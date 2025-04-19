@@ -53,6 +53,9 @@ CREATE TABLE tour_operator (
     business_address VARCHAR(255) NOT NULL,
     website_url VARCHAR(100)
 )
+ALTER TABLE tour_operator DROP CONSTRAINT FK__tour_oper__reg_n__2180FB33
+ALTER TABLE tour_operator ADD CONSTRAINT FK__tour_oper__reg FOREIGN KEY (reg_no) REFERENCES users(reg_no) ON DELETE NO ACTION ON UPDATE CASCADE
+
 
 
 CREATE TABLE service_provider (
@@ -75,7 +78,7 @@ CREATE TABLE location (
 SELECT 
     CONSTRAINT_NAME 
 FROM INFORMATION_SCHEMA.TABLE_CONSTRAINTS 
-WHERE TABLE_NAME = 'trips' AND CONSTRAINT_TYPE = 'FOREIGN KEY';
+WHERE TABLE_NAME = 'tour_operator' AND CONSTRAINT_TYPE = 'FOREIGN KEY';
 
 
 CREATE TABLE trips (
@@ -120,7 +123,7 @@ CREATE TABLE bookings (
     FOREIGN KEY (traveler_id) REFERENCES travelers(reg_no) ON DELETE NO ACTION ON UPDATE CASCADE,
     
     trip_id INT NOT NULL,
-    -- FOREIGN KEY (trip_id) REFERENCES trips(trip_id) ON DELETE NO ACTION ON UPDATE CASCADE
+    FOREIGN KEY (trip_id) REFERENCES trips(trip_id) ON DELETE NO ACTION ON UPDATE CASCADE
     
 )
 
