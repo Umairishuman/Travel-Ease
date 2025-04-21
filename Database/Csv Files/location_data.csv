@@ -1,51 +1,71 @@
 dest_id,destination_name,city,region,country
-1,Naumburg Mountains,Eversen,Northern Europe,Hungary
-2,Sondershausen Mountains,Unterlüß,East Asia,Finland
-3,Sondershausen Resort,Eisleben,Southern Europe,Austria
-4,Hambühren Beach,Ballenstedt,South Asia,UK
-5,Krakow Beach,Dessau-Roßlau,Eastern Europe,Netherlands
-6,Dessau-Roßlau City,Alsleben (Saale),North America,Turkey
-7,Aschersleben Beach,Bad Langensalza,North Africa,Scotland
-8,Helsinki Park,Wathlingen,Southeast Asia,India
-9,Milan Resort,Mannheim,Southern Europe,Italy
-10,Venice Beach,Sangerhausen,East Asia,Czech Republic
-11,Phoenix Mountains,Seelze,East Asia,Denmark
-12,Essen Mountains,Hamburg,Western Europe,England
-13,Johannesburg Resort,Faßberg,Southern Europe,South Africa
-14,Seoul Resort,Ilmenau,Asia,Brazil
-15,Sondershausen City,Hecklingen,South America,USA
-16,Zerbst Beach,Calbe,East Africa,Finland
-17,Müden (Örtze) Mountains,Charlotte,South Asia,China
-18,Wedemark Beach,Porto,Southeast Asia,Belgium
-19,Erfurt City,Stassfurt,South Asia,Japan
-20,Weida Beach,Nordhausen,Africa,Canada
-21,Ilberstedt Beach,Eschede,Asia,Romania
-22,Singapore Beach,Staßfurt,Southern Africa,South Africa
-23,Las Vegas Beach,Gerbstedt,Western Europe,Canada
-24,Jacksonville Park,Denver,Europe,Netherlands
-25,Sangerhausen Park,Indianapolis,North Africa,China
-26,Burg City,Lachendorf,South Asia,Czech Republic
-27,Südharz Park,Querfurt,Africa,Italy
-28,Barby City,Nashville,North Africa,Australia
-29,Dessau-Roßlau Mountains,Copenhagen,East Africa,Netherlands
-30,Dublin Resort,Quedlinburg,Eastern Europe,Canada
-31,Wittenberg Resort,Weida,Caribbean,Czech Republic
-32,Paris Beach,Amsterdam,North Africa,Netherlands
-33,Alsleben (Saale) Resort,Portland,Middle East,Finland
-34,Hambühren City,Isernhagen,South America,Egypt
-35,Dessau-Roßlau Park,Copenhagen,Western Europe,Romania
-36,Naples Park,Halle Neustadt,Southern Europe,Germany
-37,Valencia Resort,Tangermünde,West Africa,Japan
-38,Nordhausen Resort,Saarbruecken,Eastern Europe,Spain
-39,Langlingen Resort,Dublin,North America,Hungary
-40,San Diego Mountains,Indianapolis,Southern Africa,Belgium
-41,Gommern Park,Südharz,East Asia,Italy
-42,Isernhagen City,Rudolstadt,Southeast Asia,UK
-43,Fort Worth Beach,Arnstein,Western Europe,Netherlands
-44,Bergen City,Stendal,Western Europe,Spain
-45,Aschersleben Resort,Halle Neustadt,South America,Canada
-46,Eschede Resort,Calbe,Southern Africa,Italy
-47,Eicklingen Park,Faßberg,South Asia,Germany
-48,Hemmingen City,Naples,Southern Africa,Belgium
-49,Hermannsburg Mountains,Trier,East Asia,Spain
-50,Alsleben (Saale) Park,Seehausen,Central Asia,Hungary
+ASI-000001,Temple of Heaven,Beijing,Asia,China
+ASI-000002,Elephanta Caves,Mumbai,Asia,India
+ASI-000003,Tokyo Tower,Tokyo,Asia,Japan
+ASI-000004,Bukchon Hanok Village,Seoul,Asia,South Korea
+ASI-000005,Ha Long Bay,Hanoi,Asia,Vietnam
+ASI-000006,Grand Palace,Bangkok,Asia,Thailand
+ASI-000007,Petronas Twin Towers,Kuala Lumpur,Asia,Malaysia
+ASI-000008,Gardens by the Bay,Singapore,Asia,Singapore
+ASI-000009,Monas (National Monument),Jakarta,Asia,Indonesia
+ASI-000010,Mazar-e-Quaid,Karachi,Asia,Pakistan
+AFR-000001,Freedom Park,Lagos,Africa,Nigeria
+AFR-000002,Khan el-Khalili,Cairo,Africa,Egypt
+AFR-000003,Apartheid Museum,Johannesburg,Africa,South Africa
+AFR-000004,David Sheldrick Wildlife Trust,Nairobi,Africa,Kenya
+AFR-000005,Africa Destination 5,Casablanca,Africa,Morocco
+AFR-000006,Independence Square,Accra,Africa,Ghana
+AFR-000007,Martyrs' Memorial,Algiers,Africa,Algeria
+AFR-000008,National Museum of Tanzania,Dar es Salaam,Africa,Tanzania
+AFR-000009,Holy Trinity Cathedral,Addis Ababa,Africa,Ethiopia
+AFR-000010,Fortress of São Miguel,Luanda,Africa,Angola
+EUR-000001,Reichstag Building,Berlin,Europe,Germany
+EUR-000002,Eiffel Tower,Paris,Europe,France
+EUR-000003,Buckingham Palace,London,Europe,United Kingdom
+EUR-000004,Vatican City,Rome,Europe,Italy
+EUR-000005,Retiro Park,Madrid,Europe,Spain
+EUR-000006,Rijksmuseum,Amsterdam,Europe,Netherlands
+EUR-000007,Skansen,Stockholm,Europe,Sweden
+EUR-000008,Grossmünster,Zurich,Europe,Switzerland
+EUR-000009,Royal Castle,Warsaw,Europe,Poland
+EUR-000010,Maidan Nezalezhnosti,Kyiv,Europe,Ukraine
+NAM-000001,Statue of Liberty,New York,North America,United States
+NAM-000002,CN Tower,Toronto,North America,Canada
+NAM-000003,Templo Mayor,Mexico City,North America,Mexico
+NAM-000004,Plaza de la Revolución,Havana,North America,Cuba
+NAM-000005,Port Royal,Kingston,North America,Jamaica
+NAM-000006,Citadelle Laferrière,Port-au-Prince,North America,Haiti
+NAM-000007,The Three Eyes National Park,Santo Domingo,North America,Dominican Republic
+NAM-000008,Condado Beach,San Juan,North America,Puerto Rico
+NAM-000009,Lake Atitlán,Guatemala City,North America,Guatemala
+NAM-000010,Casco Viejo,Panama City,North America,Panama
+SAM-000001,Copacabana Beach,Rio de Janeiro,South America,Brazil
+SAM-000002,Teatro Colón,Buenos Aires,South America,Argentina
+SAM-000003,Gold Museum,Bogota,South America,Colombia
+SAM-000004,Larco Museum,Lima,South America,Peru
+SAM-000005,San Cristobal Hill,Santiago,South America,Chile
+SAM-000006,Panteón Nacional,Caracas,South America,Venezuela
+SAM-000007,Mitad del Mundo,Quito,South America,Ecuador
+SAM-000008,Lake Titicaca,La Paz,South America,Bolivia
+SAM-000009,Costanera de Asunción,Asuncion,South America,Paraguay
+SAM-000010,Rambla of Montevideo,Montevideo,South America,Uruguay
+OCE-000001,Sydney Opera House,Sydney,Oceania,Australia
+OCE-000002,Sky Tower,Auckland,Oceania,New Zealand
+OCE-000003,Fiji Museum,Suva,Oceania,Fiji
+OCE-000004,National Museum and Art Gallery,Port Moresby,Oceania,Papua New Guinea
+OCE-000005,Diamond Head,Honolulu,Oceania,Hawaii
+OCE-000006,Two Lovers Point,Hagatna,Oceania,Guam
+OCE-000007,Nan Madol,Palikir,Oceania,Micronesia
+OCE-000008,Hideaway Island,Port Vila,Oceania,Vanuatu
+OCE-000009,Botanical Garden,Honiara,Oceania,Solomon Islands
+OCE-000010,Kalalin Pass,Majuro,Oceania,Marshall Islands
+ANT-000001,Antarctica Destination 1,McMurdo Station,Antarctica,McMurdo Station
+ANT-000002,Antarctica Destination 2,Amundsen-Scott Station,Antarctica,Amundsen-Scott Station
+ANT-000003,Antarctica Destination 3,Vostok Station,Antarctica,Vostok Station
+ANT-000004,Antarctica Destination 4,Palmer Station,Antarctica,Palmer Station
+ANT-000005,Antarctica Destination 5,Esperanza Base,Antarctica,Esperanza Base
+ANT-000006,Antarctica Destination 6,Base San Martín,Antarctica,Base San Martín
+ANT-000007,Antarctica Destination 7,Orcadas Base,Antarctica,Orcadas Base
+ANT-000008,Antarctica Destination 8,Casey Station,Antarctica,Casey Station
+ANT-000009,Antarctica Destination 9,Mawson Station,Antarctica,Mawson Station
+ANT-000010,Antarctica Destination 10,Davis Station,Antarctica,Davis Station
