@@ -226,7 +226,7 @@ CREATE TABLE services (
     FOREIGN KEY (provider_id) REFERENCES service_provider(reg_no)
 )
 
-CREATE TABLE hotel_services (
+CREATE TABLE hotel_services (t
     service_id VARCHAR(20) PRIMARY KEY,
     FOREIGN KEY (service_id) REFERENCES services(service_id),
 
