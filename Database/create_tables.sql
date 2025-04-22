@@ -220,13 +220,17 @@ CREATE TABLE services (
     price DECIMAL(10, 2) NOT NULL,
     
     provider_id VARCHAR(20) NOT NULL,
+    -- people that the service can handle
+    capacity INT NOT NULL CHECK (capacity > 0),
+
     FOREIGN KEY (provider_id) REFERENCES service_provider(reg_no)
 )
 
 CREATE TABLE hotel_services (
     service_id VARCHAR(20) PRIMARY KEY,
     FOREIGN KEY (service_id) REFERENCES services(service_id),
-    room_type VARCHAR(255),
+
+    room_type VARCHAR(255) NOT NULL CHECK (room_type IN ('single', 'double', 'suite', 'deluxe', 'family', 'studio')),
     amenities TEXT
 );
 
@@ -273,10 +277,9 @@ CREATE TABLE digital_passes (
         pass_id LIKE 'ETK-[0-9][0-9][0-9][0-9][0-9][0-9]' OR
         pass_id LIKE 'HTL-[0-9][0-9][0-9][0-9][0-9][0-9]' OR
         pass_id LIKE 'ACT-[0-9][0-9][0-9][0-9][0-9][0-9]' OR
-        pass_id LIKE 'INS-[0-9][0-9][0-9][0-9][0-9][0-9]'   ),
     date_generated DATETIME NOT NULL,
     valid_till DATETIME NOT NULL,
-    document_type VARCHAR(50) NOT NULL CHECK (document_type IN ('e-ticket', 'hotel voucher', 'activity pass', 'transport voucher')),
+    document_type VARCHAR(50) NOT NULL CHECK (document_type IN ('e-ticket', 'hotel voucher', 'activity pass')),
     booking_id VARCHAR(20) NOT NULL,
     FOREIGN KEY (booking_id) REFERENCES bookings(booking_id),
     service_id VARCHAR(20),
