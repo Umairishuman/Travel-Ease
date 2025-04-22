@@ -239,19 +239,17 @@ CREATE TABLE transport_services (
         FOREIGN KEY (service_id) REFERENCES services(service_id),
 
         vehicle_type VARCHAR(50) NOT NULL CHECK (vehicle_type IN ('bus', 'car', 'bike', 'van', 'truck', 'suv')),
-        seating_capacity INT NOT NULL,
         ac_available BIT ,
-        route_description TEXT 
 );
 
 CREATE TABLE guide_services (
     service_id VARCHAR(20) PRIMARY KEY,
     FOREIGN KEY (service_id) REFERENCES services(service_id),
-
-    guide_name VARCHAR(100) NOT NULL,
+	guide_name VARCHAR(100) NOT NULL,
     years_of_experience INT,
     certification_status BIT
 );
+
 CREATE TABLE guide_languages (
     service_id VARCHAR(20) NOT NULL,
     FOREIGN KEY (service_id) REFERENCES services(service_id),
@@ -276,7 +274,8 @@ CREATE TABLE digital_passes (
     pass_id VARCHAR(20) PRIMARY KEY CHECK (
         pass_id LIKE 'ETK-[0-9][0-9][0-9][0-9][0-9][0-9]' OR
         pass_id LIKE 'HTL-[0-9][0-9][0-9][0-9][0-9][0-9]' OR
-        pass_id LIKE 'ACT-[0-9][0-9][0-9][0-9][0-9][0-9]' OR
+        pass_id LIKE 'ACT-[0-9][0-9][0-9][0-9][0-9][0-9]' 
+		),
     date_generated DATETIME NOT NULL,
     valid_till DATETIME NOT NULL,
     document_type VARCHAR(50) NOT NULL CHECK (document_type IN ('e-ticket', 'hotel voucher', 'activity pass')),
@@ -285,6 +284,8 @@ CREATE TABLE digital_passes (
     service_id VARCHAR(20),
     FOREIGN KEY (service_id) REFERENCES services(service_id)
 )
+
+select * from digital_passes
 
 
 CREATE TABLE service_reviews(
