@@ -1,0 +1,51 @@
+review_id,trip_id,traveler_id,rating,description,review_date,flag_status
+TRVW-000001,TRIP-000037,TR-000001,3,Loved every bit of it! Will travel again.,27-09-24 19:06,clear
+TRVW-000002,TRIP-000015,TR-000002,3,Amazing experience!,22-03-25 19:06,clear
+TRVW-000003,TRIP-000042,TR-000003,3,Excellent service and memorable locations.,04-12-24 19:06,clear
+TRVW-000004,TRIP-000008,TR-000004,4,Too expensive for what was offered.,07-12-24 19:06,clear
+TRVW-000005,TRIP-000031,TR-000005,1,"Average service, but great locations.",19-11-24 19:06,clear
+TRVW-000006,TRIP-000050,TR-000006,2,"The trip was well organized, would recommend.",22-05-24 19:06,clear
+TRVW-000007,TRIP-000004,TR-000007,2,Too expensive for what was offered.,31-03-25 19:06,clear
+TRVW-000008,TRIP-000027,TR-000008,5,Loved every bit of it! Will travel again.,14-06-24 19:06,clear
+TRVW-000009,TRIP-000010,TR-000009,4,"Bad weather ruined the trip, but the team handled it well.",21-04-25 19:06,clear
+TRVW-000010,TRIP-000023,TR-000010,1,"Bad weather ruined the trip, but the team handled it well.",26-01-25 19:06,clear
+TRVW-000011,TRIP-000045,TR-000011,3,Loved every bit of it! Will travel again.,02-03-25 19:06,clear
+TRVW-000012,TRIP-000017,TR-000012,5,Not satisfied with the arrangements.,15-05-24 19:06,clear
+TRVW-000013,TRIP-000036,TR-000013,3,"Could be better, some issues with logistics.",03-07-24 19:06,clear
+TRVW-000014,TRIP-000005,TR-000014,3,Loved every bit of it! Will travel again.,01-07-24 19:06,clear
+TRVW-000015,TRIP-000028,TR-000015,5,"Average service, but great locations.",29-01-25 19:06,clear
+TRVW-000016,TRIP-000011,TR-000016,5,"Could be better, some issues with logistics.",11-03-25 19:06,clear
+TRVW-000017,TRIP-000041,TR-000017,1,Too expensive for what was offered.,15-01-25 19:06,clear
+TRVW-000018,TRIP-000032,TR-000018,3,"Bad weather ruined the trip, but the team handled it well.",04-04-25 19:06,clear
+TRVW-000019,TRIP-000001,TR-000019,4,"Bad weather ruined the trip, but the team handled it well.",29-04-24 19:06,clear
+TRVW-000020,TRIP-000018,TR-000020,3,"Bad weather ruined the trip, but the team handled it well.",28-04-24 19:06,clear
+TRVW-000021,TRIP-000012,TR-000021,4,Not satisfied with the arrangements.,07-09-24 19:06,clear
+TRVW-000022,TRIP-000020,TR-000022,5,Amazing experience!,03-09-24 19:06,clear
+TRVW-000023,TRIP-000009,TR-000023,2,Amazing experience!,23-12-24 19:06,clear
+TRVW-000024,TRIP-000047,TR-000024,2,"The trip was well organized, would recommend.",18-08-24 19:06,clear
+TRVW-000025,TRIP-000030,TR-000025,1,Had a wonderful time with the group and guide.,18-02-25 19:06,clear
+TRVW-000026,TRIP-000003,TR-000026,4,Had a wonderful time with the group and guide.,23-04-24 19:06,clear
+TRVW-000027,TRIP-000044,TR-000027,2,Excellent service and memorable locations.,04-05-24 19:06,clear
+TRVW-000028,TRIP-000021,TR-000028,3,"The trip was well organized, would recommend.",19-01-25 19:06,clear
+TRVW-000029,TRIP-000038,TR-000029,3,"The trip was well organized, would recommend.",25-11-24 19:06,clear
+TRVW-000030,TRIP-000024,TR-000030,5,Excellent service and memorable locations.,11-08-24 19:06,clear
+TRVW-000031,TRIP-000002,TR-000031,3,Excellent service and memorable locations.,12-10-24 19:06,clear
+TRVW-000032,TRIP-000013,TR-000032,2,Excellent service and memorable locations.,19-01-25 19:06,clear
+TRVW-000033,TRIP-000050,TR-000033,2,"The trip was well organized, would recommend.",29-03-25 19:06,clear
+TRVW-000034,TRIP-000006,TR-000034,1,Not satisfied with the arrangements.,21-01-25 19:06,clear
+TRVW-000035,TRIP-000033,TR-000035,4,"Could be better, some issues with logistics.",05-12-24 19:06,clear
+TRVW-000036,TRIP-000022,TR-000036,4,Excellent service and memorable locations.,06-07-24 19:06,clear
+TRVW-000037,TRIP-000025,TR-000037,2,Amazing experience!,11-10-24 19:06,clear
+TRVW-000038,TRIP-000019,TR-000038,2,Amazing experience!,19-08-24 19:06,clear
+TRVW-000039,TRIP-000048,TR-000039,5,Not satisfied with the arrangements.,14-07-24 19:06,clear
+TRVW-000040,TRIP-000016,TR-000040,5,Too expensive for what was offered.,28-03-25 19:06,clear
+TRVW-000041,TRIP-000014,TR-000041,4,Not satisfied with the arrangements.,20-12-24 19:06,clear
+TRVW-000042,TRIP-000007,TR-000042,1,"Bad weather ruined the trip, but the team handled it well.",05-08-24 19:06,clear
+TRVW-000043,TRIP-000046,TR-000043,3,"The trip was well organized, would recommend.",12-01-25 19:06,clear
+TRVW-000044,TRIP-000026,TR-000044,1,"Average service, but great locations.",25-07-24 19:06,clear
+TRVW-000045,TRIP-000034,TR-000045,4,Excellent service and memorable locations.,26-02-25 19:06,clear
+TRVW-000046,TRIP-000039,TR-000046,4,"Could be better, some issues with logistics.",10-03-25 19:06,clear
+TRVW-000047,TRIP-000049,TR-000047,4,"Average service, but great locations.",28-01-25 19:06,clear
+TRVW-000048,TRIP-000035,TR-000048,2,"Bad weather ruined the trip, but the team handled it well.",22-11-24 19:06,clear
+TRVW-000049,TRIP-000040,TR-000049,2,Loved every bit of it! Will travel again.,04-12-24 19:06,clear
+TRVW-000050,TRIP-000029,TR-000050,5,"The trip was well organized, would recommend.",24-08-24 19:06,clear

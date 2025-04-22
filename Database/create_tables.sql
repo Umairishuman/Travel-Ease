@@ -16,12 +16,16 @@ CREATE TABLE users (
             contact_phone LIKE '92%[0-9]%' OR
             contact_phone LIKE '3%[0-9]%' 
         ),
-    user_status VARCHAR(50) NOT NULL CHECK (user_status IN ('active', 'inactive', 'pending', 'deleted')),
+    user_status VARCHAR(50) NOT NULL CHECK (user_status IN ('rejected', 'accepted', 'p\ending')),
     user_role VARCHAR(50) NOT NULL CHECK (user_role IN ('traveler', 'admin', 'tour_operator', 'service_provider')),
     user_profile_image VARCHAR(255) NULL,
     user_profile_description TEXT NULL,
 
 )
+
+select * from users
+
+
 
 select * from users
 
@@ -60,7 +64,6 @@ CREATE TABLE service_provider (
     provider_name VARCHAR(100) NOT NULL,
     provider_location VARCHAR(100) NOT NULL,
 )
-
 
 CREATE TABLE location (
     dest_id VARCHAR(20) PRIMARY KEY CHECK (
@@ -142,6 +145,7 @@ CREATE TABLE Preferences (
     
     preference_level INT NOT NULL CHECK (preference_level BETWEEN 1 AND 5)
 )
+
 CREATE TABLE trip_location (
     trip_id VARCHAR(20) NOT NULL,
     FOREIGN KEY (trip_id) REFERENCES trips(trip_id) ,
@@ -152,11 +156,65 @@ CREATE TABLE trip_location (
 
     PRIMARY KEY (trip_id, location_id, destination_order)
 )
+
+CREATE TABLE trip_reviews (
+    review_id VARCHAR(20) PRIMARY KEY CHECK (
+        review_id LIKE 'TRVW-[0-9][0-9][0-9][0-9][0-9][0-9]'
+    ),
+    
+    trip_id VARCHAR(20) NOT NULL,
+    FOREIGN KEY (trip_id) REFERENCES trips(trip_id),
+    
+    traveler_id VARCHAR(20) NOT NULL,
+    FOREIGN KEY (traveler_id) REFERENCES travelers(reg_no),
+    
+    rating INT NOT NULL CHECK (rating BETWEEN 1 AND 5),
+    description TEXT,
+    review_date DATETIME DEFAULT GETDATE(),
+    flag_status VARCHAR(50) NOT NULL CHECK (flag_status IN ('clear', 'flagged')) DEFAULT 'clear'
+)
+
+CREATE TABLE user_approval_logs(
+    log_id VARCHAR(20) PRIMARY KEY CHECK (log_id LIKE 'UAL-[0-9][0-9][0-9][0-9][0-9][0-9]'),
+
+    user_id VARCHAR(20) NOT NULL,
+    FOREIGN KEY (user_id) REFERENCES users(reg_no),
+
+    admin_id VARCHAR(20) NOT NULL,
+    FOREIGN KEY (admin_id) REFERENCES admins(reg_no),
+
+    log_time DATETIME DEFAULT GETDATE() NOT NULL,
+    action VARCHAR(50) NOT NULL CHECK (action IN ('approved', 'rejected')),
+
+    reason TEXT NULL
+)
+
+
+CREATE TABLE trip_review_logs(
+    log_id VARCHAR(20) PRIMARY KEY CHECK (log_id LIKE 'TRL-[0-9][0-9][0-9][0-9][0-9][0-9]'),
+
+    review_id VARCHAR(20) NOT NULL,
+    FOREIGN KEY (review_id) REFERENCES trip_reviews(review_id),
+
+    admin_id VARCHAR(20) NOT NULL,
+    FOREIGN KEY (admin_id) REFERENCES admins(reg_no),
+
+    log_time DATETIME DEFAULT GETDATE() NOT NULL,
+    action VARCHAR(50) NOT NULL CHECK (action IN ('clear', 'flagged')),
+
+    reason TEXT NULL
+)
+
+
+
+
+
+
 CREATE TABLE services (
     service_id VARCHAR(20) PRIMARY KEY CHECK (
         service_id LIKE 'SRV-[0-9][0-9][0-9][0-9][0-9][0-9]'
     ),
-    service_type VARCHAR(50) NOT NULL CHECK (service_type IN ('hotel', 'transport', 'guide', 'activity', 'insurance')),
+    service_type VARCHAR(50) NOT NULL CHECK (service_type IN ('hotel', 'transport', 'guide', 'activity', 'other')),
     
     service_description TEXT NOT NULL,
     price DECIMAL(10, 2) NOT NULL,
@@ -164,6 +222,41 @@ CREATE TABLE services (
     provider_id VARCHAR(20) NOT NULL,
     FOREIGN KEY (provider_id) REFERENCES service_provider(reg_no)
 )
+
+CREATE TABLE hotel_services (
+    service_id VARCHAR(20) PRIMARY KEY,
+    FOREIGN KEY (service_id) REFERENCES services(service_id),
+    room_type VARCHAR(255),
+    amenities TEXT
+);
+
+CREATE TABLE transport_services (
+    service_id VARCHAR(20) PRIMARY KEY NOT NULL,
+        FOREIGN KEY (service_id) REFERENCES services(service_id),
+
+        vehicle_type VARCHAR(50) NOT NULL CHECK (vehicle_type IN ('bus', 'car', 'bike', 'van', 'truck', 'suv')),
+        seating_capacity INT NOT NULL,
+        ac_available BIT ,
+        route_description TEXT 
+);
+
+CREATE TABLE guide_services (
+    service_id VARCHAR(20) PRIMARY KEY,
+    FOREIGN KEY (service_id) REFERENCES services(service_id),
+
+    guide_name VARCHAR(100) NOT NULL,
+    years_of_experience INT,
+    certification_status BIT
+);
+CREATE TABLE guide_languages (
+    service_id VARCHAR(20) NOT NULL,
+    FOREIGN KEY (service_id) REFERENCES services(service_id),
+
+    language VARCHAR(50) NOT NULL,
+    PRIMARY KEY (service_id, language)
+)
+
+
 
 CREATE TABLE trip_services (
     trip_id VARCHAR(20) NOT NULL,
@@ -189,22 +282,7 @@ CREATE TABLE digital_passes (
     service_id VARCHAR(20),
     FOREIGN KEY (service_id) REFERENCES services(service_id)
 )
-CREATE TABLE trip_reviews (
-    review_id VARCHAR(20) PRIMARY KEY CHECK (
-        review_id LIKE 'TRVW-[0-9][0-9][0-9][0-9][0-9][0-9]'
-    ),
-    
-    trip_id VARCHAR(20) NOT NULL,
-    FOREIGN KEY (trip_id) REFERENCES trips(trip_id),
-    
-    traveler_id VARCHAR(20) NOT NULL,
-    FOREIGN KEY (traveler_id) REFERENCES travelers(reg_no),
-    
-    rating INT NOT NULL CHECK (rating BETWEEN 1 AND 5),
-    description TEXT,
-    review_date DATETIME DEFAULT GETDATE(),
-    flag_status VARCHAR(50) NOT NULL CHECK (flag_status IN ('clear', 'flagged')) DEFAULT 'clear'
-)
+
 
 CREATE TABLE service_reviews(
     review_id VARCHAR(20) PRIMARY KEY CHECK (
@@ -223,34 +301,6 @@ CREATE TABLE service_reviews(
     flag_status VARCHAR(50) NOT NULL CHECK (flag_status IN ('clear', 'flagged')) DEFAULT 'clear',
 )
 
-CREATE TABLE user_approval_logs(
-    log_id VARCHAR(20) PRIMARY KEY CHECK (log_id LIKE 'UAL-[0-9][0-9][0-9][0-9][0-9][0-9]'),
-
-    user_id VARCHAR(20) NOT NULL,
-    FOREIGN KEY (user_id) REFERENCES users(reg_no),
-
-    admin_id VARCHAR(20) NOT NULL,
-    FOREIGN KEY (admin_id) REFERENCES admins(reg_no),
-
-    log_time DATETIME DEFAULT GETDATE() NOT NULL,
-    action VARCHAR(50) NOT NULL CHECK (action IN ('approved', 'rejected')),
-
-    reason TEXT NULL
-)
-CREATE TABLE trip_review_logs(
-    log_id VARCHAR(20) PRIMARY KEY CHECK (log_id LIKE 'TRL-[0-9][0-9][0-9][0-9][0-9][0-9]'),
-
-    review_id VARCHAR(20) NOT NULL,
-    FOREIGN KEY (review_id) REFERENCES trip_reviews(review_id),
-
-    admin_id VARCHAR(20) NOT NULL,
-    FOREIGN KEY (admin_id) REFERENCES admins(reg_no),
-
-    log_time DATETIME DEFAULT GETDATE() NOT NULL,
-    action VARCHAR(50) NOT NULL CHECK (action IN ('clear', 'flagged')),
-
-    reason TEXT NULL
-)
 
 CREATE TABLE service_review_logs(
     log_id VARCHAR(20) PRIMARY KEY CHECK (log_id LIKE 'TRL-[0-9][0-9][0-9][0-9][0-9][0-9]'),

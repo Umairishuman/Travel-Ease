@@ -1,0 +1,61 @@
+ID,Type,Description,price_per_person,provider_id
+SRV-000001,Transport,Vehicle dispatch and coordination,25.77,SP-000029
+SRV-000002,Guide,Local sightseeing assistance,265.31,SP-000046
+SRV-000003,Guide,Customized tour planning,368.48,SP-000041
+SRV-000004,Other,General inquiry handling,11.79,SP-000022
+SRV-000005,Transport,Airport pickup service,56.85,SP-000046
+SRV-000006,Transport,City transport arrangement,285.98,SP-000024
+SRV-000007,Guide,Museum tour guidance,331.65,SP-000026
+SRV-000008,Guide,Cultural activity coordination,257.46,SP-000041
+SRV-000009,Guide,Historical site narration,393.43,SP-000006
+SRV-000010,Transport,Shuttle service setup,235.9,SP-000042
+SRV-000011,Hotel,Room reservation handling,464.27,SP-000026
+SRV-000012,Guide,Language translation support,207.33,SP-000048
+SRV-000013,Transport,Intercity travel booking,484.83,SP-000035
+SRV-000014,Guide,Personalized tour escort,222.61,SP-000027
+SRV-000015,Guide,Tourist safety briefing,243.14,SP-000042
+SRV-000016,Hotel,Accommodation upgrade service,352.16,SP-000048
+SRV-000017,Transport,Daily commute scheduling,38.06,SP-000024
+SRV-000018,Guide,Travel route explanation,138.75,SP-000010
+SRV-000019,Transport,Luggage transport assistance,59.01,SP-000028
+SRV-000020,Hotel,Hotel check-in facilitation,209.04,SP-000027
+SRV-000021,Other,Complaint resolution service,283.63,SP-000019
+SRV-000022,Guide,Event itinerary briefing,396.08,SP-000041
+SRV-000023,Transport,Local transit assistance,230.44,SP-000014
+SRV-000024,Hotel,Booking confirmation service,121.7,SP-000011
+SRV-000025,Other,Lost and found handling,252.38,SP-000007
+SRV-000026,Transport,Navigation support,59.16,SP-000039
+SRV-000027,Other,Package delivery coordination,127.23,SP-000034
+SRV-000028,Guide,Adventure trip briefing,89.75,SP-000046
+SRV-000029,Transport,Group transport management,159.51,SP-000017
+SRV-000030,Guide,Guided hike organization,59.58,SP-000039
+SRV-000031,Guide,Food tour assistance,332.52,SP-000031
+SRV-000032,Other,Public event information,435.33,SP-000012
+SRV-000033,Transport,Train ticket arrangement,471.11,SP-000045
+SRV-000034,Hotel,Guest welcome service,24.98,SP-000034
+SRV-000035,Other,Schedule coordination support,433.7,SP-000005
+SRV-000036,Other,Weather condition updates,439.01,SP-000013
+SRV-000037,Transport,Airport transfer facilitation,18.12,SP-000025
+SRV-000038,Transport,Car rental service,201.12,SP-000024
+SRV-000039,Transport,Taxi booking support,60.1,SP-000015
+SRV-000040,Guide,Walking tour coordination,365.55,SP-000038
+SRV-000041,Guide,Monument description service,364.01,SP-000034
+SRV-000042,Other,Service feedback collection,342.52,SP-000035
+SRV-000043,Guide,Photography guidance,473.83,SP-000026
+SRV-000044,Hotel,Guest room change assistance,355.38,SP-000032
+SRV-000045,Guide,Destination highlights explanation,36.95,SP-000043
+SRV-000046,Guide,Language barrier support,249.47,SP-000032
+SRV-000047,Transport,Private driver arrangement,222.8,SP-000047
+SRV-000048,Transport,Time-sensitive drop-off,76.84,SP-000016
+SRV-000049,Transport,Tour bus logistics,481.57,SP-000030
+SRV-000050,Other,Custom request handling,51.65,SP-000023
+SRV-000051,Transport,Late-night ride scheduling,383.05,SP-000035
+SRV-000052,Transport,Long-distance travel service,61.64,SP-000032
+SRV-000053,Other,Technical support access,219.18,SP-000028
+SRV-000054,Guide,Local cuisine explanation,38.34,SP-000006
+SRV-000055,Hotel,Mini-bar replenishment,110.96,SP-000043
+SRV-000056,Guide,Check-out reminders,200.29,SP-000026
+SRV-000057,Hotel,Room cleaning supervision,19.51,SP-000014
+SRV-000058,Transport,Travel delay coordination,300.74,SP-000034
+SRV-000059,Transport,Short-distance transfer,463.72,SP-000029
+SRV-000060,Other,General service inquiry,148.19,SP-000004
