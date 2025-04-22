@@ -16,7 +16,7 @@ CREATE TABLE users (
             contact_phone LIKE '92%[0-9]%' OR
             contact_phone LIKE '3%[0-9]%' 
         ),
-    user_status VARCHAR(50) NOT NULL CHECK (user_status IN ('rejected', 'accepted', 'p\ending')),
+    user_status VARCHAR(50) NOT NULL CHECK (user_status IN ('rejected', 'accepted', 'pending')),
     user_role VARCHAR(50) NOT NULL CHECK (user_role IN ('traveler', 'admin', 'tour_operator', 'service_provider')),
     user_profile_image VARCHAR(255) NULL,
     user_profile_description TEXT NULL,
@@ -226,7 +226,7 @@ CREATE TABLE services (
     FOREIGN KEY (provider_id) REFERENCES service_provider(reg_no)
 )
 
-CREATE TABLE hotel_services (t
+CREATE TABLE hotel_services (
     service_id VARCHAR(20) PRIMARY KEY,
     FOREIGN KEY (service_id) REFERENCES services(service_id),
 

@@ -69,3 +69,6 @@ FROM
 
 	select * from trip_review_logs
 
+
+insert into services
+select * from services_data
