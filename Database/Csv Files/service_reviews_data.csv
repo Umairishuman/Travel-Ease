@@ -1,0 +1,61 @@
+Review_id,User_id,Service_id,Rating,Description,Review_date,Flag_status,isEdited
+SRVW-000001,TR-000037,SRV-000046,4,Great service and very professional.,22/04/2025,clear,0
+SRVW-000002,TR-000039,SRV-000004,5,Not satisfied with the support.,22/04/2025,clear,0
+SRVW-000003,TR-000012,SRV-000016,5,Quick and efficient response.,22/04/2025,clear,0
+SRVW-000004,TR-000012,SRV-000031,2,Not satisfied with the support.,22/04/2025,clear,0
+SRVW-000005,TR-000046,SRV-000044,5,The process was smooth and hassle-free.,22/04/2025,clear,0
+SRVW-000006,TR-000015,SRV-000052,4,Will definitely use this service again.,22/04/2025,clear,0
+SRVW-000007,TR-000043,SRV-000014,3,The process was smooth and hassle-free.,22/04/2025,clear,0
+SRVW-000008,TR-000050,SRV-000051,5,Not satisfied with the support.,22/04/2025,clear,0
+SRVW-000009,TR-000026,SRV-000010,5,The staff was very friendly and helpful.,22/04/2025,clear,0
+SRVW-000010,TR-000019,SRV-000033,4,Will definitely use this service again.,22/04/2025,clear,0
+SRVW-000011,TR-000014,SRV-000024,5,Highly recommend this service to others.,22/04/2025,clear,0
+SRVW-000012,TR-000039,SRV-000014,4,The staff was very friendly and helpful.,22/04/2025,clear,0
+SRVW-000013,TR-000005,SRV-000003,2,The process was smooth and hassle-free.,22/04/2025,clear,0
+SRVW-000014,TR-000031,SRV-000029,5,The process was smooth and hassle-free.,22/04/2025,clear,0
+SRVW-000015,TR-000048,SRV-000060,3,Will definitely use this service again.,22/04/2025,clear,0
+SRVW-000016,TR-000005,SRV-000056,3,The process was smooth and hassle-free.,22/04/2025,clear,0
+SRVW-000017,TR-000009,SRV-000050,2,Quick and efficient response.,22/04/2025,clear,0
+SRVW-000018,TR-000048,SRV-000023,2,Great service and very professional.,22/04/2025,clear,0
+SRVW-000019,TR-000025,SRV-000015,5,Great service and very professional.,22/04/2025,clear,0
+SRVW-000020,TR-000038,SRV-000055,1,Great service and very professional.,22/04/2025,clear,0
+SRVW-000021,TR-000002,SRV-000018,5,"Average experience, could be improved.",22/04/2025,clear,0
+SRVW-000022,TR-000026,SRV-000038,3,Not satisfied with the support.,22/04/2025,clear,0
+SRVW-000023,TR-000004,SRV-000017,1,The process was smooth and hassle-free.,22/04/2025,clear,0
+SRVW-000024,TR-000015,SRV-000029,5,Quick and efficient response.,22/04/2025,clear,0
+SRVW-000025,TR-000048,SRV-000027,5,Highly recommend this service to others.,22/04/2025,clear,0
+SRVW-000026,TR-000032,SRV-000032,4,Highly recommend this service to others.,22/04/2025,clear,0
+SRVW-000027,TR-000049,SRV-000037,1,"Average experience, could be improved.",22/04/2025,clear,0
+SRVW-000028,TR-000007,SRV-000008,1,Not satisfied with the support.,22/04/2025,clear,0
+SRVW-000029,TR-000045,SRV-000038,4,The process was smooth and hassle-free.,22/04/2025,clear,0
+SRVW-000030,TR-000021,SRV-000046,2,The process was smooth and hassle-free.,22/04/2025,clear,0
+SRVW-000031,TR-000001,SRV-000006,2,The service quality exceeded my expectations.,22/04/2025,clear,0
+SRVW-000032,TR-000014,SRV-000046,5,The staff was very friendly and helpful.,22/04/2025,clear,0
+SRVW-000033,TR-000014,SRV-000017,4,Highly recommend this service to others.,22/04/2025,clear,0
+SRVW-000034,TR-000008,SRV-000049,5,Customer support was excellent.,22/04/2025,clear,0
+SRVW-000035,TR-000050,SRV-000060,4,Not satisfied with the support.,22/04/2025,clear,0
+SRVW-000036,TR-000016,SRV-000046,2,Customer support was excellent.,22/04/2025,clear,0
+SRVW-000037,TR-000012,SRV-000027,1,The process was smooth and hassle-free.,22/04/2025,clear,0
+SRVW-000038,TR-000011,SRV-000013,3,Great service and very professional.,22/04/2025,clear,0
+SRVW-000039,TR-000005,SRV-000016,1,The process was smooth and hassle-free.,22/04/2025,clear,0
+SRVW-000040,TR-000023,SRV-000016,3,Highly recommend this service to others.,22/04/2025,clear,0
+SRVW-000041,TR-000030,SRV-000059,2,Great service and very professional.,22/04/2025,clear,0
+SRVW-000042,TR-000028,SRV-000011,3,Will definitely use this service again.,22/04/2025,clear,0
+SRVW-000043,TR-000044,SRV-000031,5,Great service and very professional.,22/04/2025,clear,0
+SRVW-000044,TR-000037,SRV-000056,3,The process was smooth and hassle-free.,22/04/2025,clear,0
+SRVW-000045,TR-000010,SRV-000022,4,Customer support was excellent.,22/04/2025,clear,0
+SRVW-000046,TR-000006,SRV-000001,4,Not satisfied with the support.,22/04/2025,clear,0
+SRVW-000047,TR-000023,SRV-000022,3,The process was smooth and hassle-free.,22/04/2025,clear,0
+SRVW-000048,TR-000030,SRV-000054,3,Not satisfied with the support.,22/04/2025,clear,0
+SRVW-000049,TR-000001,SRV-000058,3,Not satisfied with the support.,22/04/2025,clear,0
+SRVW-000050,TR-000026,SRV-000012,2,Will definitely use this service again.,22/04/2025,clear,0
+SRVW-000051,TR-000033,SRV-000059,3,Not satisfied with the support.,22/04/2025,clear,0
+SRVW-000052,TR-000036,SRV-000015,2,The service quality exceeded my expectations.,22/04/2025,clear,0
+SRVW-000053,TR-000004,SRV-000020,2,The staff was very friendly and helpful.,22/04/2025,clear,0
+SRVW-000054,TR-000007,SRV-000029,4,Will definitely use this service again.,22/04/2025,clear,0
+SRVW-000055,TR-000010,SRV-000004,1,The staff was very friendly and helpful.,22/04/2025,clear,0
+SRVW-000056,TR-000031,SRV-000040,3,The staff was very friendly and helpful.,22/04/2025,clear,0
+SRVW-000057,TR-000044,SRV-000035,5,Great service and very professional.,22/04/2025,clear,0
+SRVW-000058,TR-000046,SRV-000014,1,Great service and very professional.,22/04/2025,clear,0
+SRVW-000059,TR-000042,SRV-000050,4,Customer support was excellent.,22/04/2025,clear,0
+SRVW-000060,TR-000001,SRV-000058,5,Quick and efficient response.,22/04/2025,clear,0
