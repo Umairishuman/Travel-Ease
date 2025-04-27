@@ -21,6 +21,12 @@
         private PictureBox topLeftLogo;
         private PictureBox signIntravller;
 
+        private GroupBox groupBoxEmail;
+        private TextBox innerEmailBox;
+
+        private GroupBox groupBoxPassword;
+        private TextBox innerPasswordBox;
+
 
         private void InitializeComponent()
         {
@@ -28,15 +34,21 @@
             SignInSubtitle = new Label();
             topLeftLogo = new PictureBox();
             signIntravller = new PictureBox();
+            groupBoxEmail = new GroupBox();
+            innerEmailBox = new TextBox();
+            groupBoxPassword = new GroupBox();
+            innerPasswordBox = new TextBox();
             ((System.ComponentModel.ISupportInitialize)topLeftLogo).BeginInit();
             ((System.ComponentModel.ISupportInitialize)signIntravller).BeginInit();
+            groupBoxEmail.SuspendLayout();
+            groupBoxPassword.SuspendLayout();
             SuspendLayout();
             // 
             // SignInHeading
             // 
             SignInHeading.AutoSize = true;
             SignInHeading.Font = new Font("Segoe UI", 20F, FontStyle.Bold);
-            SignInHeading.Location = new Point(31, 116);
+            SignInHeading.Location = new Point(75, 114);
             SignInHeading.Margin = new Padding(0);
             SignInHeading.Name = "SignInHeading";
             SignInHeading.Size = new Size(292, 37);
@@ -49,7 +61,7 @@
             SignInSubtitle.AutoSize = true;
             SignInSubtitle.Font = new Font("Segoe UI", 10F);
             SignInSubtitle.ForeColor = Color.Gray;
-            SignInSubtitle.Location = new Point(37, 97);
+            SignInSubtitle.Location = new Point(81, 95);
             SignInSubtitle.Name = "SignInSubtitle";
             SignInSubtitle.Size = new Size(122, 19);
             SignInSubtitle.TabIndex = 1;
@@ -59,10 +71,10 @@
             // topLeftLogo
             // 
             topLeftLogo.Image = TravelEaseApp.Properties.Resources.travelEaseLogo;
-            topLeftLogo.Location = new Point(37, 25);
+            topLeftLogo.Location = new Point(183, 12);
             topLeftLogo.Name = "topLeftLogo";
             topLeftLogo.Padding = new Padding(2);
-            topLeftLogo.Size = new Size(43, 45);
+            topLeftLogo.Size = new Size(74, 63);
             topLeftLogo.SizeMode = PictureBoxSizeMode.StretchImage;
             topLeftLogo.TabIndex = 0;
             topLeftLogo.TabStop = false;
@@ -78,6 +90,62 @@
             signIntravller.TabIndex = 0;
             signIntravller.TabStop = false;
             // 
+            // groupBoxEmail
+            // 
+            groupBoxEmail.Controls.Add(innerEmailBox);
+            groupBoxEmail.Font = new Font("Times New Roman", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            groupBoxEmail.Location = new Point(75, 199);
+            groupBoxEmail.Name = "groupBoxEmail";
+            groupBoxEmail.Size = new Size(292, 59);
+            groupBoxEmail.TabIndex = 0;
+            groupBoxEmail.TabStop = false;
+            groupBoxEmail.Text = "E-mail";
+
+            groupBoxEmail.MouseEnter += GroupBoxEmail_MouseEnter;
+            groupBoxEmail.MouseLeave += GroupBoxEmail_MouseLeave;
+            groupBoxEmail.Enter += groupBoxEmail_Enter;
+            groupBoxEmail.Leave += groupBoxEmail_Leave;
+            groupBoxEmail.MouseClick += GroupBoxEmail_MouseClick;
+            // 
+            // innerEmailBox
+            // 
+            innerEmailBox.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            innerEmailBox.BorderStyle = BorderStyle.None;
+            innerEmailBox.Location = new Point(13, 25);
+            innerEmailBox.Name = "innerEmailBox";
+            innerEmailBox.Size = new Size(272, 15);
+            innerEmailBox.TabIndex = 3;
+            innerEmailBox.TextChanged += innerEmailBox_TextChanged;
+            AddPlaceholder(innerEmailBox, "abc@gmail.com");
+            // 
+            // groupBoxPassword
+            // 
+            groupBoxPassword.Controls.Add(innerPasswordBox);
+            groupBoxPassword.Font = new Font("Times New Roman", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            groupBoxPassword.Location = new Point(75, 264);
+            groupBoxPassword.Name = "groupBoxPassword";
+            groupBoxPassword.Size = new Size(292, 59);
+            groupBoxPassword.TabIndex = 0;
+            groupBoxPassword.TabStop = false;
+            groupBoxPassword.Text = "Password";
+
+            groupBoxPassword.Enter += groupBoxPassword_Enter;
+            groupBoxPassword.Leave += groupBoxPassword_Leave;
+            groupBoxPassword.MouseEnter += GroupBoxPassword_MouseEnter;
+            groupBoxPassword.MouseLeave += GroupBoxPassword_MouseLeave;
+            groupBoxPassword.MouseClick += GroupBoxPassword_MouseClick;
+            // 
+            // innerPasswordBox
+            // 
+            innerPasswordBox.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            innerPasswordBox.BorderStyle = BorderStyle.None;
+            innerPasswordBox.Location = new Point(13, 26);
+            innerPasswordBox.Name = "innerPasswordBox";
+            innerPasswordBox.Size = new Size(272, 15);
+            innerPasswordBox.TabIndex = 0;
+            innerPasswordBox.UseSystemPasswordChar = true;
+            innerPasswordBox.TextChanged += innerPasswordBox_TextChanged;
+            // 
             // SignInForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -88,16 +156,49 @@
             Controls.Add(SignInSubtitle);
             Controls.Add(topLeftLogo);
             Controls.Add(signIntravller);
+            Controls.Add(groupBoxEmail);
+            Controls.Add(groupBoxPassword);
             Margin = new Padding(3, 2, 3, 2);
             Name = "SignInForm";
             Text = "Sign In";
             Load += SignInForm_Load;
+            //on click on the form
+            Click += SignInForm_Click;
             ((System.ComponentModel.ISupportInitialize)topLeftLogo).EndInit();
             ((System.ComponentModel.ISupportInitialize)signIntravller).EndInit();
+            groupBoxEmail.ResumeLayout(false);
+            groupBoxEmail.PerformLayout();
+            groupBoxPassword.ResumeLayout(false);
+            groupBoxPassword.PerformLayout();
             ResumeLayout(false);
             PerformLayout();
         }
+        private void AddPlaceholder(TextBox textBox, string placeholderText)
+        {
+            textBox.Text = placeholderText;
+            textBox.ForeColor = Color.Gray;
+
+            textBox.GotFocus += (sender, e) =>
+            {
+                if (textBox.Text == placeholderText)
+                {
+                    textBox.Text = "";
+                    textBox.ForeColor = Color.Black;
+                }
+            };
+
+            textBox.LostFocus += (sender, e) =>
+            {
+                if (string.IsNullOrWhiteSpace(textBox.Text))
+                {
+                    textBox.Text = placeholderText;
+                    textBox.ForeColor = Color.Gray;
+                }
+            };
+        }
+
 
         #endregion
     }
+
 }
