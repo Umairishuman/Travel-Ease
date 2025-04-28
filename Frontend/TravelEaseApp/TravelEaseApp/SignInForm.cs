@@ -124,5 +124,16 @@ namespace TravelEase
 
         }
         ///////////////////////////////////////////////////////////////////////////////////////////////
+        //sign In button events
+        private void signInButton_Click(object sender, EventArgs e)
+        {
+            // Handle sign-in logic here
+            string email = innerEmailBox.Text;
+            string password = innerPasswordBox.Text;
+            // Example: Display a message box with the entered email and password
+            MessageBox.Show($"Email: {email}\nPassword: {password}", "Sign In");
+        }
+
+       
     }
 }
