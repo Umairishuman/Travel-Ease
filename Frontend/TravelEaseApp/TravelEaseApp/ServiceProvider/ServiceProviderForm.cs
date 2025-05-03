@@ -37,6 +37,9 @@ namespace TravelEaseApp
             dashboardForm.TopLevel = false;
             dashboardForm.FormBorderStyle = FormBorderStyle.None;
             dashboardForm.Dock = DockStyle.Fill;
+
+            dashboardForm.RequestAddServiceForm += ShowAddServiceForm;
+
             subFormPanel.Controls.Clear();
             subFormPanel.Controls.Add(dashboardForm);
             SetRoundedCorners(subFormPanel, 20);
@@ -54,6 +57,20 @@ namespace TravelEaseApp
             SetRoundedCorners(subFormPanel, 20);
             servicesForm.Show();
         }
+
+        private void ShowAddServiceForm()
+        {
+            var addServiceForm = new addServiceForm();
+            addServiceForm.TopLevel = false;
+            addServiceForm.FormBorderStyle = FormBorderStyle.None;
+            addServiceForm.Dock = DockStyle.Fill;
+
+            subFormPanel.Controls.Clear();
+            subFormPanel.Controls.Add(addServiceForm);
+            SetRoundedCorners(subFormPanel, 20);
+            addServiceForm.Show();
+        }
+
 
 
         private void ServiceProviderForm_Load(object sender, EventArgs e)

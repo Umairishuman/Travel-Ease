@@ -10,22 +10,19 @@ using System.Windows.Forms;
 
 namespace TravelEaseApp.ServiceProvider
 {
-    public partial class dashboardForm : Form
+    public partial class addServiceForm : Form
     {
-        public dashboardForm()
+        public addServiceForm()
         {
             InitializeComponent();
-
-            // ProfilePicture
-            System.Drawing.Drawing2D.GraphicsPath path = new System.Drawing.Drawing2D.GraphicsPath();
-            path.AddEllipse(0, 0, profilePictureBox.Width, profilePictureBox.Height);
-            profilePictureBox.Region = new Region(path);
-
-            // Add Service Button
-            AddHoverTransition(addServiceLabel, addServiceLabel.BackColor, addServiceLabel.ForeColor, addServiceLabel.ForeColor, addServiceLabel.BackColor);
         }
 
-        private void pictureBox1_Click(object sender, EventArgs e)
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            AddHoverTransition(submitLabel, submitLabel.BackColor, submitLabel.ForeColor, submitLabel.ForeColor, submitLabel.BackColor);
+        }
+
+        private void submitLabel_Click(object sender, EventArgs e)
         {
 
         }
@@ -91,20 +88,5 @@ namespace TravelEaseApp.ServiceProvider
             control.MouseEnter += (s, e) => isHovering = true;
             control.MouseLeave += (s, e) => isHovering = false;
         }
-
-        private void dashboardForm_Load(object sender, EventArgs e)
-        {
-            SetRoundedCorners(pendingRequestsPanel, 20);
-            SetRoundedCorners(mainStatsPanel, 20);
-            SetRoundedCorners(flowLayoutPanel1, 20);
-            SetRoundedCorners(mainStatsPanel, 20);
-        }
-
-        private void addServiceLabel_Click(object sender, EventArgs e)
-        {
-            RequestAddServiceForm?.Invoke();
-        }
-
-        public event Action RequestAddServiceForm;
     }
 }

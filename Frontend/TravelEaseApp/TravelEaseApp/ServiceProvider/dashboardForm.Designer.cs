@@ -102,6 +102,7 @@
             // 
             // dashboardTrayPanel
             // 
+            dashboardTrayPanel.BackColor = Color.Transparent;
             dashboardTrayPanel.Controls.Add(label3);
             dashboardTrayPanel.Controls.Add(dashboardTrayLabel);
             dashboardTrayPanel.Location = new Point(3, 3);
@@ -134,6 +135,7 @@
             // 
             // panel1
             // 
+            panel1.BackColor = Color.Transparent;
             panel1.Controls.Add(label1);
             panel1.Controls.Add(label2);
             panel1.Location = new Point(108, 3);
@@ -166,6 +168,7 @@
             // 
             // panel2
             // 
+            panel2.BackColor = Color.Transparent;
             panel2.Controls.Add(label4);
             panel2.Controls.Add(label5);
             panel2.Location = new Point(213, 3);
@@ -200,7 +203,7 @@
             // 
             pendingRequestsPanel.BackColor = Color.White;
             pendingRequestsPanel.Controls.Add(pendingRequestsHeaderPanel);
-            pendingRequestsPanel.Location = new Point(477, 23);
+            pendingRequestsPanel.Location = new Point(815, 23);
             pendingRequestsPanel.Name = "pendingRequestsPanel";
             pendingRequestsPanel.Size = new Size(291, 216);
             pendingRequestsPanel.TabIndex = 4;
@@ -226,9 +229,9 @@
             // mainStatsPanel
             // 
             mainStatsPanel.BackColor = Color.White;
-            mainStatsPanel.Location = new Point(38, 141);
+            mainStatsPanel.Location = new Point(26, 141);
             mainStatsPanel.Name = "mainStatsPanel";
-            mainStatsPanel.Size = new Size(411, 297);
+            mainStatsPanel.Size = new Size(764, 457);
             mainStatsPanel.TabIndex = 4;
             // 
             // addServiceLabel
@@ -238,26 +241,28 @@
             addServiceLabel.Cursor = Cursors.Hand;
             addServiceLabel.Font = new Font("Segoe UI", 15F, FontStyle.Bold);
             addServiceLabel.ForeColor = Color.White;
-            addServiceLabel.Location = new Point(548, 398);
+            addServiceLabel.Location = new Point(891, 558);
             addServiceLabel.Name = "addServiceLabel";
             addServiceLabel.Size = new Size(148, 40);
             addServiceLabel.TabIndex = 5;
             addServiceLabel.Text = "+ Add Service";
             addServiceLabel.TextAlign = ContentAlignment.MiddleCenter;
+            addServiceLabel.Click += addServiceLabel_Click;
             // 
             // flowLayoutPanel1
             // 
             flowLayoutPanel1.BackColor = Color.White;
-            flowLayoutPanel1.Location = new Point(477, 245);
+            flowLayoutPanel1.Location = new Point(815, 261);
             flowLayoutPanel1.Name = "flowLayoutPanel1";
-            flowLayoutPanel1.Size = new Size(291, 139);
+            flowLayoutPanel1.Size = new Size(291, 272);
             flowLayoutPanel1.TabIndex = 5;
             // 
             // dashboardForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(800, 450);
+            BackColor = SystemColors.ControlLight;
+            ClientSize = new Size(1118, 610);
             Controls.Add(flowLayoutPanel1);
             Controls.Add(addServiceLabel);
             Controls.Add(mainStatsPanel);
@@ -268,6 +273,7 @@
             Controls.Add(profilePictureBox);
             Name = "dashboardForm";
             Text = "dashboardForm";
+            Load += dashboardForm_Load;
             ((System.ComponentModel.ISupportInitialize)profilePictureBox).EndInit();
             mainInfoPanel.ResumeLayout(false);
             dashboardTrayPanel.ResumeLayout(false);

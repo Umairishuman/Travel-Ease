@@ -35,16 +35,16 @@
             // panel1
             // 
             panel1.BackColor = Color.White;
-            panel1.Location = new Point(12, 86);
+            panel1.Location = new Point(38, 86);
             panel1.Name = "panel1";
-            panel1.Size = new Size(776, 352);
+            panel1.Size = new Size(1049, 525);
             panel1.TabIndex = 0;
             // 
             // label1
             // 
             label1.AutoSize = true;
             label1.Font = new Font("Segoe UI", 25F, FontStyle.Bold);
-            label1.Location = new Point(321, 25);
+            label1.Location = new Point(484, 25);
             label1.Name = "label1";
             label1.Size = new Size(149, 46);
             label1.TabIndex = 1;
@@ -54,7 +54,7 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(800, 450);
+            ClientSize = new Size(1118, 610);
             Controls.Add(label1);
             Controls.Add(panel1);
             Name = "servicesForm";
