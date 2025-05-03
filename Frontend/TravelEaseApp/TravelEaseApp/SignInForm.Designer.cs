@@ -39,22 +39,26 @@
             groupBoxEmail = new GroupBox();
             innerEmailBox = new TextBox();
             groupBoxPassword = new GroupBox();
+            VisibilityIcon = new PictureBox();
             innerPasswordBox = new TextBox();
             signInButton = new Label();
+            ForgotPassword = new LinkLabel();
+            Register = new LinkLabel();
             ((System.ComponentModel.ISupportInitialize)topLeftLogo).BeginInit();
             ((System.ComponentModel.ISupportInitialize)signIntravller).BeginInit();
             groupBoxEmail.SuspendLayout();
             groupBoxPassword.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)VisibilityIcon).BeginInit();
             SuspendLayout();
             // 
             // SignInHeading
             // 
             SignInHeading.AutoSize = true;
             SignInHeading.Font = new Font("Segoe UI", 20F, FontStyle.Bold);
-            SignInHeading.Location = new Point(107, 190);
+            SignInHeading.Location = new Point(98, 118);
             SignInHeading.Margin = new Padding(0);
             SignInHeading.Name = "SignInHeading";
-            SignInHeading.Size = new Size(427, 54);
+            SignInHeading.Size = new Size(292, 37);
             SignInHeading.TabIndex = 0;
             SignInHeading.Text = "Sign In to Travel-Ease";
             SignInHeading.Click += SignInHeading_Click;
@@ -64,10 +68,9 @@
             SignInSubtitle.AutoSize = true;
             SignInSubtitle.Font = new Font("Segoe UI", 10F);
             SignInSubtitle.ForeColor = Color.Gray;
-            SignInSubtitle.Location = new Point(116, 158);
-            SignInSubtitle.Margin = new Padding(4, 0, 4, 0);
+            SignInSubtitle.Location = new Point(104, 99);
             SignInSubtitle.Name = "SignInSubtitle";
-            SignInSubtitle.Size = new Size(170, 28);
+            SignInSubtitle.Size = new Size(122, 19);
             SignInSubtitle.TabIndex = 1;
             SignInSubtitle.Text = "Start Your Journey";
             SignInSubtitle.Click += SignInSubtitle_Click;
@@ -75,11 +78,10 @@
             // topLeftLogo
             // 
             topLeftLogo.Image = TravelEaseApp.Properties.Resources.travelEaseLogo;
-            topLeftLogo.Location = new Point(261, 20);
-            topLeftLogo.Margin = new Padding(4, 5, 4, 5);
+            topLeftLogo.Location = new Point(228, 10);
             topLeftLogo.Name = "topLeftLogo";
-            topLeftLogo.Padding = new Padding(3);
-            topLeftLogo.Size = new Size(106, 105);
+            topLeftLogo.Padding = new Padding(2);
+            topLeftLogo.Size = new Size(74, 63);
             topLeftLogo.SizeMode = PictureBoxSizeMode.StretchImage;
             topLeftLogo.TabIndex = 0;
             topLeftLogo.TabStop = false;
@@ -88,10 +90,9 @@
             // signIntravller
             // 
             signIntravller.Image = TravelEaseApp.Properties.Resources.signInImage;
-            signIntravller.Location = new Point(659, 0);
-            signIntravller.Margin = new Padding(4, 5, 4, 5);
+            signIntravller.Location = new Point(550, -2);
             signIntravller.Name = "signIntravller";
-            signIntravller.Size = new Size(657, 867);
+            signIntravller.Size = new Size(503, 566);
             signIntravller.SizeMode = PictureBoxSizeMode.StretchImage;
             signIntravller.TabIndex = 0;
             signIntravller.TabStop = false;
@@ -100,11 +101,9 @@
             // 
             groupBoxEmail.Controls.Add(innerEmailBox);
             groupBoxEmail.Font = new Font("Times New Roman", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            groupBoxEmail.Location = new Point(107, 332);
-            groupBoxEmail.Margin = new Padding(4, 5, 4, 5);
+            groupBoxEmail.Location = new Point(82, 204);
             groupBoxEmail.Name = "groupBoxEmail";
-            groupBoxEmail.Padding = new Padding(4, 5, 4, 5);
-            groupBoxEmail.Size = new Size(417, 98);
+            groupBoxEmail.Size = new Size(348, 58);
             groupBoxEmail.TabIndex = 0;
             groupBoxEmail.TabStop = false;
             groupBoxEmail.Text = "E-mail";
@@ -118,24 +117,21 @@
             // 
             innerEmailBox.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             innerEmailBox.BorderStyle = BorderStyle.None;
-            innerEmailBox.Font = new Font("Segoe UI", 9F);
-            innerEmailBox.Location = new Point(19, 42);
-            innerEmailBox.Margin = new Padding(4, 5, 4, 5);
+            innerEmailBox.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            innerEmailBox.Location = new Point(13, 22);
             innerEmailBox.Name = "innerEmailBox";
-            innerEmailBox.Size = new Size(389, 24);
+            innerEmailBox.Size = new Size(281, 22);
             innerEmailBox.TabIndex = 3;
             innerEmailBox.TextChanged += innerEmailBox_TextChanged;
-            AddPlaceholder(innerEmailBox, "BlazingBeam@HELPME.com");
             // 
             // groupBoxPassword
             // 
+            groupBoxPassword.Controls.Add(VisibilityIcon);
             groupBoxPassword.Controls.Add(innerPasswordBox);
             groupBoxPassword.Font = new Font("Times New Roman", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            groupBoxPassword.Location = new Point(107, 440);
-            groupBoxPassword.Margin = new Padding(4, 5, 4, 5);
+            groupBoxPassword.Location = new Point(82, 268);
             groupBoxPassword.Name = "groupBoxPassword";
-            groupBoxPassword.Padding = new Padding(4, 5, 4, 5);
-            groupBoxPassword.Size = new Size(417, 98);
+            groupBoxPassword.Size = new Size(348, 58);
             groupBoxPassword.TabIndex = 0;
             groupBoxPassword.TabStop = false;
             groupBoxPassword.Text = "Password";
@@ -145,47 +141,79 @@
             groupBoxPassword.Enter += groupBoxPassword_Enter;
             groupBoxPassword.Leave += groupBoxPassword_Leave;
             // 
+            // VisibilityIcon
+            // 
+            VisibilityIcon.Image = TravelEaseApp.Properties.Resources.visible;
+            VisibilityIcon.Location = new Point(303, 15);
+            VisibilityIcon.Margin = new Padding(3, 2, 3, 2);
+            VisibilityIcon.Name = "VisibilityIcon";
+            VisibilityIcon.Padding = new Padding(2);
+            VisibilityIcon.Size = new Size(38, 36);
+            VisibilityIcon.SizeMode = PictureBoxSizeMode.StretchImage;
+            VisibilityIcon.TabIndex = 6;
+            VisibilityIcon.TabStop = false;
+            VisibilityIcon.Click += VisibilityIcon_Click;
+            VisibilityIcon.MouseEnter += VisibilityIcon_MouseEnter;
+            VisibilityIcon.MouseLeave += VisibilityIcon_MouseLeave;
+            // 
             // innerPasswordBox
             // 
             innerPasswordBox.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             innerPasswordBox.BorderStyle = BorderStyle.None;
-            innerPasswordBox.Location = new Point(19, 43);
-            innerPasswordBox.Margin = new Padding(4, 5, 4, 5);
+            innerPasswordBox.Font = new Font("Times New Roman", 10.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            innerPasswordBox.Location = new Point(13, 26);
             innerPasswordBox.Name = "innerPasswordBox";
-            innerPasswordBox.Size = new Size(389, 23);
+            innerPasswordBox.Size = new Size(284, 17);
             innerPasswordBox.TabIndex = 0;
             innerPasswordBox.UseSystemPasswordChar = true;
             innerPasswordBox.TextChanged += innerPasswordBox_TextChanged;
-            AddPlaceholder(innerPasswordBox, "********");
             // 
             // signInButton
             // 
-            signInButton.BackColor = Color.Blue;
+            signInButton.BackColor = Color.Black;
             signInButton.BorderStyle = BorderStyle.FixedSingle;
             signInButton.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
             signInButton.ForeColor = Color.White;
-            signInButton.Location = new Point(107, 583);
-            signInButton.Margin = new Padding(4, 0, 4, 0);
+            signInButton.Location = new Point(82, 372);
             signInButton.Name = "signInButton";
-            signInButton.Size = new Size(416, 65);
+            signInButton.Size = new Size(348, 40);
             signInButton.TabIndex = 2;
             signInButton.Text = "Sign In";
             signInButton.TextAlign = ContentAlignment.MiddleCenter;
             signInButton.Click += signInButton_Click;
-            AddHoverTransition(signInButton, signInButton.BackColor, signInButton.ForeColor, signInButton.ForeColor, signInButton.BackColor);
+            // 
+            // ForgotPassword
+            // 
+            ForgotPassword.AutoSize = true;
+            ForgotPassword.LinkColor = Color.Black;
+            ForgotPassword.Location = new Point(321, 340);
+            ForgotPassword.Name = "ForgotPassword";
+            ForgotPassword.Size = new Size(100, 15);
+            ForgotPassword.TabIndex = 3;
+            ForgotPassword.TabStop = true;
+            ForgotPassword.Text = "Forgot Password?";
+            ForgotPassword.LinkClicked += ForgotPassword_LinkClicked;
+            // 
+            // Register
+            // 
+            Register.AutoSize = true;
+            Register.LinkColor = Color.Black;
+            Register.Location = new Point(206, 441);
+            Register.Name = "Register";
+            Register.Size = new Size(96, 15);
+            Register.TabIndex = 5;
+            Register.TabStop = true;
+            Register.Text = "Register/Sign-up";
+            Register.LinkClicked += Register_LinkClicked;
             // 
             // SignInForm
             // 
-            AutoScaleDimensions = new SizeF(10F, 25F);
+            AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.White;
-            //this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
-            //this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
-
-            //this.AutoSize = false;
-            ClientSize = new Size(1314, 867);
-            this.MinimumSize = new Size(1314, 800);
-            //this.Size = new Size(1314, 867);
+            ClientSize = new Size(1054, 562);
+            Controls.Add(Register);
+            Controls.Add(ForgotPassword);
             Controls.Add(SignInHeading);
             Controls.Add(SignInSubtitle);
             Controls.Add(topLeftLogo);
@@ -193,7 +221,8 @@
             Controls.Add(groupBoxEmail);
             Controls.Add(groupBoxPassword);
             Controls.Add(signInButton);
-            Margin = new Padding(4, 3, 4, 3);
+            Margin = new Padding(3, 2, 3, 2);
+            MinimumSize = new Size(925, 497);
             Name = "SignInForm";
             Text = "Sign In";
             Load += SignInForm_Load;
@@ -204,80 +233,11 @@
             groupBoxEmail.PerformLayout();
             groupBoxPassword.ResumeLayout(false);
             groupBoxPassword.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)VisibilityIcon).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
-        private void AddPlaceholder(TextBox textBox, string placeholderText)
-        {
-            textBox.Text = placeholderText;
-            textBox.ForeColor = Color.Gray;
 
-            textBox.GotFocus += (sender, e) =>
-            {
-                if (textBox.Text == placeholderText)
-                {
-                    textBox.Text = "";
-                    textBox.ForeColor = Color.Black;
-                    //set it to not bold
-                    textBox.ForeColor = Color.Black;
-                    //textBox.Font = new Font(textBox.Font, FontStyle.Regular);
-                }
-            };
-
-            textBox.LostFocus += (sender, e) =>
-            {
-                if (string.IsNullOrWhiteSpace(textBox.Text))
-                {
-                    textBox.Text = placeholderText;
-                    textBox.ForeColor = Color.Gray;
-                }
-            };
-        }
-       
-        private int SmoothTransition(int current, int target)
-        {
-            int diff = target - current;
-            if (Math.Abs(diff) < 3)
-                return target;
-            return current + diff / 5;
-        }
-
-        private void AddHoverTransition(Control control, Color normalBackColor, Color hoverBackColor, Color normalTextColor, Color hoverTextColor)
-        {
-            Color currentBackColor = normalBackColor;
-            Color currentTextColor = normalTextColor;
-            bool isHovering = false;
-
-            control.BackColor = normalBackColor;
-            control.ForeColor = normalTextColor;
-
-            System.Windows.Forms.Timer hoverTimer = new System.Windows.Forms.Timer();
-            hoverTimer.Interval = 15;
-            hoverTimer.Tick += (s, e) =>
-            {
-                // Transition for background color
-                Color targetBackColor = isHovering ? hoverBackColor : normalBackColor;
-                int rBack = SmoothTransition(currentBackColor.R, targetBackColor.R);
-                int gBack = SmoothTransition(currentBackColor.G, targetBackColor.G);
-                int bBack = SmoothTransition(currentBackColor.B, targetBackColor.B);
-                currentBackColor = Color.FromArgb(rBack, gBack, bBack);
-
-                // Transition for text color
-                Color targetTextColor = isHovering ? hoverTextColor : normalTextColor;
-                int rText = SmoothTransition(currentTextColor.R, targetTextColor.R);
-                int gText = SmoothTransition(currentTextColor.G, targetTextColor.G);
-                int bText = SmoothTransition(currentTextColor.B, targetTextColor.B);
-                currentTextColor = Color.FromArgb(rText, gText, bText);
-
-                // Apply colors
-                control.BackColor = currentBackColor;
-                control.ForeColor = currentTextColor;
-            };
-            hoverTimer.Start();
-
-            control.MouseEnter += (s, e) => isHovering = true;
-            control.MouseLeave += (s, e) => isHovering = false;
-        }
 
         private void signInLabel_Paint(object sender, PaintEventArgs e)
         {
@@ -290,6 +250,11 @@
 
 
         #endregion
+
+        private LinkLabel ForgotPassword;
+        private Label DontAccount;
+        private LinkLabel Register;
+        private PictureBox VisibilityIcon;
     }
 
 }
