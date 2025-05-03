@@ -4,7 +4,6 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
-using System.Reflection.Emit;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -17,7 +16,7 @@ namespace TravelEaseApp
         public ServiceProviderForm()
         {
             InitializeComponent();
-            this.IsMdiContainer = true;
+            //this.IsMdiContainer = true;
             ShowDashboardForm();
 
             // dashboardTrayPanel
@@ -29,6 +28,15 @@ namespace TravelEaseApp
             serviceTrayPanel.Click += serviceTrayPanel_Click;
             serviceTrayLabel.Click += serviceTrayPanel_Click;
             serviceTrayPictureBox.Click += serviceTrayPanel_Click;
+
+            //////////////////////////////////////
+            // SIDEBAR
+            SetRoundedCorners(sidebarPanel, 20);
+            SetRoundedCorners(dashboardTrayPanel, 20);
+            SetRoundedCorners(serviceTrayPanel, 20);
+            //////////////////////////////////////
+            ///
+            SelectPanel(dashboardTrayPanel); // Select the dashboard panel by default
         }
 
         private void ShowDashboardForm()
@@ -71,17 +79,6 @@ namespace TravelEaseApp
             addServiceForm.Show();
         }
 
-
-
-        private void ServiceProviderForm_Load(object sender, EventArgs e)
-        {
-            //////////////////////////////////////
-            // SIDEBAR
-            SetRoundedCorners(sidebarPanel, 20);
-            //////////////////////////////////////
-
-        }
-
         private void dashboardTrayPanel_Click(object sender, EventArgs e)
         {
             // if subform is equal to dashboardForm, do nothing
@@ -95,6 +92,8 @@ namespace TravelEaseApp
                 ctrl.Dispose(); // Remove existing controls (forms)
             }
             ShowDashboardForm();
+            UnselectPanel(serviceTrayPanel);
+            SelectPanel(dashboardTrayPanel);
         }
 
         private void serviceTrayPanel_Click(object sender, EventArgs e)
@@ -109,6 +108,86 @@ namespace TravelEaseApp
                 ctrl.Dispose(); // Remove existing controls (forms)
             }
             ShowServicesForm();
+            UnselectPanel(dashboardTrayPanel);
+            SelectPanel(serviceTrayPanel);
         }
+
+        private Dictionary<Panel, (Color BackColor, Color LabelForeColor, Image OriginalImage)> originalPanelStates = new();
+
+        public void SelectPanel(Panel panel)
+        {
+            var label = panel.Controls.OfType<Label>().FirstOrDefault();
+            var pictureBox = panel.Controls.OfType<PictureBox>().FirstOrDefault();
+
+            if (!originalPanelStates.ContainsKey(panel))
+            {
+                originalPanelStates[panel] = (
+                    panel.BackColor,
+                    label?.ForeColor ?? Color.Black,
+                    pictureBox?.Image != null ? new Bitmap(pictureBox.Image) : null
+                );
+            }
+
+            panel.BackColor = InvertColor(panel.BackColor);
+            if (label != null)
+                label.ForeColor = InvertColor(label.ForeColor);
+
+            if (pictureBox?.Image != null)
+                pictureBox.Image = InvertImage(pictureBox.Image);
+
+            panel.BorderStyle = BorderStyle.FixedSingle;
+        }
+
+        private Color InvertColor(Color color)
+        {
+            return Color.FromArgb(color.A, 255 - color.R, 255 - color.G, 255 - color.B);
+        }
+
+        public void UnselectPanel(Panel panel)
+        {
+            if (originalPanelStates.ContainsKey(panel))
+            {
+                var (originalBack, originalFore, originalImage) = originalPanelStates[panel];
+
+                panel.BackColor = originalBack;
+
+                var label = panel.Controls.OfType<Label>().FirstOrDefault();
+                if (label != null)
+                    label.ForeColor = originalFore;
+
+                var pictureBox = panel.Controls.OfType<PictureBox>().FirstOrDefault();
+                if (pictureBox != null && originalImage != null)
+                    pictureBox.Image = new Bitmap(originalImage);
+
+                panel.BorderStyle = BorderStyle.None;
+
+                originalPanelStates.Remove(panel);
+            }
+        }
+
+
+        private Image InvertImage(Image original)
+        {
+            Bitmap inverted = new Bitmap(original.Width, original.Height);
+
+            for (int y = 0; y < original.Height; y++)
+            {
+                for (int x = 0; x < original.Width; x++)
+                {
+                    Color pixelColor = ((Bitmap)original).GetPixel(x, y);
+                    Color invertedColor = Color.FromArgb(
+                        pixelColor.A,
+                        255 - pixelColor.R,
+                        255 - pixelColor.G,
+                        255 - pixelColor.B
+                    );
+                    inverted.SetPixel(x, y, invertedColor);
+                }
+            }
+
+            return inverted;
+        }
+
+
     }
 }

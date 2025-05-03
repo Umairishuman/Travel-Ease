@@ -140,7 +140,7 @@
             // 
             // submitLabel
             // 
-            submitLabel.BackColor = Color.Blue;
+            submitLabel.BackColor = Color.Black;
             submitLabel.BorderStyle = BorderStyle.FixedSingle;
             submitLabel.Cursor = Cursors.Hand;
             submitLabel.Font = new Font("Segoe UI", 15F, FontStyle.Bold);
