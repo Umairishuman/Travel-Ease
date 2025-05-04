@@ -75,5 +75,49 @@ namespace TravelEaseApp
             control.MouseEnter += (s, e) => isHovering = true;
             control.MouseLeave += (s, e) => isHovering = false;
         }
+
+        public static void SetupGroupBoxFocusBehavior(GroupBox groupBox, TextBox innerTextBox)
+        {
+            groupBox.Enter += (s, e) => innerTextBox.Focus();
+
+            groupBox.MouseEnter += (s, e) =>
+            {
+                groupBox.Cursor = Cursors.IBeam;
+            };
+
+            groupBox.MouseLeave += (s, e) =>
+            {
+                groupBox.Cursor = Cursors.Default;
+            };
+
+            groupBox.MouseClick += (s, e) =>
+            {
+                innerTextBox.Focus();
+            };
+            groupBox.Click += (s, e) =>
+            {
+                innerTextBox.Focus();
+            };
+        }
+
+        public static void SetupPasswordField(GroupBox groupBox, TextBox textBox, PictureBox visibilityIcon, Image showIcon, Image hideIcon)
+        {
+            // Visibility toggle
+            visibilityIcon.Cursor = Cursors.Hand;
+            visibilityIcon.Click += (s, e) =>
+            {
+                bool isHidden = textBox.UseSystemPasswordChar;
+                textBox.UseSystemPasswordChar = !isHidden;
+                visibilityIcon.Image = isHidden ? hideIcon : showIcon;
+            };
+
+            // Focus textbox when groupbox is entered or clicked
+            groupBox.Enter += (s, e) => textBox.Focus();
+            groupBox.MouseClick += (s, e) => textBox.Focus();
+
+            // Cursor changes
+            groupBox.MouseEnter += (s, e) => groupBox.Cursor = Cursors.IBeam;
+            groupBox.MouseLeave += (s, e) => groupBox.Cursor = Cursors.Default;
+        }
     }
 }

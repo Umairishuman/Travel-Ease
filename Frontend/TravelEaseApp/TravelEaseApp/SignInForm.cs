@@ -156,7 +156,10 @@ namespace TravelEase
 
         private void Register_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-
+            Registration_Form registration_Form = new Registration_Form();
+            this.Hide();
+            registration_Form.FormClosed += (s, args) => this.Show();
+            registration_Form.Show();
         }
         ////////////////////////////////////////////////////////////////////////////////////
         //////eye icond

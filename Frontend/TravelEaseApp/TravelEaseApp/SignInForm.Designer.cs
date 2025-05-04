@@ -89,6 +89,7 @@
             // 
             // signIntravller
             // 
+            signIntravller.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Right;
             signIntravller.Image = TravelEaseApp.Properties.Resources.signInImage;
             signIntravller.Location = new Point(550, -2);
             signIntravller.Name = "signIntravller";
