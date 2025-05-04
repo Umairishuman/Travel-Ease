@@ -32,8 +32,8 @@
             groupBoxEmail = new GroupBox();
             innerEmailBox = new TextBox();
             groupBoxNewPassword = new GroupBox();
-            VisibilityIconNewPass = new PictureBox();
             innerNewPasswordBox = new TextBox();
+            VisibilityIconNewPass = new PictureBox();
             ConfirmPassword = new GroupBox();
             VisibilityIconConfirmPass = new PictureBox();
             ConfirmInnerTextBox = new TextBox();
@@ -97,11 +97,21 @@
             groupBoxNewPassword.TabIndex = 3;
             groupBoxNewPassword.TabStop = false;
             groupBoxNewPassword.Text = "New Password";
+            groupBoxNewPassword.MouseClick += groupBoxNewPassword_MouseClick;
             groupBoxNewPassword.MouseEnter += groupBoxNewPassword_MouseEnter;
             groupBoxNewPassword.MouseLeave += groupBoxNewPassword_MouseLeave;
             groupBoxNewPassword.Enter += groupBoxNewPassword_Enter;
-            groupBoxNewPassword.MouseClick += groupBoxNewPassword_MouseClick;
-
+            // 
+            // innerNewPasswordBox
+            // 
+            innerNewPasswordBox.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            innerNewPasswordBox.BorderStyle = BorderStyle.None;
+            innerNewPasswordBox.Font = new Font("Times New Roman", 11.25F, FontStyle.Bold);
+            innerNewPasswordBox.Location = new Point(13, 25);
+            innerNewPasswordBox.Name = "innerNewPasswordBox";
+            innerNewPasswordBox.Size = new Size(226, 18);
+            innerNewPasswordBox.TabIndex = 0;
+            innerNewPasswordBox.UseSystemPasswordChar = true;
             // 
             // VisibilityIconNewPass
             // 
@@ -117,17 +127,6 @@
             VisibilityIconNewPass.Click += VisibilityIconNewPass_Click;
             VisibilityIconNewPass.MouseEnter += VisibilityIconNewPass_MouseEnter;
             VisibilityIconNewPass.MouseLeave += VisibilityIconNewPass_MouseLeave;
-            // 
-            // innerNewPasswordBox
-            // 
-            innerNewPasswordBox.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-            innerNewPasswordBox.BorderStyle = BorderStyle.None;
-            innerNewPasswordBox.Font = new Font("Times New Roman", 11.25F, FontStyle.Bold);
-            innerNewPasswordBox.Location = new Point(13, 25);
-            innerNewPasswordBox.Name = "innerNewPasswordBox";
-            innerNewPasswordBox.Size = new Size(226, 18);
-            innerNewPasswordBox.TabIndex = 0;
-            innerNewPasswordBox.UseSystemPasswordChar = true;
             // 
             // ConfirmPassword
             // 
