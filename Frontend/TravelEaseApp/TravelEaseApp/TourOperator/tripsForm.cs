@@ -8,18 +8,19 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace TravelEaseApp.ServiceProvider
+namespace TravelEaseApp.TourOperator
 {
-    public partial class servicesForm : Form
+    public partial class tripsForm : Form
     {
-        public servicesForm()
+        public tripsForm()
         {
             InitializeComponent();
+            AddPlaceholder(textBox1, "1");
         }
 
-        private void servicesForm_Load(object sender, EventArgs e)
+        private void tripsForm_Load(object sender, EventArgs e)
         {
-            AddPlaceholder(textBox1, "1");
+
         }
 
         private void AddPlaceholder(TextBox textBox, string placeholderText)
@@ -47,11 +48,6 @@ namespace TravelEaseApp.ServiceProvider
                     textBox.ForeColor = Color.Gray;
                 }
             };
-        }
-
-        private void groupBox1_Enter(object sender, EventArgs e)
-        {
-
         }
     }
 }

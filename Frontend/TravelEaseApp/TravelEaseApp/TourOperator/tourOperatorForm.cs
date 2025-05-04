@@ -9,11 +9,11 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using TravelEaseApp.ServiceProvider;
 
-namespace TravelEaseApp
+namespace TravelEaseApp.TourOperator
 {
-    public partial class ServiceProviderForm : Form
+    public partial class tourOperatorForm : Form
     {
-        public ServiceProviderForm()
+        public tourOperatorForm()
         {
             InitializeComponent();
             //this.IsMdiContainer = true;
@@ -24,10 +24,10 @@ namespace TravelEaseApp
             dashboardTrayLabel.Click += dashboardTrayPanel_Click;
             dashboardTrayPictureBox.Click += dashboardTrayPanel_Click;
 
-            // servicesTrayPanel
-            serviceTrayPanel.Click += serviceTrayPanel_Click;
-            serviceTrayLabel.Click += serviceTrayPanel_Click;
-            serviceTrayPictureBox.Click += serviceTrayPanel_Click;
+            // tripsTrayPanel
+            tripTrayPanel.Click += tripTrayPanel_Click;
+            tripTrayLabel.Click += tripTrayPanel_Click;
+            tripTrayPictureBox.Click += tripTrayPanel_Click;
 
             SelectPanel(dashboardTrayPanel); // Select the dashboard panel by default
         }
@@ -39,27 +39,27 @@ namespace TravelEaseApp
             dashboardForm.FormBorderStyle = FormBorderStyle.None;
             dashboardForm.Dock = DockStyle.Fill;
 
-            dashboardForm.RequestAddServiceForm += ShowAddServiceForm;
+            dashboardForm.RequestAddTripForm += ShowAddTripForm;
 
             subFormPanel.Controls.Clear();
             subFormPanel.Controls.Add(dashboardForm);
             dashboardForm.Show();
         }
 
-        private void ShowServicesForm()
+        private void ShowTripsForm()
         {
-            var servicesForm = new servicesForm();
-            servicesForm.TopLevel = false;
-            servicesForm.FormBorderStyle = FormBorderStyle.None;
-            servicesForm.Dock = DockStyle.Fill;
+            var tripsForm = new tripsForm();
+            tripsForm.TopLevel = false;
+            tripsForm.FormBorderStyle = FormBorderStyle.None;
+            tripsForm.Dock = DockStyle.Fill;
             subFormPanel.Controls.Clear();
-            subFormPanel.Controls.Add(servicesForm);
-            servicesForm.Show();
+            subFormPanel.Controls.Add(tripsForm);
+            tripsForm.Show();
         }
 
-        private void ShowAddServiceForm()
+        private void ShowAddTripForm()
         {
-            var addServiceForm = new addServiceForm();
+            var addServiceForm = new addTripForm();
             addServiceForm.TopLevel = false;
             addServiceForm.FormBorderStyle = FormBorderStyle.None;
             addServiceForm.Dock = DockStyle.Fill;
@@ -67,6 +67,11 @@ namespace TravelEaseApp
             subFormPanel.Controls.Clear();
             subFormPanel.Controls.Add(addServiceForm);
             addServiceForm.Show();
+        }
+
+        private void tourOperatorForm_Load(object sender, EventArgs e)
+        {
+
         }
 
         private void dashboardTrayPanel_Click(object sender, EventArgs e)
@@ -82,14 +87,15 @@ namespace TravelEaseApp
                 ctrl.Dispose(); // Remove existing controls (forms)
             }
             ShowDashboardForm();
-            UnselectPanel(serviceTrayPanel);
+            UnselectPanel(tripTrayPanel);
+            UnselectPanel(dashboardTrayPanel);
             SelectPanel(dashboardTrayPanel);
         }
 
-        private void serviceTrayPanel_Click(object sender, EventArgs e)
+        private void tripTrayPanel_Click(object sender, EventArgs e)
         {
-            // if subform is equal to servicesForm, do nothing
-            if (subFormPanel.Controls.Count > 0 && subFormPanel.Controls[0] is servicesForm)
+            // if subform is equal to tripsForm, do nothing
+            if (subFormPanel.Controls.Count > 0 && subFormPanel.Controls[0] is tripsForm)
             {
                 return;
             }
@@ -97,9 +103,10 @@ namespace TravelEaseApp
             {
                 ctrl.Dispose(); // Remove existing controls (forms)
             }
-            ShowServicesForm();
+            ShowTripsForm();
             UnselectPanel(dashboardTrayPanel);
-            SelectPanel(serviceTrayPanel);
+            UnselectPanel(tripTrayPanel);
+            SelectPanel(tripTrayPanel);
         }
 
         private Dictionary<Panel, (Color BackColor, Color LabelForeColor, Image OriginalImage)> originalPanelStates = new();

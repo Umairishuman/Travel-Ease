@@ -8,21 +8,23 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace TravelEaseApp.ServiceProvider
+namespace TravelEaseApp.TourOperator
 {
-    public partial class addServiceForm : Form
+    public partial class dashboardForm : Form
     {
-        public addServiceForm()
+        public dashboardForm()
         {
             InitializeComponent();
+
+            // ProfilePicture
+            System.Drawing.Drawing2D.GraphicsPath path = new System.Drawing.Drawing2D.GraphicsPath();
+            path.AddEllipse(0, 0, profilePictureBox.Width, profilePictureBox.Height);
+            profilePictureBox.Region = new Region(path);
+
+            AddHoverTransition(addTripLabel, addTripLabel.BackColor, addTripLabel.ForeColor, addTripLabel.ForeColor, addTripLabel.BackColor);
         }
 
-        private void Form1_Load(object sender, EventArgs e)
-        {
-            AddHoverTransition(submitLabel, submitLabel.BackColor, submitLabel.ForeColor, submitLabel.ForeColor, submitLabel.BackColor);
-        }
-
-        private void submitLabel_Click(object sender, EventArgs e)
+        private void dashboardForm_Load(object sender, EventArgs e)
         {
 
         }
@@ -72,9 +74,11 @@ namespace TravelEaseApp.ServiceProvider
             control.MouseLeave += (s, e) => isHovering = false;
         }
 
-        private void flowLayoutPanel1_Paint(object sender, PaintEventArgs e)
-        {
+        public event Action RequestAddTripForm;
 
+        private void addTripLabel_Click(object sender, EventArgs e)
+        {
+            RequestAddTripForm?.Invoke();
         }
     }
 }

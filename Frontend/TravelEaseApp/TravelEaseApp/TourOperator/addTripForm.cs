@@ -7,24 +7,16 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using TravelEaseApp.ServiceProvider;
 
-namespace TravelEaseApp.ServiceProvider
+namespace TravelEaseApp.TourOperator
 {
-    public partial class addServiceForm : Form
+    public partial class addTripForm : Form
     {
-        public addServiceForm()
+        public addTripForm()
         {
             InitializeComponent();
-        }
-
-        private void Form1_Load(object sender, EventArgs e)
-        {
             AddHoverTransition(submitLabel, submitLabel.BackColor, submitLabel.ForeColor, submitLabel.ForeColor, submitLabel.BackColor);
-        }
-
-        private void submitLabel_Click(object sender, EventArgs e)
-        {
-
         }
 
         private int SmoothTransition(int current, int target)
@@ -72,7 +64,7 @@ namespace TravelEaseApp.ServiceProvider
             control.MouseLeave += (s, e) => isHovering = false;
         }
 
-        private void flowLayoutPanel1_Paint(object sender, PaintEventArgs e)
+        private void flowLayoutPanel3_Paint(object sender, PaintEventArgs e)
         {
 
         }
