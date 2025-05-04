@@ -93,6 +93,16 @@ namespace TravelEaseApp.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap image_svgrepo_com {
+            get {
+                object obj = ResourceManager.GetObject("image-svgrepo-com", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap images {
             get {
                 object obj = ResourceManager.GetObject("images", resourceCulture);
@@ -126,6 +136,16 @@ namespace TravelEaseApp.Properties {
         internal static System.Drawing.Bitmap signInImage {
             get {
                 object obj = ResourceManager.GetObject("signInImage", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap travel_luggage_svgrepo_com_B {
+            get {
+                object obj = ResourceManager.GetObject("travel-luggage-svgrepo-com-B", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

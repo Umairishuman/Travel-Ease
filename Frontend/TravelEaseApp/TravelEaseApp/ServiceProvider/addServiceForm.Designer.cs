@@ -169,6 +169,7 @@
             flowLayoutPanel1.Padding = new Padding(400, 120, 0, 0);
             flowLayoutPanel1.Size = new Size(1118, 610);
             flowLayoutPanel1.TabIndex = 8;
+            flowLayoutPanel1.Paint += flowLayoutPanel1_Paint;
             // 
             // label1
             // 
@@ -186,6 +187,7 @@
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1118, 610);
             Controls.Add(flowLayoutPanel1);
+            FormBorderStyle = FormBorderStyle.None;
             Name = "addServiceForm";
             Text = "Form1";
             Load += Form1_Load;

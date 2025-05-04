@@ -100,13 +100,13 @@ namespace TravelEaseApp.ServiceProvider
 
         private void dashboardForm_Load(object sender, EventArgs e)
         {
-            SetRoundedCorners(pendingRequestsPanel, 20);
-            SetRoundedCorners(flowLayoutPanel1, 20);
-            SetRoundedCorners(flowLayoutPanel2, 20);
-            SetRoundedCorners(panel3, 20);
-            SetRoundedCorners(flowLayoutPanel3, 20);
-            SetRoundedCorners(flowLayoutPanel4, 20);
-            SetRoundedCorners(flowLayoutPanel5, 20);
+            //SetRoundedCorners(pendingRequestsPanel, 20);
+            //SetRoundedCorners(flowLayoutPanel1, 20);
+            //SetRoundedCorners(flowLayoutPanel2, 20);
+            //SetRoundedCorners(panel3, 20);
+            //SetRoundedCorners(flowLayoutPanel3, 20);
+            //SetRoundedCorners(flowLayoutPanel4, 20);
+            //SetRoundedCorners(flowLayoutPanel5, 20);
         }
 
         private void addServiceLabel_Click(object sender, EventArgs e)

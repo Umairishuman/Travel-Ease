@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Windows.Forms;
 using TravelEaseApp;
+using TravelEaseApp.TourOperator;
 
 namespace TravelEase
 {
@@ -12,7 +13,7 @@ namespace TravelEase
             // Start the application and run the SignInForm
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new ServiceProviderForm());
+            Application.Run(new tourOperatorForm());
         }
     }
 }

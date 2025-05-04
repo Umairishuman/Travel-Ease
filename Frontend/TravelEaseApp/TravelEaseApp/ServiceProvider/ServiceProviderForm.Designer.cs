@@ -144,6 +144,7 @@ namespace TravelEaseApp
             Controls.Add(sidebarPanel);
             Name = "ServiceProviderForm";
             Text = "ServiceProvider";
+            Load += ServiceProviderForm_Load;
             sidebarPanel.ResumeLayout(false);
             dashboardTrayPanel.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)dashboardTrayPictureBox).EndInit();
