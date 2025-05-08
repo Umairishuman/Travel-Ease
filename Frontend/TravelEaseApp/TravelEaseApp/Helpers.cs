@@ -40,7 +40,48 @@ namespace TravelEaseApp
             return current + diff / 5;
         }
 
-        public static void AddHoverTransition(Control control, Color normalBackColor, Color hoverBackColor, Color normalTextColor, Color hoverTextColor)
+        //public static void AddHoverTransition(Control control, Color normalBackColor, Color hoverBackColor, Color normalTextColor, Color hoverTextColor)
+        //{
+        //    Color currentBackColor = normalBackColor;
+        //    Color currentTextColor = normalTextColor;
+        //    bool isHovering = false;
+
+        //    control.BackColor = normalBackColor;
+        //    control.ForeColor = normalTextColor;
+
+        //    System.Windows.Forms.Timer hoverTimer = new System.Windows.Forms.Timer();
+        //    hoverTimer.Interval = 15;
+        //    hoverTimer.Tick += (s, e) =>
+        //    {
+        //        // Transition background
+        //        Color targetBackColor = isHovering ? hoverBackColor : normalBackColor;
+        //        int rBack = SmoothTransition(currentBackColor.R, targetBackColor.R);
+        //        int gBack = SmoothTransition(currentBackColor.G, targetBackColor.G);
+        //        int bBack = SmoothTransition(currentBackColor.B, targetBackColor.B);
+        //        currentBackColor = Color.FromArgb(rBack, gBack, bBack);
+
+        //        // Transition text color
+        //        Color targetTextColor = isHovering ? hoverTextColor : normalTextColor;
+        //        int rText = SmoothTransition(currentTextColor.R, targetTextColor.R);
+        //        int gText = SmoothTransition(currentTextColor.G, targetTextColor.G);
+        //        int bText = SmoothTransition(currentTextColor.B, targetTextColor.B);
+        //        currentTextColor = Color.FromArgb(rText, gText, bText);
+
+        //        control.BackColor = currentBackColor;
+        //        control.ForeColor = currentTextColor;
+        //    };
+        //    hoverTimer.Start();
+
+        //    control.MouseEnter += (s, e) => isHovering = true;
+        //    control.MouseLeave += (s, e) => isHovering = false;
+        //}
+
+        public static void AddHoverTransition(
+            Control control,
+            Color normalBackColor,
+            Color hoverBackColor,
+            Color normalTextColor,
+            Color hoverTextColor)
         {
             Color currentBackColor = normalBackColor;
             Color currentTextColor = normalTextColor;
@@ -50,17 +91,16 @@ namespace TravelEaseApp
             control.ForeColor = normalTextColor;
 
             System.Windows.Forms.Timer hoverTimer = new System.Windows.Forms.Timer();
+
             hoverTimer.Interval = 15;
             hoverTimer.Tick += (s, e) =>
             {
-                // Transition background
                 Color targetBackColor = isHovering ? hoverBackColor : normalBackColor;
                 int rBack = SmoothTransition(currentBackColor.R, targetBackColor.R);
                 int gBack = SmoothTransition(currentBackColor.G, targetBackColor.G);
                 int bBack = SmoothTransition(currentBackColor.B, targetBackColor.B);
                 currentBackColor = Color.FromArgb(rBack, gBack, bBack);
 
-                // Transition text color
                 Color targetTextColor = isHovering ? hoverTextColor : normalTextColor;
                 int rText = SmoothTransition(currentTextColor.R, targetTextColor.R);
                 int gText = SmoothTransition(currentTextColor.G, targetTextColor.G);
@@ -72,9 +112,63 @@ namespace TravelEaseApp
             };
             hoverTimer.Start();
 
-            control.MouseEnter += (s, e) => isHovering = true;
-            control.MouseLeave += (s, e) => isHovering = false;
+            // Unified hover detection for control and children
+            void AttachHoverHandlers(Control target)
+            {
+                target.MouseEnter += (s, e) => isHovering = true;
+                target.MouseLeave += (s, e) =>
+                {
+                    Point mousePos = control.PointToClient(Cursor.Position);
+                    if (!control.ClientRectangle.Contains(mousePos))
+                    {
+                        isHovering = false;
+                    }
+                };
+
+                foreach (Control child in target.Controls)
+                {
+                    AttachHoverHandlers(child); // Recursive for nested children
+                }
+            }
+
+            AttachHoverHandlers(control);
         }
+
+
+        public static void AddHoverTransition(Control triggerControl, Control targetControl, Color normalBackColor, Color hoverBackColor, Color normalTextColor, Color hoverTextColor)
+        {
+            Color currentBackColor = normalBackColor;
+            Color currentTextColor = normalTextColor;
+            bool isHovering = false;
+
+            targetControl.BackColor = normalBackColor;
+            targetControl.ForeColor = normalTextColor;
+
+            System.Windows.Forms.Timer hoverTimer = new System.Windows.Forms.Timer();
+            hoverTimer.Interval = 15;
+            hoverTimer.Tick += (s, e) =>
+            {
+                Color targetBackColor = isHovering ? hoverBackColor : normalBackColor;
+                int rBack = SmoothTransition(currentBackColor.R, targetBackColor.R);
+                int gBack = SmoothTransition(currentBackColor.G, targetBackColor.G);
+                int bBack = SmoothTransition(currentBackColor.B, targetBackColor.B);
+                currentBackColor = Color.FromArgb(rBack, gBack, bBack);
+
+                Color targetTextCol = isHovering ? hoverTextColor : normalTextColor;
+                int rText = SmoothTransition(currentTextColor.R, targetTextCol.R);
+                int gText = SmoothTransition(currentTextColor.G, targetTextCol.G);
+                int bText = SmoothTransition(currentTextColor.B, targetTextCol.B);
+                currentTextColor = Color.FromArgb(rText, gText, bText);
+
+                targetControl.BackColor = currentBackColor;
+                targetControl.ForeColor = currentTextColor;
+            };
+            hoverTimer.Start();
+
+            triggerControl.MouseEnter += (s, e) => isHovering = true;
+            triggerControl.MouseLeave += (s, e) => isHovering = false;
+        }
+
 
         public static void SetupGroupBoxFocusBehavior(GroupBox groupBox, TextBox innerTextBox)
         {

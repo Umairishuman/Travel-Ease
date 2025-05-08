@@ -8,12 +8,13 @@ namespace TravelEase
     static class Program
     {
         [STAThread]
-        static void Main()
+        static void Main()  
+            ///////////WAIIIIIIIIIIISSSSSSSSSSSSSTTTTTTTTTTTTTTTTTT OOOOOOOFFFFFFFFFFFFFF TTTTTTTTTTTTTIMMMMMMMMMMEEEEEEEEEEEEE
         {
             // Start the application and run the SignInForm
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new tourOperatorForm());
+            Application.Run(new Traveller());
         }
     }
 }

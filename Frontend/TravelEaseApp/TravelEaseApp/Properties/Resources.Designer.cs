@@ -93,6 +93,26 @@ namespace TravelEaseApp.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap bookings {
+            get {
+                object obj = ResourceManager.GetObject("bookings", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap dashboard {
+            get {
+                object obj = ResourceManager.GetObject("dashboard", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap dashboard_svgrepo_com_B {
             get {
                 object obj = ResourceManager.GetObject("dashboard-svgrepo-com-B", resourceCulture);
@@ -183,6 +203,16 @@ namespace TravelEaseApp.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap transaction {
+            get {
+                object obj = ResourceManager.GetObject("transaction", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap travel_luggage_svgrepo_com_B {
             get {
                 object obj = ResourceManager.GetObject("travel-luggage-svgrepo-com-B", resourceCulture);
@@ -196,6 +226,26 @@ namespace TravelEaseApp.Properties {
         internal static System.Drawing.Bitmap travelEaseLogo {
             get {
                 object obj = ResourceManager.GetObject("travelEaseLogo", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap travellerpic {
+            get {
+                object obj = ResourceManager.GetObject("travellerpic", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap trips {
+            get {
+                object obj = ResourceManager.GetObject("trips", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

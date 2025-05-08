@@ -84,7 +84,7 @@ namespace TravelEaseApp
             // dashboardTrayPictureBox
             // 
             dashboardTrayPictureBox.BackColor = Color.Transparent;
-            //dashboardTrayPictureBox.Image = Properties.Resources.dashboard_svgrepo_com_B;
+            dashboardTrayPictureBox.Image = Properties.Resources.dashboard_svgrepo_com_B;
             dashboardTrayPictureBox.Location = new Point(3, 3);
             dashboardTrayPictureBox.Name = "dashboardTrayPictureBox";
             dashboardTrayPictureBox.Size = new Size(58, 42);
@@ -118,7 +118,7 @@ namespace TravelEaseApp
             // serviceTrayPictureBox
             // 
             serviceTrayPictureBox.BackColor = Color.Transparent;
-            //serviceTrayPictureBox.Image = Properties.Resources.service_bell_svgrepo_com_B;
+            serviceTrayPictureBox.Image = Properties.Resources.service_bell_svgrepo_com_B;
             serviceTrayPictureBox.Location = new Point(3, 3);
             serviceTrayPictureBox.Name = "serviceTrayPictureBox";
             serviceTrayPictureBox.Size = new Size(58, 42);
