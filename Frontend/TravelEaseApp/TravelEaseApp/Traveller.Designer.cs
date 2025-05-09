@@ -31,6 +31,7 @@
             mainPanel = new Panel();
             TravellerTripsPanel = new Panel();
             TripDisplayPanel = new Panel();
+            CompleteTripInfoPanel = new Panel();
             TravellerTripTopPanel = new Panel();
             textBox1 = new TextBox();
             TripsLabel = new Label();
@@ -82,6 +83,7 @@
             TravellerName = new Label();
             mainPanel.SuspendLayout();
             TravellerTripsPanel.SuspendLayout();
+            TripDisplayPanel.SuspendLayout();
             TravellerTripTopPanel.SuspendLayout();
             SideBarPanel.SuspendLayout();
             TransactionButtonPanel.SuspendLayout();
@@ -131,10 +133,21 @@
             // TripDisplayPanel
             // 
             TripDisplayPanel.BackColor = Color.White;
+            //TripDisplayPanel.Controls.Add(CompleteTripInfoPanel);
             TripDisplayPanel.Location = new Point(3, 115);
             TripDisplayPanel.Name = "TripDisplayPanel";
-            TripDisplayPanel.Size = new Size(1185, 566);
+            TripDisplayPanel.Size = new Size(1185, 557);
             TripDisplayPanel.TabIndex = 1;
+            TripDisplayPanel.Click += TripDisplayPanel_Click;
+            // 
+            // CompleteTripInfoPanel
+            // 
+            CompleteTripInfoPanel.BackColor = Color.FromArgb(224, 224, 224);
+            CompleteTripInfoPanel.Location = new Point(178, 13);
+            CompleteTripInfoPanel.Name = "CompleteTripInfoPanel";
+            CompleteTripInfoPanel.Size = new Size(800, 529);
+            CompleteTripInfoPanel.TabIndex = 0;
+            CompleteTripInfoPanel.Visible = false;
             // 
             // TravellerTripTopPanel
             // 
@@ -657,6 +670,7 @@
             Load += Traveller_Load;
             mainPanel.ResumeLayout(false);
             TravellerTripsPanel.ResumeLayout(false);
+            TripDisplayPanel.ResumeLayout(false);
             TravellerTripTopPanel.ResumeLayout(false);
             TravellerTripTopPanel.PerformLayout();
             SideBarPanel.ResumeLayout(false);
@@ -753,5 +767,6 @@
         private Label TripsLabel;
         private TextBox textBox1;
         private Panel TripDisplayPanel;
+        private Panel CompleteTripInfoPanel;
     }
 }
