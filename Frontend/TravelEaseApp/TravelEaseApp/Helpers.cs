@@ -230,59 +230,191 @@ namespace TravelEaseApp
                 return $"{DestinationName}, {City}, {Country}";
             }
         }
+        //serviceReview class
+        public class ServiceReview
+        {
+            public string ReviewId { get; set; }            // Format: SRVW-000001
+            public string ServiceId { get; set; }           // Foreign key to services
+            public string TravelerId { get; set; }          // Foreign key to travelers
+            public int Rating { get; set; }                 // 1 to 5
+            public string Description { get; set; }
+            public DateTime ReviewDate { get; set; } = DateTime.Now;
+            public string FlagStatus { get; set; } = "clear";
+
+            public ServiceReview(string reviewId, string serviceId, string travelerId, int rating,
+                                 string description, DateTime? reviewDate = null, string flagStatus = "clear")
+            {
+                ReviewId = reviewId;
+                ServiceId = serviceId;
+                TravelerId = travelerId;
+                Rating = rating;
+                Description = description;
+                ReviewDate = reviewDate ?? DateTime.Now;
+                FlagStatus = flagStatus;
+            }
+
+            public bool IsValidReviewId() => Regex.IsMatch(ReviewId, @"^SRVW-\d{6}$");
+            public bool IsValidRating() => Rating >= 1 && Rating <= 5;
+            public bool IsValidFlagStatus() => FlagStatus == "clear" || FlagStatus == "flagged";
+
+            public bool IsValid() => IsValidReviewId() && IsValidRating() && IsValidFlagStatus();
+
+            public override string ToString()
+            {
+                return $"ServiceReview [{ReviewId}] - {Rating}⭐ by Traveler {TravelerId}";
+            }
+        }
+
+        public class TripReview
+        {
+            public string ReviewId { get; set; }            // Format: TRVW-000001
+            public string TripId { get; set; }              // Foreign key to trips
+            public string TravelerId { get; set; }          // Foreign key to travelers
+            public int Rating { get; set; }                 // 1 to 5
+            public string Description { get; set; }
+            public DateTime ReviewDate { get; set; } = DateTime.Now;
+            public string FlagStatus { get; set; } = "clear";
+
+            public TripReview(string reviewId, string tripId, string travelerId, int rating,
+                              string description, DateTime? reviewDate = null, string flagStatus = "clear")
+            {
+                ReviewId = reviewId;
+                TripId = tripId;
+                TravelerId = travelerId;
+                Rating = rating;
+                Description = description;
+                ReviewDate = reviewDate ?? DateTime.Now;
+                FlagStatus = flagStatus;
+            }
+
+            public bool IsValidReviewId() => Regex.IsMatch(ReviewId, @"^TRVW-\d{6}$");
+            public bool IsValidRating() => Rating >= 1 && Rating <= 5;
+            public bool IsValidFlagStatus() => FlagStatus == "clear" || FlagStatus == "flagged";
+
+            public bool IsValid() => IsValidReviewId() && IsValidRating() && IsValidFlagStatus();
+
+            public override string ToString()
+            {
+                return $"TripReview [{ReviewId}] - {Rating}⭐ for Trip {TripId}";
+            }
+        }
+
+
 
         // --- Service Class ---
         public class Service
         {
-            public string ServiceId { get; set; } // e.g., "SRV-000001"
-            public string ServiceType { get; set; } // 'hotel', 'transport', 'guide', 'activity', 'other'
+            public string ServiceId { get; set; }           // e.g., "SRV-000001"
+            public string ServiceType { get; set; }         // 'hotel', 'transport', 'guide', 'activity', 'other'
             public string ServiceDescription { get; set; }
             public decimal Price { get; set; }
-            public string ProviderId { get; set; } // Should ideally be ProviderName
-            public string ProviderName { get; set; } // Added for display
+            public string ProviderId { get; set; }          // FK to provider
+            public string ProviderName { get; set; }        // Display only
             public int Capacity { get; set; }
-            public double AverageReview { get; set; } // For displaying star ratings
+            public double AverageReview { get; set; }       // Star rating (1.0 to 5.0)
+
+            public List<ServiceReview> Reviews { get; set; }
 
             public Service()
             {
-                ProviderName = "N/A"; // Default if not set
+                ProviderName = "N/A";
+                Reviews = new List<ServiceReview>();
+            }
+
+            // ✅ Add a review and update average
+            public bool AddReview(ServiceReview review)
+            {
+                if (review == null || !review.IsValid())
+                    return false;
+
+                Reviews.Add(review);
+                UpdateAverageReview();
+                return true;
+            }
+
+            // ✅ Recalculate the average rating
+            public void UpdateAverageReview()
+            {
+                if (Reviews.Count > 0)
+                    AverageReview = Math.Round(Reviews.Average(r => r.Rating), 2);
+                else
+                    AverageReview = 0;
+            }
+
+            public override string ToString()
+            {
+                return $"{ServiceType.ToUpper()} Service [{ServiceId}] by {ProviderName} - ★ {AverageReview} ({Reviews.Count} reviews)";
             }
         }
+
+
 
         // --- Trip Class ---
         public class Trip
         {
-            public string TripId { get; set; } // e.g., "TRIP-000001"
+            public string TripId { get; set; }                // e.g., "TRIP-000001"
             public string Title { get; set; }
-            public string Description { get; set; } // SQL 'descirption' typo corrected
+            public string Description { get; set; }           // Corrected spelling from 'descirption'
             public int Capacity { get; set; }
-            public int DurationDays { get; set; } // SQL 'duration' is INT, assuming days
-            public string DurationDisplay { get; set; } // For user-friendly display like "7 Days, 6 Nights"
-            public string Category { get; set; }
-            public string Status { get; set; } // 'active', 'completed', 'cancelled'
+            public int DurationDays { get; set; }
+            public string DurationDisplay { get; set; }       // e.g., "7 Days, 6 Nights"
+            public string Category { get; set; }              // 'adventure', 'cultural', etc.
+            public string Status { get; set; }                // 'active', 'completed', 'cancelled'
             public decimal PricePerPerson { get; set; }
 
-            public string StartLocationId { get; set; } // Foreign Key
-            public Location StartLocation { get; set; } // Resolved Location object
+            public string StartLocationId { get; set; }       // Foreign key
+            public Location StartLocation { get; set; }       // Resolved location object
 
             public DateTime StartDate { get; set; }
             public DateTime EndDate { get; set; }
 
-            public string OperatorId { get; set; } // Foreign Key
-            public string OperatorName { get; set; } // Resolved Operator Name
+            public string OperatorId { get; set; }            // Foreign key
+            public string OperatorName { get; set; }
 
-            public string ImageUrl { get; set; } // SQL 'profileTrip_image_url'
+            public string ImageUrl { get; set; }
 
-            public List<Location> VisitedLocations { get; set; } // Itinerary
+            public List<Location> VisitedLocations { get; set; }
             public List<Service> IncludedServices { get; set; }
-            public List<Service> RequestedServices { get; set; } // Services requested by the trip
+            public List<Service> RequestedServices { get; set; }
+
+            // ✅ New: Reviews and Rating
+            public List<TripReview> Reviews { get; set; }
+            public double AverageRating { get; private set; }
 
             public Trip()
             {
                 VisitedLocations = new List<Location>();
                 IncludedServices = new List<Service>();
-                OperatorName = "N/A"; // Default
-                DurationDisplay = $"{DurationDays} Days"; // Default, can be more specific
+                RequestedServices = new List<Service>();
+                Reviews = new List<TripReview>();
+
+                OperatorName = "N/A";
+                DurationDisplay = $"{DurationDays} Days";
+            }
+
+            // ✅ Method to add a review
+            public bool AddReview(TripReview review)
+            {
+                if (review == null || !review.IsValid())
+                    return false;
+
+                Reviews.Add(review);
+                UpdateAverageReview();
+                return true;
+            }
+
+            // ✅ Method to update average rating
+            public void UpdateAverageReview()
+            {
+                if (Reviews.Count > 0)
+                    AverageRating = Math.Round(Reviews.Average(r => r.Rating), 2);
+                else
+                    AverageRating = 0;
+            }
+
+            public override string ToString()
+            {
+                return $"{Title} ({TripId}) - {Category}, ★ {AverageRating} ({Reviews.Count} reviews)";
             }
         }
 

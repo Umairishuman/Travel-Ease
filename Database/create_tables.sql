@@ -83,6 +83,7 @@ CREATE TABLE location (
         ),
     country VARCHAR(100) NOT NULL
 )
+
 CREATE TABLE trips (
     trip_id VARCHAR(20) PRIMARY KEY CHECK (
         trip_id LIKE 'TRIP-[0-9][0-9][0-9][0-9][0-9][0-9]'
@@ -106,6 +107,10 @@ CREATE TABLE trips (
 
     profileTrip_image_url VARCHAR(255)
 )
+
+update trips
+set profileTrip_image_url = 'https://i.postimg.cc/j5dPFtS8/fabrizio-conti-c3ws-Mnx-QZDw-unsplash.jpg'
+
 
 CREATE TABLE bookings (
     booking_id VARCHAR(20) PRIMARY KEY CHECK (
@@ -284,6 +289,9 @@ CREATE TABLE digital_passes (
     service_id VARCHAR(20),
     FOREIGN KEY (service_id) REFERENCES services(service_id)
 )
+
+select * from digital_passes
+
 
 select * from digital_passes
 

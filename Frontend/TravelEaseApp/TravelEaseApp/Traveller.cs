@@ -549,27 +549,27 @@ namespace TravelEaseApp
 
         }
 
-     
+
 
         public void DisplayTripInPanel(Panel targetPanel, Trip trip)
         {
-               // --- UPDATED Theme and Styling Constants for WHITE BACKGROUND ---
-             Color PanelBackgroundColor = Color.WhiteSmoke; // Light background
-             Color TextColor = Color.FromArgb(30, 30, 30);          // Dark text
-             Color MutedTextColor = Color.FromArgb(80, 80, 80);      // Slightly lighter dark text
-             Color AccentColor = Color.FromArgb(0, 122, 204);      // Modern Blue for accents/button
-             Color ButtonTextColor = Color.White;                    // White text for button
-             Color DividerColor = Color.LightGray;                   // Light grey for dividers
+            // --- UPDATED Theme and Styling Constants for WHITE BACKGROUND ---
+            Color PanelBackgroundColor = Color.WhiteSmoke; // Light background
+            Color TextColor = Color.FromArgb(30, 30, 30);          // Dark text
+            Color MutedTextColor = Color.FromArgb(80, 80, 80);      // Slightly lighter dark text
+            Color AccentColor = Color.FromArgb(0, 122, 204);      // Modern Blue for accents/button
+            Color ButtonTextColor = Color.White;                    // White text for button
+            Color DividerColor = Color.LightGray;                   // Light grey for dividers
 
-             Font TitleFont = new Font("Segoe UI Semibold", 18F, FontStyle.Bold);
-             Font SubtitleFont = new Font("Segoe UI", 16F, FontStyle.Regular);
-             Font BodyFont = new Font("Segoe UI", 12F, FontStyle.Regular);
-             Font SectionHeaderFont = new Font("Segoe UI Semibold", 14F, FontStyle.Bold);
-             Font ButtonFont = new Font("Segoe UI Semibold", 16F, FontStyle.Bold);
+            Font TitleFont = new Font("Segoe UI Semibold", 18F, FontStyle.Bold);
+            Font SubtitleFont = new Font("Segoe UI", 16F, FontStyle.Regular);
+            Font BodyFont = new Font("Segoe UI", 12F, FontStyle.Regular);
+            Font SectionHeaderFont = new Font("Segoe UI Semibold", 14F, FontStyle.Bold);
+            Font ButtonFont = new Font("Segoe UI Semibold", 16F, FontStyle.Bold);
 
-             const int MainPadding = 20;
-             const int ItemSpacing = 8;
-             const int SectionSpacing = 15;
+            const int MainPadding = 20;
+            const int ItemSpacing = 8;
+            const int SectionSpacing = 15;
 
 
             if (targetPanel == null) throw new ArgumentNullException(nameof(targetPanel));
@@ -1042,7 +1042,8 @@ namespace TravelEaseApp
                     Tag = booking.BookingId // Store booking ID for click event
                 };
                 btnPay.FlatAppearance.BorderSize = 0;
-                btnPay.Click += (s, e) => {
+                btnPay.Click += (s, e) =>
+                {
                     if (paymentBookingsPanel.Visible == false)
                     {
                         paymentBookingsPanel.Visible = true;
@@ -1761,7 +1762,10 @@ namespace TravelEaseApp
             }
         }
 
+        private void textBox1_TextChanged(object sender, EventArgs e)
+        {
 
+        }
     }
 
 
