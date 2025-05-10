@@ -345,6 +345,7 @@
             Controls.Add(username);
             Controls.Add(profilePictureBox);
             Controls.Add(pendingRequestsPanel);
+            FormBorderStyle = FormBorderStyle.None;
             Name = "dashboardForm";
             Text = "dashboardForm";
             Load += dashboardForm_Load;

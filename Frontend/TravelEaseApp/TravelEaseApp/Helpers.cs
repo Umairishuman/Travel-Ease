@@ -487,5 +487,17 @@ namespace TravelEaseApp
                 }
             }
         }
+
+        // New Helper class for ListBox items (place this within your TravelEaseApp.TourOperator namespace)
+        public class ListBoxItem
+        {
+            public string Text { get; set; }
+            public Service Value { get; set; }
+
+            public override string ToString()
+            {
+                return Text;
+            }
+        }
     }
 }

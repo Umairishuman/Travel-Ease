@@ -14,7 +14,7 @@ namespace TravelEase
             // Start the application and run the SignInForm
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new ServiceProviderForm());
+            Application.Run(new tourOperatorForm());
         }
     }
 }
