@@ -2,6 +2,7 @@
 using System.Drawing;
 using System.Windows.Forms;
 using System.Collections.Generic;
+using System.Text.RegularExpressions;
 
 namespace TravelEaseApp
 {
@@ -281,6 +282,191 @@ namespace TravelEaseApp
                 IncludedServices = new List<Service>();
                 OperatorName = "N/A"; // Default
                 DurationDisplay = $"{DurationDays} Days"; // Default, can be more specific
+            }
+        }
+
+        public class DigitalPass
+        {
+            private string _passId;
+            private string _documentType;
+
+            public string PassId
+            {
+                get => _passId;
+                set
+                {
+                    if (!Regex.IsMatch(value, @"^(ETK|HTL|ACT)-\d{6}$"))
+                        throw new ArgumentException("Pass ID must match ETK/HTL/ACT-###### format.");
+                    _passId = value;
+                }
+            }
+
+            public DateTime DateGenerated { get; set; }
+            public DateTime ValidTill { get; set; }
+
+            public string DocumentType
+            {
+                get => _documentType;
+                set
+                {
+                    string[] allowed = { "e-ticket", "hotel voucher", "activity pass" };
+                    if (Array.IndexOf(allowed, value.ToLower()) < 0)
+                        throw new ArgumentException("Invalid document type.");
+                    _documentType = value.ToLower();
+                }
+            }
+
+            public string BookingId { get; set; }
+            public string ServiceId { get; set; } // Nullable (optional)
+
+            public DigitalPass(string passId, DateTime dateGenerated, DateTime validTill, string documentType, string bookingId, string serviceId = null)
+            {
+                PassId = passId;
+                DateGenerated = dateGenerated;
+                ValidTill = validTill;
+                DocumentType = documentType;
+                BookingId = bookingId;
+                ServiceId = serviceId;
+            }
+
+
+        }
+
+
+        public class Booking
+        {
+            private string _bookingId;
+            private string _bookingStatus;
+
+            public string BookingId
+            {
+                get => _bookingId;
+                set
+                {
+                    if (!Regex.IsMatch(value, @"^BOOK-\d{6}$"))
+                        throw new ArgumentException("Booking ID must match format BOOK-######.");
+                    _bookingId = value;
+                }
+            }
+
+            public DateTime BookDate { get; set; }
+
+            public string BookingStatus
+            {
+                get => _bookingStatus;
+                set
+                {
+                    string[] allowed = { "confirmed", "pending", "cancelled", "abandoned" };
+                    if (Array.IndexOf(allowed, value.ToLower()) < 0)
+                        throw new ArgumentException("Invalid booking status.");
+                    _bookingStatus = value.ToLower();
+                }
+            }
+
+            public string TravelerId { get; set; }
+            public string TripId { get; set; }
+
+            public List<DigitalPass> DigitalPasses { get; set; }
+
+            public Booking(string bookingId, DateTime bookDate, string bookingStatus, string travelerId, string tripId)
+            {
+                BookingId = bookingId;
+                BookDate = bookDate;
+                BookingStatus = bookingStatus;
+                TravelerId = travelerId;
+                TripId = tripId;
+                DigitalPasses = new List<DigitalPass>();
+            }
+
+            public void AddDigitalPass(DigitalPass pass)
+            {
+                if (pass.BookingId != this.BookingId)
+                    throw new ArgumentException("Digital pass does not belong to this booking.");
+                DigitalPasses.Add(pass);
+            }
+        }
+
+
+
+        public class Transaction
+        {
+            // Properties
+            public string TransactionId { get; set; }             // Format: TXN-###### 
+            public decimal Amount { get; set; }
+            public DateTime TransactionDate { get; set; }
+            public string PaymentMethod { get; set; }             // credit_card, debit_card, paypal, bank_transfer
+            public string BookingId { get; set; }
+            public string Status { get; set; }                    // success, failed, pending
+            public string SendingAccountNumber { get; set; }
+
+            // Allowed values (simulate ENUM-like behavior)
+            private static readonly HashSet<string> AllowedPaymentMethods = new HashSet<string>
+            {
+                "credit_card", "debit_card", "paypal", "bank_transfer"
+            };
+
+                    private static readonly HashSet<string> AllowedStatuses = new HashSet<string>
+            {
+                "success", "failed", "pending"
+            };
+
+            // Constructor
+            public Transaction(string transactionId, decimal amount, DateTime transactionDate,
+                               string paymentMethod, string bookingId, string status, string sendingAccountNumber)
+            {
+                TransactionId = transactionId;
+                Amount = amount;
+                TransactionDate = transactionDate;
+                PaymentMethod = paymentMethod;
+                BookingId = bookingId;
+                Status = status;
+                SendingAccountNumber = sendingAccountNumber;
+            }
+
+            // Validates TransactionId pattern: TXN-000001
+            public bool IsValidTransactionId()
+            {
+                return Regex.IsMatch(TransactionId, @"^TXN-\d{6}$");
+            }
+
+            // Validates allowed payment method
+            public bool IsValidPaymentMethod()
+            {
+                return AllowedPaymentMethods.Contains(PaymentMethod.ToLower());
+            }
+
+            // Validates allowed status
+            public bool IsValidStatus()
+            {
+                return AllowedStatuses.Contains(Status.ToLower());
+            }
+
+            // Overall validity check
+            public bool IsValid()
+            {
+                return IsValidTransactionId() && IsValidPaymentMethod() && IsValidStatus() && Amount >= 0;
+            }
+
+            // Optional: For debugging / logging
+            public override string ToString()
+            {
+                return $"Transaction [{TransactionId}] | {Amount:C} | {PaymentMethod} | {Status} | {TransactionDate:d}";
+            }
+            public string GetFriendlyPaymentMethodName()
+            {
+                if (string.IsNullOrEmpty(PaymentMethod)) return "Unknown";
+                switch (PaymentMethod.ToLowerInvariant())
+                {
+                    case "credit_card": return "Credit Card";
+                    case "debit_card": return "Debit Card";
+                    case "paypal": return "PayPal";
+                    case "bank_transfer": return "Bank Transfer";
+                    default:
+                        // Capitalize first letter if it's a custom one
+                        if (PaymentMethod.Length > 1)
+                            return char.ToUpperInvariant(PaymentMethod[0]) + PaymentMethod.Substring(1).Replace("_", " ");
+                        return PaymentMethod;
+                }
             }
         }
 
