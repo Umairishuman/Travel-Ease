@@ -274,6 +274,7 @@ namespace TravelEaseApp
 
             public List<Location> VisitedLocations { get; set; } // Itinerary
             public List<Service> IncludedServices { get; set; }
+            public List<Service> RequestedServices { get; set; } // Services requested by the trip
 
             public Trip()
             {

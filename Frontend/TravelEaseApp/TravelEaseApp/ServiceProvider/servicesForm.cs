@@ -16,6 +16,11 @@ namespace TravelEaseApp.ServiceProvider
     {
         private Label hiddenLabel;
         private Panel CompleteServiceInfoPanel;
+
+        List<Service> services = new List<Service>();
+
+        List<Trip> trips = new List<Trip>();
+
         public servicesForm()
         {
             InitializeComponent();
@@ -43,12 +48,14 @@ namespace TravelEaseApp.ServiceProvider
             };
         }
 
-        private void ServicesForm_Load(object sender, EventArgs e)
+        private void SetSampleData()
         {
-            // Create sample services
-            var services = new List<Service>
-        {
-            new Service
+            // Clear existing data
+            services.Clear();
+            trips.Clear();
+
+            // Create services
+            var service1 = new Service
             {
                 ServiceId = "SRV-0001",
                 ServiceType = "hotel",
@@ -57,8 +64,9 @@ namespace TravelEaseApp.ServiceProvider
                 ProviderName = "Grand Hotels International",
                 Capacity = 2,
                 AverageReview = 4.8
-            },
-            new Service
+            };
+
+            var service2 = new Service
             {
                 ServiceId = "SRV-0002",
                 ServiceType = "transport",
@@ -67,8 +75,9 @@ namespace TravelEaseApp.ServiceProvider
                 ProviderName = "City Transfers Ltd",
                 Capacity = 4,
                 AverageReview = 4.5
-            },
-            new Service
+            };
+
+            var service3 = new Service
             {
                 ServiceId = "SRV-0003",
                 ServiceType = "guide",
@@ -77,17 +86,137 @@ namespace TravelEaseApp.ServiceProvider
                 ProviderName = "Heritage Guides",
                 Capacity = 10,
                 AverageReview = 4.9
-            }
-        };
+            };
 
+            var service4 = new Service
+            {
+                ServiceId = "SRV-0004",
+                ServiceType = "hotel",
+                ServiceDescription = "Boutique city center hotel",
+                Price = 220.00m,
+                ProviderName = "Urban Stay Hotels",
+                Capacity = 2,
+                AverageReview = 4.6
+            };
+
+            var service5 = new Service
+            {
+                ServiceId = "SRV-0005",
+                ServiceType = "transport",
+                ServiceDescription = "Luxury minibus for group transfers",
+                Price = 200.00m,
+                ProviderName = "Group Travel Solutions",
+                Capacity = 12,
+                AverageReview = 4.4
+            };
+
+            services.AddRange(new[] { service1, service2, service3, service4, service5 });
+
+            // Create trips (without service references)
+            var trip1 = new Trip
+            {
+                TripId = "TRIP-0001",
+                Title = "Luxury Beach Getaway",
+                Description = "5-star beach resort vacation with premium amenities",
+                Capacity = 20,
+                DurationDays = 7,
+                DurationDisplay = "7 Days, 6 Nights",
+                Category = "Luxury",
+                Status = "active",
+                PricePerPerson = 2500.00m,
+                StartDate = DateTime.Now.AddDays(30),
+                EndDate = DateTime.Now.AddDays(37),
+                OperatorName = "Elite Vacations"
+            };
+            trip1.IncludedServices = new List<Service> { service1, service2 };
+            trip1.RequestedServices = new List<Service> { service3, service4 };
+
+            var trip2 = new Trip
+            {
+                TripId = "TRIP-0002",
+                Title = "Cultural City Tour",
+                Description = "Explore historical landmarks with expert guides",
+                Capacity = 15,
+                DurationDays = 5,
+                DurationDisplay = "5 Days, 4 Nights",
+                Category = "Cultural",
+                Status = "active",
+                PricePerPerson = 1800.00m,
+                StartDate = DateTime.Now.AddDays(45),
+                EndDate = DateTime.Now.AddDays(50),
+                OperatorName = "Heritage Tours"
+            };
+            trip2.IncludedServices = new List<Service> { service3, service4 };
+
+            var trip3 = new Trip
+            {
+                TripId = "TRIP-0003",
+                Title = "Adventure Safari",
+                Description = "Wildlife safari with expert trackers",
+                Capacity = 12,
+                DurationDays = 10,
+                DurationDisplay = "10 Days, 9 Nights",
+                Category = "Adventure",
+                Status = "upcoming",
+                PricePerPerson = 3200.00m,
+                StartDate = DateTime.Now.AddDays(60),
+                EndDate = DateTime.Now.AddDays(70),
+                OperatorName = "Wilderness Expeditions"
+            };
+            trip3.IncludedServices = new List<Service> { service2, service5 };
+            trip3.RequestedServices = new List<Service> { service1, service4 };
+
+            trips.AddRange(new[] { trip1, trip2, trip3 });
+        }
+
+        private void ServicesForm_Load(object sender, EventArgs e)
+        {
+            SetSampleData();
             // Add service boxes to the panel
             foreach (var service in services)
             {
-                AddServiceBox(mainDisplayPanel, service);
+                try
+                {
+                    bool isServiceAssociated = false;
+
+                    // First check if service is included in any trip
+                    foreach (var trip in trips)
+                    {
+                        if (trip.IncludedServices != null && trip.IncludedServices.Any(s => s.ServiceId == service.ServiceId))
+                        {
+                            AddServiceBox(mainDisplayPanel, service, trip);
+                            isServiceAssociated = true;
+                        }
+                    }
+
+                    // If service wasn't found in any trip's IncludedServices, check RequestedServices
+                    if (!isServiceAssociated)
+                    {
+                        foreach (var trip in trips)
+                        {
+                            if (trip.RequestedServices != null && trip.RequestedServices.Any(s => s.ServiceId == service.ServiceId))
+                            {
+                                AddServiceBox(mainDisplayPanel, service, trip);
+                                isServiceAssociated = true;
+                            }
+                        }
+                    }
+
+                    // If service isn't associated with any trip at all, display it once with null trip
+                    if (!isServiceAssociated)
+                    {
+                        AddServiceBox(mainDisplayPanel, service, null);
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show($"An error occurred while processing service {service.ServiceId}: {ex.Message}",
+                                   "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
             }
         }
 
-        public void AddServiceBox(Panel containerPanel, Service service)
+        public void AddServiceBox(Panel containerPanel, Service service, Trip trip)
         {
             // Design Constants
             int horizontalPadding = 20;
@@ -242,10 +371,10 @@ namespace TravelEaseApp.ServiceProvider
             }
 
             // Click event to show details
-            serviceBox.Click += (s, e) => ShowServiceDetails(service);
+            serviceBox.Click += (s, e) => ShowServiceDetails(service, trip);
             foreach (Control ctl in serviceBox.Controls)
             {
-                ctl.Click += (s, e) => ShowServiceDetails(service);
+                ctl.Click += (s, e) => ShowServiceDetails(service, trip);
             }
 
             // Add to container
@@ -264,7 +393,7 @@ namespace TravelEaseApp.ServiceProvider
             }
         }
 
-        private void ShowServiceDetails(Service service)
+        private void ShowServiceDetails(Service service, Trip trip)
         {
             if (CompleteServiceInfoPanel.Visible == false)
             {
@@ -275,10 +404,10 @@ namespace TravelEaseApp.ServiceProvider
                 CompleteServiceInfoPanel.Location = new Point(20, 20);
             }
 
-            DisplayServiceInPanel(CompleteServiceInfoPanel, service);
+            DisplayServiceInPanel(CompleteServiceInfoPanel, service, trip);
         }
 
-        private void DisplayServiceInPanel(Panel panel, Service service)
+        private void DisplayServiceInPanel(Panel panel, Service service, Trip trip)
         {
             panel.Controls.Clear();
             panel.Padding = new Padding(20);
@@ -306,14 +435,23 @@ namespace TravelEaseApp.ServiceProvider
                 return label;
             }
 
-            // Service Type header
-            var typeHeader = AddLabel(
-                service.ServiceType.ToUpper(),
+            // ========== SERVICE INFORMATION SECTION ==========
+            var serviceHeader = AddLabel(
+                "SERVICE DETAILS",
                 new Font("Segoe UI", 14, FontStyle.Bold),
                 GetServiceTypeColor(service.ServiceType),
                 currentY,
                 panel.Width - 60);
-            currentY += typeHeader.Height + 10;
+            currentY += serviceHeader.Height + 15;
+
+            // Service Type
+            var typeLabel = AddLabel(
+                $"Type: {service.ServiceType.ToUpper()}",
+                new Font("Segoe UI", 11),
+                GetServiceTypeColor(service.ServiceType),
+                currentY,
+                panel.Width - 60);
+            currentY += typeLabel.Height + 10;
 
             // Service ID
             var idLabel = AddLabel(
@@ -322,7 +460,7 @@ namespace TravelEaseApp.ServiceProvider
                 Color.DimGray,
                 currentY,
                 panel.Width - 60);
-            currentY += idLabel.Height + 15;
+            currentY += idLabel.Height + 10;
 
             // Description
             var descLabel = AddLabel(
@@ -331,7 +469,7 @@ namespace TravelEaseApp.ServiceProvider
                 Color.Black,
                 currentY,
                 panel.Width - 60);
-            currentY += descLabel.Height + 20;
+            currentY += descLabel.Height + 15;
 
             // Divider
             panel.Controls.Add(new Panel
@@ -379,6 +517,46 @@ namespace TravelEaseApp.ServiceProvider
                 panel.Width - 60);
             currentY += ratingLabel.Height + 20;
 
+            // ========== ASSOCIATED TRIP SECTION ==========
+            if (trip != null)
+            {
+                // Divider before trip info
+                panel.Controls.Add(new Panel
+                {
+                    BackColor = Color.LightGray,
+                    Height = 1,
+                    Width = panel.Width - 60,
+                    Location = new Point(20, currentY)
+                });
+                currentY += 20;
+
+                var tripHeader = AddLabel(
+                    "ASSOCIATED TRIP",
+                    new Font("Segoe UI", 14, FontStyle.Bold),
+                    Color.FromArgb(70, 130, 180), // Different color for trip section
+                    currentY,
+                    panel.Width - 60);
+                currentY += tripHeader.Height + 15;
+
+                // Trip ID
+                var tripIdLabel = AddLabel(
+                    $"Trip ID: {trip.TripId}",
+                    new Font("Segoe UI", 11, FontStyle.Bold),
+                    Color.FromArgb(70, 130, 180),
+                    currentY,
+                    panel.Width - 60);
+                currentY += tripIdLabel.Height + 10;
+
+                // Trip Description
+                var tripTitleLabel = AddLabel(
+                    trip.Title,
+                    new Font("Segoe UI", 10),
+                    Color.Black,
+                    currentY,
+                    panel.Width - 60);
+                currentY += tripTitleLabel.Height + 15;
+            }
+
             // Another divider
             panel.Controls.Add(new Panel
             {
@@ -389,8 +567,7 @@ namespace TravelEaseApp.ServiceProvider
             });
             currentY += 20;
 
-            // Service-specific attributes would go here
-            // You would add logic similar to your trip details for each service type
+            // ========== SERVICE-SPECIFIC ATTRIBUTES SECTION ==========
             var attributesTitle = AddLabel(
                 "SERVICE ATTRIBUTES",
                 new Font("Segoe UI", 11, FontStyle.Bold),
@@ -434,7 +611,6 @@ namespace TravelEaseApp.ServiceProvider
                     break;
             }
         }
-
         private void AddCloseButtonToPanel(Panel panel)
         {
             Button closeButton = new Button

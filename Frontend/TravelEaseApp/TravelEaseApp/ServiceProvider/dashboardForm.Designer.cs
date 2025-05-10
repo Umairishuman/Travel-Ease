@@ -32,38 +32,33 @@
             username = new Label();
             tagline = new Label();
             mainInfoPanel = new FlowLayoutPanel();
-            dashboardTrayPanel = new Panel();
+            topStatPanel1 = new Panel();
             label3 = new Label();
             dashboardTrayLabel = new Label();
-            panel1 = new Panel();
+            topStatPanel2 = new Panel();
             label1 = new Label();
             label2 = new Label();
-            panel2 = new Panel();
+            topStatPanel3 = new Panel();
             label4 = new Label();
             label5 = new Label();
-            pendingRequestsPanel = new FlowLayoutPanel();
-            pendingRequestsHeaderPanel = new Panel();
             pendingRequestsHeaderPanelLabel = new Label();
             addServiceLabel = new Label();
-            flowLayoutPanel1 = new FlowLayoutPanel();
-            panel3 = new Panel();
+            informationPanel = new Panel();
             label11 = new Label();
             label9 = new Label();
             label8 = new Label();
             label7 = new Label();
             label6 = new Label();
             flowLayoutPanel2 = new FlowLayoutPanel();
-            flowLayoutPanel3 = new FlowLayoutPanel();
-            flowLayoutPanel4 = new FlowLayoutPanel();
-            flowLayoutPanel5 = new FlowLayoutPanel();
+            statPanel1 = new FlowLayoutPanel();
+            statPanel2 = new FlowLayoutPanel();
+            pendingRequestsPanel = new Panel();
             ((System.ComponentModel.ISupportInitialize)profilePictureBox).BeginInit();
             mainInfoPanel.SuspendLayout();
-            dashboardTrayPanel.SuspendLayout();
-            panel1.SuspendLayout();
-            panel2.SuspendLayout();
-            pendingRequestsPanel.SuspendLayout();
-            pendingRequestsHeaderPanel.SuspendLayout();
-            panel3.SuspendLayout();
+            topStatPanel1.SuspendLayout();
+            topStatPanel2.SuspendLayout();
+            topStatPanel3.SuspendLayout();
+            informationPanel.SuspendLayout();
             flowLayoutPanel2.SuspendLayout();
             SuspendLayout();
             // 
@@ -103,24 +98,24 @@
             // 
             // mainInfoPanel
             // 
-            mainInfoPanel.BackColor = Color.White;
-            mainInfoPanel.Controls.Add(dashboardTrayPanel);
-            mainInfoPanel.Controls.Add(panel1);
-            mainInfoPanel.Controls.Add(panel2);
+            mainInfoPanel.BackColor = SystemColors.Control;
+            mainInfoPanel.Controls.Add(topStatPanel1);
+            mainInfoPanel.Controls.Add(topStatPanel2);
+            mainInfoPanel.Controls.Add(topStatPanel3);
             mainInfoPanel.Location = new Point(141, 59);
             mainInfoPanel.Name = "mainInfoPanel";
             mainInfoPanel.Size = new Size(315, 64);
             mainInfoPanel.TabIndex = 3;
             // 
-            // dashboardTrayPanel
+            // topStatPanel1
             // 
-            dashboardTrayPanel.BackColor = Color.Transparent;
-            dashboardTrayPanel.Controls.Add(label3);
-            dashboardTrayPanel.Controls.Add(dashboardTrayLabel);
-            dashboardTrayPanel.Location = new Point(3, 3);
-            dashboardTrayPanel.Name = "dashboardTrayPanel";
-            dashboardTrayPanel.Size = new Size(99, 60);
-            dashboardTrayPanel.TabIndex = 5;
+            topStatPanel1.BackColor = Color.White;
+            topStatPanel1.Controls.Add(label3);
+            topStatPanel1.Controls.Add(dashboardTrayLabel);
+            topStatPanel1.Location = new Point(3, 3);
+            topStatPanel1.Name = "topStatPanel1";
+            topStatPanel1.Size = new Size(99, 60);
+            topStatPanel1.TabIndex = 5;
             // 
             // label3
             // 
@@ -145,15 +140,15 @@
             dashboardTrayLabel.Text = "Something1";
             dashboardTrayLabel.TextAlign = ContentAlignment.MiddleCenter;
             // 
-            // panel1
+            // topStatPanel2
             // 
-            panel1.BackColor = Color.Transparent;
-            panel1.Controls.Add(label1);
-            panel1.Controls.Add(label2);
-            panel1.Location = new Point(108, 3);
-            panel1.Name = "panel1";
-            panel1.Size = new Size(99, 60);
-            panel1.TabIndex = 6;
+            topStatPanel2.BackColor = Color.White;
+            topStatPanel2.Controls.Add(label1);
+            topStatPanel2.Controls.Add(label2);
+            topStatPanel2.Location = new Point(108, 3);
+            topStatPanel2.Name = "topStatPanel2";
+            topStatPanel2.Size = new Size(99, 60);
+            topStatPanel2.TabIndex = 6;
             // 
             // label1
             // 
@@ -178,15 +173,15 @@
             label2.Text = "Something2";
             label2.TextAlign = ContentAlignment.MiddleCenter;
             // 
-            // panel2
+            // topStatPanel3
             // 
-            panel2.BackColor = Color.Transparent;
-            panel2.Controls.Add(label4);
-            panel2.Controls.Add(label5);
-            panel2.Location = new Point(213, 3);
-            panel2.Name = "panel2";
-            panel2.Size = new Size(99, 60);
-            panel2.TabIndex = 6;
+            topStatPanel3.BackColor = Color.White;
+            topStatPanel3.Controls.Add(label4);
+            topStatPanel3.Controls.Add(label5);
+            topStatPanel3.Location = new Point(213, 3);
+            topStatPanel3.Name = "topStatPanel3";
+            topStatPanel3.Size = new Size(99, 60);
+            topStatPanel3.TabIndex = 6;
             // 
             // label4
             // 
@@ -211,28 +206,11 @@
             label5.Text = "Something3";
             label5.TextAlign = ContentAlignment.MiddleCenter;
             // 
-            // pendingRequestsPanel
-            // 
-            pendingRequestsPanel.BackColor = Color.White;
-            pendingRequestsPanel.Controls.Add(pendingRequestsHeaderPanel);
-            pendingRequestsPanel.Location = new Point(815, 23);
-            pendingRequestsPanel.Name = "pendingRequestsPanel";
-            pendingRequestsPanel.Size = new Size(291, 216);
-            pendingRequestsPanel.TabIndex = 4;
-            // 
-            // pendingRequestsHeaderPanel
-            // 
-            pendingRequestsHeaderPanel.Controls.Add(pendingRequestsHeaderPanelLabel);
-            pendingRequestsHeaderPanel.Location = new Point(3, 3);
-            pendingRequestsHeaderPanel.Name = "pendingRequestsHeaderPanel";
-            pendingRequestsHeaderPanel.Size = new Size(288, 46);
-            pendingRequestsHeaderPanel.TabIndex = 6;
-            // 
             // pendingRequestsHeaderPanelLabel
             // 
             pendingRequestsHeaderPanelLabel.AutoSize = true;
             pendingRequestsHeaderPanelLabel.Font = new Font("Segoe UI", 13F, FontStyle.Bold);
-            pendingRequestsHeaderPanelLabel.Location = new Point(5, 10);
+            pendingRequestsHeaderPanelLabel.Location = new Point(720, 16);
             pendingRequestsHeaderPanelLabel.Name = "pendingRequestsHeaderPanelLabel";
             pendingRequestsHeaderPanelLabel.Size = new Size(156, 25);
             pendingRequestsHeaderPanelLabel.TabIndex = 0;
@@ -245,34 +223,26 @@
             addServiceLabel.Cursor = Cursors.Hand;
             addServiceLabel.Font = new Font("Segoe UI", 15F, FontStyle.Bold);
             addServiceLabel.ForeColor = Color.White;
-            addServiceLabel.Location = new Point(891, 558);
+            addServiceLabel.Location = new Point(26, 344);
             addServiceLabel.Name = "addServiceLabel";
-            addServiceLabel.Size = new Size(148, 40);
+            addServiceLabel.Size = new Size(427, 40);
             addServiceLabel.TabIndex = 5;
             addServiceLabel.Text = "+ Add Service";
             addServiceLabel.TextAlign = ContentAlignment.MiddleCenter;
             addServiceLabel.Click += addServiceLabel_Click;
             // 
-            // flowLayoutPanel1
+            // informationPanel
             // 
-            flowLayoutPanel1.BackColor = Color.White;
-            flowLayoutPanel1.Location = new Point(815, 261);
-            flowLayoutPanel1.Name = "flowLayoutPanel1";
-            flowLayoutPanel1.Size = new Size(291, 272);
-            flowLayoutPanel1.TabIndex = 5;
-            // 
-            // panel3
-            // 
-            panel3.BackColor = Color.White;
-            panel3.Controls.Add(label11);
-            panel3.Controls.Add(label9);
-            panel3.Controls.Add(label8);
-            panel3.Controls.Add(label7);
-            panel3.Controls.Add(label6);
-            panel3.Location = new Point(26, 347);
-            panel3.Name = "panel3";
-            panel3.Size = new Size(430, 190);
-            panel3.TabIndex = 0;
+            informationPanel.BackColor = Color.White;
+            informationPanel.Controls.Add(label11);
+            informationPanel.Controls.Add(label9);
+            informationPanel.Controls.Add(label8);
+            informationPanel.Controls.Add(label7);
+            informationPanel.Controls.Add(label6);
+            informationPanel.Location = new Point(26, 138);
+            informationPanel.Name = "informationPanel";
+            informationPanel.Size = new Size(427, 190);
+            informationPanel.TabIndex = 0;
             // 
             // label11
             // 
@@ -329,66 +299,62 @@
             // flowLayoutPanel2
             // 
             flowLayoutPanel2.BackColor = SystemColors.Control;
-            flowLayoutPanel2.Controls.Add(flowLayoutPanel3);
-            flowLayoutPanel2.Controls.Add(flowLayoutPanel4);
-            flowLayoutPanel2.Controls.Add(flowLayoutPanel5);
-            flowLayoutPanel2.Location = new Point(26, 162);
+            flowLayoutPanel2.Controls.Add(statPanel1);
+            flowLayoutPanel2.Controls.Add(statPanel2);
+            flowLayoutPanel2.Location = new Point(23, 402);
             flowLayoutPanel2.Name = "flowLayoutPanel2";
-            flowLayoutPanel2.Size = new Size(765, 179);
+            flowLayoutPanel2.Size = new Size(433, 246);
             flowLayoutPanel2.TabIndex = 1;
             // 
-            // flowLayoutPanel3
+            // statPanel1
             // 
-            flowLayoutPanel3.BackColor = Color.White;
-            flowLayoutPanel3.Location = new Point(3, 3);
-            flowLayoutPanel3.Name = "flowLayoutPanel3";
-            flowLayoutPanel3.Size = new Size(249, 172);
-            flowLayoutPanel3.TabIndex = 2;
+            statPanel1.BackColor = Color.White;
+            statPanel1.Location = new Point(3, 3);
+            statPanel1.Name = "statPanel1";
+            statPanel1.Size = new Size(209, 243);
+            statPanel1.TabIndex = 2;
             // 
-            // flowLayoutPanel4
+            // statPanel2
             // 
-            flowLayoutPanel4.BackColor = Color.White;
-            flowLayoutPanel4.Location = new Point(258, 3);
-            flowLayoutPanel4.Name = "flowLayoutPanel4";
-            flowLayoutPanel4.Size = new Size(249, 172);
-            flowLayoutPanel4.TabIndex = 3;
+            statPanel2.BackColor = Color.White;
+            statPanel2.Location = new Point(218, 3);
+            statPanel2.Name = "statPanel2";
+            statPanel2.Size = new Size(209, 243);
+            statPanel2.TabIndex = 3;
             // 
-            // flowLayoutPanel5
+            // pendingRequestsPanel
             // 
-            flowLayoutPanel5.BackColor = Color.White;
-            flowLayoutPanel5.Location = new Point(513, 3);
-            flowLayoutPanel5.Name = "flowLayoutPanel5";
-            flowLayoutPanel5.Size = new Size(249, 172);
-            flowLayoutPanel5.TabIndex = 3;
+            pendingRequestsPanel.AutoScroll = true;
+            pendingRequestsPanel.Location = new Point(473, 42);
+            pendingRequestsPanel.Name = "pendingRequestsPanel";
+            pendingRequestsPanel.Size = new Size(652, 606);
+            pendingRequestsPanel.TabIndex = 6;
             // 
             // dashboardForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = SystemColors.Control;
-            ClientSize = new Size(1118, 610);
+            ClientSize = new Size(1118, 648);
+            Controls.Add(pendingRequestsHeaderPanelLabel);
             Controls.Add(flowLayoutPanel2);
-            Controls.Add(panel3);
-            Controls.Add(flowLayoutPanel1);
+            Controls.Add(informationPanel);
             Controls.Add(addServiceLabel);
-            Controls.Add(pendingRequestsPanel);
             Controls.Add(mainInfoPanel);
             Controls.Add(tagline);
             Controls.Add(username);
             Controls.Add(profilePictureBox);
+            Controls.Add(pendingRequestsPanel);
             Name = "dashboardForm";
             Text = "dashboardForm";
             Load += dashboardForm_Load;
             ((System.ComponentModel.ISupportInitialize)profilePictureBox).EndInit();
             mainInfoPanel.ResumeLayout(false);
-            dashboardTrayPanel.ResumeLayout(false);
-            panel1.ResumeLayout(false);
-            panel2.ResumeLayout(false);
-            pendingRequestsPanel.ResumeLayout(false);
-            pendingRequestsHeaderPanel.ResumeLayout(false);
-            pendingRequestsHeaderPanel.PerformLayout();
-            panel3.ResumeLayout(false);
-            panel3.PerformLayout();
+            topStatPanel1.ResumeLayout(false);
+            topStatPanel2.ResumeLayout(false);
+            topStatPanel3.ResumeLayout(false);
+            informationPanel.ResumeLayout(false);
+            informationPanel.PerformLayout();
             flowLayoutPanel2.ResumeLayout(false);
             ResumeLayout(false);
             PerformLayout();
@@ -400,29 +366,26 @@
         private Label username;
         private Label tagline;
         private FlowLayoutPanel mainInfoPanel;
-        private FlowLayoutPanel pendingRequestsPanel;
-        private Panel pendingRequestsHeaderPanel;
         private Label pendingRequestsHeaderPanelLabel;
-        private Panel dashboardTrayPanel;
+        private Panel topStatPanel1;
         private Label dashboardTrayLabel;
         private Label label3;
-        private Panel panel1;
+        private Panel topStatPanel2;
         private Label label1;
         private Label label2;
-        private Panel panel2;
+        private Panel topStatPanel3;
         private Label label4;
         private Label label5;
         private Label addServiceLabel;
-        private FlowLayoutPanel flowLayoutPanel1;
-        private Panel panel3;
+        private Panel informationPanel;
         private Label label11;
         private Label label9;
         private Label label8;
         private Label label7;
         private Label label6;
         private FlowLayoutPanel flowLayoutPanel2;
-        private FlowLayoutPanel flowLayoutPanel3;
-        private FlowLayoutPanel flowLayoutPanel4;
-        private FlowLayoutPanel flowLayoutPanel5;
+        private FlowLayoutPanel statPanel1;
+        private FlowLayoutPanel statPanel2;
+        private Panel pendingRequestsPanel;
     }
 }

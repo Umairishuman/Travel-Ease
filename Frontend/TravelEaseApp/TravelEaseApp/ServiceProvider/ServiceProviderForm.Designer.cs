@@ -52,10 +52,10 @@ namespace TravelEaseApp
             sidebarPanel.BackColor = Color.White;
             sidebarPanel.Controls.Add(dashboardTrayPanel);
             sidebarPanel.Controls.Add(serviceTrayPanel);
-            sidebarPanel.Location = new Point(18, 12);
+            sidebarPanel.Location = new Point(18, 0);
             sidebarPanel.Margin = new Padding(20);
             sidebarPanel.Name = "sidebarPanel";
-            sidebarPanel.Size = new Size(70, 649);
+            sidebarPanel.Size = new Size(70, 661);
             sidebarPanel.TabIndex = 0;
             // 
             // dashboardTrayPanel
@@ -142,6 +142,7 @@ namespace TravelEaseApp
             ClientSize = new Size(1264, 681);
             Controls.Add(subFormPanel);
             Controls.Add(sidebarPanel);
+            FormBorderStyle = FormBorderStyle.Fixed3D;
             Name = "ServiceProviderForm";
             Text = "ServiceProvider";
             Load += ServiceProviderForm_Load;
