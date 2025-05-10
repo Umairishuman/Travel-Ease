@@ -31,7 +31,6 @@
             mainPanel = new Panel();
             TravellerTripsPanel = new Panel();
             TripDisplayPanel = new Panel();
-            CompleteTripInfoPanel = new Panel();
             TravellerTripTopPanel = new Panel();
             textBox1 = new TextBox();
             TripsLabel = new Label();
@@ -49,6 +48,7 @@
             DashboardButton = new PictureBox();
             DashBoardButtonLabel = new Label();
             travelEaseLogo = new PictureBox();
+            CompleteTripInfoPanel = new Panel();
             DashboardPanel = new Panel();
             panel4 = new Panel();
             peopleTravelled = new Label();
@@ -83,7 +83,6 @@
             TravellerName = new Label();
             mainPanel.SuspendLayout();
             TravellerTripsPanel.SuspendLayout();
-            TripDisplayPanel.SuspendLayout();
             TravellerTripTopPanel.SuspendLayout();
             SideBarPanel.SuspendLayout();
             TransactionButtonPanel.SuspendLayout();
@@ -133,21 +132,11 @@
             // TripDisplayPanel
             // 
             TripDisplayPanel.BackColor = Color.White;
-            //TripDisplayPanel.Controls.Add(CompleteTripInfoPanel);
             TripDisplayPanel.Location = new Point(3, 115);
             TripDisplayPanel.Name = "TripDisplayPanel";
             TripDisplayPanel.Size = new Size(1185, 557);
             TripDisplayPanel.TabIndex = 1;
             TripDisplayPanel.Click += TripDisplayPanel_Click;
-            // 
-            // CompleteTripInfoPanel
-            // 
-            CompleteTripInfoPanel.BackColor = Color.FromArgb(224, 224, 224);
-            CompleteTripInfoPanel.Location = new Point(178, 13);
-            CompleteTripInfoPanel.Name = "CompleteTripInfoPanel";
-            CompleteTripInfoPanel.Size = new Size(800, 529);
-            CompleteTripInfoPanel.TabIndex = 0;
-            CompleteTripInfoPanel.Visible = false;
             // 
             // TravellerTripTopPanel
             // 
@@ -319,6 +308,15 @@
             travelEaseLogo.SizeMode = PictureBoxSizeMode.StretchImage;
             travelEaseLogo.TabIndex = 1;
             travelEaseLogo.TabStop = false;
+            // 
+            // CompleteTripInfoPanel
+            // 
+            CompleteTripInfoPanel.BackColor = Color.FromArgb(224, 224, 224);
+            CompleteTripInfoPanel.Location = new Point(178, 13);
+            CompleteTripInfoPanel.Name = "CompleteTripInfoPanel";
+            CompleteTripInfoPanel.Size = new Size(800, 529);
+            CompleteTripInfoPanel.TabIndex = 0;
+            CompleteTripInfoPanel.Visible = false;
             // 
             // DashboardPanel
             // 
@@ -670,7 +668,6 @@
             Load += Traveller_Load;
             mainPanel.ResumeLayout(false);
             TravellerTripsPanel.ResumeLayout(false);
-            TripDisplayPanel.ResumeLayout(false);
             TravellerTripTopPanel.ResumeLayout(false);
             TravellerTripTopPanel.PerformLayout();
             SideBarPanel.ResumeLayout(false);

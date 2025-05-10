@@ -30,6 +30,8 @@ namespace TravelEaseApp
             serviceTrayPictureBox.Click += serviceTrayPanel_Click;
 
             SelectPanel(dashboardTrayPanel); // Select the dashboard panel by default
+
+            // example:             AddHoverTransition(DashboardButton, DashBoardButtonPanel, DashBoardButtonPanel.BackColor, Color.Silver, DashBoardButtonPanel.ForeColor, DashBoardButtonPanel.ForeColor);
         }
 
         private void ShowDashboardForm()
