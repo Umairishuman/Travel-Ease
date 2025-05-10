@@ -71,7 +71,15 @@ namespace TravelEaseApp.TourOperator
 
         private void tourOperatorForm_Load(object sender, EventArgs e)
         {
-
+            Color borderColor = Color.FromArgb(220, 224, 230);
+            sidebarPanel.Paint += (s, e) =>
+            {
+                ControlPaint.DrawBorder(e.Graphics, sidebarPanel.ClientRectangle,
+                    borderColor, 1, ButtonBorderStyle.Solid,
+                    borderColor, 1, ButtonBorderStyle.Solid,
+                    borderColor, 1, ButtonBorderStyle.Solid,
+                    borderColor, 1, ButtonBorderStyle.Solid);
+            };
         }
 
         private void dashboardTrayPanel_Click(object sender, EventArgs e)

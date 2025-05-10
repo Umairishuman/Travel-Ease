@@ -28,368 +28,193 @@
         /// </summary>
         private void InitializeComponent()
         {
-            panel1 = new Panel();
-            flowLayoutPanel7 = new FlowLayoutPanel();
-            panel8 = new Panel();
-            panel11 = new Panel();
-            panel10 = new Panel();
-            panel9 = new Panel();
-            label7 = new Label();
-            flowLayoutPanel6 = new FlowLayoutPanel();
-            panel4 = new Panel();
-            panel5 = new Panel();
-            panel6 = new Panel();
-            panel7 = new Panel();
-            label6 = new Label();
+            availableServicesPanel = new Panel();
+            availableServicesLabel = new Label();
+            topStatLabelNumber3 = new Label();
+            topStatLabel3 = new Label();
+            topStatLabelNumber2 = new Label();
+            topStatLabel2 = new Label();
+            topStatLabelNumber1 = new Label();
+            topStatLabel1 = new Label();
             mainInfoPanel = new FlowLayoutPanel();
-            dashboardTrayPanel = new Panel();
-            label3 = new Label();
-            dashboardTrayLabel = new Label();
-            panel2 = new Panel();
-            label1 = new Label();
-            label2 = new Label();
-            panel3 = new Panel();
-            label4 = new Label();
-            label5 = new Label();
-            tagline = new Label();
+            topStatPanel1 = new Panel();
+            topStatPanel2 = new Panel();
+            topStatPanel3 = new Panel();
+            customerReviewsLabel = new Label();
             username = new Label();
-            profilePictureBox = new PictureBox();
-            pendingRequestsPanel = new FlowLayoutPanel();
-            pendingRequestsHeaderPanel = new Panel();
-            pendingRequestsHeaderPanelLabel = new Label();
-            flowLayoutPanel1 = new FlowLayoutPanel();
+            customerReviewsPanel = new FlowLayoutPanel();
             addTripLabel = new Label();
-            flowLayoutPanel2 = new FlowLayoutPanel();
-            flowLayoutPanel3 = new FlowLayoutPanel();
-            flowLayoutPanel4 = new FlowLayoutPanel();
-            flowLayoutPanel5 = new FlowLayoutPanel();
-            label10 = new Label();
-            panel1.SuspendLayout();
-            flowLayoutPanel7.SuspendLayout();
-            flowLayoutPanel6.SuspendLayout();
+            infoPanel1 = new FlowLayoutPanel();
+            infoPanel2 = new FlowLayoutPanel();
+            tagline = new Label();
+            profilePictureBox = new PictureBox();
+            infoPanel = new FlowLayoutPanel();
+            infoLabel = new Label();
             mainInfoPanel.SuspendLayout();
-            dashboardTrayPanel.SuspendLayout();
-            panel2.SuspendLayout();
-            panel3.SuspendLayout();
+            topStatPanel1.SuspendLayout();
+            topStatPanel2.SuspendLayout();
+            topStatPanel3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)profilePictureBox).BeginInit();
-            pendingRequestsPanel.SuspendLayout();
-            pendingRequestsHeaderPanel.SuspendLayout();
-            flowLayoutPanel2.SuspendLayout();
+            infoPanel.SuspendLayout();
             SuspendLayout();
             // 
-            // panel1
+            // availableServicesPanel
             // 
-            panel1.AutoScroll = true;
-            panel1.Controls.Add(flowLayoutPanel7);
-            panel1.Controls.Add(label7);
-            panel1.Controls.Add(flowLayoutPanel6);
-            panel1.Controls.Add(label6);
-            panel1.Controls.Add(mainInfoPanel);
-            panel1.Controls.Add(tagline);
-            panel1.Controls.Add(username);
-            panel1.Controls.Add(profilePictureBox);
-            panel1.Controls.Add(pendingRequestsPanel);
-            panel1.Controls.Add(flowLayoutPanel1);
-            panel1.Controls.Add(addTripLabel);
-            panel1.Controls.Add(flowLayoutPanel2);
-            panel1.Controls.Add(label10);
-            panel1.Dock = DockStyle.Fill;
-            panel1.Location = new Point(0, 0);
-            panel1.Name = "panel1";
-            panel1.Size = new Size(1134, 649);
-            panel1.TabIndex = 0;
+            availableServicesPanel.AutoScroll = true;
+            availableServicesPanel.BackColor = SystemColors.Control;
+            availableServicesPanel.Location = new Point(27, 166);
+            availableServicesPanel.Name = "availableServicesPanel";
+            availableServicesPanel.Size = new Size(431, 482);
+            availableServicesPanel.TabIndex = 41;
             // 
-            // flowLayoutPanel7
+            // availableServicesLabel
             // 
-            flowLayoutPanel7.Controls.Add(panel8);
-            flowLayoutPanel7.Controls.Add(panel11);
-            flowLayoutPanel7.Controls.Add(panel10);
-            flowLayoutPanel7.Controls.Add(panel9);
-            flowLayoutPanel7.Location = new Point(436, 406);
-            flowLayoutPanel7.Name = "flowLayoutPanel7";
-            flowLayoutPanel7.Size = new Size(356, 210);
-            flowLayoutPanel7.TabIndex = 28;
+            availableServicesLabel.AutoSize = true;
+            availableServicesLabel.Font = new Font("Segoe UI", 18F, FontStyle.Bold);
+            availableServicesLabel.Location = new Point(27, 130);
+            availableServicesLabel.Name = "availableServicesLabel";
+            availableServicesLabel.Size = new Size(218, 32);
+            availableServicesLabel.TabIndex = 39;
+            availableServicesLabel.Text = "Available Services";
             // 
-            // panel8
+            // topStatLabelNumber3
             // 
-            panel8.BackColor = Color.White;
-            panel8.Location = new Point(0, 5);
-            panel8.Margin = new Padding(0, 5, 0, 5);
-            panel8.Name = "panel8";
-            panel8.Size = new Size(356, 42);
-            panel8.TabIndex = 32;
+            topStatLabelNumber3.BackColor = Color.Transparent;
+            topStatLabelNumber3.Font = new Font("Segoe UI", 20F, FontStyle.Bold);
+            topStatLabelNumber3.Location = new Point(3, 2);
+            topStatLabelNumber3.Margin = new Padding(0);
+            topStatLabelNumber3.Name = "topStatLabelNumber3";
+            topStatLabelNumber3.Size = new Size(93, 38);
+            topStatLabelNumber3.TabIndex = 3;
+            topStatLabelNumber3.Text = "5";
+            topStatLabelNumber3.TextAlign = ContentAlignment.TopCenter;
             // 
-            // panel11
+            // topStatLabel3
             // 
-            panel11.BackColor = Color.White;
-            panel11.Location = new Point(0, 57);
-            panel11.Margin = new Padding(0, 5, 0, 5);
-            panel11.Name = "panel11";
-            panel11.Size = new Size(356, 42);
-            panel11.TabIndex = 35;
+            topStatLabel3.BackColor = Color.Transparent;
+            topStatLabel3.Font = new Font("Segoe UI", 7F, FontStyle.Bold);
+            topStatLabel3.Location = new Point(3, 37);
+            topStatLabel3.Name = "topStatLabel3";
+            topStatLabel3.Size = new Size(93, 15);
+            topStatLabel3.TabIndex = 2;
+            topStatLabel3.Text = "Avg Rating";
+            topStatLabel3.TextAlign = ContentAlignment.MiddleCenter;
             // 
-            // panel10
+            // topStatLabelNumber2
             // 
-            panel10.BackColor = Color.White;
-            panel10.Location = new Point(0, 109);
-            panel10.Margin = new Padding(0, 5, 0, 5);
-            panel10.Name = "panel10";
-            panel10.Size = new Size(356, 42);
-            panel10.TabIndex = 34;
+            topStatLabelNumber2.BackColor = Color.Transparent;
+            topStatLabelNumber2.Font = new Font("Segoe UI", 20F, FontStyle.Bold);
+            topStatLabelNumber2.Location = new Point(3, 2);
+            topStatLabelNumber2.Margin = new Padding(0);
+            topStatLabelNumber2.Name = "topStatLabelNumber2";
+            topStatLabelNumber2.Size = new Size(93, 38);
+            topStatLabelNumber2.TabIndex = 3;
+            topStatLabelNumber2.Text = "5";
+            topStatLabelNumber2.TextAlign = ContentAlignment.TopCenter;
             // 
-            // panel9
+            // topStatLabel2
             // 
-            panel9.BackColor = Color.White;
-            panel9.Location = new Point(0, 161);
-            panel9.Margin = new Padding(0, 5, 0, 5);
-            panel9.Name = "panel9";
-            panel9.Size = new Size(356, 42);
-            panel9.TabIndex = 33;
+            topStatLabel2.BackColor = Color.Transparent;
+            topStatLabel2.Font = new Font("Segoe UI", 7F, FontStyle.Bold);
+            topStatLabel2.Location = new Point(3, 37);
+            topStatLabel2.Name = "topStatLabel2";
+            topStatLabel2.Size = new Size(93, 15);
+            topStatLabel2.TabIndex = 2;
+            topStatLabel2.Text = "Active Trips";
+            topStatLabel2.TextAlign = ContentAlignment.MiddleCenter;
             // 
-            // label7
+            // topStatLabelNumber1
             // 
-            label7.AutoSize = true;
-            label7.Font = new Font("Segoe UI", 18F, FontStyle.Bold);
-            label7.Location = new Point(436, 371);
-            label7.Name = "label7";
-            label7.Size = new Size(194, 32);
-            label7.TabIndex = 27;
-            label7.Text = "Upcoming Trips";
+            topStatLabelNumber1.BackColor = Color.Transparent;
+            topStatLabelNumber1.Font = new Font("Segoe UI", 20F, FontStyle.Bold);
+            topStatLabelNumber1.Location = new Point(3, 2);
+            topStatLabelNumber1.Margin = new Padding(0);
+            topStatLabelNumber1.Name = "topStatLabelNumber1";
+            topStatLabelNumber1.Size = new Size(93, 38);
+            topStatLabelNumber1.TabIndex = 3;
+            topStatLabelNumber1.Text = "5";
+            topStatLabelNumber1.TextAlign = ContentAlignment.TopCenter;
             // 
-            // flowLayoutPanel6
+            // topStatLabel1
             // 
-            flowLayoutPanel6.Controls.Add(panel4);
-            flowLayoutPanel6.Controls.Add(panel5);
-            flowLayoutPanel6.Controls.Add(panel6);
-            flowLayoutPanel6.Controls.Add(panel7);
-            flowLayoutPanel6.Location = new Point(30, 406);
-            flowLayoutPanel6.Name = "flowLayoutPanel6";
-            flowLayoutPanel6.Size = new Size(356, 210);
-            flowLayoutPanel6.TabIndex = 26;
-            // 
-            // panel4
-            // 
-            panel4.BackColor = Color.White;
-            panel4.Location = new Point(0, 5);
-            panel4.Margin = new Padding(0, 5, 0, 5);
-            panel4.Name = "panel4";
-            panel4.Size = new Size(356, 42);
-            panel4.TabIndex = 29;
-            // 
-            // panel5
-            // 
-            panel5.BackColor = Color.White;
-            panel5.Location = new Point(0, 57);
-            panel5.Margin = new Padding(0, 5, 0, 5);
-            panel5.Name = "panel5";
-            panel5.Size = new Size(356, 42);
-            panel5.TabIndex = 30;
-            // 
-            // panel6
-            // 
-            panel6.BackColor = Color.White;
-            panel6.Location = new Point(0, 109);
-            panel6.Margin = new Padding(0, 5, 0, 5);
-            panel6.Name = "panel6";
-            panel6.Size = new Size(356, 42);
-            panel6.TabIndex = 30;
-            // 
-            // panel7
-            // 
-            panel7.BackColor = Color.White;
-            panel7.Location = new Point(0, 161);
-            panel7.Margin = new Padding(0, 5, 0, 5);
-            panel7.Name = "panel7";
-            panel7.Size = new Size(356, 42);
-            panel7.TabIndex = 31;
-            // 
-            // label6
-            // 
-            label6.AutoSize = true;
-            label6.Font = new Font("Segoe UI", 18F, FontStyle.Bold);
-            label6.Location = new Point(27, 371);
-            label6.Name = "label6";
-            label6.Size = new Size(218, 32);
-            label6.TabIndex = 25;
-            label6.Text = "Available Services";
+            topStatLabel1.BackColor = Color.Transparent;
+            topStatLabel1.Font = new Font("Segoe UI", 7F, FontStyle.Bold);
+            topStatLabel1.Location = new Point(3, 37);
+            topStatLabel1.Name = "topStatLabel1";
+            topStatLabel1.Size = new Size(93, 15);
+            topStatLabel1.TabIndex = 2;
+            topStatLabel1.Text = "Total Trips";
+            topStatLabel1.TextAlign = ContentAlignment.MiddleCenter;
             // 
             // mainInfoPanel
             // 
-            mainInfoPanel.BackColor = Color.White;
-            mainInfoPanel.Controls.Add(dashboardTrayPanel);
-            mainInfoPanel.Controls.Add(panel2);
-            mainInfoPanel.Controls.Add(panel3);
-            mainInfoPanel.Location = new Point(142, 77);
+            mainInfoPanel.BackColor = SystemColors.Control;
+            mainInfoPanel.Controls.Add(topStatPanel1);
+            mainInfoPanel.Controls.Add(topStatPanel2);
+            mainInfoPanel.Controls.Add(topStatPanel3);
+            mainInfoPanel.Location = new Point(143, 56);
             mainInfoPanel.Name = "mainInfoPanel";
             mainInfoPanel.Size = new Size(315, 64);
-            mainInfoPanel.TabIndex = 20;
+            mainInfoPanel.TabIndex = 35;
             // 
-            // dashboardTrayPanel
+            // topStatPanel1
             // 
-            dashboardTrayPanel.BackColor = Color.Transparent;
-            dashboardTrayPanel.Controls.Add(label3);
-            dashboardTrayPanel.Controls.Add(dashboardTrayLabel);
-            dashboardTrayPanel.Location = new Point(3, 3);
-            dashboardTrayPanel.Name = "dashboardTrayPanel";
-            dashboardTrayPanel.Size = new Size(99, 60);
-            dashboardTrayPanel.TabIndex = 5;
+            topStatPanel1.BackColor = Color.White;
+            topStatPanel1.Controls.Add(topStatLabelNumber1);
+            topStatPanel1.Controls.Add(topStatLabel1);
+            topStatPanel1.Location = new Point(3, 3);
+            topStatPanel1.Name = "topStatPanel1";
+            topStatPanel1.Size = new Size(99, 60);
+            topStatPanel1.TabIndex = 5;
             // 
-            // label3
+            // topStatPanel2
             // 
-            label3.BackColor = Color.Transparent;
-            label3.Font = new Font("Segoe UI", 20F, FontStyle.Bold);
-            label3.Location = new Point(3, 2);
-            label3.Margin = new Padding(0);
-            label3.Name = "label3";
-            label3.Size = new Size(93, 38);
-            label3.TabIndex = 3;
-            label3.Text = "5";
-            label3.TextAlign = ContentAlignment.TopCenter;
+            topStatPanel2.BackColor = Color.White;
+            topStatPanel2.Controls.Add(topStatLabelNumber2);
+            topStatPanel2.Controls.Add(topStatLabel2);
+            topStatPanel2.Location = new Point(108, 3);
+            topStatPanel2.Name = "topStatPanel2";
+            topStatPanel2.Size = new Size(99, 60);
+            topStatPanel2.TabIndex = 6;
             // 
-            // dashboardTrayLabel
+            // topStatPanel3
             // 
-            dashboardTrayLabel.BackColor = Color.Transparent;
-            dashboardTrayLabel.Font = new Font("Segoe UI", 7F, FontStyle.Bold);
-            dashboardTrayLabel.Location = new Point(3, 37);
-            dashboardTrayLabel.Name = "dashboardTrayLabel";
-            dashboardTrayLabel.Size = new Size(93, 15);
-            dashboardTrayLabel.TabIndex = 2;
-            dashboardTrayLabel.Text = "Something1";
-            dashboardTrayLabel.TextAlign = ContentAlignment.MiddleCenter;
+            topStatPanel3.BackColor = Color.White;
+            topStatPanel3.Controls.Add(topStatLabelNumber3);
+            topStatPanel3.Controls.Add(topStatLabel3);
+            topStatPanel3.Location = new Point(213, 3);
+            topStatPanel3.Name = "topStatPanel3";
+            topStatPanel3.Size = new Size(99, 60);
+            topStatPanel3.TabIndex = 6;
             // 
-            // panel2
+            // customerReviewsLabel
             // 
-            panel2.BackColor = Color.Transparent;
-            panel2.Controls.Add(label1);
-            panel2.Controls.Add(label2);
-            panel2.Location = new Point(108, 3);
-            panel2.Name = "panel2";
-            panel2.Size = new Size(99, 60);
-            panel2.TabIndex = 6;
-            // 
-            // label1
-            // 
-            label1.BackColor = Color.Transparent;
-            label1.Font = new Font("Segoe UI", 20F, FontStyle.Bold);
-            label1.Location = new Point(3, 2);
-            label1.Margin = new Padding(0);
-            label1.Name = "label1";
-            label1.Size = new Size(93, 38);
-            label1.TabIndex = 3;
-            label1.Text = "5";
-            label1.TextAlign = ContentAlignment.TopCenter;
-            // 
-            // label2
-            // 
-            label2.BackColor = Color.Transparent;
-            label2.Font = new Font("Segoe UI", 7F, FontStyle.Bold);
-            label2.Location = new Point(3, 37);
-            label2.Name = "label2";
-            label2.Size = new Size(93, 15);
-            label2.TabIndex = 2;
-            label2.Text = "Something2";
-            label2.TextAlign = ContentAlignment.MiddleCenter;
-            // 
-            // panel3
-            // 
-            panel3.BackColor = Color.Transparent;
-            panel3.Controls.Add(label4);
-            panel3.Controls.Add(label5);
-            panel3.Location = new Point(213, 3);
-            panel3.Name = "panel3";
-            panel3.Size = new Size(99, 60);
-            panel3.TabIndex = 6;
-            // 
-            // label4
-            // 
-            label4.BackColor = Color.Transparent;
-            label4.Font = new Font("Segoe UI", 20F, FontStyle.Bold);
-            label4.Location = new Point(3, 2);
-            label4.Margin = new Padding(0);
-            label4.Name = "label4";
-            label4.Size = new Size(93, 38);
-            label4.TabIndex = 3;
-            label4.Text = "5";
-            label4.TextAlign = ContentAlignment.TopCenter;
-            // 
-            // label5
-            // 
-            label5.BackColor = Color.Transparent;
-            label5.Font = new Font("Segoe UI", 7F, FontStyle.Bold);
-            label5.Location = new Point(3, 37);
-            label5.Name = "label5";
-            label5.Size = new Size(93, 15);
-            label5.TabIndex = 2;
-            label5.Text = "Something3";
-            label5.TextAlign = ContentAlignment.MiddleCenter;
-            // 
-            // tagline
-            // 
-            tagline.AutoSize = true;
-            tagline.Font = new Font("Segoe UI", 8F, FontStyle.Bold);
-            tagline.Location = new Point(142, 60);
-            tagline.Name = "tagline";
-            tagline.Size = new Size(100, 13);
-            tagline.TabIndex = 19;
-            tagline.Text = "Some cool text 😎";
+            customerReviewsLabel.AutoSize = true;
+            customerReviewsLabel.Font = new Font("Segoe UI", 13F, FontStyle.Bold);
+            customerReviewsLabel.Location = new Point(472, 171);
+            customerReviewsLabel.Name = "customerReviewsLabel";
+            customerReviewsLabel.Size = new Size(167, 25);
+            customerReviewsLabel.TabIndex = 30;
+            customerReviewsLabel.Text = "Customer Reviews";
             // 
             // username
             // 
             username.AutoSize = true;
             username.Font = new Font("Segoe UI", 15F, FontStyle.Bold);
-            username.Location = new Point(138, 32);
+            username.Location = new Point(139, 11);
             username.Name = "username";
             username.Size = new Size(145, 28);
-            username.TabIndex = 18;
+            username.TabIndex = 33;
             username.Text = "Tour Operator";
             username.TextAlign = ContentAlignment.MiddleLeft;
             // 
-            // profilePictureBox
+            // customerReviewsPanel
             // 
-            profilePictureBox.BackColor = Color.DodgerBlue;
-            profilePictureBox.Image = Properties.Resources.images;
-            profilePictureBox.InitialImage = null;
-            profilePictureBox.Location = new Point(27, 41);
-            profilePictureBox.Name = "profilePictureBox";
-            profilePictureBox.Size = new Size(100, 100);
-            profilePictureBox.SizeMode = PictureBoxSizeMode.Zoom;
-            profilePictureBox.TabIndex = 16;
-            profilePictureBox.TabStop = false;
-            // 
-            // pendingRequestsPanel
-            // 
-            pendingRequestsPanel.BackColor = Color.White;
-            pendingRequestsPanel.Controls.Add(pendingRequestsHeaderPanel);
-            pendingRequestsPanel.Location = new Point(816, 41);
-            pendingRequestsPanel.Name = "pendingRequestsPanel";
-            pendingRequestsPanel.Size = new Size(291, 216);
-            pendingRequestsPanel.TabIndex = 22;
-            // 
-            // pendingRequestsHeaderPanel
-            // 
-            pendingRequestsHeaderPanel.Controls.Add(pendingRequestsHeaderPanelLabel);
-            pendingRequestsHeaderPanel.Location = new Point(3, 3);
-            pendingRequestsHeaderPanel.Name = "pendingRequestsHeaderPanel";
-            pendingRequestsHeaderPanel.Size = new Size(288, 46);
-            pendingRequestsHeaderPanel.TabIndex = 6;
-            // 
-            // pendingRequestsHeaderPanelLabel
-            // 
-            pendingRequestsHeaderPanelLabel.AutoSize = true;
-            pendingRequestsHeaderPanelLabel.Font = new Font("Segoe UI", 13F, FontStyle.Bold);
-            pendingRequestsHeaderPanelLabel.Location = new Point(5, 10);
-            pendingRequestsHeaderPanelLabel.Name = "pendingRequestsHeaderPanelLabel";
-            pendingRequestsHeaderPanelLabel.Size = new Size(167, 25);
-            pendingRequestsHeaderPanelLabel.TabIndex = 0;
-            pendingRequestsHeaderPanelLabel.Text = "Customer Reviews";
-            // 
-            // flowLayoutPanel1
-            // 
-            flowLayoutPanel1.BackColor = Color.White;
-            flowLayoutPanel1.Location = new Point(816, 279);
-            flowLayoutPanel1.Name = "flowLayoutPanel1";
-            flowLayoutPanel1.Size = new Size(291, 272);
-            flowLayoutPanel1.TabIndex = 23;
+            customerReviewsPanel.BackColor = SystemColors.Control;
+            customerReviewsPanel.Location = new Point(472, 184);
+            customerReviewsPanel.Name = "customerReviewsPanel";
+            customerReviewsPanel.Size = new Size(644, 389);
+            customerReviewsPanel.TabIndex = 37;
             // 
             // addTripLabel
             // 
@@ -398,122 +223,124 @@
             addTripLabel.Cursor = Cursors.Hand;
             addTripLabel.Font = new Font("Segoe UI", 15F, FontStyle.Bold);
             addTripLabel.ForeColor = Color.White;
-            addTripLabel.Location = new Point(816, 576);
+            addTripLabel.Location = new Point(637, 589);
             addTripLabel.Name = "addTripLabel";
             addTripLabel.Size = new Size(291, 40);
-            addTripLabel.TabIndex = 24;
+            addTripLabel.TabIndex = 38;
             addTripLabel.Text = "Add New Trip";
             addTripLabel.TextAlign = ContentAlignment.MiddleCenter;
-            addTripLabel.Click += addTripLabel_Click;
             // 
-            // flowLayoutPanel2
+            // infoPanel1
             // 
-            flowLayoutPanel2.BackColor = SystemColors.Control;
-            flowLayoutPanel2.Controls.Add(flowLayoutPanel3);
-            flowLayoutPanel2.Controls.Add(flowLayoutPanel4);
-            flowLayoutPanel2.Controls.Add(flowLayoutPanel5);
-            flowLayoutPanel2.Location = new Point(27, 180);
-            flowLayoutPanel2.Name = "flowLayoutPanel2";
-            flowLayoutPanel2.Size = new Size(765, 179);
-            flowLayoutPanel2.TabIndex = 17;
+            infoPanel1.BackColor = Color.White;
+            infoPanel1.Location = new Point(3, 3);
+            infoPanel1.Name = "infoPanel1";
+            infoPanel1.Size = new Size(315, 120);
+            infoPanel1.TabIndex = 2;
             // 
-            // flowLayoutPanel3
+            // infoPanel2
             // 
-            flowLayoutPanel3.BackColor = Color.White;
-            flowLayoutPanel3.Location = new Point(3, 3);
-            flowLayoutPanel3.Name = "flowLayoutPanel3";
-            flowLayoutPanel3.Size = new Size(249, 172);
-            flowLayoutPanel3.TabIndex = 2;
+            infoPanel2.BackColor = Color.White;
+            infoPanel2.Location = new Point(324, 3);
+            infoPanel2.Name = "infoPanel2";
+            infoPanel2.Size = new Size(315, 120);
+            infoPanel2.TabIndex = 3;
             // 
-            // flowLayoutPanel4
+            // tagline
             // 
-            flowLayoutPanel4.BackColor = Color.White;
-            flowLayoutPanel4.Location = new Point(258, 3);
-            flowLayoutPanel4.Name = "flowLayoutPanel4";
-            flowLayoutPanel4.Size = new Size(249, 172);
-            flowLayoutPanel4.TabIndex = 3;
+            tagline.AutoSize = true;
+            tagline.Font = new Font("Segoe UI", 8F, FontStyle.Bold);
+            tagline.Location = new Point(143, 39);
+            tagline.Name = "tagline";
+            tagline.Size = new Size(100, 13);
+            tagline.TabIndex = 34;
+            tagline.Text = "Some cool text 😎";
             // 
-            // flowLayoutPanel5
+            // profilePictureBox
             // 
-            flowLayoutPanel5.BackColor = Color.White;
-            flowLayoutPanel5.Location = new Point(513, 3);
-            flowLayoutPanel5.Name = "flowLayoutPanel5";
-            flowLayoutPanel5.Size = new Size(249, 172);
-            flowLayoutPanel5.TabIndex = 3;
+            profilePictureBox.BackColor = Color.DodgerBlue;
+            profilePictureBox.Image = Properties.Resources.images;
+            profilePictureBox.InitialImage = null;
+            profilePictureBox.Location = new Point(27, 20);
+            profilePictureBox.Name = "profilePictureBox";
+            profilePictureBox.Size = new Size(100, 100);
+            profilePictureBox.SizeMode = PictureBoxSizeMode.Zoom;
+            profilePictureBox.TabIndex = 31;
+            profilePictureBox.TabStop = false;
             // 
-            // label10
+            // infoPanel
             // 
-            label10.AutoSize = true;
-            label10.Font = new Font("Segoe UI", 18F, FontStyle.Bold);
-            label10.Location = new Point(27, 143);
-            label10.Name = "label10";
-            label10.Size = new Size(114, 32);
-            label10.TabIndex = 21;
-            label10.Text = "Statistics";
+            infoPanel.BackColor = SystemColors.Control;
+            infoPanel.Controls.Add(infoPanel1);
+            infoPanel.Controls.Add(infoPanel2);
+            infoPanel.Location = new Point(472, 39);
+            infoPanel.Name = "infoPanel";
+            infoPanel.Size = new Size(644, 127);
+            infoPanel.TabIndex = 32;
+            // 
+            // infoLabel
+            // 
+            infoLabel.AutoSize = true;
+            infoLabel.Font = new Font("Segoe UI", 18F, FontStyle.Bold);
+            infoLabel.Location = new Point(475, 4);
+            infoLabel.Name = "infoLabel";
+            infoLabel.Size = new Size(152, 32);
+            infoLabel.TabIndex = 36;
+            infoLabel.Text = "Information";
             // 
             // dashboardForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1134, 649);
-            Controls.Add(panel1);
+            ClientSize = new Size(1134, 648);
+            Controls.Add(availableServicesPanel);
+            Controls.Add(availableServicesLabel);
+            Controls.Add(mainInfoPanel);
+            Controls.Add(customerReviewsLabel);
+            Controls.Add(username);
+            Controls.Add(customerReviewsPanel);
+            Controls.Add(addTripLabel);
+            Controls.Add(tagline);
+            Controls.Add(profilePictureBox);
+            Controls.Add(infoPanel);
+            Controls.Add(infoLabel);
             FormBorderStyle = FormBorderStyle.None;
             Name = "dashboardForm";
             Text = "Form1";
             Load += dashboardForm_Load;
-            panel1.ResumeLayout(false);
-            panel1.PerformLayout();
-            flowLayoutPanel7.ResumeLayout(false);
-            flowLayoutPanel6.ResumeLayout(false);
             mainInfoPanel.ResumeLayout(false);
-            dashboardTrayPanel.ResumeLayout(false);
-            panel2.ResumeLayout(false);
-            panel3.ResumeLayout(false);
+            topStatPanel1.ResumeLayout(false);
+            topStatPanel2.ResumeLayout(false);
+            topStatPanel3.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)profilePictureBox).EndInit();
-            pendingRequestsPanel.ResumeLayout(false);
-            pendingRequestsHeaderPanel.ResumeLayout(false);
-            pendingRequestsHeaderPanel.PerformLayout();
-            flowLayoutPanel2.ResumeLayout(false);
+            infoPanel.ResumeLayout(false);
             ResumeLayout(false);
+            PerformLayout();
         }
 
         #endregion
 
-        private Panel panel1;
-        private FlowLayoutPanel flowLayoutPanel7;
-        private Label label7;
-        private FlowLayoutPanel flowLayoutPanel6;
-        private Panel panel4;
-        private Panel panel5;
-        private Panel panel6;
-        private Label label6;
+        private Panel availableServicesPanel;
+        private Label availableServicesLabel;
+        private Label topStatLabelNumber3;
+        private Label topStatLabel3;
+        private Label topStatLabelNumber2;
+        private Label topStatLabel2;
+        private Label topStatLabelNumber1;
+        private Label topStatLabel1;
         private FlowLayoutPanel mainInfoPanel;
-        private Panel dashboardTrayPanel;
-        private Label label3;
-        private Label dashboardTrayLabel;
-        private Panel panel2;
-        private Label label1;
-        private Label label2;
-        private Panel panel3;
-        private Label label4;
-        private Label label5;
-        private Label tagline;
+        private Panel topStatPanel1;
+        private Panel topStatPanel2;
+        private Panel topStatPanel3;
+        private Label customerReviewsLabel;
         private Label username;
-        private PictureBox profilePictureBox;
-        private FlowLayoutPanel pendingRequestsPanel;
-        private Panel pendingRequestsHeaderPanel;
-        private Label pendingRequestsHeaderPanelLabel;
-        private FlowLayoutPanel flowLayoutPanel1;
+        private FlowLayoutPanel customerReviewsPanel;
         private Label addTripLabel;
-        private FlowLayoutPanel flowLayoutPanel2;
-        private FlowLayoutPanel flowLayoutPanel3;
-        private FlowLayoutPanel flowLayoutPanel4;
-        private FlowLayoutPanel flowLayoutPanel5;
-        private Label label10;
-        private Panel panel8;
-        private Panel panel11;
-        private Panel panel10;
-        private Panel panel9;
-        private Panel panel7;
+        private FlowLayoutPanel infoPanel1;
+        private FlowLayoutPanel infoPanel2;
+        private Label tagline;
+        private PictureBox profilePictureBox;
+        private FlowLayoutPanel infoPanel;
+        private Label infoLabel;
     }
 }

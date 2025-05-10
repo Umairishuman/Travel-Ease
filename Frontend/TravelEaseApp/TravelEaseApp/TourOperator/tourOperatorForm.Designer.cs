@@ -135,6 +135,7 @@
             ClientSize = new Size(1264, 681);
             Controls.Add(subFormPanel);
             Controls.Add(sidebarPanel);
+            FormBorderStyle = FormBorderStyle.Fixed3D;
             Name = "tourOperatorForm";
             Text = "TourOperator";
             Load += tourOperatorForm_Load;
