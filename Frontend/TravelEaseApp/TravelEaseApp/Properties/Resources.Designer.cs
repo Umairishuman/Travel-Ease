@@ -183,6 +183,16 @@ namespace TravelEaseApp.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap reviews {
+            get {
+                object obj = ResourceManager.GetObject("reviews", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap service_bell_svgrepo_com_B {
             get {
                 object obj = ResourceManager.GetObject("service-bell-svgrepo-com-B", resourceCulture);

@@ -83,6 +83,7 @@ CREATE TABLE location (
         ),
     country VARCHAR(100) NOT NULL
 )
+
 CREATE TABLE trips (
     trip_id VARCHAR(20) PRIMARY KEY CHECK (
         trip_id LIKE 'TRIP-[0-9][0-9][0-9][0-9][0-9][0-9]'
@@ -91,7 +92,7 @@ CREATE TABLE trips (
     descirption TEXT NOT NULL,
     capacity INT NOT NULL,
     duration INT NOT NULL,
-    category VARCHAR(50) NOT NULL CHECK (category IN ('adventure', 'cultural', 'leisure', 'wildlife', 'historical', 'beach', 'mountain', 'cruise')),   
+    category VARCHAR(10),
     status VARCHAR(50) NOT NULL CHECK (status IN ('active', 'completed', 'cancelled')),
     price_per_person DECIMAL(10, 2) NOT NULL,
     
@@ -106,6 +107,12 @@ CREATE TABLE trips (
 
     profileTrip_image_url VARCHAR(255)
 )
+
+
+
+update trips
+set profileTrip_image_url = 'https://i.postimg.cc/j5dPFtS8/fabrizio-conti-c3ws-Mnx-QZDw-unsplash.jpg'
+
 
 CREATE TABLE bookings (
     booking_id VARCHAR(20) PRIMARY KEY CHECK (
@@ -286,6 +293,9 @@ CREATE TABLE digital_passes (
 )
 
 select * from digital_passes
+use travelEase;
+
+select * from digital_passes
 
 
 CREATE TABLE service_reviews(
@@ -321,3 +331,44 @@ CREATE TABLE service_review_logs(
 
     reason TEXT NULL
 )
+
+select distinct category from trips
+CREATE TABLE Category (
+    id VARCHAR(10) PRIMARY KEY CHECK (id LIKE 'CAT-[0-9][0-9][0-9][0-9][0-9][0-9]'),
+    category_name VARCHAR(100) NOT NULL
+);
+
+INSERT INTO Category (id, category_name) VALUES
+('CAT-000001', 'adventure'),
+('CAT-000002', 'beach'),
+('CAT-000003', 'cruise'),
+('CAT-000004', 'cultural'),
+('CAT-000005', 'historical'),
+('CAT-000006', 'leisure'),
+('CAT-000007', 'mountain'),
+('CAT-000008', 'wildlife'),
+('CAT-000009', 'nature'),
+('CAT-000010', 'desert'),
+('CAT-000011', 'island'),
+('CAT-000012', 'road trip'),
+('CAT-000013', 'skiing'),
+('CAT-000014', 'eco-tourism'),
+('CAT-000015', 'pilgrimage'),
+('CAT-000016', 'food & wine'),
+('CAT-000017', 'shopping'),
+('CAT-000018', 'honeymoon'),
+('CAT-000019', 'family'),
+('CAT-000020', 'solo'),
+('CAT-000021', 'luxury'),
+('CAT-000022', 'budget'),
+('CAT-000023', 'festival'),
+('CAT-000024', 'sports'),
+('CAT-000025', 'volunteering'),
+('CAT-000026', 'photography'),
+('CAT-000027', 'spiritual'),
+('CAT-000028', 'urban exploration'),
+('CAT-000029', 'wellness'),
+('CAT-000030', 'extreme adventure');
+
+
+
