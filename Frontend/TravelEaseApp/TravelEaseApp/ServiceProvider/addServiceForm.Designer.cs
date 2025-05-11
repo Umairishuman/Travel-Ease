@@ -39,11 +39,14 @@
             submitLabel = new Label();
             flowLayoutPanel1 = new FlowLayoutPanel();
             label1 = new Label();
+            RoleSelectionGroup = new GroupBox();
+            RoleSelectOptions = new ComboBox();
             serviceTypeBoxEmail.SuspendLayout();
             serviceDescriptionBox.SuspendLayout();
             pricePerPersonBox.SuspendLayout();
             capacityBox.SuspendLayout();
             flowLayoutPanel1.SuspendLayout();
+            RoleSelectionGroup.SuspendLayout();
             SuspendLayout();
             // 
             // serviceTypeBoxEmail
@@ -162,6 +165,7 @@
             flowLayoutPanel1.Controls.Add(pricePerPersonBox);
             flowLayoutPanel1.Controls.Add(capacityBox);
             flowLayoutPanel1.Controls.Add(submitLabel);
+            flowLayoutPanel1.Controls.Add(RoleSelectionGroup);
             flowLayoutPanel1.Dock = DockStyle.Fill;
             flowLayoutPanel1.FlowDirection = FlowDirection.TopDown;
             flowLayoutPanel1.Location = new Point(0, 0);
@@ -180,6 +184,36 @@
             label1.TabIndex = 8;
             label1.Text = "Add Service";
             label1.TextAlign = ContentAlignment.MiddleCenter;
+            // 
+            // RoleSelectionGroup
+            // 
+            RoleSelectionGroup.Controls.Add(RoleSelectOptions);
+            RoleSelectionGroup.Font = new Font("Segoe UI", 10F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            RoleSelectionGroup.Location = new Point(700, 122);
+            RoleSelectionGroup.Margin = new Padding(2);
+            RoleSelectionGroup.Name = "RoleSelectionGroup";
+            RoleSelectionGroup.Padding = new Padding(2);
+            RoleSelectionGroup.Size = new Size(321, 71);
+            RoleSelectionGroup.TabIndex = 9;
+            RoleSelectionGroup.TabStop = false;
+            RoleSelectionGroup.Text = "Service Type";
+            // 
+            // RoleSelectOptions
+            // 
+            RoleSelectOptions.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            RoleSelectOptions.BackColor = Color.White;
+            RoleSelectOptions.FlatStyle = FlatStyle.Flat;
+            RoleSelectOptions.Font = new Font("Segoe UI", 16F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            RoleSelectOptions.ForeColor = SystemColors.InactiveCaptionText;
+            RoleSelectOptions.FormattingEnabled = true;
+            RoleSelectOptions.ItemHeight = 30;
+            RoleSelectOptions.Items.AddRange(new object[] { "Traveller", "Tour Operator", "Service Provider", "Admin" });
+            RoleSelectOptions.Location = new Point(10, 19);
+            RoleSelectOptions.Margin = new Padding(2);
+            RoleSelectOptions.Name = "RoleSelectOptions";
+            RoleSelectOptions.Size = new Size(429, 38);
+            RoleSelectOptions.TabIndex = 4;
+            RoleSelectOptions.Text = "Traveller";
             // 
             // addServiceForm
             // 
@@ -200,6 +234,7 @@
             capacityBox.ResumeLayout(false);
             capacityBox.PerformLayout();
             flowLayoutPanel1.ResumeLayout(false);
+            RoleSelectionGroup.ResumeLayout(false);
             ResumeLayout(false);
         }
 
@@ -216,5 +251,7 @@
         private Label submitLabel;
         private FlowLayoutPanel flowLayoutPanel1;
         private Label label1;
+        private GroupBox RoleSelectionGroup;
+        private ComboBox RoleSelectOptions;
     }
 }

@@ -10,11 +10,14 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel;
 using static TravelEaseApp.Helpers; // Assuming Helpers contains Location, Service, Trip classes
+using Microsoft.Data.SqlClient;
 
 namespace TravelEaseApp.TourOperator
 {
     public partial class tripsForm : Form
     {
+        private string regNo;
+
         private Label hiddenLabel;
         private Panel CompleteTripInfoPanel;
 
@@ -29,17 +32,18 @@ namespace TravelEaseApp.TourOperator
         List<Trip> trips = new List<Trip>();
         List<Location> locations = new List<Location>();
         List<TripReview> reviews = new List<TripReview>();
-        public tripsForm()
+        public tripsForm(string regNo)
         {
             InitializeComponent();
+            this.regNo = regNo;
         }
 
         private void tripsForm_Load(object sender, EventArgs e)
         {
             InitializeComponents();
 
-            SetSampleData();
-
+            //SetSampleData();
+            setData();
             foreach (var trip in trips)
             {
                 AddTripBox(availableTripsPanel, trip);
@@ -160,6 +164,144 @@ namespace TravelEaseApp.TourOperator
             closeServiceRequestButton.Click += (s, e) => ServiceRequestPanel.Visible = false;
             ServiceRequestPanel.Controls.Add(closeServiceRequestButton);
             closeServiceRequestButton.BringToFront(); // Ensure it's clickable
+        }
+
+        private void setData()
+        {
+            {   // get all services
+                string query = "SELECT * FROM Services";
+
+                using (SqlConnection connection = new SqlConnection(connectionString))
+                {
+                    SqlCommand command = new SqlCommand(query, connection);
+
+                    try
+                    {
+                        connection.Open();
+                        SqlDataReader reader = command.ExecuteReader();
+
+                        while (reader.Read())
+                        {
+                            var service = new Service
+                            {
+                                ServiceId = reader.GetString(0),
+                                ServiceType = reader.GetString(1),
+                                ServiceDescription = reader.GetString(2),
+                                Price = reader.GetDecimal(3),
+                                ProviderId = reader.GetString(4), // Fixed: Changed GetInt32 to GetString
+                                Capacity = reader.GetInt32(5)
+                            };
+                            services.Add(service);
+                        }
+                        reader.Close();
+                    }
+                    catch (Exception ex)
+                    {
+                        Console.WriteLine($"Error: {ex.Message}");
+                        throw; // Re-throw to handle in calling code
+                    }
+                }
+            }
+
+            {   // get all trips with operator_id == reg_no
+                string query = "SELECT * FROM trips WHERE operator_id = '" + @regNo + "'";
+                using (SqlConnection connection = new SqlConnection(connectionString))
+                {
+                    SqlCommand command = new SqlCommand(query, connection);
+                    try
+                    {
+                        connection.Open();
+                        SqlDataReader reader = command.ExecuteReader();
+                        while (reader.Read())
+                        {
+                            var trip = new Trip
+                            {
+                                TripId = reader.GetString(0),
+                                Title = reader.GetString(1),
+                                Description = reader.GetString(2),
+                                Capacity = reader.GetInt32(3),
+                                DurationDays = reader.GetInt32(4),
+                                Status = reader.GetString(5),
+                                PricePerPerson = reader.GetDecimal(6),
+                                StartLocationId = reader.GetString(7), // Fixed: Changed GetInt32 to GetString
+                                StartDate = reader.GetDateTime(8),
+                                EndDate = reader.GetDateTime(9),
+                                OperatorId = reader.GetString(10), // Fixed: Changed GetInt32 to GetString
+                                Category = reader.GetString(11),
+                            };
+                            trips.Add(trip);
+                        }
+                        reader.Close();
+                    }
+                    catch (Exception ex)
+                    {
+                        Console.WriteLine($"Error: {ex.Message}");
+                        throw; // Re-throw to handle in calling code
+                    }
+                }
+            }
+
+            {   // get all locations
+                string query = "SELECT * FROM location";
+                using (SqlConnection connection = new SqlConnection(connectionString))
+                {
+                    SqlCommand command = new SqlCommand(query, connection);
+                    try
+                    {
+                        connection.Open();
+                        SqlDataReader reader = command.ExecuteReader();
+                        while (reader.Read())
+                        {
+                            var location = new Location
+                            {
+                                DestId = reader.GetString(0),
+                                DestinationName = reader.GetString(1),
+                                City = reader.GetString(2),
+                                Region = reader.GetString(3),
+                                Country = reader.GetString(4)
+                            };
+                            locations.Add(location);
+                        }
+                        reader.Close();
+                    }
+                    catch (Exception ex)
+                    {
+                        Console.WriteLine($"Error: {ex.Message}");
+                        throw; // Re-throw to handle in calling code
+                    }
+                }
+            }
+            {   // get all reviews
+                string query = "SELECT * FROM trip_reviews";
+                using (SqlConnection connection = new SqlConnection(connectionString))
+                {
+                    SqlCommand command = new SqlCommand(query, connection);
+                    try
+                    {
+                        connection.Open();
+                        SqlDataReader reader = command.ExecuteReader();
+                        while (reader.Read())
+                        {
+                            var review = new TripReview(
+                                reviewId: reader.GetString(0),
+                                tripId: reader.GetString(1),
+                                travelerId: reader.GetString(2),
+                                rating: reader.GetInt32(3),
+                                description: reader.GetString(4),
+                                reviewDate: reader.GetDateTime(5),
+                                flagStatus: reader.GetString(6)
+                            );
+                            reviews.Add(review);
+                        }
+                        reader.Close();
+                    }
+                    catch (Exception ex)
+                    {
+                        Console.WriteLine($"Error: {ex.Message}");
+                        throw; // Re-throw to handle in calling code
+                    }
+                }
+            }
         }
 
         private void SetSampleData()
