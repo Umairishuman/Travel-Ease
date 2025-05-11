@@ -66,6 +66,7 @@
             availableServicesPanel.Name = "availableServicesPanel";
             availableServicesPanel.Size = new Size(431, 482);
             availableServicesPanel.TabIndex = 41;
+            availableServicesPanel.Paint += availableServicesPanel_Paint;
             // 
             // availableServicesLabel
             // 
@@ -210,10 +211,11 @@
             // 
             // customerReviewsPanel
             // 
+            customerReviewsPanel.AutoScroll = true;
             customerReviewsPanel.BackColor = SystemColors.Control;
-            customerReviewsPanel.Location = new Point(472, 184);
+            customerReviewsPanel.Location = new Point(472, 199);
             customerReviewsPanel.Name = "customerReviewsPanel";
-            customerReviewsPanel.Size = new Size(644, 389);
+            customerReviewsPanel.Size = new Size(644, 374);
             customerReviewsPanel.TabIndex = 37;
             // 
             // addTripLabel
