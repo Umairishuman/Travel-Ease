@@ -35,7 +35,26 @@
             RegistrationImage = new PictureBox();
             mainPanel = new Panel();
             AdminPanel = new Panel();
+            AdminIsBack = new PictureBox();
+            adminPic = new PictureBox();
+            AdminSignUpButton = new Label();
+            AdminAbout = new GroupBox();
+            AdminInnerAbout = new TextBox();
+            label3 = new Label();
+            AdminEmail = new GroupBox();
+            AdminInnerEmail = new TextBox();
+            pictureBox2 = new PictureBox();
+            AdminName = new GroupBox();
+            AdminInnerName = new TextBox();
+            AdminConfirm = new GroupBox();
+            AdminConfirmEye = new PictureBox();
+            AdminInnerConfirm = new TextBox();
+            AdminPassword = new GroupBox();
+            AdminPassEye = new PictureBox();
+            AdminInnerPassword = new TextBox();
             ServiceProviderPanel = new Panel();
+            PhoneSPBox = new GroupBox();
+            innerSPPhoneBox = new TextBox();
             ProviderIsBack = new PictureBox();
             pictureBox4 = new PictureBox();
             ProviderSignUp = new Label();
@@ -56,6 +75,8 @@
             providerPassEye = new PictureBox();
             ProviderInnerPassword = new TextBox();
             TourOperatorPanel = new Panel();
+            PhoneNoOpBox = new GroupBox();
+            innerOpPhoneBox = new TextBox();
             OpBackArrow = new PictureBox();
             SignUpOperator = new Label();
             WebUrlOp = new GroupBox();
@@ -76,6 +97,8 @@
             innerPasswordOp = new TextBox();
             TourOperatorImage = new PictureBox();
             TraverllerPanel = new Panel();
+            PhoneNoBox = new GroupBox();
+            innerPhoneNoBox = new TextBox();
             TravllerSIgnUp = new Label();
             BioBox = new GroupBox();
             innerBio = new TextBox();
@@ -101,29 +124,25 @@
             TravellerFormLogo = new PictureBox();
             HeadingTraveller = new Label();
             rolePanel = new Panel();
-            AdminSignUpButton = new Label();
-            AdminAbout = new GroupBox();
-            AdminInnerAbout = new TextBox();
-            label3 = new Label();
-            AdminEmail = new GroupBox();
-            AdminInnerEmail = new TextBox();
-            pictureBox2 = new PictureBox();
-            AdminName = new GroupBox();
-            AdminInnerName = new TextBox();
-            AdminConfirm = new GroupBox();
-            AdminConfirmEye = new PictureBox();
-            AdminInnerConfirm = new TextBox();
-            AdminPassword = new GroupBox();
-            AdminPassEye = new PictureBox();
-            AdminInnerPassword = new TextBox();
-            adminPic = new PictureBox();
-            AdminIsBack = new PictureBox();
+            adminPhoneNoBox = new GroupBox();
+            innerAdminPhone = new TextBox();
             ((System.ComponentModel.ISupportInitialize)topLeftLogo).BeginInit();
             RoleSelectionGroup.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)RegistrationImage).BeginInit();
             mainPanel.SuspendLayout();
             AdminPanel.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)AdminIsBack).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)adminPic).BeginInit();
+            AdminAbout.SuspendLayout();
+            AdminEmail.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
+            AdminName.SuspendLayout();
+            AdminConfirm.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)AdminConfirmEye).BeginInit();
+            AdminPassword.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)AdminPassEye).BeginInit();
             ServiceProviderPanel.SuspendLayout();
+            PhoneSPBox.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)ProviderIsBack).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox4).BeginInit();
             ProviderAboutBox.SuspendLayout();
@@ -136,6 +155,7 @@
             ProviderPasswordBox.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)providerPassEye).BeginInit();
             TourOperatorPanel.SuspendLayout();
+            PhoneNoOpBox.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)OpBackArrow).BeginInit();
             WebUrlOp.SuspendLayout();
             EmailOpBox.SuspendLayout();
@@ -148,6 +168,7 @@
             ((System.ComponentModel.ISupportInitialize)eyeOp).BeginInit();
             ((System.ComponentModel.ISupportInitialize)TourOperatorImage).BeginInit();
             TraverllerPanel.SuspendLayout();
+            PhoneNoBox.SuspendLayout();
             BioBox.SuspendLayout();
             NationalityBox.SuspendLayout();
             CnicBox.SuspendLayout();
@@ -162,16 +183,7 @@
             ((System.ComponentModel.ISupportInitialize)TravellerBackButton).BeginInit();
             ((System.ComponentModel.ISupportInitialize)TravellerFormLogo).BeginInit();
             rolePanel.SuspendLayout();
-            AdminAbout.SuspendLayout();
-            AdminEmail.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
-            AdminName.SuspendLayout();
-            AdminConfirm.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)AdminConfirmEye).BeginInit();
-            AdminPassword.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)AdminPassEye).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)adminPic).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)AdminIsBack).BeginInit();
+            adminPhoneNoBox.SuspendLayout();
             SuspendLayout();
             // 
             // topLeftLogo
@@ -241,8 +253,7 @@
             RegistrationImage.TabStop = false;
             // 
             // mainPanel
-            //
-            //
+            // 
             mainPanel.Controls.Add(rolePanel);
             mainPanel.Controls.Add(TraverllerPanel);
             mainPanel.Controls.Add(TourOperatorPanel);
@@ -256,6 +267,7 @@
             // 
             // AdminPanel
             // 
+            AdminPanel.Controls.Add(adminPhoneNoBox);
             AdminPanel.Controls.Add(AdminIsBack);
             AdminPanel.Controls.Add(adminPic);
             AdminPanel.Controls.Add(AdminSignUpButton);
@@ -273,8 +285,201 @@
             AdminPanel.TabIndex = 6;
             AdminPanel.Visible = false;
             // 
+            // AdminIsBack
+            // 
+            AdminIsBack.BackColor = Color.WhiteSmoke;
+            AdminIsBack.Image = Properties.Resources.Arrow;
+            AdminIsBack.Location = new Point(3, 2);
+            AdminIsBack.Margin = new Padding(3, 2, 3, 2);
+            AdminIsBack.Name = "AdminIsBack";
+            AdminIsBack.Size = new Size(51, 53);
+            AdminIsBack.SizeMode = PictureBoxSizeMode.StretchImage;
+            AdminIsBack.TabIndex = 37;
+            AdminIsBack.TabStop = false;
+            AdminIsBack.Click += GoBackArrow_Click;
+            // 
+            // adminPic
+            // 
+            adminPic.Image = Properties.Resources.another_logo;
+            adminPic.Location = new Point(654, 119);
+            adminPic.Name = "adminPic";
+            adminPic.Size = new Size(379, 364);
+            adminPic.SizeMode = PictureBoxSizeMode.StretchImage;
+            adminPic.TabIndex = 36;
+            adminPic.TabStop = false;
+            // 
+            // AdminSignUpButton
+            // 
+            AdminSignUpButton.BackColor = Color.Black;
+            AdminSignUpButton.BorderStyle = BorderStyle.FixedSingle;
+            AdminSignUpButton.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
+            AdminSignUpButton.ForeColor = Color.White;
+            AdminSignUpButton.Location = new Point(194, 478);
+            AdminSignUpButton.Name = "AdminSignUpButton";
+            AdminSignUpButton.Size = new Size(348, 40);
+            AdminSignUpButton.TabIndex = 27;
+            AdminSignUpButton.Text = "Sign up";
+            AdminSignUpButton.TextAlign = ContentAlignment.MiddleCenter;
+            AdminSignUpButton.Click += AdminSignUpButton_Click;
+            // 
+            // AdminAbout
+            // 
+            AdminAbout.Controls.Add(AdminInnerAbout);
+            AdminAbout.Font = new Font("Times New Roman", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            AdminAbout.Location = new Point(383, 266);
+            AdminAbout.Name = "AdminAbout";
+            AdminAbout.Size = new Size(239, 58);
+            AdminAbout.TabIndex = 35;
+            AdminAbout.TabStop = false;
+            AdminAbout.Text = "Why do you want to be an Admin?";
+            // 
+            // AdminInnerAbout
+            // 
+            AdminInnerAbout.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            AdminInnerAbout.BorderStyle = BorderStyle.None;
+            AdminInnerAbout.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            AdminInnerAbout.Location = new Point(13, 22);
+            AdminInnerAbout.Name = "AdminInnerAbout";
+            AdminInnerAbout.Size = new Size(220, 22);
+            AdminInnerAbout.TabIndex = 3;
+            // 
+            // label3
+            // 
+            label3.AutoSize = true;
+            label3.Font = new Font("Segoe UI", 20F, FontStyle.Bold);
+            label3.Location = new Point(228, 105);
+            label3.Margin = new Padding(0);
+            label3.Name = "label3";
+            label3.Size = new Size(304, 37);
+            label3.TabIndex = 33;
+            label3.Text = "Sign Up to Travel-Ease";
+            // 
+            // AdminEmail
+            // 
+            AdminEmail.Controls.Add(AdminInnerEmail);
+            AdminEmail.Font = new Font("Times New Roman", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            AdminEmail.Location = new Point(102, 266);
+            AdminEmail.Name = "AdminEmail";
+            AdminEmail.Size = new Size(239, 58);
+            AdminEmail.TabIndex = 34;
+            AdminEmail.TabStop = false;
+            AdminEmail.Text = "E-Mail";
+            // 
+            // AdminInnerEmail
+            // 
+            AdminInnerEmail.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            AdminInnerEmail.BorderStyle = BorderStyle.None;
+            AdminInnerEmail.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            AdminInnerEmail.Location = new Point(13, 22);
+            AdminInnerEmail.Name = "AdminInnerEmail";
+            AdminInnerEmail.Size = new Size(215, 22);
+            AdminInnerEmail.TabIndex = 3;
+            // 
+            // pictureBox2
+            // 
+            pictureBox2.Image = Properties.Resources.travelEaseLogo;
+            pictureBox2.Location = new Point(319, 29);
+            pictureBox2.Name = "pictureBox2";
+            pictureBox2.Padding = new Padding(2);
+            pictureBox2.Size = new Size(74, 63);
+            pictureBox2.SizeMode = PictureBoxSizeMode.StretchImage;
+            pictureBox2.TabIndex = 32;
+            pictureBox2.TabStop = false;
+            // 
+            // AdminName
+            // 
+            AdminName.Controls.Add(AdminInnerName);
+            AdminName.Font = new Font("Times New Roman", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            AdminName.Location = new Point(102, 174);
+            AdminName.Name = "AdminName";
+            AdminName.Size = new Size(239, 64);
+            AdminName.TabIndex = 30;
+            AdminName.TabStop = false;
+            AdminName.Text = "Admin Name";
+            // 
+            // AdminInnerName
+            // 
+            AdminInnerName.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            AdminInnerName.BorderStyle = BorderStyle.None;
+            AdminInnerName.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            AdminInnerName.Location = new Point(13, 22);
+            AdminInnerName.Name = "AdminInnerName";
+            AdminInnerName.Size = new Size(215, 22);
+            AdminInnerName.TabIndex = 3;
+            // 
+            // AdminConfirm
+            // 
+            AdminConfirm.Controls.Add(AdminConfirmEye);
+            AdminConfirm.Controls.Add(AdminInnerConfirm);
+            AdminConfirm.Font = new Font("Times New Roman", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            AdminConfirm.Location = new Point(383, 374);
+            AdminConfirm.Name = "AdminConfirm";
+            AdminConfirm.Size = new Size(239, 58);
+            AdminConfirm.TabIndex = 29;
+            AdminConfirm.TabStop = false;
+            AdminConfirm.Text = "Confirm Password";
+            // 
+            // AdminConfirmEye
+            // 
+            AdminConfirmEye.Image = Properties.Resources.visible;
+            AdminConfirmEye.Location = new Point(195, 16);
+            AdminConfirmEye.Margin = new Padding(3, 2, 3, 2);
+            AdminConfirmEye.Name = "AdminConfirmEye";
+            AdminConfirmEye.Padding = new Padding(2);
+            AdminConfirmEye.Size = new Size(38, 35);
+            AdminConfirmEye.SizeMode = PictureBoxSizeMode.StretchImage;
+            AdminConfirmEye.TabIndex = 7;
+            AdminConfirmEye.TabStop = false;
+            // 
+            // AdminInnerConfirm
+            // 
+            AdminInnerConfirm.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            AdminInnerConfirm.BorderStyle = BorderStyle.None;
+            AdminInnerConfirm.Font = new Font("Times New Roman", 11.25F, FontStyle.Bold);
+            AdminInnerConfirm.Location = new Point(13, 25);
+            AdminInnerConfirm.Name = "AdminInnerConfirm";
+            AdminInnerConfirm.Size = new Size(176, 18);
+            AdminInnerConfirm.TabIndex = 0;
+            AdminInnerConfirm.UseSystemPasswordChar = true;
+            // 
+            // AdminPassword
+            // 
+            AdminPassword.Controls.Add(AdminPassEye);
+            AdminPassword.Controls.Add(AdminInnerPassword);
+            AdminPassword.Font = new Font("Times New Roman", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            AdminPassword.Location = new Point(102, 374);
+            AdminPassword.Name = "AdminPassword";
+            AdminPassword.Size = new Size(239, 58);
+            AdminPassword.TabIndex = 28;
+            AdminPassword.TabStop = false;
+            AdminPassword.Text = "Password";
+            // 
+            // AdminPassEye
+            // 
+            AdminPassEye.Image = Properties.Resources.visible;
+            AdminPassEye.Location = new Point(195, 16);
+            AdminPassEye.Margin = new Padding(3, 2, 3, 2);
+            AdminPassEye.Name = "AdminPassEye";
+            AdminPassEye.Padding = new Padding(2);
+            AdminPassEye.Size = new Size(38, 35);
+            AdminPassEye.SizeMode = PictureBoxSizeMode.StretchImage;
+            AdminPassEye.TabIndex = 7;
+            AdminPassEye.TabStop = false;
+            // 
+            // AdminInnerPassword
+            // 
+            AdminInnerPassword.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            AdminInnerPassword.BorderStyle = BorderStyle.None;
+            AdminInnerPassword.Font = new Font("Times New Roman", 11.25F, FontStyle.Bold);
+            AdminInnerPassword.Location = new Point(6, 25);
+            AdminInnerPassword.Name = "AdminInnerPassword";
+            AdminInnerPassword.Size = new Size(183, 18);
+            AdminInnerPassword.TabIndex = 0;
+            AdminInnerPassword.UseSystemPasswordChar = true;
+            // 
             // ServiceProviderPanel
             // 
+            ServiceProviderPanel.Controls.Add(PhoneSPBox);
             ServiceProviderPanel.Controls.Add(ProviderIsBack);
             ServiceProviderPanel.Controls.Add(pictureBox4);
             ServiceProviderPanel.Controls.Add(ProviderSignUp);
@@ -292,6 +497,27 @@
             ServiceProviderPanel.Size = new Size(1054, 562);
             ServiceProviderPanel.TabIndex = 6;
             ServiceProviderPanel.Visible = false;
+            // 
+            // PhoneSPBox
+            // 
+            PhoneSPBox.Controls.Add(innerSPPhoneBox);
+            PhoneSPBox.Font = new Font("Times New Roman", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            PhoneSPBox.Location = new Point(200, 305);
+            PhoneSPBox.Name = "PhoneSPBox";
+            PhoneSPBox.Size = new Size(239, 58);
+            PhoneSPBox.TabIndex = 29;
+            PhoneSPBox.TabStop = false;
+            PhoneSPBox.Text = "Phone No.";
+            // 
+            // innerSPPhoneBox
+            // 
+            innerSPPhoneBox.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            innerSPPhoneBox.BorderStyle = BorderStyle.None;
+            innerSPPhoneBox.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            innerSPPhoneBox.Location = new Point(13, 22);
+            innerSPPhoneBox.Name = "innerSPPhoneBox";
+            innerSPPhoneBox.Size = new Size(216, 22);
+            innerSPPhoneBox.TabIndex = 3;
             // 
             // ProviderIsBack
             // 
@@ -328,12 +554,13 @@
             ProviderSignUp.TabIndex = 18;
             ProviderSignUp.Text = "Sign up";
             ProviderSignUp.TextAlign = ContentAlignment.MiddleCenter;
+            ProviderSignUp.Click += ProviderSignUp_Click;
             // 
             // ProviderAboutBox
             // 
             ProviderAboutBox.Controls.Add(ProviderInnerAbout);
             ProviderAboutBox.Font = new Font("Times New Roman", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            ProviderAboutBox.Location = new Point(339, 262);
+            ProviderAboutBox.Location = new Point(342, 235);
             ProviderAboutBox.Name = "ProviderAboutBox";
             ProviderAboutBox.Size = new Size(239, 58);
             ProviderAboutBox.TabIndex = 26;
@@ -365,7 +592,7 @@
             // 
             ProviderEmailBox.Controls.Add(ProviderInnerEmail);
             ProviderEmailBox.Font = new Font("Times New Roman", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            ProviderEmailBox.Location = new Point(58, 262);
+            ProviderEmailBox.Location = new Point(58, 234);
             ProviderEmailBox.Name = "ProviderEmailBox";
             ProviderEmailBox.Size = new Size(239, 58);
             ProviderEmailBox.TabIndex = 25;
@@ -386,7 +613,7 @@
             // 
             ProviderLocation.Controls.Add(ProviderLocationInner);
             ProviderLocation.Font = new Font("Times New Roman", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            ProviderLocation.Location = new Point(339, 187);
+            ProviderLocation.Location = new Point(342, 165);
             ProviderLocation.Name = "ProviderLocation";
             ProviderLocation.Size = new Size(239, 58);
             ProviderLocation.TabIndex = 22;
@@ -418,7 +645,7 @@
             // 
             ProviderName.Controls.Add(ProviderInnerName);
             ProviderName.Font = new Font("Times New Roman", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            ProviderName.Location = new Point(58, 187);
+            ProviderName.Location = new Point(58, 165);
             ProviderName.Name = "ProviderName";
             ProviderName.Size = new Size(239, 58);
             ProviderName.TabIndex = 21;
@@ -507,6 +734,7 @@
             // 
             // TourOperatorPanel
             // 
+            TourOperatorPanel.Controls.Add(PhoneNoOpBox);
             TourOperatorPanel.Controls.Add(OpBackArrow);
             TourOperatorPanel.Controls.Add(SignUpOperator);
             TourOperatorPanel.Controls.Add(WebUrlOp);
@@ -524,6 +752,27 @@
             TourOperatorPanel.Size = new Size(1054, 562);
             TourOperatorPanel.TabIndex = 6;
             TourOperatorPanel.Visible = false;
+            // 
+            // PhoneNoOpBox
+            // 
+            PhoneNoOpBox.Controls.Add(innerOpPhoneBox);
+            PhoneNoOpBox.Font = new Font("Times New Roman", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            PhoneNoOpBox.Location = new Point(165, 293);
+            PhoneNoOpBox.Name = "PhoneNoOpBox";
+            PhoneNoOpBox.Size = new Size(239, 58);
+            PhoneNoOpBox.TabIndex = 18;
+            PhoneNoOpBox.TabStop = false;
+            PhoneNoOpBox.Text = "Phone No.";
+            // 
+            // innerOpPhoneBox
+            // 
+            innerOpPhoneBox.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            innerOpPhoneBox.BorderStyle = BorderStyle.None;
+            innerOpPhoneBox.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            innerOpPhoneBox.Location = new Point(13, 22);
+            innerOpPhoneBox.Name = "innerOpPhoneBox";
+            innerOpPhoneBox.Size = new Size(220, 22);
+            innerOpPhoneBox.TabIndex = 3;
             // 
             // OpBackArrow
             // 
@@ -550,12 +799,13 @@
             SignUpOperator.TabIndex = 4;
             SignUpOperator.Text = "Sign up";
             SignUpOperator.TextAlign = ContentAlignment.MiddleCenter;
+            SignUpOperator.Click += SignUpOperator_Click;
             // 
             // WebUrlOp
             // 
             WebUrlOp.Controls.Add(innerWebUrl);
             WebUrlOp.Font = new Font("Times New Roman", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            WebUrlOp.Location = new Point(305, 249);
+            WebUrlOp.Location = new Point(305, 220);
             WebUrlOp.Name = "WebUrlOp";
             WebUrlOp.Size = new Size(239, 58);
             WebUrlOp.TabIndex = 17;
@@ -587,7 +837,7 @@
             // 
             EmailOpBox.Controls.Add(innerOpEmail);
             EmailOpBox.Font = new Font("Times New Roman", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            EmailOpBox.Location = new Point(24, 249);
+            EmailOpBox.Location = new Point(24, 220);
             EmailOpBox.Name = "EmailOpBox";
             EmailOpBox.Size = new Size(239, 58);
             EmailOpBox.TabIndex = 16;
@@ -608,7 +858,7 @@
             // 
             BusinessAddressOp.Controls.Add(innerAddressOpBox);
             BusinessAddressOp.Font = new Font("Times New Roman", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            BusinessAddressOp.Location = new Point(305, 174);
+            BusinessAddressOp.Location = new Point(305, 150);
             BusinessAddressOp.Name = "BusinessAddressOp";
             BusinessAddressOp.Size = new Size(239, 58);
             BusinessAddressOp.TabIndex = 15;
@@ -640,7 +890,7 @@
             // 
             OperatorName.Controls.Add(innerOpNameBox);
             OperatorName.Font = new Font("Times New Roman", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            OperatorName.Location = new Point(24, 174);
+            OperatorName.Location = new Point(24, 150);
             OperatorName.Name = "OperatorName";
             OperatorName.Size = new Size(239, 58);
             OperatorName.TabIndex = 14;
@@ -741,6 +991,7 @@
             // TraverllerPanel
             // 
             TraverllerPanel.BackgroundImageLayout = ImageLayout.Zoom;
+            TraverllerPanel.Controls.Add(PhoneNoBox);
             TraverllerPanel.Controls.Add(TravllerSIgnUp);
             TraverllerPanel.Controls.Add(BioBox);
             TraverllerPanel.Controls.Add(NationalityBox);
@@ -761,24 +1012,46 @@
             TraverllerPanel.TabIndex = 6;
             TraverllerPanel.Visible = false;
             // 
+            // PhoneNoBox
+            // 
+            PhoneNoBox.Controls.Add(innerPhoneNoBox);
+            PhoneNoBox.Font = new Font("Times New Roman", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            PhoneNoBox.Location = new Point(578, 316);
+            PhoneNoBox.Name = "PhoneNoBox";
+            PhoneNoBox.Size = new Size(239, 58);
+            PhoneNoBox.TabIndex = 13;
+            PhoneNoBox.TabStop = false;
+            PhoneNoBox.Text = "Phone No.";
+            // 
+            // innerPhoneNoBox
+            // 
+            innerPhoneNoBox.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            innerPhoneNoBox.BorderStyle = BorderStyle.None;
+            innerPhoneNoBox.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            innerPhoneNoBox.Location = new Point(13, 22);
+            innerPhoneNoBox.Name = "innerPhoneNoBox";
+            innerPhoneNoBox.Size = new Size(220, 22);
+            innerPhoneNoBox.TabIndex = 3;
+            // 
             // TravllerSIgnUp
             // 
             TravllerSIgnUp.BackColor = Color.Black;
             TravllerSIgnUp.BorderStyle = BorderStyle.FixedSingle;
             TravllerSIgnUp.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
             TravllerSIgnUp.ForeColor = Color.White;
-            TravllerSIgnUp.Location = new Point(389, 470);
+            TravllerSIgnUp.Location = new Point(389, 501);
             TravllerSIgnUp.Name = "TravllerSIgnUp";
             TravllerSIgnUp.Size = new Size(239, 40);
             TravllerSIgnUp.TabIndex = 13;
             TravllerSIgnUp.Text = "Sign Up";
             TravllerSIgnUp.TextAlign = ContentAlignment.MiddleCenter;
+            TravllerSIgnUp.Click += TravellerSIgnUp_Click;
             // 
             // BioBox
             // 
             BioBox.Controls.Add(innerBio);
             BioBox.Font = new Font("Times New Roman", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            BioBox.Location = new Point(35, 354);
+            BioBox.Location = new Point(225, 316);
             BioBox.Name = "BioBox";
             BioBox.Size = new Size(239, 58);
             BioBox.TabIndex = 12;
@@ -799,7 +1072,7 @@
             // 
             NationalityBox.Controls.Add(innerNationality);
             NationalityBox.Font = new Font("Times New Roman", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            NationalityBox.Location = new Point(731, 240);
+            NationalityBox.Location = new Point(731, 236);
             NationalityBox.Name = "NationalityBox";
             NationalityBox.Size = new Size(239, 58);
             NationalityBox.TabIndex = 11;
@@ -820,7 +1093,7 @@
             // 
             CnicBox.Controls.Add(innerCNIC);
             CnicBox.Font = new Font("Times New Roman", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            CnicBox.Location = new Point(389, 240);
+            CnicBox.Location = new Point(389, 236);
             CnicBox.Name = "CnicBox";
             CnicBox.Size = new Size(239, 58);
             CnicBox.TabIndex = 10;
@@ -842,7 +1115,7 @@
             ConfirmPasswordBox.Controls.Add(EyeConfirmPassword);
             ConfirmPasswordBox.Controls.Add(innerConfirmPassword);
             ConfirmPasswordBox.Font = new Font("Times New Roman", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            ConfirmPasswordBox.Location = new Point(731, 354);
+            ConfirmPasswordBox.Location = new Point(578, 399);
             ConfirmPasswordBox.Name = "ConfirmPasswordBox";
             ConfirmPasswordBox.Size = new Size(239, 58);
             ConfirmPasswordBox.TabIndex = 11;
@@ -877,7 +1150,7 @@
             PasswordBox.Controls.Add(EyePassword);
             PasswordBox.Controls.Add(innerPasswordBox);
             PasswordBox.Font = new Font("Times New Roman", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            PasswordBox.Location = new Point(389, 354);
+            PasswordBox.Location = new Point(225, 399);
             PasswordBox.Name = "PasswordBox";
             PasswordBox.Size = new Size(239, 58);
             PasswordBox.TabIndex = 10;
@@ -911,7 +1184,7 @@
             // 
             DateOfBirthBox.Controls.Add(DateOfBirthPicker);
             DateOfBirthBox.Font = new Font("Times New Roman", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            DateOfBirthBox.Location = new Point(35, 240);
+            DateOfBirthBox.Location = new Point(35, 236);
             DateOfBirthBox.Name = "DateOfBirthBox";
             DateOfBirthBox.Size = new Size(239, 58);
             DateOfBirthBox.TabIndex = 9;
@@ -1037,196 +1310,26 @@
             rolePanel.Size = new Size(1054, 562);
             rolePanel.TabIndex = 0;
             // 
-            // AdminSignUpButton
+            // adminPhoneNoBox
             // 
-            AdminSignUpButton.BackColor = Color.Black;
-            AdminSignUpButton.BorderStyle = BorderStyle.FixedSingle;
-            AdminSignUpButton.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
-            AdminSignUpButton.ForeColor = Color.White;
-            AdminSignUpButton.Location = new Point(194, 478);
-            AdminSignUpButton.Name = "AdminSignUpButton";
-            AdminSignUpButton.Size = new Size(348, 40);
-            AdminSignUpButton.TabIndex = 27;
-            AdminSignUpButton.Text = "Sign up";
-            AdminSignUpButton.TextAlign = ContentAlignment.MiddleCenter;
+            adminPhoneNoBox.Controls.Add(innerAdminPhone);
+            adminPhoneNoBox.Font = new Font("Times New Roman", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            adminPhoneNoBox.Location = new Point(383, 180);
+            adminPhoneNoBox.Name = "adminPhoneNoBox";
+            adminPhoneNoBox.Size = new Size(239, 58);
+            adminPhoneNoBox.TabIndex = 38;
+            adminPhoneNoBox.TabStop = false;
+            adminPhoneNoBox.Text = "Phone No.";
             // 
-            // AdminAbout
+            // innerAdminPhone
             // 
-            AdminAbout.Controls.Add(AdminInnerAbout);
-            AdminAbout.Font = new Font("Times New Roman", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            AdminAbout.Location = new Point(383, 266);
-            AdminAbout.Name = "AdminAbout";
-            AdminAbout.Size = new Size(239, 58);
-            AdminAbout.TabIndex = 35;
-            AdminAbout.TabStop = false;
-            AdminAbout.Text = "Why do you want to be an Admin?";
-            // 
-            // AdminInnerAbout
-            // 
-            AdminInnerAbout.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-            AdminInnerAbout.BorderStyle = BorderStyle.None;
-            AdminInnerAbout.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            AdminInnerAbout.Location = new Point(13, 22);
-            AdminInnerAbout.Name = "AdminInnerAbout";
-            AdminInnerAbout.Size = new Size(220, 22);
-            AdminInnerAbout.TabIndex = 3;
-            // 
-            // label3
-            // 
-            label3.AutoSize = true;
-            label3.Font = new Font("Segoe UI", 20F, FontStyle.Bold);
-            label3.Location = new Point(228, 105);
-            label3.Margin = new Padding(0);
-            label3.Name = "label3";
-            label3.Size = new Size(304, 37);
-            label3.TabIndex = 33;
-            label3.Text = "Sign Up to Travel-Ease";
-            // 
-            // AdminEmail
-            // 
-            AdminEmail.Controls.Add(AdminInnerEmail);
-            AdminEmail.Font = new Font("Times New Roman", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            AdminEmail.Location = new Point(102, 266);
-            AdminEmail.Name = "AdminEmail";
-            AdminEmail.Size = new Size(239, 58);
-            AdminEmail.TabIndex = 34;
-            AdminEmail.TabStop = false;
-            AdminEmail.Text = "E-Mail";
-            // 
-            // AdminInnerEmail
-            // 
-            AdminInnerEmail.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-            AdminInnerEmail.BorderStyle = BorderStyle.None;
-            AdminInnerEmail.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            AdminInnerEmail.Location = new Point(13, 22);
-            AdminInnerEmail.Name = "AdminInnerEmail";
-            AdminInnerEmail.Size = new Size(215, 22);
-            AdminInnerEmail.TabIndex = 3;
-            // 
-            // pictureBox2
-            // 
-            pictureBox2.Image = Properties.Resources.travelEaseLogo;
-            pictureBox2.Location = new Point(319, 29);
-            pictureBox2.Name = "pictureBox2";
-            pictureBox2.Padding = new Padding(2);
-            pictureBox2.Size = new Size(74, 63);
-            pictureBox2.SizeMode = PictureBoxSizeMode.StretchImage;
-            pictureBox2.TabIndex = 32;
-            pictureBox2.TabStop = false;
-            // 
-            // AdminName
-            // 
-            AdminName.Controls.Add(AdminInnerName);
-            AdminName.Font = new Font("Times New Roman", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            AdminName.Location = new Point(187, 174);
-            AdminName.Name = "AdminName";
-            AdminName.Size = new Size(345, 64);
-            AdminName.TabIndex = 30;
-            AdminName.TabStop = false;
-            AdminName.Text = "Admin Name";
-            // 
-            // AdminInnerName
-            // 
-            AdminInnerName.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-            AdminInnerName.BorderStyle = BorderStyle.None;
-            AdminInnerName.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            AdminInnerName.Location = new Point(13, 22);
-            AdminInnerName.Name = "AdminInnerName";
-            AdminInnerName.Size = new Size(321, 22);
-            AdminInnerName.TabIndex = 3;
-            // 
-            // AdminConfirm
-            // 
-            AdminConfirm.Controls.Add(AdminConfirmEye);
-            AdminConfirm.Controls.Add(AdminInnerConfirm);
-            AdminConfirm.Font = new Font("Times New Roman", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            AdminConfirm.Location = new Point(383, 374);
-            AdminConfirm.Name = "AdminConfirm";
-            AdminConfirm.Size = new Size(239, 58);
-            AdminConfirm.TabIndex = 29;
-            AdminConfirm.TabStop = false;
-            AdminConfirm.Text = "Confirm Password";
-            // 
-            // AdminConfirmEye
-            // 
-            AdminConfirmEye.Image = Properties.Resources.visible;
-            AdminConfirmEye.Location = new Point(195, 16);
-            AdminConfirmEye.Margin = new Padding(3, 2, 3, 2);
-            AdminConfirmEye.Name = "AdminConfirmEye";
-            AdminConfirmEye.Padding = new Padding(2);
-            AdminConfirmEye.Size = new Size(38, 35);
-            AdminConfirmEye.SizeMode = PictureBoxSizeMode.StretchImage;
-            AdminConfirmEye.TabIndex = 7;
-            AdminConfirmEye.TabStop = false;
-            // 
-            // AdminInnerConfirm
-            // 
-            AdminInnerConfirm.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-            AdminInnerConfirm.BorderStyle = BorderStyle.None;
-            AdminInnerConfirm.Font = new Font("Times New Roman", 11.25F, FontStyle.Bold);
-            AdminInnerConfirm.Location = new Point(13, 25);
-            AdminInnerConfirm.Name = "AdminInnerConfirm";
-            AdminInnerConfirm.Size = new Size(176, 18);
-            AdminInnerConfirm.TabIndex = 0;
-            AdminInnerConfirm.UseSystemPasswordChar = true;
-            // 
-            // AdminPassword
-            // 
-            AdminPassword.Controls.Add(AdminPassEye);
-            AdminPassword.Controls.Add(AdminInnerPassword);
-            AdminPassword.Font = new Font("Times New Roman", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            AdminPassword.Location = new Point(102, 374);
-            AdminPassword.Name = "AdminPassword";
-            AdminPassword.Size = new Size(239, 58);
-            AdminPassword.TabIndex = 28;
-            AdminPassword.TabStop = false;
-            AdminPassword.Text = "Password";
-            // 
-            // AdminPassEye
-            // 
-            AdminPassEye.Image = Properties.Resources.visible;
-            AdminPassEye.Location = new Point(195, 16);
-            AdminPassEye.Margin = new Padding(3, 2, 3, 2);
-            AdminPassEye.Name = "AdminPassEye";
-            AdminPassEye.Padding = new Padding(2);
-            AdminPassEye.Size = new Size(38, 35);
-            AdminPassEye.SizeMode = PictureBoxSizeMode.StretchImage;
-            AdminPassEye.TabIndex = 7;
-            AdminPassEye.TabStop = false;
-            // 
-            // AdminInnerPassword
-            // 
-            AdminInnerPassword.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-            AdminInnerPassword.BorderStyle = BorderStyle.None;
-            AdminInnerPassword.Font = new Font("Times New Roman", 11.25F, FontStyle.Bold);
-            AdminInnerPassword.Location = new Point(6, 25);
-            AdminInnerPassword.Name = "AdminInnerPassword";
-            AdminInnerPassword.Size = new Size(183, 18);
-            AdminInnerPassword.TabIndex = 0;
-            AdminInnerPassword.UseSystemPasswordChar = true;
-            // 
-            // adminPic
-            // 
-            adminPic.Image = Properties.Resources.another_logo;
-            adminPic.Location = new Point(654, 119);
-            adminPic.Name = "adminPic";
-            adminPic.Size = new Size(379, 364);
-            adminPic.SizeMode = PictureBoxSizeMode.StretchImage;
-            adminPic.TabIndex = 36;
-            adminPic.TabStop = false;
-            // 
-            // AdminIsBack
-            // 
-            AdminIsBack.BackColor = Color.WhiteSmoke;
-            AdminIsBack.Image = Properties.Resources.Arrow;
-            AdminIsBack.Location = new Point(3, 2);
-            AdminIsBack.Margin = new Padding(3, 2, 3, 2);
-            AdminIsBack.Name = "AdminIsBack";
-            AdminIsBack.Size = new Size(51, 53);
-            AdminIsBack.SizeMode = PictureBoxSizeMode.StretchImage;
-            AdminIsBack.TabIndex = 37;
-            AdminIsBack.TabStop = false;
-            AdminIsBack.Click += GoBackArrow_Click;
+            innerAdminPhone.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            innerAdminPhone.BorderStyle = BorderStyle.None;
+            innerAdminPhone.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            innerAdminPhone.Location = new Point(13, 22);
+            innerAdminPhone.Name = "innerAdminPhone";
+            innerAdminPhone.Size = new Size(220, 22);
+            innerAdminPhone.TabIndex = 3;
             // 
             // Registration_Form
             // 
@@ -1245,8 +1348,25 @@
             mainPanel.ResumeLayout(false);
             AdminPanel.ResumeLayout(false);
             AdminPanel.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)AdminIsBack).EndInit();
+            ((System.ComponentModel.ISupportInitialize)adminPic).EndInit();
+            AdminAbout.ResumeLayout(false);
+            AdminAbout.PerformLayout();
+            AdminEmail.ResumeLayout(false);
+            AdminEmail.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)pictureBox2).EndInit();
+            AdminName.ResumeLayout(false);
+            AdminName.PerformLayout();
+            AdminConfirm.ResumeLayout(false);
+            AdminConfirm.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)AdminConfirmEye).EndInit();
+            AdminPassword.ResumeLayout(false);
+            AdminPassword.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)AdminPassEye).EndInit();
             ServiceProviderPanel.ResumeLayout(false);
             ServiceProviderPanel.PerformLayout();
+            PhoneSPBox.ResumeLayout(false);
+            PhoneSPBox.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)ProviderIsBack).EndInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox4).EndInit();
             ProviderAboutBox.ResumeLayout(false);
@@ -1266,6 +1386,8 @@
             ((System.ComponentModel.ISupportInitialize)providerPassEye).EndInit();
             TourOperatorPanel.ResumeLayout(false);
             TourOperatorPanel.PerformLayout();
+            PhoneNoOpBox.ResumeLayout(false);
+            PhoneNoOpBox.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)OpBackArrow).EndInit();
             WebUrlOp.ResumeLayout(false);
             WebUrlOp.PerformLayout();
@@ -1285,6 +1407,8 @@
             ((System.ComponentModel.ISupportInitialize)TourOperatorImage).EndInit();
             TraverllerPanel.ResumeLayout(false);
             TraverllerPanel.PerformLayout();
+            PhoneNoBox.ResumeLayout(false);
+            PhoneNoBox.PerformLayout();
             BioBox.ResumeLayout(false);
             BioBox.PerformLayout();
             NationalityBox.ResumeLayout(false);
@@ -1307,21 +1431,8 @@
             ((System.ComponentModel.ISupportInitialize)TravellerBackButton).EndInit();
             ((System.ComponentModel.ISupportInitialize)TravellerFormLogo).EndInit();
             rolePanel.ResumeLayout(false);
-            AdminAbout.ResumeLayout(false);
-            AdminAbout.PerformLayout();
-            AdminEmail.ResumeLayout(false);
-            AdminEmail.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)pictureBox2).EndInit();
-            AdminName.ResumeLayout(false);
-            AdminName.PerformLayout();
-            AdminConfirm.ResumeLayout(false);
-            AdminConfirm.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)AdminConfirmEye).EndInit();
-            AdminPassword.ResumeLayout(false);
-            AdminPassword.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)AdminPassEye).EndInit();
-            ((System.ComponentModel.ISupportInitialize)adminPic).EndInit();
-            ((System.ComponentModel.ISupportInitialize)AdminIsBack).EndInit();
+            adminPhoneNoBox.ResumeLayout(false);
+            adminPhoneNoBox.PerformLayout();
             ResumeLayout(false);
         }
 
@@ -1417,5 +1528,13 @@
         private TextBox AdminInnerPassword;
         private PictureBox adminPic;
         private PictureBox AdminIsBack;
+        private GroupBox PhoneNoBox;
+        private TextBox innerPhoneNoBox;
+        private GroupBox PhoneNoOpBox;
+        private TextBox innerOpPhoneBox;
+        private GroupBox PhoneSPBox;
+        private TextBox innerSPPhoneBox;
+        private GroupBox adminPhoneNoBox;
+        private TextBox innerAdminPhone;
     }
 }

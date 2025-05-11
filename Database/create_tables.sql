@@ -25,9 +25,20 @@ CREATE TABLE users (
 
 select * from users
 
+CREATE TABLE reg_counter (
+    user_type VARCHAR(10) PRIMARY KEY, -- TR, OP, SP, AD
+    last_number INT NOT NULL
+);
+
+-- Initialize values for all user types
+INSERT INTO reg_counter (user_type, last_number) VALUES ('TR', 50);
+INSERT INTO reg_counter (user_type, last_number) VALUES ('OP', 50);
+INSERT INTO reg_counter (user_type, last_number) VALUES ('SP', 50);
+INSERT INTO reg_counter (user_type, last_number) VALUES ('AD', 50);
 
 
 select * from users
+select * from reg_counter
 
 CREATE TABLE travelers (
     reg_no VARCHAR(20) PRIMARY KEY,
@@ -110,8 +121,8 @@ CREATE TABLE trips (
 
 
 
-update trips
-set profileTrip_image_url = 'https://i.postimg.cc/j5dPFtS8/fabrizio-conti-c3ws-Mnx-QZDw-unsplash.jpg'
+update users
+set user_profile_image = 'https://i.postimg.cc/j5dPFtS8/fabrizio-conti-c3ws-Mnx-QZDw-unsplash.jpg'
 
 
 CREATE TABLE bookings (

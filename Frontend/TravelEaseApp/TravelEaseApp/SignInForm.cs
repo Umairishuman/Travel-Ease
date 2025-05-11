@@ -172,8 +172,9 @@ namespace TravelEase
                                     MessageBox.Show("Login successful!");
 
                                     // Redirect based on role
-                                    this.Hide();
+                                    this.Close();
                                     Form nextForm;
+
 
                                     switch (role.ToLower())
                                     {

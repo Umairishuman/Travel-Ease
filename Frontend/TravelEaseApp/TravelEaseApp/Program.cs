@@ -14,6 +14,7 @@ namespace TravelEase
             // Start the application and run the SignInForm
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
+            string regNo = "123456"; // Example registration number
             Application.Run(new SignInForm());
         }
     }
