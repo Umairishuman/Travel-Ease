@@ -631,5 +631,38 @@ namespace TravelEaseApp
                 return Text;
             }
         }
+
+
+        public class Category
+        {
+            private string _id;
+            public string Id
+            {
+                get => _id;
+                set
+                {
+                    // Optional: Add validation similar to your CHECK constraint
+                    // Example: if (!Regex.IsMatch(value, @"^CAT-\d{6}$"))
+                    // throw new ArgumentException("Category ID format is invalid. Must be CAT-######.");
+                    _id = value;
+                }
+            }
+
+            public string CategoryName { get; set; }
+
+            public Category(string id, string categoryName)
+            {
+                // Basic validation for required fields
+                if (string.IsNullOrWhiteSpace(id))
+                    throw new ArgumentNullException(nameof(id), "Category ID cannot be null or empty.");
+                if (string.IsNullOrWhiteSpace(categoryName))
+                    throw new ArgumentNullException(nameof(categoryName), "Category name cannot be null or empty.");
+
+                Id = id; // Setter will handle format validation if implemented
+                CategoryName = categoryName;
+            }
+        }
+
+
     }
 }

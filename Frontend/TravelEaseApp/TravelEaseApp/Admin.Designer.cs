@@ -29,10 +29,6 @@
         private void InitializeComponent()
         {
             DashboardPanel = new Panel();
-            TripReviewPanel = new Panel();
-            TripReviewDisplayPanel = new Panel();
-            tripReviewTopPanel = new Panel();
-            TripReviwesHeadLabel = new Label();
             UpcomingTripsPanel = new Panel();
             UpcomingTripsLabel = new Label();
             StatisticsPanel = new Panel();
@@ -52,8 +48,12 @@
             TravellerBio = new Label();
             TravllerPicBox = new PictureBox();
             AdminName = new Label();
+            TripReviewPanel = new Panel();
+            TripReviewDisplayPanel = new Panel();
+            tripReviewTopPanel = new Panel();
+            TripReviwesHeadLabel = new Label();
             SideBarPanel = new Panel();
-            panel4 = new Panel();
+            serviceRevButtonPanel = new Panel();
             ServiceRevButton = new PictureBox();
             label2 = new Label();
             UserRevButtonPanel = new Panel();
@@ -67,9 +67,17 @@
             DashBoardButtonLabel = new Label();
             travelEaseLogo = new PictureBox();
             mainPanel = new Panel();
+            CategoryPanel = new Panel();
+            CategoryDisplayPanel = new Panel();
+            CategoryTopPanel = new Panel();
+            addCategoryBox = new TextBox();
+            AddCategoryButton = new Label();
+            CategoryHeadlabel = new Label();
+            serviceReviewPanel = new Panel();
+            ServiceRevDisplayPanel = new Panel();
+            ServiceRevTopPnael = new Panel();
+            ServiceRevHeadLabel = new Label();
             DashboardPanel.SuspendLayout();
-            TripReviewPanel.SuspendLayout();
-            tripReviewTopPanel.SuspendLayout();
             UpcomingTripsPanel.SuspendLayout();
             StatisticsPanel.SuspendLayout();
             panel3.SuspendLayout();
@@ -79,8 +87,10 @@
             successfulJourneysPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)TravllerPicBox).BeginInit();
+            TripReviewPanel.SuspendLayout();
+            tripReviewTopPanel.SuspendLayout();
             SideBarPanel.SuspendLayout();
-            panel4.SuspendLayout();
+            serviceRevButtonPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)ServiceRevButton).BeginInit();
             UserRevButtonPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)UserRevButton).BeginInit();
@@ -90,6 +100,10 @@
             ((System.ComponentModel.ISupportInitialize)DashboardButton).BeginInit();
             ((System.ComponentModel.ISupportInitialize)travelEaseLogo).BeginInit();
             mainPanel.SuspendLayout();
+            CategoryPanel.SuspendLayout();
+            CategoryTopPanel.SuspendLayout();
+            serviceReviewPanel.SuspendLayout();
+            ServiceRevTopPnael.SuspendLayout();
             SuspendLayout();
             // 
             // DashboardPanel
@@ -103,42 +117,6 @@
             DashboardPanel.Name = "DashboardPanel";
             DashboardPanel.Size = new Size(1168, 684);
             DashboardPanel.TabIndex = 3;
-            // 
-            // TripReviewPanel
-            // 
-            TripReviewPanel.Controls.Add(TripReviewDisplayPanel);
-            TripReviewPanel.Controls.Add(tripReviewTopPanel);
-            TripReviewPanel.Location = new Point(108, 0);
-            TripReviewPanel.Name = "TripReviewPanel";
-            TripReviewPanel.Size = new Size(1166, 678);
-            TripReviewPanel.TabIndex = 6;
-            // 
-            // TripReviewDisplayPanel
-            // 
-            TripReviewDisplayPanel.BackColor = Color.White;
-            TripReviewDisplayPanel.Location = new Point(3, 123);
-            TripReviewDisplayPanel.Name = "TripReviewDisplayPanel";
-            TripReviewDisplayPanel.Size = new Size(1165, 554);
-            TripReviewDisplayPanel.TabIndex = 1;
-            // 
-            // tripReviewTopPanel
-            // 
-            tripReviewTopPanel.BackColor = Color.White;
-            tripReviewTopPanel.Controls.Add(TripReviwesHeadLabel);
-            tripReviewTopPanel.Location = new Point(3, 17);
-            tripReviewTopPanel.Name = "tripReviewTopPanel";
-            tripReviewTopPanel.Size = new Size(1163, 100);
-            tripReviewTopPanel.TabIndex = 0;
-            // 
-            // TripReviwesHeadLabel
-            // 
-            TripReviwesHeadLabel.AutoSize = true;
-            TripReviwesHeadLabel.Font = new Font("Segoe UI", 18F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            TripReviwesHeadLabel.Location = new Point(477, 31);
-            TripReviwesHeadLabel.Name = "TripReviwesHeadLabel";
-            TripReviwesHeadLabel.Size = new Size(156, 32);
-            TripReviwesHeadLabel.TabIndex = 0;
-            TripReviwesHeadLabel.Text = "Trip Reviews";
             // 
             // UpcomingTripsPanel
             // 
@@ -333,10 +311,47 @@
             AdminName.TabIndex = 0;
             AdminName.Text = "Admin";
             // 
+            // TripReviewPanel
+            // 
+            TripReviewPanel.Controls.Add(TripReviewDisplayPanel);
+            TripReviewPanel.Controls.Add(tripReviewTopPanel);
+            TripReviewPanel.Location = new Point(108, 0);
+            TripReviewPanel.Name = "TripReviewPanel";
+            TripReviewPanel.Size = new Size(1166, 678);
+            TripReviewPanel.TabIndex = 6;
+            TripReviewPanel.Visible = false;
+            // 
+            // TripReviewDisplayPanel
+            // 
+            TripReviewDisplayPanel.BackColor = Color.White;
+            TripReviewDisplayPanel.Location = new Point(3, 123);
+            TripReviewDisplayPanel.Name = "TripReviewDisplayPanel";
+            TripReviewDisplayPanel.Size = new Size(1165, 554);
+            TripReviewDisplayPanel.TabIndex = 1;
+            // 
+            // tripReviewTopPanel
+            // 
+            tripReviewTopPanel.BackColor = Color.White;
+            tripReviewTopPanel.Controls.Add(TripReviwesHeadLabel);
+            tripReviewTopPanel.Location = new Point(3, 17);
+            tripReviewTopPanel.Name = "tripReviewTopPanel";
+            tripReviewTopPanel.Size = new Size(1163, 100);
+            tripReviewTopPanel.TabIndex = 0;
+            // 
+            // TripReviwesHeadLabel
+            // 
+            TripReviwesHeadLabel.AutoSize = true;
+            TripReviwesHeadLabel.Font = new Font("Segoe UI", 18F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            TripReviwesHeadLabel.Location = new Point(477, 31);
+            TripReviwesHeadLabel.Name = "TripReviwesHeadLabel";
+            TripReviwesHeadLabel.Size = new Size(156, 32);
+            TripReviwesHeadLabel.TabIndex = 0;
+            TripReviwesHeadLabel.Text = "Trip Reviews";
+            // 
             // SideBarPanel
             // 
             SideBarPanel.BackColor = Color.White;
-            SideBarPanel.Controls.Add(panel4);
+            SideBarPanel.Controls.Add(serviceRevButtonPanel);
             SideBarPanel.Controls.Add(UserRevButtonPanel);
             SideBarPanel.Controls.Add(CategoryButtonPanel);
             SideBarPanel.Controls.Add(DashBoardButtonPanel);
@@ -346,15 +361,15 @@
             SideBarPanel.Size = new Size(105, 684);
             SideBarPanel.TabIndex = 2;
             // 
-            // panel4
+            // serviceRevButtonPanel
             // 
-            panel4.Controls.Add(ServiceRevButton);
-            panel4.Controls.Add(label2);
-            panel4.Location = new Point(4, 290);
-            panel4.Margin = new Padding(2);
-            panel4.Name = "panel4";
-            panel4.Size = new Size(96, 62);
-            panel4.TabIndex = 8;
+            serviceRevButtonPanel.Controls.Add(ServiceRevButton);
+            serviceRevButtonPanel.Controls.Add(label2);
+            serviceRevButtonPanel.Location = new Point(4, 290);
+            serviceRevButtonPanel.Margin = new Padding(2);
+            serviceRevButtonPanel.Name = "serviceRevButtonPanel";
+            serviceRevButtonPanel.Size = new Size(96, 62);
+            serviceRevButtonPanel.TabIndex = 8;
             // 
             // ServiceRevButton
             // 
@@ -365,6 +380,7 @@
             ServiceRevButton.SizeMode = PictureBoxSizeMode.StretchImage;
             ServiceRevButton.TabIndex = 4;
             ServiceRevButton.TabStop = false;
+            ServiceRevButton.Click += ServiceRevButton_Click;
             // 
             // label2
             // 
@@ -395,6 +411,7 @@
             UserRevButton.SizeMode = PictureBoxSizeMode.StretchImage;
             UserRevButton.TabIndex = 4;
             UserRevButton.TabStop = false;
+            UserRevButton.Click += UserRevButton_Click;
             // 
             // UserRevButtonLabel
             // 
@@ -425,6 +442,7 @@
             CategoryButton.SizeMode = PictureBoxSizeMode.StretchImage;
             CategoryButton.TabIndex = 4;
             CategoryButton.TabStop = false;
+            CategoryButton.Click += CategoryButton_Click;
             // 
             // CategoryButtonLabel
             // 
@@ -456,6 +474,7 @@
             DashboardButton.SizeMode = PictureBoxSizeMode.StretchImage;
             DashboardButton.TabIndex = 5;
             DashboardButton.TabStop = false;
+            DashboardButton.Click += DashboardButton_Click;
             // 
             // DashBoardButtonLabel
             // 
@@ -480,12 +499,112 @@
             // mainPanel
             // 
             mainPanel.Controls.Add(SideBarPanel);
+            mainPanel.Controls.Add(DashboardPanel);
+            mainPanel.Controls.Add(CategoryPanel);
             mainPanel.Controls.Add(TripReviewPanel);
+            mainPanel.Controls.Add(serviceReviewPanel);
             mainPanel.Dock = DockStyle.Fill;
             mainPanel.Location = new Point(0, 0);
             mainPanel.Name = "mainPanel";
             mainPanel.Size = new Size(1277, 680);
             mainPanel.TabIndex = 4;
+            // 
+            // CategoryPanel
+            // 
+            CategoryPanel.Controls.Add(CategoryDisplayPanel);
+            CategoryPanel.Controls.Add(CategoryTopPanel);
+            CategoryPanel.Location = new Point(111, 0);
+            CategoryPanel.Name = "CategoryPanel";
+            CategoryPanel.Size = new Size(1166, 674);
+            CategoryPanel.TabIndex = 4;
+            CategoryPanel.Visible = false;
+            // 
+            // CategoryDisplayPanel
+            // 
+            CategoryDisplayPanel.BackColor = Color.White;
+            CategoryDisplayPanel.Location = new Point(3, 134);
+            CategoryDisplayPanel.Name = "CategoryDisplayPanel";
+            CategoryDisplayPanel.Size = new Size(1166, 543);
+            CategoryDisplayPanel.TabIndex = 1;
+            // 
+            // CategoryTopPanel
+            // 
+            CategoryTopPanel.BackColor = Color.White;
+            CategoryTopPanel.Controls.Add(addCategoryBox);
+            CategoryTopPanel.Controls.Add(AddCategoryButton);
+            CategoryTopPanel.Controls.Add(CategoryHeadlabel);
+            CategoryTopPanel.Location = new Point(3, 18);
+            CategoryTopPanel.Name = "CategoryTopPanel";
+            CategoryTopPanel.Size = new Size(1163, 100);
+            CategoryTopPanel.TabIndex = 0;
+            // 
+            // addCategoryBox
+            // 
+            addCategoryBox.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            addCategoryBox.Location = new Point(656, 35);
+            addCategoryBox.Name = "addCategoryBox";
+            addCategoryBox.Size = new Size(300, 33);
+            addCategoryBox.TabIndex = 4;
+            // 
+            // AddCategoryButton
+            // 
+            AddCategoryButton.BackColor = Color.Black;
+            AddCategoryButton.BorderStyle = BorderStyle.FixedSingle;
+            AddCategoryButton.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
+            AddCategoryButton.ForeColor = Color.White;
+            AddCategoryButton.Location = new Point(978, 30);
+            AddCategoryButton.Name = "AddCategoryButton";
+            AddCategoryButton.Size = new Size(123, 40);
+            AddCategoryButton.TabIndex = 3;
+            AddCategoryButton.Text = "Add Category";
+            AddCategoryButton.TextAlign = ContentAlignment.MiddleCenter;
+            // 
+            // CategoryHeadlabel
+            // 
+            CategoryHeadlabel.AutoSize = true;
+            CategoryHeadlabel.Font = new Font("Segoe UI", 15.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            CategoryHeadlabel.Location = new Point(112, 31);
+            CategoryHeadlabel.Name = "CategoryHeadlabel";
+            CategoryHeadlabel.Size = new Size(116, 30);
+            CategoryHeadlabel.TabIndex = 0;
+            CategoryHeadlabel.Text = "Categories";
+            // 
+            // serviceReviewPanel
+            // 
+            serviceReviewPanel.Controls.Add(ServiceRevDisplayPanel);
+            serviceReviewPanel.Controls.Add(ServiceRevTopPnael);
+            serviceReviewPanel.Location = new Point(108, 3);
+            serviceReviewPanel.Name = "serviceReviewPanel";
+            serviceReviewPanel.Size = new Size(1166, 674);
+            serviceReviewPanel.TabIndex = 3;
+            serviceReviewPanel.Visible = false;
+            // 
+            // ServiceRevDisplayPanel
+            // 
+            ServiceRevDisplayPanel.BackColor = Color.White;
+            ServiceRevDisplayPanel.Location = new Point(3, 134);
+            ServiceRevDisplayPanel.Name = "ServiceRevDisplayPanel";
+            ServiceRevDisplayPanel.Size = new Size(1166, 543);
+            ServiceRevDisplayPanel.TabIndex = 1;
+            // 
+            // ServiceRevTopPnael
+            // 
+            ServiceRevTopPnael.BackColor = Color.White;
+            ServiceRevTopPnael.Controls.Add(ServiceRevHeadLabel);
+            ServiceRevTopPnael.Location = new Point(3, 18);
+            ServiceRevTopPnael.Name = "ServiceRevTopPnael";
+            ServiceRevTopPnael.Size = new Size(1163, 100);
+            ServiceRevTopPnael.TabIndex = 0;
+            // 
+            // ServiceRevHeadLabel
+            // 
+            ServiceRevHeadLabel.AutoSize = true;
+            ServiceRevHeadLabel.Font = new Font("Segoe UI", 15.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            ServiceRevHeadLabel.Location = new Point(492, 40);
+            ServiceRevHeadLabel.Name = "ServiceRevHeadLabel";
+            ServiceRevHeadLabel.Size = new Size(167, 30);
+            ServiceRevHeadLabel.TabIndex = 0;
+            ServiceRevHeadLabel.Text = "Service Reviews";
             // 
             // Admin
             // 
@@ -498,9 +617,6 @@
             Load += Admin_Load;
             DashboardPanel.ResumeLayout(false);
             DashboardPanel.PerformLayout();
-            TripReviewPanel.ResumeLayout(false);
-            tripReviewTopPanel.ResumeLayout(false);
-            tripReviewTopPanel.PerformLayout();
             UpcomingTripsPanel.ResumeLayout(false);
             UpcomingTripsPanel.PerformLayout();
             StatisticsPanel.ResumeLayout(false);
@@ -515,9 +631,12 @@
             successfulJourneysPanel.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             ((System.ComponentModel.ISupportInitialize)TravllerPicBox).EndInit();
+            TripReviewPanel.ResumeLayout(false);
+            tripReviewTopPanel.ResumeLayout(false);
+            tripReviewTopPanel.PerformLayout();
             SideBarPanel.ResumeLayout(false);
-            panel4.ResumeLayout(false);
-            panel4.PerformLayout();
+            serviceRevButtonPanel.ResumeLayout(false);
+            serviceRevButtonPanel.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)ServiceRevButton).EndInit();
             UserRevButtonPanel.ResumeLayout(false);
             UserRevButtonPanel.PerformLayout();
@@ -530,6 +649,12 @@
             ((System.ComponentModel.ISupportInitialize)DashboardButton).EndInit();
             ((System.ComponentModel.ISupportInitialize)travelEaseLogo).EndInit();
             mainPanel.ResumeLayout(false);
+            CategoryPanel.ResumeLayout(false);
+            CategoryTopPanel.ResumeLayout(false);
+            CategoryTopPanel.PerformLayout();
+            serviceReviewPanel.ResumeLayout(false);
+            ServiceRevTopPnael.ResumeLayout(false);
+            ServiceRevTopPnael.PerformLayout();
             ResumeLayout(false);
         }
 
@@ -578,11 +703,21 @@
         private PictureBox travelEaseLogo;
         private Panel mainPanel;
         private PictureBox CategoryButton;
-        private Panel panel4;
+        private Panel serviceRevButtonPanel;
         private PictureBox ServiceRevButton;
         private Label label2;
         private Panel TripReviewPanel;
         private Label TripReviwesHeadLabel;
         private Panel TripReviewDisplayPanel;
+        private Panel serviceReviewPanel;
+        private Panel ServiceRevTopPnael;
+        private Label ServiceRevHeadLabel;
+        private Panel ServiceRevDisplayPanel;
+        private Panel CategoryPanel;
+        private Panel CategoryDisplayPanel;
+        private Panel CategoryTopPanel;
+        private Label CategoryHeadlabel;
+        private Label AddCategoryButton;
+        private TextBox addCategoryBox;
     }
 }
