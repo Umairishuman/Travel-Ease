@@ -9,16 +9,18 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using static TravelEaseApp.Helpers;
+using System.Data.SqlClient;
 
 namespace TravelEaseApp
 {
     public partial class Admin : Form
     {
+        string regNo;
         Label hiddenLabel;
 
-        public Admin()
+        public Admin(string regNo)
         {
-
+            this.regNo = regNo;
 
             InitializeComponent();
             hiddenLabel = new Label();
@@ -27,7 +29,7 @@ namespace TravelEaseApp
             hiddenLabel.TabStop = false; // Does not appear in the tab order
             this.Controls.Add(hiddenLabel);
             this.ActiveControl = hiddenLabel; // Set focus to the invisible label
-
+            this.regNo = regNo;
         }
 
         private void CategoryButtonLabel_Click(object sender, EventArgs e)

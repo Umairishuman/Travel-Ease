@@ -77,6 +77,7 @@
             ServiceRevDisplayPanel = new Panel();
             ServiceRevTopPnael = new Panel();
             ServiceRevHeadLabel = new Label();
+            ReportViewButton = new Label();
             DashboardPanel.SuspendLayout();
             UpcomingTripsPanel.SuspendLayout();
             StatisticsPanel.SuspendLayout();
@@ -141,6 +142,7 @@
             // 
             // StatisticsPanel
             // 
+            StatisticsPanel.Controls.Add(ReportViewButton);
             StatisticsPanel.Controls.Add(StatisticLabel);
             StatisticsPanel.Controls.Add(panel3);
             StatisticsPanel.Controls.Add(panel2);
@@ -606,6 +608,19 @@
             ServiceRevHeadLabel.TabIndex = 0;
             ServiceRevHeadLabel.Text = "Service Reviews";
             // 
+            // ReportViewButton
+            // 
+            ReportViewButton.BackColor = Color.Black;
+            ReportViewButton.BorderStyle = BorderStyle.FixedSingle;
+            ReportViewButton.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
+            ReportViewButton.ForeColor = Color.White;
+            ReportViewButton.Location = new Point(115, 417);
+            ReportViewButton.Name = "ReportViewButton";
+            ReportViewButton.Size = new Size(348, 40);
+            ReportViewButton.TabIndex = 6;
+            ReportViewButton.Text = "View Reports";
+            ReportViewButton.TextAlign = ContentAlignment.MiddleCenter;
+            // 
             // Admin
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -719,5 +734,6 @@
         private Label CategoryHeadlabel;
         private Label AddCategoryButton;
         private TextBox addCategoryBox;
+        private Label ReportViewButton;
     }
 }

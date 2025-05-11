@@ -13,8 +13,10 @@ namespace TravelEaseApp
 {
     public partial class ServiceProviderForm : Form
     {
-        public ServiceProviderForm()
+        string regNo;
+        public ServiceProviderForm(string regNo)
         {
+            this.regNo = regNo;
             InitializeComponent();
             //this.IsMdiContainer = true;
             ShowDashboardForm();
@@ -41,6 +43,7 @@ namespace TravelEaseApp
                     borderColor, 1, ButtonBorderStyle.Solid,
                     borderColor, 1, ButtonBorderStyle.Solid);
             };
+            this.regNo = regNo;
         }
 
         private void ShowDashboardForm()

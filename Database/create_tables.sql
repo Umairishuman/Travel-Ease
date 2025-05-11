@@ -372,3 +372,8 @@ INSERT INTO Category (id, category_name) VALUES
 
 
 
+create view RevenueByCategory as
+select c.category_name, Sum(t.price_per_person) as Revenue 
+from Category c 
+inner join trips t on t.category = c.id
+group by c.category_name

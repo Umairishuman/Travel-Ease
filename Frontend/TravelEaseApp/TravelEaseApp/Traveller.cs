@@ -19,10 +19,12 @@ namespace TravelEaseApp
 
     public partial class Traveller : Form
     {
+        string regNo;
         Label hiddenLabel;
         //Panel currentPanel;
-        public Traveller()
+        public Traveller(string regNo)
         {
+            this.regNo = regNo;
             InitializeComponent();
 
             hiddenLabel = new Label();
@@ -32,6 +34,7 @@ namespace TravelEaseApp
             this.Controls.Add(hiddenLabel);
 
             this.ActiveControl = hiddenLabel; // Set focus
+            this.regNo = regNo;
         }
 
         private void Traveller_Load(object sender, EventArgs e)

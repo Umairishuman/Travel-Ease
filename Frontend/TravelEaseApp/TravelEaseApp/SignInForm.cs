@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Windows.Forms;
 using TravelEaseApp;
+using TravelEaseApp.TourOperator;
 using static TravelEaseApp.Helpers;
+using System.Data.SqlClient;
 namespace TravelEase
 {
     public partial class SignInForm : Form
@@ -134,11 +136,83 @@ namespace TravelEase
         //sign In button events
         private void signInButton_Click(object sender, EventArgs e)
         {
-            // Handle sign-in logic here
-            string email = innerEmailBox.Text;
-            string password = innerPasswordBox.Text;
-            // Example: Display a message box with the entered email and password
-            MessageBox.Show($"Email: {email}\nPassword: {password}", "Sign In");
+            string email = innerEmailBox.Text.Trim();
+            string password = innerPasswordBox.Text.Trim(); // You should hash this in real applications
+
+            if (string.IsNullOrEmpty(email) || string.IsNullOrEmpty(password))
+            {
+                MessageBox.Show("Please enter both email and password.");
+                return;
+            }
+
+            using (SqlConnection conn = new SqlConnection(connectionString))
+            {
+                try
+                {
+                    conn.Open();
+
+                    string query = @"SELECT reg_no, user_role, password_hash FROM users 
+                             WHERE contact_email = @Email";
+
+                    using (SqlCommand cmd = new SqlCommand(query, conn))
+                    {
+                        cmd.Parameters.AddWithValue("@Email", email);
+
+                        using (SqlDataReader reader = cmd.ExecuteReader())
+                        {
+                            if (reader.Read())
+                            {
+                                string storedHash = reader["password_hash"].ToString();
+                                string role = reader["user_role"].ToString();
+                                string regNo = reader["reg_no"].ToString();
+
+                                // In production, compare using hashed input password
+                                if (password == storedHash)
+                                {
+                                    MessageBox.Show("Login successful!");
+
+                                    // Redirect based on role
+                                    this.Hide();
+                                    Form nextForm;
+
+                                    switch (role.ToLower())
+                                    {
+                                        case "traveler":
+                                            nextForm = new Traveller(regNo);
+                                            break;
+                                        case "tour_operator":
+                                            nextForm = new tourOperatorForm(regNo);
+                                            break;
+                                        case "service_provider":
+                                            nextForm = new ServiceProviderForm(regNo);
+                                            break;
+                                        case "admin":
+                                            nextForm = new Admin(regNo);
+                                            break;
+                                        default:
+                                            MessageBox.Show("Unknown user role.");
+                                            return;
+                                    }
+
+                                    nextForm.Show();
+                                }
+                                else
+                                {
+                                    MessageBox.Show("Incorrect password.");
+                                }
+                            }
+                            else
+                            {
+                                MessageBox.Show("User not found.");
+                            }
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Error: " + ex.Message);
+                }
+            }
         }
 
         private void ForgotPassword_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)

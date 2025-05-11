@@ -13,8 +13,10 @@ namespace TravelEaseApp.TourOperator
 {
     public partial class tourOperatorForm : Form
     {
-        public tourOperatorForm()
+        string regNo;
+        public tourOperatorForm(string regNo)
         {
+            this.regNo = regNo;
             InitializeComponent();
             //this.IsMdiContainer = true;
             ShowDashboardForm();
@@ -30,6 +32,7 @@ namespace TravelEaseApp.TourOperator
             tripTrayPictureBox.Click += tripTrayPanel_Click;
 
             SelectPanel(dashboardTrayPanel); // Select the dashboard panel by default
+            this.regNo = regNo;
         }
 
         private void ShowDashboardForm()

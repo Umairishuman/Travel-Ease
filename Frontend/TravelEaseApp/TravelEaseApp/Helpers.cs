@@ -3,11 +3,14 @@ using System.Drawing;
 using System.Windows.Forms;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace TravelEaseApp
 {
     public static class Helpers
     {
+        public static string connectionString = "Data Source=DESKTOP-HNUMPVK\\SQLEXPRESS;Initial Catalog = TravelEase; Integrated Security = True; Encrypt=True;TrustServerCertificate=True";
+
         public static void AddPlaceholder(TextBox textBox, string placeholderText)
         {
             textBox.Text = placeholderText;

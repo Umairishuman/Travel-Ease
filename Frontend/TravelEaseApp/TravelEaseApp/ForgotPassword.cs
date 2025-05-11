@@ -5,13 +5,17 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using TravelEase;
+using System.Data.SqlClient;
 using static TravelEaseApp.Helpers;
 
 namespace TravelEaseApp
 {
+
+
     public partial class ForgotPassword : Form
     {
         SignInForm signInForm;
@@ -48,6 +52,74 @@ namespace TravelEaseApp
         private void ForgotPassword_Click(object sender, EventArgs e)
         {
             this.ActiveControl = hiddenLabel; // Set focus to the hidden label
+        }
+
+
+
+        public static bool ValidateEmail(TextBox emailTextBox)
+        {
+            string email = emailTextBox.Text.Trim();
+
+            // Step 1: Validate email format using Regex
+            string emailPattern = @"^[^@\s]+@[^@\s]+\.[^@\s]+$";
+            if (!Regex.IsMatch(email, emailPattern))
+            {
+                MessageBox.Show("Invalid email format", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
+            }
+
+            // Step 2: Check if email exists in the database
+            try
+            {
+                using (SqlConnection connection = new SqlConnection(connectionString))
+                {
+                    connection.Open();
+                    string query = "SELECT COUNT(1) FROM users WHERE contact_email = @Email";
+                    using (SqlCommand command = new SqlCommand(query, connection))
+                    {
+                        command.Parameters.AddWithValue("@Email", email);
+
+                        int emailCount = (int)command.ExecuteScalar();
+                        if (emailCount > 0)
+                        {
+                            return true;
+                        }
+                        else
+                        {
+                            MessageBox.Show("No email found", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                            return false;
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"An error occurred: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
+            }
+        }
+
+        public static bool ValidatePassword(TextBox newPasswordTextBox, TextBox confirmPasswordTextBox)
+        {
+            string newPassword = newPasswordTextBox.Text.Trim();
+            string confirmPassword = confirmPasswordTextBox.Text.Trim();
+
+            // Step 1: Check if the password is more than 8 characters
+            if (newPassword.Length <= 8)
+            {
+                MessageBox.Show("Password must be more than 8 characters", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
+            }
+
+            // Step 2: Check if the new password and confirm password are the same
+            if (!newPassword.Equals(confirmPassword))
+            {
+                MessageBox.Show("Passwords do not match", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return false;
+            }
+
+            // If all validations pass
+            return true;
         }
 
         private void innerEmailBox_TextChanged(object sender, EventArgs e)
@@ -118,9 +190,52 @@ namespace TravelEaseApp
 
         private void ConfirmButton_Click(object sender, EventArgs e)
         {
-            // Handle sign-in button click
-            // You can add your logic here to handle the sign-in process
-            MessageBox.Show("Sign In button clicked!");
+            // Step 1: Validate the email
+            bool isEmailValid = ValidateEmail(innerEmailBox);
+            if (!isEmailValid)
+            {
+                return; // Exit if email validation fails
+            }
+
+            // Step 2: Validate the password
+            bool isPasswordValid = ValidatePassword(innerNewPasswordBox, ConfirmInnerTextBox);
+            if (!isPasswordValid)
+            {
+                return; // Exit if password validation fails
+            }
+
+            // Step 3: Update the password in the database
+            string email = innerEmailBox.Text.Trim();
+            string newPassword = innerNewPasswordBox.Text.Trim();
+            string hashedPassword = newPassword; // Implement a hashing method for security
+
+            try
+            {
+                using (SqlConnection connection = new SqlConnection(connectionString))
+                {
+                    connection.Open();
+                    string query = "UPDATE users SET password_hash = @PasswordHash WHERE contact_email = @Email";
+                    using (SqlCommand command = new SqlCommand(query, connection))
+                    {
+                        command.Parameters.AddWithValue("@PasswordHash", hashedPassword);
+                        command.Parameters.AddWithValue("@Email", email);
+
+                        int rowsAffected = command.ExecuteNonQuery();
+                        if (rowsAffected > 0)
+                        {
+                            MessageBox.Show("Password updated successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        }
+                        else
+                        {
+                            MessageBox.Show("Failed to update password. Please try again.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"An error occurred: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void GoBackArrow_Click(object sender, EventArgs e)
