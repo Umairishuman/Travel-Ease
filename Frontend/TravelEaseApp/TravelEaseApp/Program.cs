@@ -15,7 +15,7 @@ namespace TravelEase
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             string regNo = "123456"; // Example registration number
-            Application.Run(new tourOperatorForm("1"));
+            Application.Run(new ServiceProviderForm("1"));
         }
     }
 }

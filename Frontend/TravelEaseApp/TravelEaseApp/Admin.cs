@@ -376,11 +376,11 @@ namespace TravelEaseApp
 
 
         public void DisplayServiceReviewInPanel(
-        Panel containerPanel,
-        ServiceReview review,
-        bool isPublicView,
-        string travelerName = "Anonymous Traveler",
-        string travelerProfilePicUrl = "https://i.postimg.cc/j5dPFtS8/fabrizio-conti-c3ws-Mnx-QZDw-unsplash.jpg")
+            Panel containerPanel,
+            ServiceReview review,
+            bool isPublicView,
+            string travelerName = "Anonymous Traveler",
+            string travelerProfilePicUrl = "https://i.postimg.cc/j5dPFtS8/fabrizio-conti-c3ws-Mnx-QZDw-unsplash.jpg")
         {
             if (containerPanel == null) throw new ArgumentNullException(nameof(containerPanel));
             if (review == null) throw new ArgumentNullException(nameof(review));
