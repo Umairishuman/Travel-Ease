@@ -42,22 +42,24 @@
             ReportReview.ControlHScrollBarHeight = null;
             ReportReview.ControlVScrollBarWidth = null;
             ReportReview.Font = new Font("Tahoma", 8F);
-            ReportReview.Location = new Point(249, 38);
+            ReportReview.Location = new Point(356, 63);
+            ReportReview.Margin = new Padding(6, 7, 6, 7);
             ReportReview.Name = "ReportReview";
             ReportReview.OutlineExpand = true;
             ReportReview.OutlineWidth = 150;
             ReportReview.PageOffset = new Point(10, 10);
             ReportReview.RightToLeft = RightToLeft.No;
             ReportReview.SaveInitialDirectory = null;
-            ReportReview.Size = new Size(673, 369);
+            ReportReview.Size = new Size(961, 615);
             ReportReview.TabIndex = 0;
             // 
             // ReportForm
             // 
-            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1235, 553);
+            ClientSize = new Size(1764, 922);
             Controls.Add(ReportReview);
+            Margin = new Padding(4, 5, 4, 5);
             Name = "ReportForm";
             Text = "ReportForm";
             ResumeLayout(false);

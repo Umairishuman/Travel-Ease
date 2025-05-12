@@ -34,9 +34,10 @@
             // 
             // ReportsForm
             // 
-            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1052, 564);
+            ClientSize = new Size(1503, 940);
+            Margin = new Padding(4, 5, 4, 5);
             Name = "ReportsForm";
             Text = "ReportsForm";
             Load += ReportsForm_Load;
