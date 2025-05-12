@@ -15,6 +15,7 @@ using System.Globalization;
 using System.Transactions;
 using static TravelEaseApp.Helpers;
 using System.Data.SqlClient;
+using System.Drawing.Drawing2D;
 
 namespace TravelEaseApp
 {
@@ -50,80 +51,14 @@ namespace TravelEaseApp
 
 
             PreferencesPanel.AutoScroll = true;
-            AddPreferenceBox(PreferencesPanel, 1, "The tower of NUCES", "Choa Saidan Shah", "Europe", "Australia");
-            AddPreferenceBox(PreferencesPanel, 2, "The tower of NUCES", "Choa Saidan Shah", "Europe", "Australia");
-            AddPreferenceBox(PreferencesPanel, 3, "The tower of NUCES", "Choa Saidan Shah", "Europe", "Australia");
+
+            AddPreferenceBox(PreferencesPanel, 1, "Eiffel Tower", "Paris", "Europe", "France");
+            AddPreferenceBox(PreferencesPanel, 2, "Colosseum", "Rome", "Europe", "Italy");
+            AddPreferenceBox(PreferencesPanel, 3, "Alpine Hiking Base", "Chamonix", "Europe", "France");
 
 
 
             TripDisplayPanel.AutoScroll = true;
-            //AddTripBox(TripDisplayPanel, "AN EXQUISITE JOURNEY", "a very long logn long adlkjf description", "Kashmir", "2025-12-12", "2024-12-23", "5 Days", 5, "Active", "Adventurous", 23.80f, "https://ibb.co/FbBy9qYX", "TAYYAB GROUP & SONS");
-            //AddTripBox(TripDisplayPanel, "AN EXQUISITE JOURNEY", "a very long logn long adlkjf description", "Kashmir", "2025-12-12", "2024-12-23", "5 Days", 5, "Active", "Adventurous", 23.80f, "https://i.postimg.cc/D0VGX3ND/alex-shutin-k-Kv-QJ6r-K6-S4-unsplash.jpg", "TAYYAB GROUP & SONS");
-            //AddTripBox(TripDisplayPanel, "AN EXQUISITE JOURNEY", "a very long logn long adlkjf description", "Kashmir", "2025-12-12", "2024-12-23", "5 Days", 5, "Active", "Adventurous", 23.80f, "","TAYYAB GROUP & SONS");
-
-            // In your Form_Load or a button click event:
-            //TripUIManager uiManager = new TripUIManager();
-
-            // --- Mock Location Data ---
-            Location locParis = new Location { DestId = "EUR-00001", DestinationName = "Eiffel Tower Visit", City = "Paris", Region = "Europe", Country = "France" };
-            Location locRome = new Location { DestId = "EUR-00002", DestinationName = "Colosseum Tour", City = "Rome", Region = "Europe", Country = "Italy" };
-            Location locAlps = new Location { DestId = "EUR-00003", DestinationName = "Alpine Hiking Base", City = "Chamonix", Region = "Europe", Country = "France" };
-
-
-            // --- Mock Service Data ---
-            Service hotelService = new Service { ServiceId = "SRV-001", ServiceType = "Hotel", ServiceDescription = "4-star hotel near city center, breakfast included.", Price = 120.00m, ProviderName = "Grand City Hotels", Capacity = 2, AverageReview = 4.5 };
-            Service guideService = new Service { ServiceId = "SRV-002", ServiceType = "Guide", ServiceDescription = "Full-day licensed local guide.", Price = 80.00m, ProviderName = "Local Tour Guides Co.", Capacity = 10, AverageReview = 4.8 };
-            Service transportService = new Service { ServiceId = "SRV-003", ServiceType = "Transport", ServiceDescription = "Airport transfers and city transit pass.", Price = 50.00m, ProviderName = "CityLink Transport", Capacity = 4, AverageReview = 4.2 };
-
-            // --- Mock Trip Data ---
-            Trip trip1 = new Trip
-            {
-                TripId = "TRIP-00001",
-                Title = "European Capitals Adventure",
-                Description = "Explore the rich history and vibrant culture of Paris and Rome in this 7-day whirlwind tour. See iconic landmarks, enjoy delicious cuisine, and create memories that will last a lifetime.",
-                Capacity = 20,
-                DurationDays = 7,
-                DurationDisplay = "7 Days, 6 Nights",
-                Category = "Cultural",
-                Status = "Active",
-                PricePerPerson = 1299.99m,
-                StartLocation = locParis, // Starting point
-                StartDate = new DateTime(2025, 9, 15),
-                EndDate = new DateTime(2025, 9, 21),
-                OperatorName = "EuroWonders Tours",
-                ImageUrl = "https://i.postimg.cc/D0VGX3ND/alex-shutin-k-Kv-QJ6r-K6-S4-unsplash.jpg", // Use a real or placeholder image URL
-                VisitedLocations = new List<Location> { locParis, locRome },
-                IncludedServices = new List<Service> { hotelService, guideService, transportService }
-            };
-
-            Trip trip2 = new Trip
-            {
-                TripId = "TRIP-00002",
-                Title = "Alpine Peaks Expedition",
-                Description = "A breathtaking 5-day hiking trip through the majestic Alps. Perfect for adventure seekers and nature lovers. Includes guided hikes and mountain lodge accommodation.",
-                Capacity = 12,
-                DurationDays = 5,
-                DurationDisplay = "5 Days, 4 Nights",
-                Category = "Adventure",
-                Status = "Active",
-                PricePerPerson = 899.00m,
-                StartLocation = locAlps,
-                StartDate = new DateTime(2025, 7, 20),
-                EndDate = new DateTime(2025, 7, 24),
-                OperatorName = "Mountain Goat Adventures",
-                ImageUrl = "https://via.placeholder.com/300x200.png?text=Alps+Hiking",
-                VisitedLocations = new List<Location> { locAlps },
-                IncludedServices = new List<Service>{
-
-                    new Service { ServiceId = "SRV-004", ServiceType = "Accommodation", ServiceDescription = "Mountain Lodge Stay (shared rooms)", Price = 70.00m, ProviderName = "Alpine Lodges Inc.", Capacity = 4, AverageReview = 4.3 },
-                    new Service { ServiceId = "SRV-005", ServiceType = "Guide", ServiceDescription = "Certified Mountain Guide for all hikes.", Price = 100.00m, ProviderName = "Peak Guides", Capacity = 6, AverageReview = 4.9 }
-                }
-            };
-
-
-            AddTripBox(TripDisplayPanel, trip1);
-            AddTripBox(TripDisplayPanel, trip2);
-
             mainPanel.MouseDown += (s, e) =>
             {
                 // If the info panel is not visible, do nothing
@@ -145,52 +80,13 @@ namespace TravelEaseApp
                 }
             };
 
-            Booking booking1 = new Booking("BOOK-123456", DateTime.Now, "confirmed", "TRAV-001", "TRIP-002");
-            DigitalPass digitalPasses = new DigitalPass("ETK-654321", DateTime.Now, DateTime.Now.AddDays(7), "e-ticket", "BOOK-123456", "SRV-0001");
-            DigitalPass digitalPasses1 = new DigitalPass("ETK-654321", DateTime.Now, DateTime.Now.AddDays(7), "e-ticket", "BOOK-123456", "SRV-0002");
-
-            booking1.AddDigitalPass(digitalPasses);
-            booking1.AddDigitalPass(digitalPasses1);
-
-            Booking booking2 = new Booking("BOOK-123456", DateTime.Now, "pending", "TRAV-001", "TRIP-002");
-
-            booking2.AddDigitalPass(digitalPasses);
-            booking2.AddDigitalPass(digitalPasses1);
-            AddBookingBox(BookingsDisplayPanel, booking1, trip1.Title);
-            AddBookingBox(BookingsDisplayPanel, booking2, trip2.Title);
-
 
 
             SetupGroupBoxFocusBehavior(groupBoxAccNum, innerAccNumBox);
             AddPlaceholder(innerAccNumBox, "PK47ABPL9882329237938473");
             AddHoverTransition(PayButton, PayButton.BackColor, PayButton.ForeColor, PayButton.ForeColor, PayButton.BackColor);
+            PayButton.Click += PayButton_Click;
 
-            TravelEaseApp.Helpers.Transaction newTransaction = new TravelEaseApp.Helpers.Transaction(
-            $"TXN-{new Random().Next(100000, 999999)}",
-            150.75m,
-            DateTime.Now.AddHours(-new Random().Next(1, 72)),
-            "credit_card",
-            "BKG-00123", // Associated Booking ID
-            "success",
-            "ACCT-XXXX-1234"
-                );
-
-            AddTransactionToPanel(TransactionDisplayPanel, newTransaction);
-
-            TravelEaseApp.Helpers.Transaction pendingTransaction = new TravelEaseApp.Helpers.Transaction(
-                $"TXN-{new Random().Next(100000, 999999)}",
-                75.00m,
-                DateTime.Now.AddMinutes(-30),
-                "paypal",
-                "BKG-00124",
-                "pending",
-                "ACCT-XXXX-5678"
-            );
-            AddTransactionToPanel(TransactionDisplayPanel, pendingTransaction);
-
-
-            AddTripBox(UpcomingTripsPanel, trip1);
-            AddTripBox(UpcomingTripsPanel, trip2);
 
             MoneyLabel.Text = moneySlider.Value.ToString("C", CultureInfo.CurrentCulture);
 
@@ -199,6 +95,11 @@ namespace TravelEaseApp
                 MoneyLabel.Text = $"{moneySlider.Value}$";
             };
 
+        }
+
+        private void PayButton_Click(object? sender, EventArgs e)
+        {
+            
         }
 
 
@@ -292,7 +193,36 @@ namespace TravelEaseApp
         }
 
 
+        const int ReviewSectionHeight = 200;
+        const int StarSize = 30;
+        private Panel CreateRatingControl(string prefix, int yPosition, int panelWidth, EventHandler starClickHandler)
+        {
+            Panel ratingPanel = new Panel
+            {
+                Location = new Point(MainPadding, yPosition),
+                Width = panelWidth,
+                Height = StarSize + 10,
+                BackColor = Color.Transparent
+            };
 
+            for (int i = 1; i <= 5; i++)
+            {
+                PictureBox star = new PictureBox
+                {
+                    Name = $"{prefix}_star{i}",
+                    Tag = i,
+                    Image = Properties.Resources.StarEmpty, // You'll need star images
+                    Size = new Size(StarSize, StarSize),
+                    Location = new Point((i - 1) * (StarSize + 5), 0),
+                    SizeMode = PictureBoxSizeMode.StretchImage,
+                    Cursor = Cursors.Hand
+                };
+                star.Click += starClickHandler;
+                ratingPanel.Controls.Add(star);
+            }
+
+            return ratingPanel;
+        }
 
         public void AddTripBox(Panel containerPanel, Trip trip)
         {
@@ -563,29 +493,99 @@ namespace TravelEaseApp
 
         private void DisplayOperatorReviews(Panel containerPanel, string operatorId)
         {
-            // --- Your Implementation Here ---
-            // 1. Fetch reviews for operatorId from your data source (database, API, etc.)
-            // 2. Create Labels, PictureBoxes (for stars), etc., for each review.
-            // 3. Add the created controls to containerPanel.
-            // 4. Adjust containerPanel.Height if necessary or manage scrolling within it.
+            containerPanel.AutoScroll = true;
+            containerPanel.MinimumSize = new Size(containerPanel.Width, 200); // Set minimum height of 200  
 
-            // Example Placeholder Content:
-            containerPanel.SuspendLayout(); // Suspend layout for performance
-            containerPanel.Controls.Clear();
-            Label lblPlaceholder = new Label
+            try
             {
-                Text = $"Review loading for Operator ID: {operatorId} (Not Implemented Yet)",
-                Dock = DockStyle.Top,
-                AutoSize = true,
-                ForeColor = Color.Gray,
-                Font = new Font("Segoe UI", 10F, FontStyle.Italic),
-                Padding = new Padding(5)
-            };
-            containerPanel.Controls.Add(lblPlaceholder);
-            containerPanel.Height = lblPlaceholder.Height + 10; // Adjust height based on content
-            containerPanel.ResumeLayout(); // Resume layout
+                containerPanel.SuspendLayout();
+                containerPanel.Controls.Clear();
 
-            Console.WriteLine($"Placeholder: DisplayOperatorReviews called for Operator ID: {operatorId}");
+                // SQL query to get reviews for operator's trips with traveler info  
+                string query = @"  
+               SELECT tr.*,   
+                      t.title AS trip_title,  
+                      trav.first_name + ' ' + trav.last_name AS traveler_name  
+               FROM trip_reviews tr  
+               JOIN trips t ON tr.trip_id = t.trip_id  
+               JOIN travelers trav ON tr.traveler_id = trav.reg_no  
+               WHERE t.operator_id = @operatorId  
+               ORDER BY tr.review_date DESC";
+
+                using (SqlConnection connection = new SqlConnection(connectionString))
+                {
+                    connection.Open();
+
+                    using (SqlCommand command = new SqlCommand(query, connection))
+                    {
+                        command.Parameters.AddWithValue("@operatorId", operatorId);
+
+                        using (SqlDataReader reader = command.ExecuteReader())
+                        {
+                            if (!reader.HasRows)
+                            {
+                                // No reviews found  
+                                Label lblNoReviews = new Label
+                                {
+                                    Text = "No reviews found for this operator yet.",
+                                    Dock = DockStyle.Top,
+                                    AutoSize = true,
+                                    ForeColor = Color.Gray,
+                                    Font = new Font("Segoe UI", 10F, FontStyle.Italic),
+                                    Padding = new Padding(5)
+                                };
+                                containerPanel.Controls.Add(lblNoReviews);
+                            }
+                            else
+                            {
+                                while (reader.Read())
+                                {
+                                    // Create TripReview object  
+                                    TripReview review = new TripReview(
+                                        reader["review_id"].ToString(),
+                                        reader["trip_id"].ToString(),
+                                        reader["traveler_id"].ToString(),
+                                        Convert.ToInt32(reader["rating"]),
+                                        reader["description"].ToString(),
+                                        Convert.ToDateTime(reader["review_date"]),
+                                        reader["flag_status"].ToString()
+                                    );
+
+                                    // Get additional info  
+                                    string tripTitle = reader["trip_title"].ToString();
+                                    string travelerName = reader["traveler_name"].ToString();
+
+                                    // Display the review  
+                                    DisplayTripReviewInPanel(
+                                        containerPanel,
+                                        review,
+                                        isPublicView: true,
+                                        travelerName: travelerName
+                                    );
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                // Error handling  
+                Label lblError = new Label
+                {
+                    Text = $"Error loading reviews: {ex.Message}",
+                    Dock = DockStyle.Top,
+                    AutoSize = true,
+                    ForeColor = Color.Red,
+                    Font = new Font("Segoe UI", 10F),
+                    Padding = new Padding(5)
+                };
+                containerPanel.Controls.Add(lblError);
+            }
+            finally
+            {
+                containerPanel.ResumeLayout();
+            }
         }
 
         /// <summary>
@@ -597,56 +597,177 @@ namespace TravelEaseApp
         /// <param name="providerName">The Name of the service provider (for display).</param>
         private void DisplayServiceProviderReviews(Panel containerPanel, string providerId, string providerName)
         {
-            // --- Your Implementation Here ---
-            // 1. Fetch reviews for providerId from your data source.
-            // 2. Create UI elements for reviews.
-            // 3. Add controls to containerPanel.
-            // 4. Adjust containerPanel.Height or manage scrolling.
+            containerPanel.AutoScroll = true;
+            containerPanel.MinimumSize = new Size(containerPanel.Width, 200); // Set minimum height of 200  
 
-            // Example Placeholder Content:
-            containerPanel.SuspendLayout();
-            containerPanel.Controls.Clear();
-            Label lblPlaceholder = new Label
+            try
             {
-                // Use providerName for clarity in the placeholder
-                Text = $"Review loading for {providerName ?? "Provider"} (ID: {providerId ?? "N/A"}) (Not Implemented Yet)",
-                Dock = DockStyle.Top,
-                AutoSize = true,
-                ForeColor = Color.Gray,
-                Font = new Font("Segoe UI", 10F, FontStyle.Italic),
-                Padding = new Padding(5)
-            };
-            containerPanel.Controls.Add(lblPlaceholder);
-            containerPanel.Height = lblPlaceholder.Height + 10;
-            containerPanel.ResumeLayout();
+                containerPanel.SuspendLayout();
+                containerPanel.Controls.Clear();
 
-            Console.WriteLine($"Placeholder: DisplayServiceProviderReviews called for Provider ID: {providerId}, Name: {providerName}");
+                // SQL query to get reviews for provider's services with traveler and service info
+                string query = @"
+            SELECT sr.*, 
+                   s.service_type AS service_type,
+                   s.service_description AS service_description,
+                   trav.first_name + ' ' + trav.last_name AS traveler_name
+            FROM service_reviews sr
+            JOIN services s ON sr.service_id = s.service_id
+            JOIN travelers trav ON sr.user_id = trav.reg_no
+            WHERE s.provider_id = @providerId
+            ORDER BY sr.review_date DESC";
+
+                using (SqlConnection connection = new SqlConnection(connectionString))
+                {
+                    connection.Open();
+
+                    using (SqlCommand command = new SqlCommand(query, connection))
+                    {
+                        command.Parameters.AddWithValue("@providerId", providerId);
+
+                        using (SqlDataReader reader = command.ExecuteReader())
+                        {
+                            if (!reader.HasRows)
+                            {
+                                // No reviews found
+                                Label lblNoReviews = new Label
+                                {
+                                    Text = $"No reviews found for {providerName ?? "this provider"} yet.",
+                                    Dock = DockStyle.Top,
+                                    AutoSize = true,
+                                    ForeColor = Color.Gray,
+                                    Font = new Font("Segoe UI", 10F, FontStyle.Italic),
+                                    Padding = new Padding(5)
+                                };
+                                containerPanel.Controls.Add(lblNoReviews);
+                            }
+                            else
+                            {
+                                // Add provider header
+                                Label lblProviderHeader = new Label
+                                {
+                                    Text = $"Reviews for {providerName}",
+                                    Dock = DockStyle.Top,
+                                    Font = new Font("Segoe UI", 12F, FontStyle.Bold),
+                                    AutoSize = true,
+                                    Padding = new Padding(5, 5, 5, 15)
+                                };
+                                containerPanel.Controls.Add(lblProviderHeader);
+
+                                while (reader.Read())
+                                {
+                                    // Create ServiceReview object
+                                    ServiceReview review = new ServiceReview(
+                                        reader["review_id"].ToString(),
+                                        reader["service_id"].ToString(),
+                                        reader["user_id"].ToString(),
+                                        Convert.ToInt32(reader["rating"]),
+                                        reader["description"].ToString(),
+                                        Convert.ToDateTime(reader["review_date"]),
+                                        reader["flag_status"].ToString()
+                                    );
+
+                                    // Get additional info
+                                    string travelerName = reader["traveler_name"].ToString();
+                                    //string travelerProfilePic = reader["traveler_profile_pic"].ToString();
+
+                                    // Use the existing DisplayServiceReviewInPanel method
+                                    DisplayServiceReviewInPanel(
+                                        containerPanel,
+                                        review,
+                                        isPublicView: true,
+                                        travelerName: travelerName
+                                    );
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                // Error handling
+                Label lblError = new Label
+                {
+                    Text = $"Error loading reviews: {ex.Message}",
+                    Dock = DockStyle.Top,
+                    AutoSize = true,
+                    ForeColor = Color.Red,
+                    Font = new Font("Segoe UI", 10F),
+                    Padding = new Padding(5)
+                };
+                containerPanel.Controls.Add(lblError);
+            }
+            finally
+            {
+                containerPanel.ResumeLayout();
+            }
         }
 
-        // --- Helper Function (Assuming it exists or you create it) ---
-        //private void AddCloseButtonToPanel(Panel targetPanel, Panel mainPanel)
-        //{
-        //    // Implementation depends on how you want the close button to work
-        //    // Example: Adds a simple 'X' button to hide targetPanel
-        //    Button closeButton = new Button();
-        //    closeButton.Text = "X";
-        //    closeButton.ForeColor = Color.DimGray;
-        //    closeButton.BackColor = Color.WhiteSmoke; // Match panel background
-        //    closeButton.FlatStyle = FlatStyle.Flat;
-        //    closeButton.FlatAppearance.BorderSize = 0;
-        //    closeButton.Size = new Size(25, 25);
-        //    closeButton.Font = new Font("Arial", 10F, FontStyle.Bold);
-        //    closeButton.Location = new Point(targetPanel.ClientSize.Width - closeButton.Width - 5, 5); // Top-right corner
-        //    closeButton.Anchor = AnchorStyles.Top | AnchorStyles.Right; // Keep it top-right on resize
-        //    closeButton.Cursor = Cursors.Hand;
-        //    closeButton.Click += (sender, e) => {
-        //        targetPanel.Visible = false; // Or targetPanel.Dispose(); or hide mainPanel etc.
-        //        if (mainPanel != null) mainPanel.Visible = true; // Example action
-        //    };
-        //    targetPanel.Controls.Add(closeButton);
-        //    closeButton.BringToFront(); // Ensure it's clickable
-        //}
+        public void LoadTripServices(Trip trip)
+        {
+            if (trip == null)
+            {
+                throw new ArgumentNullException(nameof(trip));
+            }
 
+            // Initialize the IncludedServices list if it's null
+            if (trip.IncludedServices == null)
+            {
+                trip.IncludedServices = new List<Service>();
+            }
+            else
+            {
+                // Clear existing services if you want to refresh
+                trip.IncludedServices.Clear();
+            }
+
+            string query = @"
+        SELECT s.service_id, s.service_type, s.service_description, 
+               s.price, s.capacity, s.provider_id,
+               sp.provider_name AS provider_name
+        FROM trip_services ts
+        JOIN services s ON ts.service_id = s.service_id
+        JOIN service_provider sp ON s.provider_id = sp.reg_no
+        WHERE ts.trip_id = @tripId";
+
+            try
+            {
+                using (SqlConnection connection = new SqlConnection(connectionString))
+                {
+                    connection.Open();
+
+                    using (SqlCommand command = new SqlCommand(query, connection))
+                    {
+                        command.Parameters.AddWithValue("@tripId", trip.TripId);
+
+                        using (SqlDataReader reader = command.ExecuteReader())
+                        {
+                            while (reader.Read())
+                            {
+                                Service service = new Service
+                                {
+                                    ServiceId = reader["service_id"].ToString(),
+                                    ServiceType = reader["service_type"].ToString(),
+                                    ServiceDescription = reader["service_description"].ToString(),
+                                    Price = Convert.ToDecimal(reader["price"]),
+                                    Capacity = Convert.ToInt32(reader["capacity"]),
+                                    ProviderId = reader["provider_id"].ToString(),
+                                    ProviderName = reader["provider_name"].ToString()
+                                };
+
+                                trip.IncludedServices.Add(service);
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                // You might want to log this error or handle it differently
+                throw new ApplicationException($"Error loading services for trip {trip.TripId}", ex);
+            }
+        }
 
         // --- Main Display Function ---
         public void DisplayTripInPanel(Panel targetPanel, Trip trip, Panel mainPanel) // Added mainPanel parameter
@@ -887,7 +1008,7 @@ namespace TravelEaseApp
                 currentY += AddDivider(currentY).Height + SectionSpacing;
             }
 
-
+            LoadTripServices(trip); // Load services into the trip object
             // --- ✅ Service Provider Reviews Section ---
             if (trip.IncludedServices != null && trip.IncludedServices.Any())
             {
@@ -951,7 +1072,68 @@ namespace TravelEaseApp
                     Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right
                 };
                 btnBookNow.FlatAppearance.BorderSize = 0;
-                // btnBookNow.Click += BtnBookNow_Click; // Assign your event handler here
+                btnBookNow.Click += (sender, e) => {
+                    try
+                    {
+                        // Generate a new booking ID
+                        string bookingId = GetNextRegNo("BOOK");
+
+                        // Prepare the SQL query
+                        string query = @"
+                        INSERT INTO bookings (
+                            booking_id,
+                            book_date,
+                            booking_status,
+                            traveler_id,
+                            trip_id
+                        ) VALUES (
+                            @bookingId,
+                            @bookDate,
+                            @status,
+                            @travelerId,
+                            @tripId
+                        )";
+
+                        using (SqlConnection connection = new SqlConnection(connectionString))
+                        {
+                            connection.Open();
+
+                            using (SqlCommand command = new SqlCommand(query, connection))
+                            {
+                                // Add parameters
+                                command.Parameters.AddWithValue("@bookingId", bookingId);
+                                command.Parameters.AddWithValue("@bookDate", DateTime.Now);
+                                command.Parameters.AddWithValue("@status", "pending");
+                                command.Parameters.AddWithValue("@travelerId", this.regNo);
+                                command.Parameters.AddWithValue("@tripId", trip.TripId);
+
+                                // Execute the query
+                                int rowsAffected = command.ExecuteNonQuery();
+
+                                if (rowsAffected > 0)
+                                {
+                                    MessageBox.Show("Booking request submitted successfully!", "Success",
+                                        MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                                    // Optionally: refresh the UI or navigate away
+                                    //mainPanel.Controls.Clear();
+                                    // Add your code to show the main panel content
+                                }
+                                else
+                                {
+                                    MessageBox.Show("Failed to create booking.", "Error",
+                                        MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                }
+                            }
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show($"Error creating booking: {ex.Message}", "Error",
+                            MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                };
+
                 targetPanel.Controls.Add(btnBookNow);
                 currentY += btnBookNow.Height + MainPadding;
             }
@@ -971,6 +1153,44 @@ namespace TravelEaseApp
             targetPanel.Invalidate(); // Force redraw
         }
 
+        private string GetNextRegNo(string userType)
+        {
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(connectionString))
+                {
+                    conn.Open();
+
+                    string query = @"
+                UPDATE reg_counter
+                SET last_number = last_number + 1
+                OUTPUT INSERTED.last_number
+                WHERE user_type = @type;
+            ";
+
+                    using (SqlCommand cmd = new SqlCommand(query, conn))
+                    {
+                        cmd.Parameters.AddWithValue("@type", userType);
+                        object result = cmd.ExecuteScalar();
+
+                        if (result != null)
+                        {
+                            int number = Convert.ToInt32(result);
+                            return userType + "-" + number.ToString("D6");
+                        }
+                        else
+                        {
+                            throw new Exception("User type not found in reg_counter.");
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error generating registration number: " + ex.Message);
+                return null; // Caller should handle null as failure
+            }
+        }
         // Example event handler (define this in your form/class where DisplayTripInPanel is called)
         // private void BtnBookNow_Click(object sender, EventArgs e)
         // {
@@ -981,6 +1201,9 @@ namespace TravelEaseApp
         //         // Add booking logic here
         //     }
         // }
+
+
+
         public void AddCloseButtonToPanel(Panel panel, Panel mainPanel)
         {
             // Create the close button
@@ -2221,6 +2444,574 @@ namespace TravelEaseApp
         }
 
 
+        private Image CreatePlaceholderImage(string text, Font font, Size size, Color backColor, Color foreColor)
+        {
+            Bitmap bmp = new Bitmap(size.Width, size.Height);
+            using (Graphics g = Graphics.FromImage(bmp))
+            using (StringFormat sf = new StringFormat { Alignment = StringAlignment.Center, LineAlignment = StringAlignment.Center })
+            using (Brush backBrush = new SolidBrush(backColor))
+            using (Brush foreBrush = new SolidBrush(foreColor))
+            {
+                g.FillRectangle(backBrush, 0, 0, size.Width, size.Height);
+                g.DrawString(text, font, foreBrush, new RectangleF(0, 0, size.Width, size.Height), sf);
+            }
+            return bmp;
+        }
+        private string GetStarString(int rating)
+        {
+            if (rating < 0) rating = 0;
+            if (rating > 5) rating = 5;
+            return new string('⭐', rating) + new string('☆', 5 - rating);
+        }
+
+
+        public void DisplayServiceReviewInPanel(
+            Panel containerPanel,
+            ServiceReview review,
+            bool isPublicView,
+            string travelerName = "Anonymous Traveler",
+            string travelerProfilePicUrl = "https://i.postimg.cc/j5dPFtS8/fabrizio-conti-c3ws-Mnx-QZDw-unsplash.jpg")
+        {
+            if (containerPanel == null) throw new ArgumentNullException(nameof(containerPanel));
+            if (review == null) throw new ArgumentNullException(nameof(review));
+
+            // --- Design Constants ---
+            int horizontalPagePadding = 20;
+            int verticalCardSpacing = 15;
+            int cardInternalPadding = 15;
+            int cardAccentBarWidth = 6;
+            int profilePicSize = isPublicView ? 50 : 0; // Now will show pic in public view
+
+            int cardWidth = containerPanel.ClientSize.Width - (2 * horizontalPagePadding);
+            if (cardWidth < (isPublicView ? 350 : 400)) cardWidth = (isPublicView ? 350 : 400); // Min width
+            int cardMinHeight = isPublicView ? 100 : 150; // Min height
+
+            // --- Colors ---
+            Color primaryBackColor = Color.FromArgb(255, 255, 255); // White
+            Color cardHoverColor = Color.FromArgb(247, 249, 252);   // Very light blue for hover
+            Color cardBorderColor = Color.FromArgb(220, 224, 230);  // Light grey border
+            Color nameColor = Color.FromArgb(25, 25, 25);           // Dark grey for name
+            Color dateColor = Color.FromArgb(110, 110, 110);        // Medium grey for date
+            Color descriptionColor = Color.FromArgb(45, 45, 45);    // Dark grey for description
+            Color starColor = Color.FromArgb(255, 180, 0);          // Gold/Yellow for stars
+            Color adminTextColor = Color.FromArgb(70, 70, 70);      // Text color for admin details
+            Color adminLabelColor = Color.FromArgb(90, 90, 90);     // Label color for admin fields
+
+            Color flagClearColor = Color.FromArgb(30, 150, 75);     // Softer Green
+            Color flagFlaggedColor = Color.FromArgb(210, 60, 75);   // Softer Red
+            Color buttonFlagColor = Color.FromArgb(0, 123, 255);    // Blue for "Flag"
+            Color buttonUnflagColor = Color.FromArgb(255, 120, 0);  // Orange for "Unflag"
+
+            // --- Fonts ---
+            Font nameFont = new Font("Segoe UI Semibold", 11F);
+            Font dateFont = new Font("Segoe UI", 8.5F);
+            Font descriptionFont = new Font("Segoe UI", 9.5F);
+            Font starFont = new Font("Segoe UI Symbol", 12F);
+            Font adminTextFont = new Font("Segoe UI", 9F);
+            Font adminLabelFont = new Font("Segoe UI Semibold", 9F);
+            Font buttonFont = new Font("Segoe UI Semibold", 9F);
+
+            // --- Create the Review Card Panel ---
+            Panel reviewCard = new Panel
+            {
+                Width = cardWidth,
+                BackColor = primaryBackColor,
+                Padding = new Padding(cardInternalPadding),
+                Margin = new Padding(0, 0, 0, 0)
+            };
+
+            // Position the card
+            int yPositionInContainer = verticalCardSpacing;
+            if (containerPanel.Controls.Count > 0)
+            {
+                yPositionInContainer = containerPanel.Controls[containerPanel.Controls.Count - 1].Bottom + verticalCardSpacing;
+            }
+            reviewCard.Location = new Point(horizontalPagePadding, yPositionInContainer);
+
+            // Accent color based on flag status
+            Color currentAccentColor = isPublicView ? Color.FromArgb(200, 200, 200) :
+                (review.FlagStatus == "clear" ? flagClearColor : flagFlaggedColor);
+
+            reviewCard.Paint += (s, e) =>
+            {
+                ControlPaint.DrawBorder(e.Graphics, reviewCard.ClientRectangle,
+                    cardBorderColor, 1, ButtonBorderStyle.Solid, cardBorderColor, 1, ButtonBorderStyle.Solid,
+                    cardBorderColor, 1, ButtonBorderStyle.Solid, cardBorderColor, 1, ButtonBorderStyle.Solid);
+
+                using (SolidBrush accentBrush = new SolidBrush(currentAccentColor))
+                {
+                    e.Graphics.FillRectangle(accentBrush, 0, 0, cardAccentBarWidth, reviewCard.Height);
+                }
+            };
+
+            int currentY = cardInternalPadding;
+            int contentStartX = cardInternalPadding + cardAccentBarWidth + (isPublicView ? profilePicSize + cardInternalPadding : 0);
+            int contentWidth = reviewCard.Width - contentStartX - cardInternalPadding;
+            if (contentWidth < 150) contentWidth = 150;
+
+            // --- Profile Picture (Public View Only) ---
+            if (isPublicView)
+            {
+                PictureBox picProfile = new PictureBox
+                {
+                    Width = profilePicSize,
+                    Height = profilePicSize,
+                    Location = new Point(cardInternalPadding + cardAccentBarWidth, cardInternalPadding),
+                    SizeMode = PictureBoxSizeMode.StretchImage,
+                    BackColor = Color.FromArgb(230, 230, 230)
+                };
+
+                GraphicsPath path = new GraphicsPath();
+                path.AddEllipse(0, 0, picProfile.Width, picProfile.Height);
+                picProfile.Region = new Region(path);
+
+                try
+                {
+                    if (!string.IsNullOrWhiteSpace(travelerProfilePicUrl) && Uri.IsWellFormedUriString(travelerProfilePicUrl, UriKind.Absolute))
+                    {
+                        picProfile.LoadAsync(travelerProfilePicUrl);
+                    }
+                    else
+                    {
+                        picProfile.Image = CreatePlaceholderImage("👤", new Font("Segoe UI Symbol", profilePicSize * 0.5f),
+                            picProfile.Size, picProfile.BackColor, Color.Gray);
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine("Error loading profile image: " + ex.Message);
+                    picProfile.Image = CreatePlaceholderImage("!", new Font("Arial", profilePicSize * 0.5f),
+                        picProfile.Size, picProfile.BackColor, Color.Red);
+                }
+                reviewCard.Controls.Add(picProfile);
+            }
+
+            // --- Traveler Name (Public View) ---
+            if (isPublicView)
+            {
+                Label lblName = new Label
+                {
+                    Text = travelerName,
+                    Font = nameFont,
+                    ForeColor = nameColor,
+                    AutoSize = false,
+                    Width = contentWidth - 75,
+                    Height = nameFont.Height,
+                    Location = new Point(contentStartX, currentY),
+                    AutoEllipsis = true,
+                    Tag = "HoverSensitive"
+                };
+                reviewCard.Controls.Add(lblName);
+            }
+
+            // --- Review Date ---
+            Label lblDate = new Label
+            {
+                Text = review.ReviewDate.ToString("MMM dd, yyyy"),
+                Font = dateFont,
+                ForeColor = dateColor,
+                AutoSize = true,
+                Tag = "HoverSensitive"
+            };
+            if (isPublicView)
+            {
+                lblDate.Location = new Point(reviewCard.Width - cardInternalPadding - lblDate.PreferredWidth - 5, currentY + 2);
+            }
+            reviewCard.Controls.Add(lblDate);
+
+            if (isPublicView)
+            {
+                currentY += nameFont.Height + 2;
+            }
+
+            // --- Star Rating ---
+            Label lblStars = new Label
+            {
+                Text = GetStarString(review.Rating),
+                Font = starFont,
+                ForeColor = starColor,
+                AutoSize = true,
+                Location = new Point(contentStartX, currentY)
+            };
+            reviewCard.Controls.Add(lblStars);
+            currentY += lblStars.Height + 6;
+
+            // --- Admin View: IDs ---
+            if (!isPublicView)
+            {
+                Func<string, string, int, Label> AddAdminDetail = (labelText, valueText, yPos) =>
+                {
+                    Label lbl = new Label
+                    {
+                        Text = $"{labelText}: {valueText}",
+                        Font = adminTextFont,
+                        ForeColor = adminTextColor,
+                        AutoSize = true,
+                        Location = new Point(contentStartX, yPos),
+                        Tag = "HoverSensitive"
+                    };
+                    reviewCard.Controls.Add(lbl);
+                    return lbl;
+                };
+
+                Label lastAdminDetail;
+                lastAdminDetail = AddAdminDetail("Review ID", review.ReviewId, currentY);
+                currentY = lastAdminDetail.Bottom + 3;
+                lastAdminDetail = AddAdminDetail("Service ID", review.ServiceId, currentY);
+                currentY = lastAdminDetail.Bottom + 3;
+                lastAdminDetail = AddAdminDetail("Traveler ID", review.TravelerId, currentY);
+                currentY = lastAdminDetail.Bottom + 3;
+
+                lblDate.Location = new Point(contentStartX, currentY);
+                currentY = lblDate.Bottom + 8;
+            }
+
+            // --- Review Description ---
+            Label lblDescription = new Label
+            {
+                Text = review.Description,
+                Font = descriptionFont,
+                ForeColor = descriptionColor,
+                AutoSize = false,
+                Width = contentWidth,
+                Location = new Point(contentStartX, currentY),
+                MaximumSize = new Size(contentWidth, 0),
+                Tag = "HoverSensitive"
+            };
+            Size descSize = TextRenderer.MeasureText(review.Description, descriptionFont,
+                                                  new Size(contentWidth, int.MaxValue),
+                                                  TextFormatFlags.WordBreak | TextFormatFlags.TextBoxControl);
+            lblDescription.Height = descSize.Height + 5;
+            reviewCard.Controls.Add(lblDescription);
+            currentY += lblDescription.Height + 10;
+
+            // --- Admin View: Flag Status ---
+            if (!isPublicView)
+            {
+                Label lblFlagStatus = new Label
+                {
+                    Text = $"Status: {review.FlagStatus.ToUpper()}",
+                    Font = adminLabelFont,
+                    ForeColor = review.FlagStatus == "clear" ? flagClearColor : flagFlaggedColor,
+                    AutoSize = true,
+                    Location = new Point(contentStartX, currentY)
+                };
+                reviewCard.Controls.Add(lblFlagStatus);
+
+                Button btnToggleFlag = new Button
+                {
+                    Text = review.FlagStatus == "clear" ? "Flag Review" : "Unflag Review",
+                    Font = buttonFont,
+                    ForeColor = Color.White,
+                    BackColor = review.FlagStatus == "clear" ? buttonFlagColor : buttonUnflagColor,
+                    Width = 120,
+                    Height = 30,
+                    FlatStyle = FlatStyle.Flat,
+                    Location = new Point(reviewCard.Width - cardInternalPadding - 120, lblFlagStatus.Top - (30 - lblFlagStatus.Height) / 2),
+                    Tag = review
+                };
+                btnToggleFlag.FlatAppearance.BorderSize = 0;
+                
+                reviewCard.Controls.Add(btnToggleFlag);
+                currentY = Math.Max(lblFlagStatus.Bottom, btnToggleFlag.Bottom) + 10;
+            }
+
+            // Set final height
+            reviewCard.Height = Math.Max(cardMinHeight, currentY + cardInternalPadding - 10);
+
+            // --- Add Hover Effect ---
+            AddHoverTransition(reviewCard, primaryBackColor, cardHoverColor, descriptionColor, descriptionColor);
+
+            // --- Add to container ---
+            containerPanel.Controls.Add(reviewCard);
+            if (containerPanel.Parent is Form || containerPanel.Parent?.Parent is Form)
+            {
+                containerPanel.ScrollControlIntoView(reviewCard);
+            }
+            else if (containerPanel.VerticalScroll.Visible)
+            {
+                containerPanel.ScrollControlIntoView(reviewCard);
+            }
+        }
+
+        public void DisplayTripReviewInPanel(
+           Panel containerPanel,
+           TripReview review,
+           bool isPublicView,
+           string travelerName = "Anonymous Traveler",
+           string travelerProfilePicUrl = "https://i.postimg.cc/j5dPFtS8/fabrizio-conti-c3ws-Mnx-QZDw-unsplash.jpg"
+       )
+        {
+            if (containerPanel == null) throw new ArgumentNullException(nameof(containerPanel));
+            if (review == null) throw new ArgumentNullException(nameof(review));
+
+            // --- Design Constants ---
+            int horizontalPagePadding = 20;
+            int verticalCardSpacing = 15;
+            int cardInternalPadding = 15;
+            int cardAccentBarWidth = 6;
+            int profilePicSize = isPublicView ? 50 : 0;
+
+            int cardWidth = containerPanel.ClientSize.Width - (2 * horizontalPagePadding);
+            if (cardWidth < (isPublicView ? 350 : 400)) cardWidth = (isPublicView ? 350 : 400); // Min width
+            int cardMinHeight = isPublicView ? 100 : 150; // Min height
+
+            // --- Colors ---
+            Color primaryBackColor = Color.FromArgb(255, 255, 255); // White
+            Color cardHoverColor = Color.FromArgb(247, 249, 252);   // Very light blue for hover
+            Color cardBorderColor = Color.FromArgb(220, 224, 230);  // Light grey border
+            Color nameColor = Color.FromArgb(25, 25, 25);           // Dark grey for name
+            Color dateColor = Color.FromArgb(110, 110, 110);        // Medium grey for date
+            Color descriptionColor = Color.FromArgb(45, 45, 45);    // Dark grey for description
+            Color starColor = Color.FromArgb(255, 180, 0);          // Gold/Yellow for stars
+            Color adminTextColor = Color.FromArgb(70, 70, 70);      // Text color for admin details
+            Color adminLabelColor = Color.FromArgb(90, 90, 90);     // Label color for admin fields
+
+            Color flagClearColor = Color.FromArgb(30, 150, 75);     // Softer Green
+            Color flagFlaggedColor = Color.FromArgb(210, 60, 75);   // Softer Red
+            Color buttonFlagColor = Color.FromArgb(0, 123, 255);    // Blue for "Flag"
+            Color buttonUnflagColor = Color.FromArgb(255, 120, 0);  // Orange for "Unflag"
+
+            // --- Fonts ---
+            Font nameFont = new Font("Segoe UI Semibold", 11F);
+            Font dateFont = new Font("Segoe UI", 8.5F);
+            Font descriptionFont = new Font("Segoe UI", 9.5F);
+            Font starFont = new Font("Segoe UI Symbol", 12F); // Ensure this font supports stars
+            Font adminTextFont = new Font("Segoe UI", 9F);
+            Font adminLabelFont = new Font("Segoe UI Semibold", 9F);
+            Font buttonFont = new Font("Segoe UI Semibold", 9F);
+
+            // --- Create the Review Card Panel ---
+            Panel reviewCard = new Panel
+            {
+                Width = cardWidth,
+                BackColor = primaryBackColor,
+                Padding = new Padding(cardInternalPadding),
+                Margin = new Padding(0, 0, 0, 0) // Location set manually
+            };
+
+            // Position the new card below the last control in the container panel
+            int yPositionInContainer = verticalCardSpacing;
+            if (containerPanel.Controls.Count > 0)
+            {
+                Control lastControl = containerPanel.Controls[containerPanel.Controls.Count - 1];
+                yPositionInContainer = lastControl.Bottom + verticalCardSpacing;
+            }
+            reviewCard.Location = new Point(horizontalPagePadding, yPositionInContainer);
+
+            // Determine accent color based on view type and flag status
+            Color currentAccentColor = isPublicView ? Color.FromArgb(200, 200, 200) : (review.FlagStatus == "clear" ? flagClearColor : flagFlaggedColor);
+
+            reviewCard.Paint += (s, e) =>
+            {
+                ControlPaint.DrawBorder(e.Graphics, reviewCard.ClientRectangle,
+                    cardBorderColor, 1, ButtonBorderStyle.Solid, cardBorderColor, 1, ButtonBorderStyle.Solid,
+                    cardBorderColor, 1, ButtonBorderStyle.Solid, cardBorderColor, 1, ButtonBorderStyle.Solid);
+
+                using (SolidBrush accentBrush = new SolidBrush(currentAccentColor))
+                {
+                    e.Graphics.FillRectangle(accentBrush, 0, 0, cardAccentBarWidth, reviewCard.Height);
+                }
+            };
+
+            int currentY = cardInternalPadding; // Y-position inside the review card
+                                                // Calculate start X for content, accounting for profile pic in public view
+            int contentStartX = cardInternalPadding + cardAccentBarWidth + (isPublicView ? profilePicSize + cardInternalPadding : 0);
+            int contentWidth = reviewCard.Width - contentStartX - cardInternalPadding;
+            if (contentWidth < 150) contentWidth = 150; // Prevent content area from being too narrow
+
+            // --- Profile Picture (Public View Only) ---
+            if (isPublicView)
+            {
+                PictureBox picProfile = new PictureBox
+                {
+                    Width = profilePicSize,
+                    Height = profilePicSize,
+                    Location = new Point(cardInternalPadding + cardAccentBarWidth, cardInternalPadding),
+                    SizeMode = PictureBoxSizeMode.StretchImage, // Changed to StretchImage for potentially non-square images
+                    BackColor = Color.FromArgb(230, 230, 230)
+                };
+                // Simple rounded effect for PictureBox
+                GraphicsPath path = new GraphicsPath();
+                path.AddEllipse(0, 0, picProfile.Width, picProfile.Height);
+                picProfile.Region = new Region(path);
+
+                try
+                {
+                    if (!string.IsNullOrWhiteSpace(travelerProfilePicUrl) && Uri.IsWellFormedUriString(travelerProfilePicUrl, UriKind.Absolute))
+                    {
+                        picProfile.LoadAsync(travelerProfilePicUrl);
+                    }
+                    else // Load default placeholder if URL is invalid
+                    {
+                        picProfile.Image = CreatePlaceholderImage("👤", new Font("Segoe UI Symbol", profilePicSize * 0.5f), picProfile.Size, picProfile.BackColor, Color.Gray);
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine("Error loading profile image: " + ex.Message);
+                    picProfile.Image = CreatePlaceholderImage("!", new Font("Arial", profilePicSize * 0.5f), picProfile.Size, picProfile.BackColor, Color.Red);
+                }
+                reviewCard.Controls.Add(picProfile);
+            }
+
+            // --- Traveler Name (Public View) ---
+            if (isPublicView)
+            {
+                Label lblName = new Label
+                {
+                    Text = travelerName,
+                    Font = nameFont,
+                    ForeColor = nameColor,
+                    AutoSize = false, // Allow AutoEllipsis
+                    Width = contentWidth - 75, // Space for date label on the right
+                    Height = nameFont.Height,
+                    Location = new Point(contentStartX, currentY),
+                    AutoEllipsis = true,
+                    Tag = "HoverSensitive"
+                };
+                reviewCard.Controls.Add(lblName);
+            }
+
+            // --- Review Date ---
+            Label lblDate = new Label
+            {
+                Text = review.ReviewDate.ToString("MMM dd, yyyy"), // Format date
+                Font = dateFont,
+                ForeColor = dateColor,
+                AutoSize = true,
+                Tag = "HoverSensitive"
+            };
+            if (isPublicView) // Position date top-right in public view
+            {
+                lblDate.Location = new Point(reviewCard.Width - cardInternalPadding - lblDate.PreferredWidth - 5, currentY + 2);
+            }
+            // For admin view, lblDate will be positioned later in the flow.
+            reviewCard.Controls.Add(lblDate);
+
+            if (isPublicView)
+            {
+                currentY += nameFont.Height + 2; // Move Y down after name
+            }
+
+            // --- Star Rating ---
+            Label lblStars = new Label
+            {
+                Text = GetStarString(review.Rating),
+                Font = starFont,
+                ForeColor = starColor,
+                AutoSize = true,
+                Location = new Point(contentStartX, currentY)
+            };
+            reviewCard.Controls.Add(lblStars);
+            currentY += lblStars.Height + 6;
+
+            // --- Admin View: IDs (Review ID, Trip ID, Traveler ID) ---
+            if (!isPublicView)
+            {
+                Func<string, string, int, Label> AddAdminDetail = (labelText, valueText, yPos) =>
+                {
+                    Label lbl = new Label
+                    {
+                        Text = $"{labelText}: {valueText}",
+                        Font = adminTextFont,
+                        ForeColor = adminTextColor,
+                        AutoSize = true,
+                        Location = new Point(contentStartX, yPos),
+                        Tag = "HoverSensitive"
+                    };
+                    reviewCard.Controls.Add(lbl);
+                    return lbl;
+                };
+
+                Label lastAdminDetail;
+                lastAdminDetail = AddAdminDetail("Review ID", review.ReviewId, currentY);
+                currentY = lastAdminDetail.Bottom + 3;
+                lastAdminDetail = AddAdminDetail("Trip ID", review.TripId, currentY);
+                currentY = lastAdminDetail.Bottom + 3;
+                lastAdminDetail = AddAdminDetail("Traveler ID", review.TravelerId, currentY);
+                currentY = lastAdminDetail.Bottom + 3;
+
+                // Position Date for Admin View (after IDs, before description)
+                lblDate.Location = new Point(contentStartX, currentY);
+                currentY = lblDate.Bottom + 8;
+            }
+
+            // --- Review Description ---
+            Label lblDescription = new Label
+            {
+                Text = review.Description,
+                Font = descriptionFont,
+                ForeColor = descriptionColor,
+                AutoSize = false, // Important for multi-line and fixed width
+                Width = contentWidth,
+                Location = new Point(contentStartX, currentY),
+                MaximumSize = new Size(contentWidth, 0), // Width is fixed, height is dynamic
+                Tag = "HoverSensitive"
+            };
+            // Calculate height needed for the description text
+            Size descSize = TextRenderer.MeasureText(review.Description, descriptionFont,
+                                                     new Size(contentWidth, int.MaxValue),
+                                                     TextFormatFlags.WordBreak | TextFormatFlags.TextBoxControl);
+            lblDescription.Height = descSize.Height + 5; // Add a little padding
+            reviewCard.Controls.Add(lblDescription);
+            currentY += lblDescription.Height + 10;
+
+            // --- Admin View: Flag Status and Action Button ---
+            if (!isPublicView)
+            {
+                Label lblFlagStatus = new Label
+                {
+                    Text = $"Status: {review.FlagStatus.ToUpper()}",
+                    Font = adminLabelFont,
+                    ForeColor = review.FlagStatus == "clear" ? flagClearColor : flagFlaggedColor,
+                    AutoSize = true,
+                    Location = new Point(contentStartX, currentY)
+                };
+                reviewCard.Controls.Add(lblFlagStatus);
+
+                Button btnToggleFlag = new Button
+                {
+                    Text = review.FlagStatus == "clear" ? "Flag Review" : "Unflag Review",
+                    Font = buttonFont,
+                    ForeColor = Color.White,
+                    BackColor = review.FlagStatus == "clear" ? buttonFlagColor : buttonUnflagColor,
+                    Width = 120,
+                    Height = 30,
+                    FlatStyle = FlatStyle.Flat,
+                    // Position button to the right of the status label or aligned right on the card
+                    Location = new Point(reviewCard.Width - cardInternalPadding - 120, lblFlagStatus.Top - (30 - lblFlagStatus.Height) / 2),
+                    Tag = review // Store the review object for easy access in the event handler
+                };
+                btnToggleFlag.FlatAppearance.BorderSize = 0;
+                
+
+                reviewCard.Controls.Add(btnToggleFlag);
+                currentY = Math.Max(lblFlagStatus.Bottom, btnToggleFlag.Bottom) + 10; // Ensure Y is below the taller of the two
+            }
+
+            // Set final height for the review card, ensuring it's at least minHeight
+            reviewCard.Height = Math.Max(cardMinHeight, currentY + cardInternalPadding - 10); // Final adjustment for bottom padding
+
+            // --- Add Hover Effect ---
+            // Use a distinct hover forecolor if needed, or keep it same as original text color
+            AddHoverTransition(reviewCard, primaryBackColor, cardHoverColor, descriptionColor, descriptionColor);
+
+            // --- Add to container ---
+            containerPanel.Controls.Add(reviewCard);
+            // Scroll the new card into view if the container panel is on a top-level form
+            if (containerPanel.Parent is Form || containerPanel.Parent?.Parent is Form)
+            {
+                containerPanel.ScrollControlIntoView(reviewCard);
+            }
+            else // For nested panels, check if the immediate container is scrollable
+            {
+                if (containerPanel.VerticalScroll.Visible)
+                {
+                    containerPanel.ScrollControlIntoView(reviewCard);
+                }
+            }
+        }
 
 
     }
