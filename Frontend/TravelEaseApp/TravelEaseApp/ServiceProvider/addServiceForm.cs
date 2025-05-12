@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.ReportingServices.Diagnostics.Internal;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -7,56 +8,105 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.Data.SqlClient;
+using static TravelEaseApp.Helpers;
+using Microsoft.Data.SqlClient;
 
 namespace TravelEaseApp.ServiceProvider
 {
     public partial class addServiceForm : Form
     {
-        public addServiceForm()
+        string regNo;
+        public addServiceForm(string REGNO)
         {
             InitializeComponent();
+            regNo = REGNO;
         }
 
         private void Form1_Load(object sender, EventArgs e)
         {
             AddHoverTransition(submitLabel, submitLabel.BackColor, submitLabel.ForeColor, submitLabel.ForeColor, submitLabel.BackColor);
+
+            Color borderColor = Color.FromArgb(220, 224, 230);
+            typeSelectOptions.Paint += (s, e) =>
+            {
+                ControlPaint.DrawBorder(e.Graphics, typeSelectOptions.ClientRectangle,
+                    borderColor, 1, ButtonBorderStyle.Solid,
+                    borderColor, 1, ButtonBorderStyle.Solid,
+                    borderColor, 1, ButtonBorderStyle.Solid,
+                    borderColor, 1, ButtonBorderStyle.Solid);
+            };
+            typeSelectOptions.Text = "-- Select Service Type --";
         }
 
         private void submitLabel_Click(object sender, EventArgs e)
         {
-            string connString = "Data Source=DESKTOP-ON2MGLP\\SQLEXPRESS;Initial Catalog=Database phase 1 backup;Integrated Security=True";
-            string serviceType=innerServiceTypeBox.Text;
-            string serviceDesc = innerServiceDescriptionBox.Text;
-            decimal price = decimal.Parse(innerPricePerPersonBox.Text);
-            int capacity = int.Parse(innerCapacityBox.Text);
-
-            int newServiceId = 1;
-
-                
-
-
-            string query = "INSERT INTO services (service_type, service_description, price, capacity) " +
-                   "VALUES (@service_type, @description, @price_per_person, @capacity)";
-
-            using (SqlConnection conn = new SqlConnection(connString))
-            using (SqlCommand cmd = new SqlCommand(query, conn))
+            Service service = new Service
             {
-                cmd.Parameters.AddWithValue("@service_type", serviceType);
-                cmd.Parameters.AddWithValue("@description", serviceDesc);
-                cmd.Parameters.AddWithValue("@price_per_person", price);
-                cmd.Parameters.AddWithValue("@capacity", capacity);
+                ServiceType = typeSelectOptions.Text,
+                ServiceDescription = innerServiceDescriptionBox.Text,
+                Price = decimal.TryParse(innerPricePerPersonBox.Text, out decimal price) ? price : -1,
+                Capacity = int.TryParse(innerCapacityBox.Text, out int capacity) ? capacity : -1,
+            };
 
-                try
+            List<String> validServices = new List<string> { "Hotel", "Guide", "Transport", "Other" };
+
+            bool valid = true;
+            if (!validServices.Contains(service.ServiceType))
+            {
+                valid = false;
+                MessageBox.Show("Please select a valid service type.");
+            }
+            if (service.Price < 0)
+            {
+                valid = false;
+                MessageBox.Show("Please enter a valid price.");
+            }
+            if (service.Capacity < 0)
+            {
+                valid = false;
+                MessageBox.Show("Please enter a valid capacity.");
+            }
+
+            if (valid)
+            {
+                // get max serviceId from database table reg_counter
+                // increment it by 1 and assign it to 
+                string query = $"SELECT * FROM reg_counter WHERE user_type = 'SRV'";
+                using (SqlConnection connection = new SqlConnection(connectionString))
                 {
-                    conn.Open();
-                    int rowsInserted = cmd.ExecuteNonQuery();
-                    MessageBox.Show("Service added successfully.");
+                    SqlCommand command = new SqlCommand(query, connection);
+                    connection.Open();
+                    SqlDataReader reader = command.ExecuteReader();
+                    if (reader.Read())
+                    {
+                        int maxServiceId = reader.GetInt32(1);
+                        service.ServiceId = "SRV-" + (maxServiceId + 1).ToString("D6");
+                        MessageBox.Show("Service ID: " + service.ServiceId);
+                    }
+                    else
+                    {
+                        MessageBox.Show("Error: No service ID found.");
+                        return;
+                    }
                 }
-                catch (Exception ex)
+                string query2 = $"UPDATE reg_counter SET last_number = last_number + 1 WHERE user_type = 'SRV'";
+                using (SqlConnection connection = new SqlConnection(connectionString))
                 {
-                    MessageBox.Show("Error while inserting: " + ex.Message);
+                    SqlCommand command = new SqlCommand(query2, connection);
+                    connection.Open();
+                    command.ExecuteNonQuery();
                 }
+
+
+                // use Transaction based tsql query to insert the service
+                string query3 = $"INSERT INTO services (service_id, service_type, service_description, price, provider_id, capacity) VALUES ('{service.ServiceId}', '{service.ServiceType}', '{service.ServiceDescription}', {service.Price}, '{regNo}', {service.Capacity})";
+                using (SqlConnection connection = new SqlConnection(connectionString))
+                {
+                    SqlCommand command = new SqlCommand(query3, connection);
+                    connection.Open();
+                    command.ExecuteNonQuery();
+                }
+                MessageBox.Show("Service added successfully.");
             }
         }
 
@@ -103,11 +153,6 @@ namespace TravelEaseApp.ServiceProvider
 
             control.MouseEnter += (s, e) => isHovering = true;
             control.MouseLeave += (s, e) => isHovering = false;
-        }
-
-        private void flowLayoutPanel1_Paint(object sender, PaintEventArgs e)
-        {
-
         }
     }
 }

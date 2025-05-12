@@ -14,6 +14,7 @@
     <PackageReference Include="FastReport.OpenSource" Version="2025.2.0" />
     <PackageReference Include="FastReport.OpenSource.Export.PdfSimple" Version="2025.2.0" />
     <PackageReference Include="Microsoft.Data.SqlClient" Version="6.0.2" />
+    <PackageReference Include="Microsoft.Data.SqlClient.SNI.runtime" Version="6.0.2" />
     <PackageReference Include="Microsoft.ReportingServices.ReportViewerControl.Winforms" Version="150.1652.0" />
     <PackageReference Include="ScottPlot.WinForms" Version="5.0.55" />
     <PackageReference Include="System.Data.SqlClient" Version="4.9.0" />

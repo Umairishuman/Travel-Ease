@@ -12,6 +12,13 @@ namespace TravelEase
             ///////////WAIIIIIIIIIIISSSSSSSSSSSSSTTTTTTTTTTTTTTTTTT OOOOOOOFFFFFFFFFFFFFF TTTTTTTTTTTTTIMMMMMMMMMMEEEEEEEEEEEEE
         {
             // Start the application and run the SignInForm
+            /* FOR TESTING:
+            OP-000022 - tourOperator
+            SP-000029 - serviceProvider
+            */
+            ////////////////////////////////////////////////
+            // REGISTERATION NUMBER
+            ////////////////////////////////////////////////
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             string regNo = "123456"; // Example registration number

@@ -48,7 +48,7 @@ namespace TravelEaseApp
 
         private void ShowDashboardForm()
         {
-            var dashboardForm = new dashboardForm();
+            var dashboardForm = new dashboardForm(regNo);
             dashboardForm.TopLevel = false;
             dashboardForm.FormBorderStyle = FormBorderStyle.None;
             dashboardForm.Dock = DockStyle.Fill;
@@ -62,7 +62,7 @@ namespace TravelEaseApp
 
         private void ShowServicesForm()
         {
-            var servicesForm = new servicesForm();
+            var servicesForm = new servicesForm(regNo);
             servicesForm.TopLevel = false;
             servicesForm.FormBorderStyle = FormBorderStyle.None;
             servicesForm.Dock = DockStyle.Fill;
@@ -73,7 +73,7 @@ namespace TravelEaseApp
 
         private void ShowAddServiceForm()
         {
-            var addServiceForm = new addServiceForm();
+            var addServiceForm = new addServiceForm(regNo);
             addServiceForm.TopLevel = false;
             addServiceForm.FormBorderStyle = FormBorderStyle.None;
             addServiceForm.Dock = DockStyle.Fill;
