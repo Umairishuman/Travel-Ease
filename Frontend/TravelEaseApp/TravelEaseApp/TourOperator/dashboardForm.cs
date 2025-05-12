@@ -92,6 +92,7 @@ namespace TravelEaseApp.TourOperator
                                 AutoSize = true,
                                 Location = new Point(10, infoLabel3.Bottom + 5)
                             };
+                            infoPanel1.Controls.Add(infoLabel4);
                         }
                         reader.Close();
                     }

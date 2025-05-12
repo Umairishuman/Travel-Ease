@@ -261,7 +261,7 @@
             infoPanel.Controls.Add(infoPanel1);
             infoPanel.Location = new Point(472, 39);
             infoPanel.Name = "infoPanel";
-            infoPanel.Size = new Size(644, 72);
+            infoPanel.Size = new Size(644, 95);
             infoPanel.TabIndex = 32;
             // 
             // infoPanel1
@@ -269,7 +269,7 @@
             infoPanel1.Controls.Add(addTripLabel);
             infoPanel1.Location = new Point(3, 3);
             infoPanel1.Name = "infoPanel1";
-            infoPanel1.Size = new Size(638, 66);
+            infoPanel1.Size = new Size(638, 89);
             infoPanel1.TabIndex = 0;
             // 
             // infoLabel
