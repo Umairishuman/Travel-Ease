@@ -32,6 +32,9 @@
             UpcomingTripsPanel = new Panel();
             UpcomingTripsLabel = new Label();
             StatisticsPanel = new Panel();
+            reportsGroupBox = new GroupBox();
+            selectReportComboBox = new ComboBox();
+            ReportViewButton = new Label();
             panel4 = new Panel();
             AverageTripLengthNumber = new Label();
             AverageTripLength = new Label();
@@ -40,7 +43,6 @@
             AverageTripCostNumberLabel = new Label();
             AverageTripCost = new Label();
             pictureBox4 = new PictureBox();
-            ReportViewButton = new Label();
             StatisticLabel = new Label();
             panel3 = new Panel();
             TotalRevenueNumberLabel = new Label();
@@ -105,6 +107,7 @@
             DashboardPanel.SuspendLayout();
             UpcomingTripsPanel.SuspendLayout();
             StatisticsPanel.SuspendLayout();
+            reportsGroupBox.SuspendLayout();
             panel4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox5).BeginInit();
             panel1.SuspendLayout();
@@ -177,9 +180,10 @@
             // 
             // StatisticsPanel
             // 
+            StatisticsPanel.Controls.Add(reportsGroupBox);
+            StatisticsPanel.Controls.Add(ReportViewButton);
             StatisticsPanel.Controls.Add(panel4);
             StatisticsPanel.Controls.Add(panel1);
-            StatisticsPanel.Controls.Add(ReportViewButton);
             StatisticsPanel.Controls.Add(StatisticLabel);
             StatisticsPanel.Controls.Add(panel3);
             StatisticsPanel.Controls.Add(panel2);
@@ -189,13 +193,55 @@
             StatisticsPanel.Size = new Size(585, 515);
             StatisticsPanel.TabIndex = 3;
             // 
+            // reportsGroupBox
+            // 
+            reportsGroupBox.Controls.Add(selectReportComboBox);
+            reportsGroupBox.Font = new Font("Times New Roman", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            reportsGroupBox.Location = new Point(12, 341);
+            reportsGroupBox.Margin = new Padding(2);
+            reportsGroupBox.Name = "reportsGroupBox";
+            reportsGroupBox.Padding = new Padding(2);
+            reportsGroupBox.Size = new Size(348, 71);
+            reportsGroupBox.TabIndex = 16;
+            reportsGroupBox.TabStop = false;
+            reportsGroupBox.Text = "Reports";
+            // 
+            // selectReportComboBox
+            // 
+            selectReportComboBox.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            selectReportComboBox.BackColor = Color.White;
+            selectReportComboBox.FlatStyle = FlatStyle.Flat;
+            selectReportComboBox.Font = new Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            selectReportComboBox.ForeColor = SystemColors.InactiveCaptionText;
+            selectReportComboBox.FormattingEnabled = true;
+            selectReportComboBox.ItemHeight = 17;
+            selectReportComboBox.Location = new Point(4, 25);
+            selectReportComboBox.Margin = new Padding(2);
+            selectReportComboBox.Name = "selectReportComboBox";
+            selectReportComboBox.Size = new Size(340, 25);
+            selectReportComboBox.TabIndex = 4;
+            // 
+            // ReportViewButton
+            // 
+            ReportViewButton.BackColor = Color.Black;
+            ReportViewButton.BorderStyle = BorderStyle.FixedSingle;
+            ReportViewButton.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
+            ReportViewButton.ForeColor = Color.White;
+            ReportViewButton.Location = new Point(379, 356);
+            ReportViewButton.Name = "ReportViewButton";
+            ReportViewButton.Size = new Size(172, 40);
+            ReportViewButton.TabIndex = 6;
+            ReportViewButton.Text = "View Reports";
+            ReportViewButton.TextAlign = ContentAlignment.MiddleCenter;
+            ReportViewButton.Click += ReportViewButton_Click;
+            // 
             // panel4
             // 
             panel4.BackColor = Color.White;
             panel4.Controls.Add(AverageTripLengthNumber);
             panel4.Controls.Add(AverageTripLength);
             panel4.Controls.Add(pictureBox5);
-            panel4.Location = new Point(307, 219);
+            panel4.Location = new Point(204, 195);
             panel4.Name = "panel4";
             panel4.Size = new Size(156, 126);
             panel4.TabIndex = 4;
@@ -204,7 +250,7 @@
             // 
             AverageTripLengthNumber.AutoSize = true;
             AverageTripLengthNumber.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            AverageTripLengthNumber.Location = new Point(46, 81);
+            AverageTripLengthNumber.Location = new Point(41, 81);
             AverageTripLengthNumber.Name = "AverageTripLengthNumber";
             AverageTripLengthNumber.Size = new Size(71, 21);
             AverageTripLengthNumber.TabIndex = 2;
@@ -215,7 +261,7 @@
             AverageTripLength.AutoSize = true;
             AverageTripLength.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
             AverageTripLength.ForeColor = Color.Gray;
-            AverageTripLength.Location = new Point(14, 64);
+            AverageTripLength.Location = new Point(11, 64);
             AverageTripLength.Name = "AverageTripLength";
             AverageTripLength.Size = new Size(133, 17);
             AverageTripLength.TabIndex = 1;
@@ -224,10 +270,10 @@
             // pictureBox5
             // 
             pictureBox5.Image = Properties.Resources.length;
-            pictureBox5.Location = new Point(46, 9);
+            pictureBox5.Location = new Point(0, 4);
             pictureBox5.Name = "pictureBox5";
-            pictureBox5.Size = new Size(61, 50);
-            pictureBox5.SizeMode = PictureBoxSizeMode.StretchImage;
+            pictureBox5.Size = new Size(156, 59);
+            pictureBox5.SizeMode = PictureBoxSizeMode.Zoom;
             pictureBox5.TabIndex = 0;
             pictureBox5.TabStop = false;
             // 
@@ -237,7 +283,7 @@
             panel1.Controls.Add(AverageTripCostNumberLabel);
             panel1.Controls.Add(AverageTripCost);
             panel1.Controls.Add(pictureBox4);
-            panel1.Location = new Point(100, 219);
+            panel1.Location = new Point(12, 195);
             panel1.Name = "panel1";
             panel1.Size = new Size(156, 126);
             panel1.TabIndex = 3;
@@ -246,7 +292,7 @@
             // 
             AverageTripCostNumberLabel.AutoSize = true;
             AverageTripCostNumberLabel.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            AverageTripCostNumberLabel.Location = new Point(42, 81);
+            AverageTripCostNumberLabel.Location = new Point(48, 85);
             AverageTripCostNumberLabel.Name = "AverageTripCostNumberLabel";
             AverageTripCostNumberLabel.Size = new Size(59, 21);
             AverageTripCostNumberLabel.TabIndex = 2;
@@ -257,7 +303,7 @@
             AverageTripCost.AutoSize = true;
             AverageTripCost.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
             AverageTripCost.ForeColor = Color.Gray;
-            AverageTripCost.Location = new Point(24, 63);
+            AverageTripCost.Location = new Point(21, 67);
             AverageTripCost.Name = "AverageTripCost";
             AverageTripCost.Size = new Size(117, 17);
             AverageTripCost.TabIndex = 1;
@@ -266,25 +312,12 @@
             // pictureBox4
             // 
             pictureBox4.Image = Properties.Resources.low_price;
-            pictureBox4.Location = new Point(46, 9);
+            pictureBox4.Location = new Point(0, 4);
             pictureBox4.Name = "pictureBox4";
-            pictureBox4.Size = new Size(61, 50);
-            pictureBox4.SizeMode = PictureBoxSizeMode.StretchImage;
+            pictureBox4.Size = new Size(156, 60);
+            pictureBox4.SizeMode = PictureBoxSizeMode.Zoom;
             pictureBox4.TabIndex = 0;
             pictureBox4.TabStop = false;
-            // 
-            // ReportViewButton
-            // 
-            ReportViewButton.BackColor = Color.Black;
-            ReportViewButton.BorderStyle = BorderStyle.FixedSingle;
-            ReportViewButton.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
-            ReportViewButton.ForeColor = Color.White;
-            ReportViewButton.Location = new Point(115, 417);
-            ReportViewButton.Name = "ReportViewButton";
-            ReportViewButton.Size = new Size(348, 40);
-            ReportViewButton.TabIndex = 6;
-            ReportViewButton.Text = "View Reports";
-            ReportViewButton.TextAlign = ContentAlignment.MiddleCenter;
             // 
             // StatisticLabel
             // 
@@ -311,7 +344,7 @@
             // 
             TotalRevenueNumberLabel.AutoSize = true;
             TotalRevenueNumberLabel.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            TotalRevenueNumberLabel.Location = new Point(42, 80);
+            TotalRevenueNumberLabel.Location = new Point(41, 80);
             TotalRevenueNumberLabel.Name = "TotalRevenueNumberLabel";
             TotalRevenueNumberLabel.Size = new Size(64, 21);
             TotalRevenueNumberLabel.TabIndex = 2;
@@ -322,7 +355,7 @@
             RevenueLabel.AutoSize = true;
             RevenueLabel.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
             RevenueLabel.ForeColor = Color.Gray;
-            RevenueLabel.Location = new Point(32, 63);
+            RevenueLabel.Location = new Point(27, 64);
             RevenueLabel.Name = "RevenueLabel";
             RevenueLabel.Size = new Size(95, 17);
             RevenueLabel.TabIndex = 1;
@@ -331,10 +364,10 @@
             // pictureBox3
             // 
             pictureBox3.Image = Properties.Resources.profit;
-            pictureBox3.Location = new Point(46, 9);
+            pictureBox3.Location = new Point(0, 4);
             pictureBox3.Name = "pictureBox3";
-            pictureBox3.Size = new Size(61, 50);
-            pictureBox3.SizeMode = PictureBoxSizeMode.StretchImage;
+            pictureBox3.Size = new Size(156, 59);
+            pictureBox3.SizeMode = PictureBoxSizeMode.Zoom;
             pictureBox3.TabIndex = 0;
             pictureBox3.TabStop = false;
             // 
@@ -373,10 +406,10 @@
             // pictureBox2
             // 
             pictureBox2.Image = Properties.Resources.active;
-            pictureBox2.Location = new Point(46, 9);
+            pictureBox2.Location = new Point(0, 4);
             pictureBox2.Name = "pictureBox2";
-            pictureBox2.Size = new Size(61, 50);
-            pictureBox2.SizeMode = PictureBoxSizeMode.StretchImage;
+            pictureBox2.Size = new Size(156, 59);
+            pictureBox2.SizeMode = PictureBoxSizeMode.Zoom;
             pictureBox2.TabIndex = 0;
             pictureBox2.TabStop = false;
             // 
@@ -395,7 +428,7 @@
             // 
             TotalUsersNumberLabel.AutoSize = true;
             TotalUsersNumberLabel.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            TotalUsersNumberLabel.Location = new Point(61, 79);
+            TotalUsersNumberLabel.Location = new Point(67, 79);
             TotalUsersNumberLabel.Name = "TotalUsersNumberLabel";
             TotalUsersNumberLabel.Size = new Size(19, 21);
             TotalUsersNumberLabel.TabIndex = 2;
@@ -415,10 +448,10 @@
             // pictureBox1
             // 
             pictureBox1.Image = Properties.Resources.dashboard;
-            pictureBox1.Location = new Point(50, 9);
+            pictureBox1.Location = new Point(0, 3);
             pictureBox1.Name = "pictureBox1";
-            pictureBox1.Size = new Size(50, 50);
-            pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
+            pictureBox1.Size = new Size(156, 59);
+            pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
             pictureBox1.TabIndex = 0;
             pictureBox1.TabStop = false;
             // 
@@ -977,6 +1010,7 @@
             UpcomingTripsPanel.PerformLayout();
             StatisticsPanel.ResumeLayout(false);
             StatisticsPanel.PerformLayout();
+            reportsGroupBox.ResumeLayout(false);
             panel4.ResumeLayout(false);
             panel4.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox5).EndInit();
@@ -1115,5 +1149,7 @@
         private Label AverageTripCostNumberLabel;
         private Label AverageTripCost;
         private PictureBox pictureBox4;
+        private GroupBox reportsGroupBox;
+        private ComboBox selectReportComboBox;
     }
 }

@@ -11,6 +11,7 @@ using System.Windows.Forms;
 using static TravelEaseApp.Helpers;
 using System.Data.SqlClient;
 using System.Globalization;
+using FastReport;
 
 namespace TravelEaseApp
 {
@@ -18,6 +19,39 @@ namespace TravelEaseApp
     {
         string regNo;
         Label hiddenLabel;
+
+        private Panel CompleteReportPanel = new Panel();
+
+        List<string> reportList = new List<string>
+        {
+            "1. Revenue by Category Report",
+            "2. Trip Booking Revenue Report",
+            "3. Trip Cancellation Rate Report",
+            "4. Peak Booking Periods Report",
+            "5. Average Booking Value Report",
+            "6. Traveler Demographics Report",
+            "7. Preferred Trip Types Report",
+            "8. Preferred Destinations Report",
+            "9. Traveler Spending Habits Report",
+            "10. Average Operator Rating Report",
+            "11. Operator Total Revenue Report",
+            "12. Hotel Occupancy Rate Report",
+            "13. Guide Service Ratings Report",
+            "14. Most Booked Destinations Report",
+            "15. Seasonal Trends Report",
+            "16. Traveler Satisfaction Score Report",
+            "17. Emerging Destinations Report",
+            "18. Abandoned Booking Analysis Report",
+            "19. Abandoned Booking Reasons Report",
+            "20. Abandoned Booking Recovery Rate Report",
+            "21. Potential Revenue Loss Report",
+            "22. New User Registrations Report",
+            "23. Monthly Active Users Report",
+            "24. Partnership Growth Report",
+            "25. Regional Expansion Report",
+            "26. Payment Success/Failure Rate Report",
+            "27. Chargeback Rate Report"
+        };
 
         public Admin(string regNo)
         {
@@ -31,6 +65,34 @@ namespace TravelEaseApp
             this.Controls.Add(hiddenLabel);
             this.ActiveControl = hiddenLabel; // Set focus to the invisible label
             this.regNo = regNo;
+
+            //submitLabel.BackColor, submitLabel.ForeColor, submitLabel.ForeColor, submitLabel.BackColor
+            AddHoverTransition(ReportViewButton, ReportViewButton.BackColor, ReportViewButton.ForeColor, ReportViewButton.ForeColor, ReportViewButton.BackColor);
+            PopulateSelectReportComboBox();
+
+            CompleteReportPanel.Visible = false;
+
+            Color borderColor = Color.FromArgb(220, 224, 230);
+            CompleteReportPanel.Paint += (s, e) =>
+            {
+                ControlPaint.DrawBorder(e.Graphics, CompleteReportPanel.ClientRectangle,
+                    borderColor, 1, ButtonBorderStyle.Solid,
+                    borderColor, 1, ButtonBorderStyle.Solid,
+                    borderColor, 1, ButtonBorderStyle.Solid,
+                    borderColor, 1, ButtonBorderStyle.Solid);
+            };
+        }
+
+        private void PopulateSelectReportComboBox()
+        {
+            //categoryComboBox.DataSource = null; // Clear previous bindings
+            //categoryComboBox.DisplayMember = "CategoryName"; // Display user-friendly string
+            //categoryComboBox.ValueMember = "Id"; // Set the value to location_id
+            //categoryComboBox.DataSource = categories; // Bind the data
+
+            // show strings from reportList, but output the index of the selection
+            selectReportComboBox.DataSource = reportList;
+            selectReportComboBox.SelectedIndex = -1; // No selection by default
         }
 
         private void CategoryButtonLabel_Click(object sender, EventArgs e)
@@ -791,7 +853,7 @@ namespace TravelEaseApp
             return path;
         }
 
-       
+
 
         public void AddCategoryToPanel(Panel containerPanel, Category category)
         {
@@ -922,7 +984,8 @@ namespace TravelEaseApp
             Dictionary<Control, Color> originalColors = new Dictionary<Control, Color>();
             Dictionary<Control, Color> originalBackColors = new Dictionary<Control, Color>(); // Store label BackColors too if needed
 
-            Action<Control> applyHover = (control) => {
+            Action<Control> applyHover = (control) =>
+            {
                 control.BackColor = _hoverColor;
                 originalBackColors.Clear(); // Clear previous hover states
                 originalColors.Clear();
@@ -940,7 +1003,8 @@ namespace TravelEaseApp
                 }
             };
 
-            Action<Control> removeHover = (control) => {
+            Action<Control> removeHover = (control) =>
+            {
                 if (control.ClientRectangle.Contains(control.PointToClient(Cursor.Position)))
                     return; // Still inside the panel, do nothing
 
@@ -961,7 +1025,8 @@ namespace TravelEaseApp
 
             // Apply hover to panel and its children recursively
             Action<Control> subscribeToHover = null;
-            subscribeToHover = (control) => {
+            subscribeToHover = (control) =>
+            {
                 control.MouseEnter += (s, e) => applyHover(categoryCardPanel); // Always trigger based on the main panel
                 control.MouseLeave += (s, e) => removeHover(categoryCardPanel); // Always trigger based on the main panel
 
@@ -2072,7 +2137,74 @@ namespace TravelEaseApp
             }
         }
 
+        private void ReportViewButton_Click(object sender, EventArgs e)
+        {
+            ShowReportDetails();
+        }
 
+        private void ShowReportDetails()
+        {
+            if (selectReportComboBox.SelectedIndex >= 0 && selectReportComboBox.SelectedIndex < reportList.Count)
+            {
 
+                if (!CompleteReportPanel.Visible)
+                {
+                    // Add CompleteReportPanel to the current form controls if not already
+                    if (!this.Controls.Contains(CompleteReportPanel))
+                    {
+                        this.Controls.Add(CompleteReportPanel);
+                    }
+
+                    CompleteReportPanel.BringToFront();
+                    CompleteReportPanel.Visible = true;
+                    // Set size and location relative to the main form
+                    CompleteReportPanel.Size = new Size(this.ClientSize.Width - 80, this.ClientSize.Height - 80);
+                    CompleteReportPanel.Location = new Point(40, 40);
+                    CompleteReportPanel.Controls.Clear(); // Clear any existing controls
+
+                    // Assuming the order in reportList corresponds to your reportType cases (1-based)
+                    int selectedReportIndex = selectReportComboBox.SelectedIndex;
+                    int reportTypeToPass = selectedReportIndex + 1; // Adjust if your mapping is different
+
+                    var rep = new ReportsForm(reportTypeToPass);
+                    rep.Dock = DockStyle.Fill;
+                    rep.TopLevel = false;
+                    rep.FormBorderStyle = FormBorderStyle.None;
+                    rep.BackColor = Color.White;
+                    CompleteReportPanel.Controls.Add(rep);
+                    rep.Show();
+                    rep.BringToFront();
+                    AddCloseButtonToPanel(CompleteReportPanel);
+                }
+            }
+            else
+            {
+                MessageBox.Show("Please select a report from the list.");
+            }
+        }
+
+        private void AddCloseButtonToPanel(Panel panel)
+        {
+            Button closeButton = new Button
+            {
+                Text = "×",
+                Font = new Font("Segoe UI", 12, FontStyle.Bold),
+                ForeColor = Color.Gray,
+                BackColor = Color.Transparent,
+                FlatStyle = FlatStyle.Flat,
+                Size = new Size(30, 30),
+                Location = new Point(panel.Width - 50, 10),
+                Cursor = Cursors.Hand
+            };
+
+            closeButton.FlatAppearance.BorderSize = 0;
+            closeButton.Click += (s, e) =>
+            {
+                panel.Visible = false;
+            };
+
+            panel.Controls.Add(closeButton);
+            closeButton.BringToFront();
+        }
     }
 }

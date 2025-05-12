@@ -12,7 +12,7 @@ namespace TravelEaseApp
 {
     public static class Helpers
     {
-        public static string connectionString = "Data Source=DESKTOP-HNUMPVK\\SQLEXPRESS;Initial Catalog=TravelEase;Integrated Security=True;Encrypt=True;TrustServerCertificate=True";
+        public static string connectionString = "Data Source=BLAZ\\SQLEXPRESS;Initial Catalog=ViewsBackupV2;Integrated Security=True;Encrypt=True;TrustServerCertificate=True";
 
         public static void AddPlaceholder(TextBox textBox, string placeholderText)
         {

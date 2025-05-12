@@ -24,7 +24,7 @@ namespace TravelEase
             string regNo = "AD-000001"; // Example registration number
             //SignInForm signInForm = new SignInForm();
 
-            Application.Run(new Traveller(regNo));
+            Application.Run(new Admin(regNo));
             //signInForm.Close();
 
         }

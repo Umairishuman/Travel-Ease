@@ -13,7 +13,6 @@ using System.Net;
 using System.Net.NetworkInformation;
 using System.Globalization;
 using System.Transactions;
-using static TravelEaseApp.Helpers;
 using System.Data.SqlClient;
 using System.Drawing.Drawing2D;
 
@@ -199,7 +198,7 @@ namespace TravelEaseApp
         {
             Panel ratingPanel = new Panel
             {
-                Location = new Point(MainPadding, yPosition),
+                //Location = new Point(MainPadding, yPosition),
                 Width = panelWidth,
                 Height = StarSize + 10,
                 BackColor = Color.Transparent
@@ -211,7 +210,7 @@ namespace TravelEaseApp
                 {
                     Name = $"{prefix}_star{i}",
                     Tag = i,
-                    Image = Properties.Resources.StarEmpty, // You'll need star images
+                    //Image = Properties.Resources.StarEmpty, // You'll need star images
                     Size = new Size(StarSize, StarSize),
                     Location = new Point((i - 1) * (StarSize + 5), 0),
                     SizeMode = PictureBoxSizeMode.StretchImage,
