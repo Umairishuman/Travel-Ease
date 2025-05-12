@@ -9,6 +9,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="1" Version="1.0.0" />
+    <PackageReference Include="FastReport.Net.Demo" Version="2025.2.2" />
+    <PackageReference Include="FastReport.OpenSource" Version="2025.2.0" />
+    <PackageReference Include="FastReport.OpenSource.Export.PdfSimple" Version="2025.2.0" />
     <PackageReference Include="Microsoft.Data.SqlClient" Version="6.0.2" />
     <PackageReference Include="Microsoft.ReportingServices.ReportViewerControl.Winforms" Version="150.1652.0" />
     <PackageReference Include="System.Data.SqlClient" Version="4.9.0" />
@@ -20,10 +24,20 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <Compile Update="RevenueByCategory.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>RevenueByCategory.xsd</DependentUpon>
+    </Compile>
     <Compile Update="TravelEaseDataSet.Designer.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
       <DependentUpon>TravelEaseDataSet.xsd</DependentUpon>
+    </Compile>
+    <Compile Update="TravelEaseDataSet1.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>TravelEaseDataSet1.xsd</DependentUpon>
     </Compile>
   </ItemGroup>
 
@@ -35,9 +49,17 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Update="RevenueByCategory.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>RevenueByCategory.Designer.cs</LastGenOutput>
+    </None>
     <None Update="TravelEaseDataSet.xsd">
       <Generator>MSDataSetGenerator</Generator>
       <LastGenOutput>TravelEaseDataSet.Designer.cs</LastGenOutput>
+    </None>
+    <None Update="TravelEaseDataSet1.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>TravelEaseDataSet1.Designer.cs</LastGenOutput>
     </None>
   </ItemGroup>
 

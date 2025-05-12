@@ -28,15 +28,18 @@
         /// </summary>
         private void InitializeComponent()
         {
+            FastReport.Report report1 = new FastReport.Report();
             SuspendLayout();
+            report1.NeedRefresh = false;
             // 
             // ReportsForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1144, 564);
+            ClientSize = new Size(1052, 564);
             Name = "ReportsForm";
             Text = "ReportsForm";
+            Load += ReportsForm_Load;
             ResumeLayout(false);
         }
 

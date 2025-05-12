@@ -1,0 +1,52 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="TravelEaseDataSet1" targetNamespace="http://tempuri.org/TravelEaseDataSet1.xsd" xmlns:mstns="http://tempuri.org/TravelEaseDataSet1.xsd" xmlns="http://tempuri.org/TravelEaseDataSet1.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections>
+          <Connection ConnectionStringObject="Data Source=DESKTOP-HNUMPVK\SQLEXPRESS;Initial Catalog=TravelEase;Integrated Security=True;Encrypt=True;TrustServerCertificate=True" IsAppSettingsProperty="false" Modifier="Assembly" Name="desktop-hnumpvk\sqlexpress.TravelEase.dbo" ParameterPrefix="@" Provider="System.Data.SqlClient" />
+        </Connections>
+        <Tables>
+          <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="RevenueByCategoryTableAdapter" GeneratorDataComponentClassName="RevenueByCategoryTableAdapter" Name="RevenueByCategory" UserDataComponentName="RevenueByCategoryTableAdapter">
+            <MainSource>
+              <DbSource ConnectionRef="desktop-hnumpvk\sqlexpress.TravelEase.dbo" DbObjectName="TravelEase.dbo.RevenueByCategory" DbObjectType="View" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="false" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetData" UserSourceName="Fill">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="false">
+                    <CommandText>SELECT category_name, Revenue FROM dbo.RevenueByCategory</CommandText>
+                    <Parameters />
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+            </MainSource>
+            <Mappings>
+              <Mapping SourceColumn="category_name" DataSetColumn="category_name" />
+              <Mapping SourceColumn="Revenue" DataSetColumn="Revenue" />
+            </Mappings>
+            <Sources />
+          </TableAdapter>
+        </Tables>
+        <Sources />
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="TravelEaseDataSet1" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="True" msprop:Generator_UserDSName="TravelEaseDataSet1" msprop:Generator_DataSetName="TravelEaseDataSet1">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="RevenueByCategory" msprop:Generator_RowEvHandlerName="RevenueByCategoryRowChangeEventHandler" msprop:Generator_RowDeletedName="RevenueByCategoryRowDeleted" msprop:Generator_RowDeletingName="RevenueByCategoryRowDeleting" msprop:Generator_RowEvArgName="RevenueByCategoryRowChangeEvent" msprop:Generator_TablePropName="RevenueByCategory" msprop:Generator_RowChangedName="RevenueByCategoryRowChanged" msprop:Generator_RowChangingName="RevenueByCategoryRowChanging" msprop:Generator_TableClassName="RevenueByCategoryDataTable" msprop:Generator_RowClassName="RevenueByCategoryRow" msprop:Generator_TableVarName="tableRevenueByCategory" msprop:Generator_UserTableName="RevenueByCategory">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="category_name" msprop:Generator_ColumnPropNameInRow="category_name" msprop:Generator_ColumnPropNameInTable="category_nameColumn" msprop:Generator_ColumnVarNameInTable="columncategory_name" msprop:Generator_UserColumnName="category_name">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="100" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="Revenue" msprop:Generator_ColumnPropNameInRow="Revenue" msprop:Generator_ColumnPropNameInTable="RevenueColumn" msprop:Generator_ColumnVarNameInTable="columnRevenue" msprop:Generator_UserColumnName="Revenue" type="xs:decimal" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>
