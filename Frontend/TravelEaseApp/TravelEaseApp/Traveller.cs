@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
-using System.Drawing;
+using System.Drawing;   
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -13,6 +13,8 @@ using System.Net;
 using System.Net.NetworkInformation;
 using System.Globalization;
 using System.Transactions;
+using static TravelEaseApp.Helpers;
+using System.Data.SqlClient;
 
 namespace TravelEaseApp
 {
@@ -24,7 +26,7 @@ namespace TravelEaseApp
         //Panel currentPanel;
         public Traveller(string regNo)
         {
-            this.regNo = regNo;
+            this.regNo = "TR-000004";
             InitializeComponent();
 
             hiddenLabel = new Label();
@@ -34,7 +36,6 @@ namespace TravelEaseApp
             this.Controls.Add(hiddenLabel);
 
             this.ActiveControl = hiddenLabel; // Set focus
-            this.regNo = regNo;
         }
 
         private void Traveller_Load(object sender, EventArgs e)
@@ -44,8 +45,7 @@ namespace TravelEaseApp
             AddHoverTransition(BookingsButton, BookingsButtonPanel, BookingsButtonPanel.BackColor, Color.Silver, BookingsButtonPanel.ForeColor, BookingsButtonPanel.ForeColor);
             AddHoverTransition(TransactionsButton, TransactionButtonPanel, TransactionButtonPanel.BackColor, Color.Silver, TransactionButtonPanel.ForeColor, TransactionButtonPanel.ForeColor);
             AddHoverTransition(AddPreferenceButton, AddPreferenceButton.BackColor, Color.Silver, AddPreferenceButton.ForeColor, AddPreferenceButton.ForeColor);
-
-
+            AddHoverTransition(applyfilterbox, applyfilterbox.BackColor, applyfilterbox.ForeColor, applyfilterbox.ForeColor, applyfilterbox.BackColor);
 
 
 
@@ -192,8 +192,14 @@ namespace TravelEaseApp
             AddTripBox(UpcomingTripsPanel, trip1);
             AddTripBox(UpcomingTripsPanel, trip2);
 
-        }
+            MoneyLabel.Text = moneySlider.Value.ToString("C", CultureInfo.CurrentCulture);
 
+            moneySlider.Scroll += (s, e) =>
+            {
+                MoneyLabel.Text = $"{moneySlider.Value}$";
+            };
+
+        }
 
 
         //TripDisplayPanel_Click
@@ -392,45 +398,59 @@ namespace TravelEaseApp
                 AutoEllipsis = true
             };
 
-            // --- Status ---
+            // --- Status --- (Fixed version)
             Panel pnlStatus = new Panel
             {
+                AutoSize = false,
                 Height = 22,
-                //AutoSize = true,
-                Padding = new Padding(0, 0, 0, 0)
+                Padding = new Padding(5, 2, 5, 2),
+                MinimumSize = new Size(70, 22)
             };
+
             Label lblStatusText = new Label
             {
                 Text = trip.Status.ToUpper(),
                 Font = statusFont,
-                ForeColor = Color.Black,
+                ForeColor = Color.White,
                 TextAlign = ContentAlignment.MiddleCenter,
                 Dock = DockStyle.Fill,
-                AutoSize = false,
-                Location = new Point(0, 0)
+                AutoSize = false
             };
-            pnlStatus.Controls.Add(lblStatusText);
-            pnlStatus.MinimumSize = new Size(70, 22);
 
+            // Set status color and text
             switch (trip.Status.ToLower())
             {
                 case "active":
                     pnlStatus.BackColor = Color.MediumSeaGreen;
-                    lblStatusText.Text = "ACHLKhhgghJK";
+                    lblStatusText.Text = "ACTIVE";
                     break;
                 case "cancelled":
                     pnlStatus.BackColor = Color.Tomato;
+                    lblStatusText.Text = "CANCELLED";
                     break;
                 case "completed":
                     pnlStatus.BackColor = Color.CornflowerBlue;
+                    lblStatusText.Text = "COMPLETED";
                     break;
                 default:
                     pnlStatus.BackColor = Color.LightSlateGray;
-                    lblStatusText.Text = "N/A";
+                    lblStatusText.Text = trip.Status.ToUpper();
                     break;
             }
+
+            // Calculate required width based on text
+            using (Graphics g = pnlStatus.CreateGraphics())
+            {
+                SizeF textSize = g.MeasureString(lblStatusText.Text, statusFont);
+                pnlStatus.Width = (int)textSize.Width + 12; // Add padding
+            }
+
+            // Ensure minimum width
+            if (pnlStatus.Width < 70)
+                pnlStatus.Width = 70;
+
             pnlStatus.Location = new Point(contentPanel.Width - pnlStatus.Width - 10, 2);
-            //lblStatusText.Location = new Point(0, 0);
+            pnlStatus.Controls.Add(lblStatusText);
 
             // --- Description ---
             Label lblDescription = new Label
@@ -508,7 +528,6 @@ namespace TravelEaseApp
             // --- Add to panels ---
             contentPanel.Controls.Add(lblTitle);
             contentPanel.Controls.Add(pnlStatus);
-            //contentPanel.Controls.Add(lblStatusText);
             contentPanel.Controls.Add(lblDescription);
             contentPanel.Controls.Add(lblDatesAndLocation);
             contentPanel.Controls.Add(lblDurationCategory);
@@ -519,16 +538,7 @@ namespace TravelEaseApp
             tripBox.Controls.Add(tripImage);
             tripBox.Controls.Add(contentPanel);
 
-            //// --- Hover effect ---
-            //foreach (Control ctl in contentPanel.Controls)
-            //{
-            //    if (ctl is Label) ctl.BackColor = Color.Transparent;
-            //    ctl.MouseEnter += (s, e) => tripBox.BackColor = hoverColor;
-            //    ctl.MouseLeave += (s, e) => tripBox.BackColor = primaryBackColor;
-            //}
-            //tripImage.MouseEnter += (s, e) => tripBox.BackColor = hoverColor;
-            //tripImage.MouseLeave += (s, e) => tripBox.BackColor = primaryBackColor;
-
+            // --- Hover effect ---
             AddHoverTransition(tripBox, primaryBackColor, hoverColor, titleColor, textColor);
 
             // --- Add to container ---
@@ -542,56 +552,141 @@ namespace TravelEaseApp
                     mainPanel.Controls.Add(CompleteTripInfoPanel);
                     CompleteTripInfoPanel.BringToFront();
                     CompleteTripInfoPanel.Visible = true;
-
                 }
-                DisplayTripInPanel(CompleteTripInfoPanel, trip);
+                DisplayTripInPanel(CompleteTripInfoPanel, trip, mainPanel);
             };
 
             // Attach to tripBox and all its children
             AttachClickToAllChildren(tripBox, showTripDetails);
-
         }
 
 
-
-        public void DisplayTripInPanel(Panel targetPanel, Trip trip)
+        private void DisplayOperatorReviews(Panel containerPanel, string operatorId)
         {
-            // --- UPDATED Theme and Styling Constants for WHITE BACKGROUND ---
-            Color PanelBackgroundColor = Color.WhiteSmoke; // Light background
-            Color TextColor = Color.FromArgb(30, 30, 30);          // Dark text
-            Color MutedTextColor = Color.FromArgb(80, 80, 80);      // Slightly lighter dark text
-            Color AccentColor = Color.FromArgb(0, 122, 204);      // Modern Blue for accents/button
-            Color ButtonTextColor = Color.White;                    // White text for button
-            Color DividerColor = Color.LightGray;                   // Light grey for dividers
+            // --- Your Implementation Here ---
+            // 1. Fetch reviews for operatorId from your data source (database, API, etc.)
+            // 2. Create Labels, PictureBoxes (for stars), etc., for each review.
+            // 3. Add the created controls to containerPanel.
+            // 4. Adjust containerPanel.Height if necessary or manage scrolling within it.
+
+            // Example Placeholder Content:
+            containerPanel.SuspendLayout(); // Suspend layout for performance
+            containerPanel.Controls.Clear();
+            Label lblPlaceholder = new Label
+            {
+                Text = $"Review loading for Operator ID: {operatorId} (Not Implemented Yet)",
+                Dock = DockStyle.Top,
+                AutoSize = true,
+                ForeColor = Color.Gray,
+                Font = new Font("Segoe UI", 10F, FontStyle.Italic),
+                Padding = new Padding(5)
+            };
+            containerPanel.Controls.Add(lblPlaceholder);
+            containerPanel.Height = lblPlaceholder.Height + 10; // Adjust height based on content
+            containerPanel.ResumeLayout(); // Resume layout
+
+            Console.WriteLine($"Placeholder: DisplayOperatorReviews called for Operator ID: {operatorId}");
+        }
+
+        /// <summary>
+        /// Populates a panel with reviews for a specific service provider.
+        /// (You will implement the database fetching and UI creation here)
+        /// </summary>
+        /// <param name="containerPanel">The Panel control to add review UI elements into.</param>
+        /// <param name="providerId">The ID of the service provider whose reviews are needed.</param>
+        /// <param name="providerName">The Name of the service provider (for display).</param>
+        private void DisplayServiceProviderReviews(Panel containerPanel, string providerId, string providerName)
+        {
+            // --- Your Implementation Here ---
+            // 1. Fetch reviews for providerId from your data source.
+            // 2. Create UI elements for reviews.
+            // 3. Add controls to containerPanel.
+            // 4. Adjust containerPanel.Height or manage scrolling.
+
+            // Example Placeholder Content:
+            containerPanel.SuspendLayout();
+            containerPanel.Controls.Clear();
+            Label lblPlaceholder = new Label
+            {
+                // Use providerName for clarity in the placeholder
+                Text = $"Review loading for {providerName ?? "Provider"} (ID: {providerId ?? "N/A"}) (Not Implemented Yet)",
+                Dock = DockStyle.Top,
+                AutoSize = true,
+                ForeColor = Color.Gray,
+                Font = new Font("Segoe UI", 10F, FontStyle.Italic),
+                Padding = new Padding(5)
+            };
+            containerPanel.Controls.Add(lblPlaceholder);
+            containerPanel.Height = lblPlaceholder.Height + 10;
+            containerPanel.ResumeLayout();
+
+            Console.WriteLine($"Placeholder: DisplayServiceProviderReviews called for Provider ID: {providerId}, Name: {providerName}");
+        }
+
+        // --- Helper Function (Assuming it exists or you create it) ---
+        //private void AddCloseButtonToPanel(Panel targetPanel, Panel mainPanel)
+        //{
+        //    // Implementation depends on how you want the close button to work
+        //    // Example: Adds a simple 'X' button to hide targetPanel
+        //    Button closeButton = new Button();
+        //    closeButton.Text = "X";
+        //    closeButton.ForeColor = Color.DimGray;
+        //    closeButton.BackColor = Color.WhiteSmoke; // Match panel background
+        //    closeButton.FlatStyle = FlatStyle.Flat;
+        //    closeButton.FlatAppearance.BorderSize = 0;
+        //    closeButton.Size = new Size(25, 25);
+        //    closeButton.Font = new Font("Arial", 10F, FontStyle.Bold);
+        //    closeButton.Location = new Point(targetPanel.ClientSize.Width - closeButton.Width - 5, 5); // Top-right corner
+        //    closeButton.Anchor = AnchorStyles.Top | AnchorStyles.Right; // Keep it top-right on resize
+        //    closeButton.Cursor = Cursors.Hand;
+        //    closeButton.Click += (sender, e) => {
+        //        targetPanel.Visible = false; // Or targetPanel.Dispose(); or hide mainPanel etc.
+        //        if (mainPanel != null) mainPanel.Visible = true; // Example action
+        //    };
+        //    targetPanel.Controls.Add(closeButton);
+        //    closeButton.BringToFront(); // Ensure it's clickable
+        //}
+
+
+        // --- Main Display Function ---
+        public void DisplayTripInPanel(Panel targetPanel, Trip trip, Panel mainPanel) // Added mainPanel parameter
+        {
+            // --- Theme and Styling Constants ---
+            Color PanelBackgroundColor = Color.WhiteSmoke;
+            Color TextColor = Color.FromArgb(30, 30, 30);
+            Color MutedTextColor = Color.FromArgb(80, 80, 80);
+            Color AccentColor = Color.FromArgb(0, 122, 204);
+            Color ButtonTextColor = Color.White;
+            Color DividerColor = Color.LightGray;
+            Color CompletedTripColor = Color.FromArgb(0, 150, 0); // Green for completed status
 
             Font TitleFont = new Font("Segoe UI Semibold", 18F, FontStyle.Bold);
             Font SubtitleFont = new Font("Segoe UI", 16F, FontStyle.Regular);
             Font BodyFont = new Font("Segoe UI", 12F, FontStyle.Regular);
             Font SectionHeaderFont = new Font("Segoe UI Semibold", 14F, FontStyle.Bold);
             Font ButtonFont = new Font("Segoe UI Semibold", 16F, FontStyle.Bold);
+            Font SmallHeaderFont = new Font("Segoe UI Semibold", 11F, FontStyle.Bold); // For service provider review headers
 
             const int MainPadding = 20;
             const int ItemSpacing = 8;
             const int SectionSpacing = 15;
+            const int ReviewPanelMinHeight = 50; // Min height for review panels
 
 
             if (targetPanel == null) throw new ArgumentNullException(nameof(targetPanel));
             if (trip == null) throw new ArgumentNullException(nameof(trip));
 
-
-
+            targetPanel.SuspendLayout(); // Suspend layout during bulk updates
 
             targetPanel.Controls.Clear();
             targetPanel.BackColor = PanelBackgroundColor;
-            targetPanel.ForeColor = TextColor; // Default text color
+            targetPanel.ForeColor = TextColor;
             targetPanel.Padding = new Padding(MainPadding);
             targetPanel.AutoScroll = true;
-            //add a small cross on the top right corner of the panel to close the panel
-            AddCloseButtonToPanel(targetPanel, mainPanel);
-
-
+            AddCloseButtonToPanel(targetPanel, mainPanel); // Assuming mainPanel is the panel to show after closing
 
             int currentY = MainPadding;
+            int panelWidth = targetPanel.ClientSize.Width - (2 * MainPadding);
 
             Label AddLabel(string text, Font font, Color color, int y, int? fixedHeight = null, bool isMultiline = true, ContentAlignment alignment = ContentAlignment.TopLeft)
             {
@@ -600,54 +695,61 @@ namespace TravelEaseApp
                     Text = text,
                     Font = font,
                     ForeColor = color,
-                    BackColor = Color.Transparent, // Important for themed background
+                    BackColor = Color.Transparent,
                     Location = new Point(MainPadding, y),
-                    Width = targetPanel.ClientSize.Width - (2 * MainPadding),
+                    Width = panelWidth > 0 ? panelWidth : 400, // Ensure minimum width if panel isn't drawn yet
                     TextAlign = alignment,
+                    MaximumSize = new Size(panelWidth > 0 ? panelWidth : 400, 0) // Allow vertical growth
                 };
 
                 if (isMultiline)
                 {
-                    lbl.AutoSize = false;
+                    lbl.AutoSize = false; // Set AutoSize false for manual height calculation/setting
+                                          // Use MeasureText for accurate height calculation with word wrapping
                     Size textSize = TextRenderer.MeasureText(text, font, new Size(lbl.Width, int.MaxValue), TextFormatFlags.WordBreak | TextFormatFlags.TextBoxControl);
-                    lbl.Height = fixedHeight ?? textSize.Height + 5;
+                    lbl.Height = fixedHeight ?? textSize.Height + 5; // Add a little padding
                 }
                 else
                 {
-                    lbl.AutoSize = true;
+                    lbl.AutoSize = true; // Let single-line labels size themselves
                 }
                 targetPanel.Controls.Add(lbl);
                 return lbl;
             }
 
-            Panel AddDivider(int y) // Not used in current white theme, but kept for potential future use
+            Panel AddDivider(int y)
             {
                 Panel divider = new Panel
                 {
                     Height = 1,
-                    BackColor = DividerColor, // Updated divider color
+                    BackColor = DividerColor,
                     Location = new Point(MainPadding, y),
-                    Width = targetPanel.ClientSize.Width - (2 * MainPadding),
+                    Width = panelWidth > 0 ? panelWidth : 400,
+                    Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right // Make divider resize horizontally
                 };
                 targetPanel.Controls.Add(divider);
                 return divider;
             }
 
+            // --- Image ---
             if (!string.IsNullOrWhiteSpace(trip.ImageUrl))
             {
                 PictureBox pictureBox = new PictureBox
                 {
                     Location = new Point(MainPadding, currentY),
-                    Size = new Size(targetPanel.ClientSize.Width - (2 * MainPadding), 200),
+                    Size = new Size(panelWidth > 0 ? panelWidth : 400, 200),
                     SizeMode = PictureBoxSizeMode.StretchImage,
-                    BackColor = Color.Gainsboro // Lighter background for image placeholder on white theme
+                    BackColor = Color.Gainsboro,
+                    Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right
                 };
                 try
                 {
+                    // Prefer HttpClient, but WebClient works for basic cases
                     if (Uri.IsWellFormedUriString(trip.ImageUrl, UriKind.Absolute))
                     {
                         using (WebClient wc = new WebClient())
                         {
+                            // Consider async download if UI responsiveness is critical
                             byte[] imageBytes = wc.DownloadData(trip.ImageUrl);
                             using (var ms = new System.IO.MemoryStream(imageBytes))
                             {
@@ -655,92 +757,98 @@ namespace TravelEaseApp
                             }
                         }
                     }
-                    else if (System.IO.File.Exists(trip.ImageUrl))
+                    else if (System.IO.File.Exists(trip.ImageUrl)) // Handle local files
                     {
-                        pictureBox.ImageLocation = trip.ImageUrl;
+                        // Use Image.FromFile for local files to avoid locking them
+                        pictureBox.Image = Image.FromFile(trip.ImageUrl);
+                        // pictureBox.ImageLocation = trip.ImageUrl; // Setting ImageLocation can sometimes lock files
                     }
                     else
                     {
-                        Label imgPlaceholder = new Label
-                        {
-                            Text = "Image not available",
-                            Font = BodyFont,
-                            ForeColor = MutedTextColor,
-                            BackColor = pictureBox.BackColor, // Match picbox background
-                            Size = pictureBox.Size,
-                            TextAlign = ContentAlignment.MiddleCenter
-                        };
-                        pictureBox.Controls.Add(imgPlaceholder); // Add placeholder text over PictureBox
+                        // Add placeholder text if URL/path is invalid or inaccessible
+                        Label imgPlaceholder = new Label { Text = "Image not available", Font = BodyFont, ForeColor = MutedTextColor, BackColor = pictureBox.BackColor, Size = pictureBox.Size, TextAlign = ContentAlignment.MiddleCenter };
+                        pictureBox.Controls.Add(imgPlaceholder);
                     }
                     targetPanel.Controls.Add(pictureBox);
                     currentY += pictureBox.Height + SectionSpacing;
                 }
                 catch (Exception ex)
                 {
-                    Console.WriteLine($"Image load error: {ex.Message}");
-                    Label imgErrorLabel = AddLabel("Image could not be loaded.", BodyFont, MutedTextColor, currentY);
+                    Console.WriteLine($"Image load error for {trip.ImageUrl}: {ex.Message}");
+                    // Optionally add an error message label instead of crashing
+                    Label imgErrorLabel = AddLabel($"Image could not be loaded.", BodyFont, MutedTextColor, currentY);
                     currentY += imgErrorLabel.Height + ItemSpacing;
+                    // Don't add the picturebox if loading failed badly
                 }
             }
 
+            // --- Title, Price, Duration ---
             Label lblTitle = AddLabel(trip.Title ?? "Untitled Trip", TitleFont, TextColor, currentY, alignment: ContentAlignment.MiddleCenter);
             currentY += lblTitle.Height + ItemSpacing;
 
             string priceDuration = $"{trip.PricePerPerson:C} per person  |  {trip.DurationDisplay ?? "Duration N/A"}";
             Label lblPriceDuration = AddLabel(priceDuration, SubtitleFont, MutedTextColor, currentY, alignment: ContentAlignment.MiddleCenter);
             currentY += lblPriceDuration.Height + SectionSpacing;
-            currentY += AddDivider(currentY).Height + ItemSpacing; // Add a divider line
+            currentY += AddDivider(currentY).Height + SectionSpacing; // Divider after header section
 
+
+            // --- Description (Overview) ---
             if (!string.IsNullOrWhiteSpace(trip.Description))
             {
                 Label lblDescHeader = AddLabel("OVERVIEW", SectionHeaderFont, AccentColor, currentY);
                 currentY += lblDescHeader.Height + (ItemSpacing / 2);
                 Label lblDescription = AddLabel(trip.Description, BodyFont, TextColor, currentY);
                 currentY += lblDescription.Height + SectionSpacing;
-                currentY += AddDivider(currentY).Height + ItemSpacing; // Add a divider line
+                currentY += AddDivider(currentY).Height + SectionSpacing;
             }
 
+            // --- Details Section ---
             Label lblDetailsHeader = AddLabel("DETAILS", SectionHeaderFont, AccentColor, currentY);
             currentY += lblDetailsHeader.Height + (ItemSpacing / 2);
 
-            Label lblDates = AddLabel($"Dates: {trip.StartDate:MMMM dd, yyyy} - {trip.EndDate:MMMM dd, yyyy}", BodyFont, TextColor, currentY);
+            Label lblDates = AddLabel($"Dates: {trip.StartDate:MMMM dd, yyyy} - {trip.EndDate:MMMM dd, yyyy}", BodyFont, TextColor, currentY, isMultiline: false);
             currentY += lblDates.Height + ItemSpacing;
 
-            Label lblStartLoc = AddLabel($"Starts In: {(trip.StartLocation?.ToString() ?? "N/A")}", BodyFont, TextColor, currentY);
+            Label lblStartLoc = AddLabel($"Starts In: {(trip.StartLocation?.ToString() ?? "N/A")}", BodyFont, TextColor, currentY, isMultiline: false);
             currentY += lblStartLoc.Height + ItemSpacing;
 
-            Label lblCapacity = AddLabel($"Capacity: {trip.Capacity} guests", BodyFont, TextColor, currentY);
+            Label lblCapacity = AddLabel($"Capacity: {trip.Capacity} guests", BodyFont, TextColor, currentY, isMultiline: false);
             currentY += lblCapacity.Height + ItemSpacing;
 
-            Label lblOperator = AddLabel($"Operated By: {trip.OperatorName ?? "N/A"}", BodyFont, TextColor, currentY);
+            Label lblOperator = AddLabel($"Operated By: {trip.OperatorName ?? "N/A"}", BodyFont, TextColor, currentY, isMultiline: false);
             currentY += lblOperator.Height + ItemSpacing;
 
-            Label lblCategory = AddLabel($"Category: {trip.Category ?? "N/A"}", BodyFont, TextColor, currentY);
+            Label lblCategory = AddLabel($"Category: {trip.Category ?? "N/A"}", BodyFont, TextColor, currentY, isMultiline: false);
             currentY += lblCategory.Height + ItemSpacing;
 
-            Label lblStatus = AddLabel($"Status: {trip.Status ?? "N/A"}", BodyFont, TextColor, currentY);
+            Label lblStatus = AddLabel($"Status: {trip.Status ?? "N/A"}", BodyFont, TextColor, currentY, isMultiline: false);
             currentY += lblStatus.Height + SectionSpacing;
-            currentY += AddDivider(currentY).Height + ItemSpacing; // Add a divider line
+            currentY += AddDivider(currentY).Height + SectionSpacing;
 
+
+            // --- Visited Locations ---
             if (trip.VisitedLocations != null && trip.VisitedLocations.Any())
             {
                 Label lblVisitedHeader = AddLabel("PLACES YOU'LL VISIT", SectionHeaderFont, AccentColor, currentY);
                 currentY += lblVisitedHeader.Height + (ItemSpacing / 2);
                 foreach (var loc in trip.VisitedLocations)
                 {
-                    Label lblLoc = AddLabel($"• {loc.ToString()}", BodyFont, TextColor, currentY);
+                    Label lblLoc = AddLabel($"• {loc?.ToString() ?? "Unknown Location"}", BodyFont, TextColor, currentY); // Added null check for loc
                     currentY += lblLoc.Height + (ItemSpacing / 2);
                 }
-                currentY += SectionSpacing - (ItemSpacing / 2);
-                currentY += AddDivider(currentY).Height + ItemSpacing; // Add a divider line
+                currentY += SectionSpacing - (ItemSpacing / 2); // Adjust spacing after the list
+                currentY += AddDivider(currentY).Height + SectionSpacing;
             }
 
+            // --- Included Services ---
             if (trip.IncludedServices != null && trip.IncludedServices.Any())
             {
                 Label lblServicesHeader = AddLabel("WHAT'S INCLUDED", SectionHeaderFont, AccentColor, currentY);
                 currentY += lblServicesHeader.Height + (ItemSpacing / 2);
                 foreach (var service in trip.IncludedServices)
                 {
+                    if (service == null) continue; // Skip null services
+
                     string serviceText = $"• {service.ServiceType ?? "Service"}: {service.ServiceDescription ?? "Details not specified."}";
                     if (!string.IsNullOrWhiteSpace(service.ProviderName) && service.ProviderName != "N/A")
                     {
@@ -749,30 +857,130 @@ namespace TravelEaseApp
                     Label lblService = AddLabel(serviceText, BodyFont, TextColor, currentY);
                     currentY += lblService.Height + (ItemSpacing / 2);
                 }
-                currentY += SectionSpacing - (ItemSpacing / 2);
+                currentY += SectionSpacing - (ItemSpacing / 2); // Adjust spacing
+                currentY += AddDivider(currentY).Height + SectionSpacing;
             }
-            currentY += ItemSpacing;
 
-            Button btnBookNow = new Button
+
+            // --- ✅ Tour Operator Reviews Section ---
+            if (!string.IsNullOrWhiteSpace(trip.OperatorId))
             {
-                Text = "Book Now",
-                Font = ButtonFont,
-                ForeColor = ButtonTextColor,
-                BackColor = AccentColor,
-                FlatStyle = FlatStyle.Flat,
-                Height = 50,
-                Width = targetPanel.ClientSize.Width - (2 * MainPadding),
-                Location = new Point(MainPadding, currentY),
-                Cursor = Cursors.Hand,
-                Tag = trip.TripId
-            };
-            btnBookNow.FlatAppearance.BorderSize = 0;
-            targetPanel.Controls.Add(btnBookNow);
-            currentY += btnBookNow.Height + MainPadding;
+                Label lblOperatorReviewHeader = AddLabel("TOUR OPERATOR REVIEWS", SectionHeaderFont, AccentColor, currentY);
+                currentY += lblOperatorReviewHeader.Height + (ItemSpacing / 2);
 
-            targetPanel.AutoScrollMinSize = new Size(0, currentY);
-            targetPanel.Invalidate(); // Ensure the panel redraws with new styles
+                Panel operatorReviewsPanel = new Panel
+                {
+                    Location = new Point(MainPadding, currentY),
+                    Width = panelWidth > 0 ? panelWidth : 400,
+                    Height = ReviewPanelMinHeight, // Start with min height, might be adjusted by the function
+                    BackColor = Color.Transparent, // Inherit panel background or set specific color
+                    Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right,
+                    //BorderStyle = BorderStyle.FixedSingle // Optional: for debugging layout
+                };
+                targetPanel.Controls.Add(operatorReviewsPanel);
+
+                // Call the function to populate this panel
+                DisplayOperatorReviews(operatorReviewsPanel, trip.OperatorId);
+
+                // Update currentY based on the actual height of the populated panel
+                currentY += operatorReviewsPanel.Height + SectionSpacing;
+                currentY += AddDivider(currentY).Height + SectionSpacing;
+            }
+
+
+            // --- ✅ Service Provider Reviews Section ---
+            if (trip.IncludedServices != null && trip.IncludedServices.Any())
+            {
+                // Get unique providers with valid IDs/Names
+                var providers = trip.IncludedServices
+                    .Where(s => s != null && !string.IsNullOrWhiteSpace(s.ProviderId)) // Ensure service and ProviderId exist
+                    .GroupBy(s => s.ProviderId) // Group by ID (preferred)
+                    .Select(g => g.First()) // Select one service per unique provider ID
+                    .ToList();
+
+                if (providers.Any())
+                {
+                    Label lblProviderReviewsHeader = AddLabel("SERVICE PROVIDER REVIEWS", SectionHeaderFont, AccentColor, currentY);
+                    currentY += lblProviderReviewsHeader.Height + SectionSpacing; // More space before the first provider
+
+                    foreach (var service in providers)
+                    {
+                        // Add a small header for *this* provider
+                        Label lblProviderNameHeader = AddLabel($"Reviews for: {service.ProviderName ?? "Unknown Provider"}", SmallHeaderFont, TextColor, currentY);
+                        currentY += lblProviderNameHeader.Height + (ItemSpacing / 2);
+
+                        Panel serviceProviderReviewsPanel = new Panel
+                        {
+                            Location = new Point(MainPadding, currentY),
+                            Width = panelWidth > 0 ? panelWidth : 400,
+                            Height = ReviewPanelMinHeight, // Min height
+                            BackColor = Color.Transparent,
+                            Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right,
+                            // BorderStyle = BorderStyle.FixedSingle // Optional: for debugging
+                        };
+                        targetPanel.Controls.Add(serviceProviderReviewsPanel);
+
+                        // Call the function to populate this panel
+                        DisplayServiceProviderReviews(serviceProviderReviewsPanel, service.ProviderId, service.ProviderName);
+
+                        // Update Y based on the populated panel's height
+                        currentY += serviceProviderReviewsPanel.Height + ItemSpacing; // Space after each provider's review section
+                    }
+                    currentY += SectionSpacing - ItemSpacing; // Adjust spacing after the last provider
+                    currentY += AddDivider(currentY).Height + SectionSpacing; // Divider after all service reviews
+                }
+            }
+
+            currentY += ItemSpacing; // Extra space before the button/completion message
+
+            // --- Action Button / Completion Message ---
+            if (!trip.IsCompleted)
+            {
+                Button btnBookNow = new Button
+                {
+                    Text = "Book Now",
+                    Font = ButtonFont,
+                    ForeColor = ButtonTextColor,
+                    BackColor = AccentColor,
+                    FlatStyle = FlatStyle.Flat,
+                    Height = 50,
+                    Width = panelWidth > 0 ? panelWidth : 400,
+                    Location = new Point(MainPadding, currentY),
+                    Cursor = Cursors.Hand,
+                    Tag = trip.TripId, // Store TripId for the click event handler
+                    Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right
+                };
+                btnBookNow.FlatAppearance.BorderSize = 0;
+                // btnBookNow.Click += BtnBookNow_Click; // Assign your event handler here
+                targetPanel.Controls.Add(btnBookNow);
+                currentY += btnBookNow.Height + MainPadding;
+            }
+            else
+            {
+                // Display a message indicating the trip is completed
+                Label lblCompleted = AddLabel("This trip has been completed.", SubtitleFont, CompletedTripColor, currentY, alignment: ContentAlignment.MiddleCenter);
+                lblCompleted.Font = new Font(lblCompleted.Font, FontStyle.Bold); // Make it bold
+                currentY += lblCompleted.Height + MainPadding;
+            }
+
+
+            // --- Final Panel Adjustments ---
+            targetPanel.AutoScrollMinSize = new Size(0, currentY); // Set scroll minimum size
+            targetPanel.ResumeLayout(); // Resume layout and redraw everything
+            targetPanel.PerformLayout(); // Force layout calculation
+            targetPanel.Invalidate(); // Force redraw
         }
+
+        // Example event handler (define this in your form/class where DisplayTripInPanel is called)
+        // private void BtnBookNow_Click(object sender, EventArgs e)
+        // {
+        //     Button btn = sender as Button;
+        //     if (btn != null && btn.Tag is string tripId)
+        //     {
+        //         MessageBox.Show($"Booking action for Trip ID: {tripId}");
+        //         // Add booking logic here
+        //     }
+        // }
         public void AddCloseButtonToPanel(Panel panel, Panel mainPanel)
         {
             // Create the close button
@@ -811,7 +1019,7 @@ namespace TravelEaseApp
             DashboardPanel.Visible = true;
             TravellerTripsPanel.Visible = false;
             TravellerBookingsPanel.Visible = false;
-            //TravellerTransactionsPanel.Visible = false;
+            TravellerTransactionPanel.Visible = false;
 
         }
 
@@ -820,8 +1028,8 @@ namespace TravelEaseApp
             DashboardPanel.Visible = false;
             TravellerTripsPanel.Visible = true;
             TravellerBookingsPanel.Visible = false;
-            //TravellerTransactionsPanel.Visible = false;
-
+            TravellerTransactionPanel.Visible = false;
+            retrieveTrips();
         }
 
         private void BookingsButton_Click(object sender, EventArgs e)
@@ -829,7 +1037,8 @@ namespace TravelEaseApp
             DashboardPanel.Visible = false;
             TravellerTripsPanel.Visible = false;
             TravellerBookingsPanel.Visible = true;
-            //TravellerTransactionsPanel.Visible = false;
+            TravellerTransactionPanel.Visible = false;
+            retrieveBookings(this.regNo);
         }
 
         private void TransactionsButton_Click(object sender, EventArgs e)
@@ -837,7 +1046,8 @@ namespace TravelEaseApp
             DashboardPanel.Visible = false;
             TravellerTripsPanel.Visible = false;
             TravellerBookingsPanel.Visible = false;
-            //TravellerTransactionsPanel.Visible = true;;
+            TravellerTransactionPanel.Visible = true;
+            retrieveTransactions(this.regNo);
         }
 
 
@@ -1149,12 +1359,10 @@ namespace TravelEaseApp
 
         private void ShowDigitalPassesForBooking(Booking currentBooking)
         {
+            AddCloseButtonToPanel(digitalPassesDiaplayPanel, mainPanel);
             if (currentBooking == null || currentBooking.DigitalPasses == null || !currentBooking.DigitalPasses.Any())
             {
                 MessageBox.Show("No digital passes found for this booking.", "Digital Passes", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                digitalPassesDiaplayPanel.Controls.Clear(); // Clear the panel
-                Label lblNoPasses = new Label { Text = "No passes to display.", Dock = DockStyle.Fill, TextAlign = ContentAlignment.MiddleCenter };
-                digitalPassesDiaplayPanel.Controls.Add(lblNoPasses);
                 return;
             }
 
@@ -1185,7 +1393,6 @@ namespace TravelEaseApp
 
             // 3. Call the display function
             DisplayPassesInPanel(digitalPassesDiaplayPanel, passesToShow, serviceMap);
-            AddCloseButtonToPanel(digitalPassesDiaplayPanel, mainPanel);
 
         }
 
@@ -1769,8 +1976,253 @@ namespace TravelEaseApp
         {
 
         }
+
+
+        private void retrieveTrips(string text = null, DateTime? startDate = null, DateTime? endDate = null, int budget = 0)
+        {
+            try
+            {
+                // Clear existing trips from the panel
+                TripDisplayPanel.Controls.Clear();
+
+                // Build the SQL query with filters
+                string query = @"
+            SELECT t.*, o.operator_name AS operator_name, l.destination_name AS start_location_name
+            FROM trips t
+            JOIN tour_operator o ON t.operator_id = o.reg_no
+            JOIN location l ON t.start_loc_id = l.dest_id
+            WHERE t.status = 'active'";
+
+                // Add text filter if provided
+                if (!string.IsNullOrEmpty(text))
+                {
+                    string searchText = text.Trim();
+                    query += @" AND (
+                LOWER(t.title) LIKE LOWER(@text) OR 
+                LOWER(t.descirption) LIKE LOWER(@text) OR 
+                LOWER(t.category) LIKE LOWER(@text) OR 
+                LOWER(o.operator_name) LIKE LOWER(@text)
+            )";
+                }
+
+                // Add date filters if provided
+                if (startDate.HasValue)
+                {
+                    query += " AND t.start_date >= @startDate";
+                }
+                if (endDate.HasValue)
+                {
+                    query += " AND t.end_date <= @endDate";
+                }
+
+                // Add budget filter
+                if (budget > 0)
+                {
+                    query += " AND t.price_per_person <= @budget";
+                }
+
+                using (SqlConnection connection = new SqlConnection(connectionString))
+                {
+                    connection.Open();
+
+                    using (SqlCommand command = new SqlCommand(query, connection))
+                    {
+                        // Add parameters
+                        if (!string.IsNullOrEmpty(text))
+                        {
+                            command.Parameters.AddWithValue("@text", $"%{text.Trim()}%");
+                        }
+                        if (startDate.HasValue)
+                        {
+                            command.Parameters.AddWithValue("@startDate", startDate.Value);
+                        }
+                        if (endDate.HasValue)
+                        {
+                            command.Parameters.AddWithValue("@endDate", endDate.Value);
+                        }
+                        if (budget > 0)
+                        {
+                            command.Parameters.AddWithValue("@budget", budget);
+                        }
+
+                        using (SqlDataReader reader = command.ExecuteReader())
+                        {
+                            while (reader.Read())
+                            {
+                                Trip trip = new Trip
+                                {
+                                    TripId = reader["trip_id"].ToString(),
+                                    Title = reader["title"].ToString(),
+                                    Description = reader["descirption"].ToString(),
+                                    Capacity = Convert.ToInt32(reader["capacity"]),
+                                    DurationDays = Convert.ToInt32(reader["duration"]),
+                                    Category = reader["category"].ToString(),
+                                    Status = reader["status"].ToString(),
+                                    PricePerPerson = Convert.ToDecimal(reader["price_per_person"]),
+                                    StartLocationId = reader["start_loc_id"].ToString(),
+                                    StartDate = Convert.ToDateTime(reader["start_date"]),
+                                    EndDate = Convert.ToDateTime(reader["end_date"]),
+                                    OperatorId = reader["operator_id"].ToString(),
+                                    OperatorName = reader["operator_name"].ToString(),
+                                    ImageUrl = reader["profileTrip_image_url"].ToString(),
+                                    StartLocation = new Location
+                                    {
+                                        DestId = reader["start_loc_id"].ToString(),
+                                        DestinationName = reader["start_location_name"].ToString()
+                                    },
+                                    DurationDisplay = $"{reader["duration"]} Days"
+                                };
+
+                                // Add the trip to the panel
+                                AddTripBox(TripDisplayPanel, trip);
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                // Handle any errors
+                MessageBox.Show($"Error retrieving trips: {ex.Message}");
+            }
+        }
+        private void trackBar1_Scroll(object sender, EventArgs e)
+        {
+
+        }
+
+        private void applyfilterbox_Click(object sender, EventArgs e)
+        {
+            retrieveTrips();
+        }
+
+        private void ApplyFiltersButton_Click(object sender, EventArgs e)
+        {
+            // Retrieve values from UI elements  
+            string searchText = searchBox.Text;
+            int budget = int.TryParse(MoneyLabel.Text.Replace("$", "").Trim(), out int parsedBudget) ? parsedBudget : 0;
+            DateTime? startDate = dateTimePicker1.Value;
+            DateTime? endDate = dateTimePicker2.Value;
+            if (endDate < startDate) 
+            { 
+                MessageBox.Show("start date cannot be less than end date");
+                return;
+            }
+            // Call the retrieveTrips function with the retrieved values  
+            retrieveTrips(searchText, startDate, endDate, budget);
+        }
+
+        private void retrieveBookings(string regNo)
+        {
+            try
+            {
+                // Clear existing bookings from the panel
+                BookingsDisplayPanel.Controls.Clear();
+
+                // SQL query to get bookings with trip names
+                string query = @"
+            SELECT b.*, t.title AS trip_name
+            FROM bookings b
+            JOIN trips t ON b.trip_id = t.trip_id
+            WHERE b.traveler_id = @regNo
+            ORDER BY b.book_date DESC";
+
+                using (SqlConnection connection = new SqlConnection(connectionString))
+                {
+                    connection.Open();
+
+                    using (SqlCommand command = new SqlCommand(query, connection))
+                    {
+                        command.Parameters.AddWithValue("@regNo", regNo);
+
+                        using (SqlDataReader reader = command.ExecuteReader())
+                        {
+                            while (reader.Read())
+                            {
+                                // Create Booking object
+                                Booking booking = new Booking(
+                                    reader["booking_id"].ToString(),
+                                    Convert.ToDateTime(reader["book_date"]),
+                                    reader["booking_status"].ToString(),
+                                    reader["traveler_id"].ToString(),
+                                    reader["trip_id"].ToString()
+                                );
+
+                                // Get trip name
+                                string tripName = reader["trip_name"].ToString();
+
+                                // Add booking to the panel
+                                AddBookingBox(BookingsDisplayPanel, booking, tripName);
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error retrieving bookings: {ex.Message}");
+            }
+        }
+
+
+        private void retrieveTransactions(string regNo)
+        {
+            try
+            {
+                // Clear existing transactions from the panel
+                TransactionDisplayPanel.Controls.Clear();
+
+                // SQL query to get transactions with booking and trip info
+                string query = @"
+            SELECT txn.*, b.traveler_id, tr.title AS trip_name
+            FROM transactions txn
+            JOIN bookings b ON txn.booking_id = b.booking_id
+            JOIN trips tr ON b.trip_id = tr.trip_id
+            WHERE b.traveler_id = @regNo
+            ORDER BY txn.transaction_date DESC";
+
+                using (SqlConnection connection = new SqlConnection(connectionString))
+                {
+                    connection.Open();
+
+                    using (SqlCommand command = new SqlCommand(query, connection))
+                    {
+                        command.Parameters.AddWithValue("@regNo", regNo);
+
+                        using (SqlDataReader reader = command.ExecuteReader())
+                        {
+                            while (reader.Read())
+                            {
+                                // Create Transaction object
+                                TravelEaseApp.Helpers.Transaction transaction = new TravelEaseApp.Helpers.Transaction(
+                                    reader["transaction_id"].ToString(),
+                                    Convert.ToDecimal(reader["amount"]),
+                                    Convert.ToDateTime(reader["transaction_date"]),
+                                    reader["payment_method"].ToString(),
+                                    reader["booking_id"].ToString(),
+                                    reader["status"].ToString(),
+                                    reader["sending_account_number"].ToString()
+                                );
+
+                                // Get trip name
+                                //string tripName = reader["trip_name"].ToString();
+
+                                // Add transaction to the panel
+                                AddTransactionToPanel(TransactionDisplayPanel, transaction);
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error retrieving transactions: {ex.Message}");
+            }
+        }
+
+
+
+
     }
-
-
 
 }

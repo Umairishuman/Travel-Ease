@@ -9,7 +9,7 @@ namespace TravelEaseApp
 {
     public static class Helpers
     {
-        public static string connectionString = "Data Source=BLAZ\\SQLEXPRESS;Initial Catalog=ViewsBackup;Integrated Security=True;Trust Server Certificate=True";
+        public static string connectionString = "Data Source=DESKTOP-HNUMPVK\\SQLEXPRESS;Initial Catalog=TravelEase;Integrated Security=True;Encrypt=True;TrustServerCertificate=True";
 
         public static void AddPlaceholder(TextBox textBox, string placeholderText)
         {
@@ -219,6 +219,40 @@ namespace TravelEaseApp
             groupBox.MouseLeave += (s, e) => groupBox.Cursor = Cursors.Default;
         }
 
+        //users class]using System;
+
+        public class User
+        {
+            public string RegNo { get; set; } // e.g., TR-123456, OP-123456
+            public string PasswordHash { get; set; }
+            public DateTime CreatedDate { get; set; } = DateTime.Now;
+            public DateTime? LastLogin { get; set; }
+            public string ContactEmail { get; set; }
+            public string ContactPhone { get; set; }
+            public string UserStatus { get; set; } // "rejected", "accepted", "pending"
+            public string UserRole { get; set; } // "traveler", "admin", etc.
+            public string? UserProfileImage { get; set; }
+            public string? UserProfileDescription { get; set; }
+
+            // Optional: Add validation methods if needed
+            public bool IsValidRegNo()
+            {
+                return System.Text.RegularExpressions.Regex.IsMatch(RegNo, @"^(TR|OP|SP|AD)-\d{6}$");
+            }
+
+            public bool IsValidEmail()
+            {
+                return System.Text.RegularExpressions.Regex.IsMatch(ContactEmail, @"^[^@\s]+@[^@\s]+\.[^@\s]+$");
+            }
+
+            public bool IsValidPhone()
+            {
+                return System.Text.RegularExpressions.Regex.IsMatch(ContactPhone, @"^(\+?\d{10,15}|0\d{9,14}|92\d{9,13}|3\d{9})$");
+            }
+        }
+
+
+
         // --- Location Class ---
         public class Location
         {
@@ -355,34 +389,41 @@ namespace TravelEaseApp
         // --- Trip Class ---
         public class Trip
         {
-            public string TripId { get; set; }                // e.g., "TRIP-000001"
+            public string TripId { get; set; }
             public string Title { get; set; }
-            public string Description { get; set; }           // Corrected spelling from 'descirption'
+            public string Description { get; set; }
             public int Capacity { get; set; }
             public int DurationDays { get; set; }
-            public string DurationDisplay { get; set; }       // e.g., "7 Days, 6 Nights"
-            public string Category { get; set; }              // 'adventure', 'cultural', etc.
-            public string Status { get; set; }                // 'active', 'completed', 'cancelled'
+            public string DurationDisplay { get; set; }
+            public string Category { get; set; }
+            public string Status { get; set; } // e.g., 'Scheduled', 'Active', 'Completed', 'Cancelled'
             public decimal PricePerPerson { get; set; }
 
-            public string StartLocationId { get; set; }       // Foreign key
-            public Location StartLocation { get; set; }       // Resolved location object
+            public string StartLocationId { get; set; }
+            public Location StartLocation { get; set; }
 
             public DateTime StartDate { get; set; }
             public DateTime EndDate { get; set; }
 
-            public string OperatorId { get; set; }            // Foreign key
+            public string OperatorId { get; set; }
             public string OperatorName { get; set; }
 
             public string ImageUrl { get; set; }
 
             public List<Location> VisitedLocations { get; set; }
             public List<Service> IncludedServices { get; set; }
-            public List<Service> RequestedServices { get; set; }
+            public List<Service> RequestedServices { get; set; } // Assuming this exists or might be used later
 
-            // ✅ New: Reviews and Rating
+            // Reviews and Rating for the Trip itself
             public List<TripReview> Reviews { get; set; }
             public double AverageRating { get; private set; }
+
+            // ✅ NEW: Flag to indicate if the trip is considered completed
+            public bool IsCompleted { get; set; }
+            // You might want to set this based on EndDate or Status in your business logic
+            // Example calculation (could be a read-only property):
+            // public bool IsCompleted => EndDate < DateTime.Now || Status == "Completed" || Status == "Cancelled";
+
 
             public Trip()
             {
@@ -392,10 +433,11 @@ namespace TravelEaseApp
                 Reviews = new List<TripReview>();
 
                 OperatorName = "N/A";
-                DurationDisplay = $"{DurationDays} Days";
+                // Initialize DurationDisplay if DurationDays is set, or handle null/default cases
+                DurationDisplay = DurationDays > 0 ? $"{DurationDays} Days" : "Duration N/A";
+                IsCompleted = false; // Default to not completed
             }
 
-            // ✅ Method to add a review
             public bool AddReview(TripReview review)
             {
                 if (review == null || !review.IsValid())
@@ -406,10 +448,9 @@ namespace TravelEaseApp
                 return true;
             }
 
-            // ✅ Method to update average rating
             public void UpdateAverageReview()
             {
-                if (Reviews.Count > 0)
+                if (Reviews != null && Reviews.Count > 0)
                     AverageRating = Math.Round(Reviews.Average(r => r.Rating), 2);
                 else
                     AverageRating = 0;
@@ -417,7 +458,7 @@ namespace TravelEaseApp
 
             public override string ToString()
             {
-                return $"{Title} ({TripId}) - {Category}, ★ {AverageRating} ({Reviews.Count} reviews)";
+                return $"{Title} ({TripId}) - {Category}, ★ {AverageRating} ({Reviews?.Count ?? 0} reviews)";
             }
         }
 

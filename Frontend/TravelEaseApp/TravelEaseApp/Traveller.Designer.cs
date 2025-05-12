@@ -32,16 +32,15 @@
             TravellerTripsPanel = new Panel();
             TripDisplayPanel = new Panel();
             TravellerTripTopPanel = new Panel();
-            textBox1 = new TextBox();
+            MoneyLabel = new Label();
+            moneySlider = new TrackBar();
+            applyfilterbox = new Label();
+            groupBox2 = new GroupBox();
+            dateTimePicker1 = new DateTimePicker();
+            groupBox1 = new GroupBox();
+            dateTimePicker2 = new DateTimePicker();
+            searchBox = new TextBox();
             TripsLabel = new Label();
-            TravellerBookingsPanel = new Panel();
-            BookingsDisplayPanel = new Panel();
-            BookingsTopPanel = new Panel();
-            BookingsLabel = new Label();
-            TravellerTransactionPanel = new Panel();
-            TransactionDisplayPanel = new Panel();
-            TransactionTopPanel = new Panel();
-            TransactionHeading = new Label();
             SideBarPanel = new Panel();
             TransactionButtonPanel = new Panel();
             TransactionsButton = new PictureBox();
@@ -56,6 +55,14 @@
             DashboardButton = new PictureBox();
             DashBoardButtonLabel = new Label();
             travelEaseLogo = new PictureBox();
+            TravellerBookingsPanel = new Panel();
+            BookingsDisplayPanel = new Panel();
+            BookingsTopPanel = new Panel();
+            BookingsLabel = new Label();
+            TravellerTransactionPanel = new Panel();
+            TransactionDisplayPanel = new Panel();
+            TransactionTopPanel = new Panel();
+            TransactionHeading = new Label();
             DashboardPanel = new Panel();
             UpcomingTripsPanel = new Panel();
             UpcomingTripsLabel = new Label();
@@ -95,18 +102,13 @@
             MethodSelectOptions = new ComboBox();
             CompleteTripInfoPanel = new Panel();
             digitalPassesDiaplayPanel = new Panel();
-            groupBox1 = new GroupBox();
-            dateTimePicker1 = new DateTimePicker();
-            groupBox2 = new GroupBox();
-            dateTimePicker2 = new DateTimePicker();
-            label5 = new Label();
+            profilePanel = new Panel();
             mainPanel.SuspendLayout();
             TravellerTripsPanel.SuspendLayout();
             TravellerTripTopPanel.SuspendLayout();
-            TravellerBookingsPanel.SuspendLayout();
-            BookingsTopPanel.SuspendLayout();
-            TravellerTransactionPanel.SuspendLayout();
-            TransactionTopPanel.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)moneySlider).BeginInit();
+            groupBox2.SuspendLayout();
+            groupBox1.SuspendLayout();
             SideBarPanel.SuspendLayout();
             TransactionButtonPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)TransactionsButton).BeginInit();
@@ -117,6 +119,10 @@
             DashBoardButtonPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)DashboardButton).BeginInit();
             ((System.ComponentModel.ISupportInitialize)travelEaseLogo).BeginInit();
+            TravellerBookingsPanel.SuspendLayout();
+            BookingsTopPanel.SuspendLayout();
+            TravellerTransactionPanel.SuspendLayout();
+            TransactionTopPanel.SuspendLayout();
             DashboardPanel.SuspendLayout();
             UpcomingTripsPanel.SuspendLayout();
             PreferencesPanel.SuspendLayout();
@@ -132,12 +138,11 @@
             paymentBookingsPanel.SuspendLayout();
             groupBoxAccNum.SuspendLayout();
             RoleSelectionGroup.SuspendLayout();
-            groupBox1.SuspendLayout();
-            groupBox2.SuspendLayout();
             SuspendLayout();
             // 
             // mainPanel
             // 
+            mainPanel.Controls.Add(DashboardPanel);
             mainPanel.Controls.Add(TravellerTripsPanel);
             mainPanel.Controls.Add(TravellerBookingsPanel);
             mainPanel.Controls.Add(TravellerTransactionPanel);
@@ -162,34 +167,109 @@
             // 
             TripDisplayPanel.BackColor = Color.White;
             TripDisplayPanel.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            TripDisplayPanel.Location = new Point(3, 133);
+            TripDisplayPanel.Location = new Point(3, 157);
             TripDisplayPanel.Name = "TripDisplayPanel";
             TripDisplayPanel.Padding = new Padding(4);
-            TripDisplayPanel.Size = new Size(1185, 539);
+            TripDisplayPanel.Size = new Size(1185, 515);
             TripDisplayPanel.TabIndex = 1;
             TripDisplayPanel.Click += TripDisplayPanel_Click;
             // 
             // TravellerTripTopPanel
             // 
             TravellerTripTopPanel.BackColor = Color.White;
-            TravellerTripTopPanel.Controls.Add(label5);
+            TravellerTripTopPanel.Controls.Add(MoneyLabel);
+            TravellerTripTopPanel.Controls.Add(moneySlider);
+            TravellerTripTopPanel.Controls.Add(applyfilterbox);
             TravellerTripTopPanel.Controls.Add(groupBox2);
             TravellerTripTopPanel.Controls.Add(groupBox1);
-            TravellerTripTopPanel.Controls.Add(textBox1);
+            TravellerTripTopPanel.Controls.Add(searchBox);
             TravellerTripTopPanel.Controls.Add(TripsLabel);
             TravellerTripTopPanel.Location = new Point(3, 12);
             TravellerTripTopPanel.Name = "TravellerTripTopPanel";
-            TravellerTripTopPanel.Size = new Size(1185, 115);
+            TravellerTripTopPanel.Size = new Size(1185, 137);
             TravellerTripTopPanel.TabIndex = 0;
             // 
-            // textBox1
+            // MoneyLabel
             // 
-            textBox1.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            textBox1.Location = new Point(196, 9);
-            textBox1.Name = "textBox1";
-            textBox1.Size = new Size(556, 33);
-            textBox1.TabIndex = 1;
-            textBox1.TextChanged += textBox1_TextChanged;
+            MoneyLabel.AutoSize = true;
+            MoneyLabel.Font = new Font("Segoe UI", 15.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            MoneyLabel.Location = new Point(797, 12);
+            MoneyLabel.Name = "MoneyLabel";
+            MoneyLabel.Size = new Size(73, 30);
+            MoneyLabel.TabIndex = 101;
+            MoneyLabel.Text = "1000$";
+            // 
+            // moneySlider
+            // 
+            moneySlider.LargeChange = 500;
+            moneySlider.Location = new Point(504, 14);
+            moneySlider.Maximum = 10000;
+            moneySlider.Name = "moneySlider";
+            moneySlider.Size = new Size(248, 45);
+            moneySlider.SmallChange = 50;
+            moneySlider.TabIndex = 100;
+            moneySlider.TickFrequency = 100;
+            moneySlider.Value = 1000;
+            moneySlider.Scroll += trackBar1_Scroll;
+            // 
+            // applyfilterbox
+            // 
+            applyfilterbox.AutoSize = true;
+            applyfilterbox.BackColor = Color.Black;
+            applyfilterbox.Font = new Font("Segoe UI", 15.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            applyfilterbox.ForeColor = Color.White;
+            applyfilterbox.Location = new Point(930, 37);
+            applyfilterbox.Name = "applyfilterbox";
+            applyfilterbox.Padding = new Padding(4);
+            applyfilterbox.Size = new Size(144, 38);
+            applyfilterbox.TabIndex = 4;
+            applyfilterbox.Text = "Apply Filters";
+            applyfilterbox.Click += applyfilterbox_Click;
+            // 
+            // groupBox2
+            // 
+            groupBox2.Controls.Add(dateTimePicker1);
+            groupBox2.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            groupBox2.Location = new Point(196, 65);
+            groupBox2.Name = "groupBox2";
+            groupBox2.Size = new Size(246, 60);
+            groupBox2.TabIndex = 3;
+            groupBox2.TabStop = false;
+            groupBox2.Text = "From:";
+            // 
+            // dateTimePicker1
+            // 
+            dateTimePicker1.Location = new Point(15, 24);
+            dateTimePicker1.Name = "dateTimePicker1";
+            dateTimePicker1.Size = new Size(215, 23);
+            dateTimePicker1.TabIndex = 0;
+            // 
+            // groupBox1
+            // 
+            groupBox1.Controls.Add(dateTimePicker2);
+            groupBox1.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            groupBox1.Location = new Point(504, 65);
+            groupBox1.Name = "groupBox1";
+            groupBox1.Size = new Size(248, 60);
+            groupBox1.TabIndex = 2;
+            groupBox1.TabStop = false;
+            groupBox1.Text = "To:";
+            // 
+            // dateTimePicker2
+            // 
+            dateTimePicker2.Location = new Point(15, 24);
+            dateTimePicker2.Name = "dateTimePicker2";
+            dateTimePicker2.Size = new Size(215, 23);
+            dateTimePicker2.TabIndex = 0;
+            // 
+            // searchBox
+            // 
+            searchBox.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            searchBox.Location = new Point(196, 18);
+            searchBox.Name = "searchBox";
+            searchBox.Size = new Size(246, 33);
+            searchBox.TabIndex = 1;
+            searchBox.TextChanged += textBox1_TextChanged;
             // 
             // TripsLabel
             // 
@@ -200,79 +280,6 @@
             TripsLabel.Size = new Size(69, 32);
             TripsLabel.TabIndex = 0;
             TripsLabel.Text = "Trips";
-            // 
-            // TravellerBookingsPanel
-            // 
-            TravellerBookingsPanel.Controls.Add(BookingsDisplayPanel);
-            TravellerBookingsPanel.Controls.Add(BookingsTopPanel);
-            TravellerBookingsPanel.Location = new Point(86, 0);
-            TravellerBookingsPanel.Name = "TravellerBookingsPanel";
-            TravellerBookingsPanel.Size = new Size(1190, 681);
-            TravellerBookingsPanel.TabIndex = 3;
-            TravellerBookingsPanel.Visible = false;
-            // 
-            // BookingsDisplayPanel
-            // 
-            BookingsDisplayPanel.BackColor = Color.White;
-            BookingsDisplayPanel.Location = new Point(6, 140);
-            BookingsDisplayPanel.Name = "BookingsDisplayPanel";
-            BookingsDisplayPanel.Size = new Size(1184, 532);
-            BookingsDisplayPanel.TabIndex = 2;
-            // 
-            // BookingsTopPanel
-            // 
-            BookingsTopPanel.BackColor = Color.White;
-            BookingsTopPanel.Controls.Add(BookingsLabel);
-            BookingsTopPanel.Location = new Point(12, 49);
-            BookingsTopPanel.Name = "BookingsTopPanel";
-            BookingsTopPanel.Size = new Size(1178, 80);
-            BookingsTopPanel.TabIndex = 1;
-            // 
-            // BookingsLabel
-            // 
-            BookingsLabel.AutoSize = true;
-            BookingsLabel.Font = new Font("Segoe UI", 20.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            BookingsLabel.Location = new Point(512, 25);
-            BookingsLabel.Name = "BookingsLabel";
-            BookingsLabel.Size = new Size(136, 37);
-            BookingsLabel.TabIndex = 0;
-            BookingsLabel.Text = "Bookings";
-            // 
-            // TravellerTransactionPanel
-            // 
-            TravellerTransactionPanel.Controls.Add(TransactionDisplayPanel);
-            TravellerTransactionPanel.Controls.Add(TransactionTopPanel);
-            TravellerTransactionPanel.Location = new Point(85, 0);
-            TravellerTransactionPanel.Name = "TravellerTransactionPanel";
-            TravellerTransactionPanel.Size = new Size(1191, 684);
-            TravellerTransactionPanel.TabIndex = 1;
-            // 
-            // TransactionDisplayPanel
-            // 
-            TransactionDisplayPanel.BackColor = Color.White;
-            TransactionDisplayPanel.Location = new Point(3, 140);
-            TransactionDisplayPanel.Name = "TransactionDisplayPanel";
-            TransactionDisplayPanel.Size = new Size(1185, 532);
-            TransactionDisplayPanel.TabIndex = 1;
-            // 
-            // TransactionTopPanel
-            // 
-            TransactionTopPanel.BackColor = Color.White;
-            TransactionTopPanel.Controls.Add(TransactionHeading);
-            TransactionTopPanel.Location = new Point(3, 32);
-            TransactionTopPanel.Name = "TransactionTopPanel";
-            TransactionTopPanel.Size = new Size(1188, 100);
-            TransactionTopPanel.TabIndex = 0;
-            // 
-            // TransactionHeading
-            // 
-            TransactionHeading.AutoSize = true;
-            TransactionHeading.Font = new Font("Segoe UI", 20.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            TransactionHeading.Location = new Point(484, 29);
-            TransactionHeading.Name = "TransactionHeading";
-            TransactionHeading.Size = new Size(177, 37);
-            TransactionHeading.TabIndex = 0;
-            TransactionHeading.Text = "Transactions";
             // 
             // SideBarPanel
             // 
@@ -420,6 +427,79 @@
             travelEaseLogo.SizeMode = PictureBoxSizeMode.StretchImage;
             travelEaseLogo.TabIndex = 1;
             travelEaseLogo.TabStop = false;
+            // 
+            // TravellerBookingsPanel
+            // 
+            TravellerBookingsPanel.Controls.Add(BookingsDisplayPanel);
+            TravellerBookingsPanel.Controls.Add(BookingsTopPanel);
+            TravellerBookingsPanel.Location = new Point(86, 0);
+            TravellerBookingsPanel.Name = "TravellerBookingsPanel";
+            TravellerBookingsPanel.Size = new Size(1190, 681);
+            TravellerBookingsPanel.TabIndex = 3;
+            TravellerBookingsPanel.Visible = false;
+            // 
+            // BookingsDisplayPanel
+            // 
+            BookingsDisplayPanel.BackColor = Color.White;
+            BookingsDisplayPanel.Location = new Point(6, 140);
+            BookingsDisplayPanel.Name = "BookingsDisplayPanel";
+            BookingsDisplayPanel.Size = new Size(1184, 532);
+            BookingsDisplayPanel.TabIndex = 2;
+            // 
+            // BookingsTopPanel
+            // 
+            BookingsTopPanel.BackColor = Color.White;
+            BookingsTopPanel.Controls.Add(BookingsLabel);
+            BookingsTopPanel.Location = new Point(12, 49);
+            BookingsTopPanel.Name = "BookingsTopPanel";
+            BookingsTopPanel.Size = new Size(1178, 80);
+            BookingsTopPanel.TabIndex = 1;
+            // 
+            // BookingsLabel
+            // 
+            BookingsLabel.AutoSize = true;
+            BookingsLabel.Font = new Font("Segoe UI", 20.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            BookingsLabel.Location = new Point(512, 25);
+            BookingsLabel.Name = "BookingsLabel";
+            BookingsLabel.Size = new Size(136, 37);
+            BookingsLabel.TabIndex = 0;
+            BookingsLabel.Text = "Bookings";
+            // 
+            // TravellerTransactionPanel
+            // 
+            TravellerTransactionPanel.Controls.Add(TransactionDisplayPanel);
+            TravellerTransactionPanel.Controls.Add(TransactionTopPanel);
+            TravellerTransactionPanel.Location = new Point(85, 0);
+            TravellerTransactionPanel.Name = "TravellerTransactionPanel";
+            TravellerTransactionPanel.Size = new Size(1191, 684);
+            TravellerTransactionPanel.TabIndex = 1;
+            // 
+            // TransactionDisplayPanel
+            // 
+            TransactionDisplayPanel.BackColor = Color.White;
+            TransactionDisplayPanel.Location = new Point(3, 140);
+            TransactionDisplayPanel.Name = "TransactionDisplayPanel";
+            TransactionDisplayPanel.Size = new Size(1185, 532);
+            TransactionDisplayPanel.TabIndex = 1;
+            // 
+            // TransactionTopPanel
+            // 
+            TransactionTopPanel.BackColor = Color.White;
+            TransactionTopPanel.Controls.Add(TransactionHeading);
+            TransactionTopPanel.Location = new Point(3, 32);
+            TransactionTopPanel.Name = "TransactionTopPanel";
+            TransactionTopPanel.Size = new Size(1188, 100);
+            TransactionTopPanel.TabIndex = 0;
+            // 
+            // TransactionHeading
+            // 
+            TransactionHeading.AutoSize = true;
+            TransactionHeading.Font = new Font("Segoe UI", 20.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            TransactionHeading.Location = new Point(484, 29);
+            TransactionHeading.Name = "TransactionHeading";
+            TransactionHeading.Size = new Size(177, 37);
+            TransactionHeading.TabIndex = 0;
+            TransactionHeading.Text = "Transactions";
             // 
             // DashboardPanel
             // 
@@ -846,54 +926,12 @@
             digitalPassesDiaplayPanel.TabIndex = 0;
             digitalPassesDiaplayPanel.Visible = false;
             // 
-            // groupBox1
+            // profilePanel
             // 
-            groupBox1.Controls.Add(dateTimePicker1);
-            groupBox1.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            groupBox1.Location = new Point(504, 44);
-            groupBox1.Name = "groupBox1";
-            groupBox1.Size = new Size(248, 60);
-            groupBox1.TabIndex = 2;
-            groupBox1.TabStop = false;
-            groupBox1.Text = "To:";
-            // 
-            // dateTimePicker1
-            // 
-            dateTimePicker1.Location = new Point(15, 24);
-            dateTimePicker1.Name = "dateTimePicker1";
-            dateTimePicker1.Size = new Size(215, 23);
-            dateTimePicker1.TabIndex = 0;
-            // 
-            // groupBox2
-            // 
-            groupBox2.Controls.Add(dateTimePicker2);
-            groupBox2.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            groupBox2.Location = new Point(196, 46);
-            groupBox2.Name = "groupBox2";
-            groupBox2.Size = new Size(246, 60);
-            groupBox2.TabIndex = 3;
-            groupBox2.TabStop = false;
-            groupBox2.Text = "From:";
-            // 
-            // dateTimePicker2
-            // 
-            dateTimePicker2.Location = new Point(15, 24);
-            dateTimePicker2.Name = "dateTimePicker2";
-            dateTimePicker2.Size = new Size(215, 23);
-            dateTimePicker2.TabIndex = 0;
-            // 
-            // label5
-            // 
-            label5.AutoSize = true;
-            label5.BackColor = Color.Black;
-            label5.Font = new Font("Segoe UI", 15.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label5.ForeColor = Color.White;
-            label5.Location = new Point(930, 37);
-            label5.Name = "label5";
-            label5.Padding = new Padding(4);
-            label5.Size = new Size(144, 38);
-            label5.TabIndex = 4;
-            label5.Text = "Apply Filters";
+            profilePanel.Location = new Point(85, 0);
+            profilePanel.Name = "profilePanel";
+            profilePanel.Size = new Size(1191, 672);
+            profilePanel.TabIndex = 1;
             // 
             // Traveller
             // 
@@ -908,12 +946,9 @@
             TravellerTripsPanel.ResumeLayout(false);
             TravellerTripTopPanel.ResumeLayout(false);
             TravellerTripTopPanel.PerformLayout();
-            TravellerBookingsPanel.ResumeLayout(false);
-            BookingsTopPanel.ResumeLayout(false);
-            BookingsTopPanel.PerformLayout();
-            TravellerTransactionPanel.ResumeLayout(false);
-            TransactionTopPanel.ResumeLayout(false);
-            TransactionTopPanel.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)moneySlider).EndInit();
+            groupBox2.ResumeLayout(false);
+            groupBox1.ResumeLayout(false);
             SideBarPanel.ResumeLayout(false);
             TransactionButtonPanel.ResumeLayout(false);
             TransactionButtonPanel.PerformLayout();
@@ -928,6 +963,12 @@
             DashBoardButtonPanel.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)DashboardButton).EndInit();
             ((System.ComponentModel.ISupportInitialize)travelEaseLogo).EndInit();
+            TravellerBookingsPanel.ResumeLayout(false);
+            BookingsTopPanel.ResumeLayout(false);
+            BookingsTopPanel.PerformLayout();
+            TravellerTransactionPanel.ResumeLayout(false);
+            TransactionTopPanel.ResumeLayout(false);
+            TransactionTopPanel.PerformLayout();
             DashboardPanel.ResumeLayout(false);
             DashboardPanel.PerformLayout();
             UpcomingTripsPanel.ResumeLayout(false);
@@ -953,8 +994,6 @@
             groupBoxAccNum.ResumeLayout(false);
             groupBoxAccNum.PerformLayout();
             RoleSelectionGroup.ResumeLayout(false);
-            groupBox1.ResumeLayout(false);
-            groupBox2.ResumeLayout(false);
             ResumeLayout(false);
         }
 
@@ -1005,7 +1044,7 @@
         private Panel TravellerTripsPanel;
         private Panel TravellerTripTopPanel;
         private Label TripsLabel;
-        private TextBox textBox1;
+        private TextBox searchBox;
         private Panel TripDisplayPanel;
         private Panel CompleteTripInfoPanel;
         private Panel BookingsDisplayPanel;
@@ -1028,9 +1067,12 @@
         private Label AddPreferenceButton;
         private Label PreferencesHeading;
         private GroupBox groupBox1;
-        private DateTimePicker dateTimePicker1;
-        private Label label5;
-        private GroupBox groupBox2;
         private DateTimePicker dateTimePicker2;
+        private Label applyfilterbox;
+        private GroupBox groupBox2;
+        private DateTimePicker dateTimePicker1;
+        private Panel profilePanel;
+        private TrackBar moneySlider;
+        private Label MoneyLabel;
     }
 }

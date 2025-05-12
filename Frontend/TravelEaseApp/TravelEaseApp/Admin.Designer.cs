@@ -32,17 +32,26 @@
             UpcomingTripsPanel = new Panel();
             UpcomingTripsLabel = new Label();
             StatisticsPanel = new Panel();
+            panel4 = new Panel();
+            AverageTripLengthNumber = new Label();
+            AverageTripLength = new Label();
+            pictureBox5 = new PictureBox();
+            panel1 = new Panel();
+            AverageTripCostNumberLabel = new Label();
+            AverageTripCost = new Label();
+            pictureBox4 = new PictureBox();
+            ReportViewButton = new Label();
             StatisticLabel = new Label();
             panel3 = new Panel();
-            label3 = new Label();
+            TotalRevenueNumberLabel = new Label();
             RevenueLabel = new Label();
             pictureBox3 = new PictureBox();
             panel2 = new Panel();
-            label1 = new Label();
+            ActiveUsersNumberLabel = new Label();
             ActiveUsersLabel = new Label();
             pictureBox2 = new PictureBox();
             successfulJourneysPanel = new Panel();
-            SuccessfulJourneysNumber = new Label();
+            TotalUsersNumberLabel = new Label();
             TotalUsersLabel = new Label();
             pictureBox1 = new PictureBox();
             TravellerBio = new Label();
@@ -51,8 +60,14 @@
             TripReviewPanel = new Panel();
             TripReviewDisplayPanel = new Panel();
             tripReviewTopPanel = new Panel();
+            tripFilterButton = new Label();
+            groupBox2 = new GroupBox();
+            tripFlagOption = new ComboBox();
             TripReviwesHeadLabel = new Label();
             SideBarPanel = new Panel();
+            UserApprovalButtonPanel = new Panel();
+            UserApprovalButton = new PictureBox();
+            UserApprovalLabel = new Label();
             serviceRevButtonPanel = new Panel();
             ServiceRevButton = new PictureBox();
             label2 = new Label();
@@ -76,11 +91,24 @@
             serviceReviewPanel = new Panel();
             ServiceRevDisplayPanel = new Panel();
             ServiceRevTopPnael = new Panel();
+            serviceFilerButton = new Label();
+            groupBox1 = new GroupBox();
+            serviceFlagOption = new ComboBox();
             ServiceRevHeadLabel = new Label();
-            ReportViewButton = new Label();
+            UserApprPanel = new Panel();
+            UsersDiplayPanel = new Panel();
+            UserApprovalTopPanel = new Panel();
+            ApplyButton = new Label();
+            UserSelection = new GroupBox();
+            statusSelectOption = new ComboBox();
+            UserApprovalHeadingLabel = new Label();
             DashboardPanel.SuspendLayout();
             UpcomingTripsPanel.SuspendLayout();
             StatisticsPanel.SuspendLayout();
+            panel4.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)pictureBox5).BeginInit();
+            panel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)pictureBox4).BeginInit();
             panel3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox3).BeginInit();
             panel2.SuspendLayout();
@@ -90,7 +118,10 @@
             ((System.ComponentModel.ISupportInitialize)TravllerPicBox).BeginInit();
             TripReviewPanel.SuspendLayout();
             tripReviewTopPanel.SuspendLayout();
+            groupBox2.SuspendLayout();
             SideBarPanel.SuspendLayout();
+            UserApprovalButtonPanel.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)UserApprovalButton).BeginInit();
             serviceRevButtonPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)ServiceRevButton).BeginInit();
             UserRevButtonPanel.SuspendLayout();
@@ -105,6 +136,10 @@
             CategoryTopPanel.SuspendLayout();
             serviceReviewPanel.SuspendLayout();
             ServiceRevTopPnael.SuspendLayout();
+            groupBox1.SuspendLayout();
+            UserApprPanel.SuspendLayout();
+            UserApprovalTopPanel.SuspendLayout();
+            UserSelection.SuspendLayout();
             SuspendLayout();
             // 
             // DashboardPanel
@@ -142,6 +177,8 @@
             // 
             // StatisticsPanel
             // 
+            StatisticsPanel.Controls.Add(panel4);
+            StatisticsPanel.Controls.Add(panel1);
             StatisticsPanel.Controls.Add(ReportViewButton);
             StatisticsPanel.Controls.Add(StatisticLabel);
             StatisticsPanel.Controls.Add(panel3);
@@ -151,6 +188,103 @@
             StatisticsPanel.Name = "StatisticsPanel";
             StatisticsPanel.Size = new Size(585, 515);
             StatisticsPanel.TabIndex = 3;
+            // 
+            // panel4
+            // 
+            panel4.BackColor = Color.White;
+            panel4.Controls.Add(AverageTripLengthNumber);
+            panel4.Controls.Add(AverageTripLength);
+            panel4.Controls.Add(pictureBox5);
+            panel4.Location = new Point(307, 219);
+            panel4.Name = "panel4";
+            panel4.Size = new Size(156, 126);
+            panel4.TabIndex = 4;
+            // 
+            // AverageTripLengthNumber
+            // 
+            AverageTripLengthNumber.AutoSize = true;
+            AverageTripLengthNumber.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            AverageTripLengthNumber.Location = new Point(46, 81);
+            AverageTripLengthNumber.Name = "AverageTripLengthNumber";
+            AverageTripLengthNumber.Size = new Size(71, 21);
+            AverageTripLengthNumber.TabIndex = 2;
+            AverageTripLengthNumber.Text = "9.3 days";
+            // 
+            // AverageTripLength
+            // 
+            AverageTripLength.AutoSize = true;
+            AverageTripLength.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            AverageTripLength.ForeColor = Color.Gray;
+            AverageTripLength.Location = new Point(14, 64);
+            AverageTripLength.Name = "AverageTripLength";
+            AverageTripLength.Size = new Size(133, 17);
+            AverageTripLength.TabIndex = 1;
+            AverageTripLength.Text = "Average Trip Length";
+            // 
+            // pictureBox5
+            // 
+            pictureBox5.Image = Properties.Resources.length;
+            pictureBox5.Location = new Point(46, 9);
+            pictureBox5.Name = "pictureBox5";
+            pictureBox5.Size = new Size(61, 50);
+            pictureBox5.SizeMode = PictureBoxSizeMode.StretchImage;
+            pictureBox5.TabIndex = 0;
+            pictureBox5.TabStop = false;
+            // 
+            // panel1
+            // 
+            panel1.BackColor = Color.White;
+            panel1.Controls.Add(AverageTripCostNumberLabel);
+            panel1.Controls.Add(AverageTripCost);
+            panel1.Controls.Add(pictureBox4);
+            panel1.Location = new Point(100, 219);
+            panel1.Name = "panel1";
+            panel1.Size = new Size(156, 126);
+            panel1.TabIndex = 3;
+            // 
+            // AverageTripCostNumberLabel
+            // 
+            AverageTripCostNumberLabel.AutoSize = true;
+            AverageTripCostNumberLabel.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            AverageTripCostNumberLabel.Location = new Point(42, 81);
+            AverageTripCostNumberLabel.Name = "AverageTripCostNumberLabel";
+            AverageTripCostNumberLabel.Size = new Size(59, 21);
+            AverageTripCostNumberLabel.TabIndex = 2;
+            AverageTripCostNumberLabel.Text = "971.75";
+            // 
+            // AverageTripCost
+            // 
+            AverageTripCost.AutoSize = true;
+            AverageTripCost.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            AverageTripCost.ForeColor = Color.Gray;
+            AverageTripCost.Location = new Point(24, 63);
+            AverageTripCost.Name = "AverageTripCost";
+            AverageTripCost.Size = new Size(117, 17);
+            AverageTripCost.TabIndex = 1;
+            AverageTripCost.Text = "Average Trip Cost";
+            // 
+            // pictureBox4
+            // 
+            pictureBox4.Image = Properties.Resources.low_price;
+            pictureBox4.Location = new Point(46, 9);
+            pictureBox4.Name = "pictureBox4";
+            pictureBox4.Size = new Size(61, 50);
+            pictureBox4.SizeMode = PictureBoxSizeMode.StretchImage;
+            pictureBox4.TabIndex = 0;
+            pictureBox4.TabStop = false;
+            // 
+            // ReportViewButton
+            // 
+            ReportViewButton.BackColor = Color.Black;
+            ReportViewButton.BorderStyle = BorderStyle.FixedSingle;
+            ReportViewButton.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
+            ReportViewButton.ForeColor = Color.White;
+            ReportViewButton.Location = new Point(115, 417);
+            ReportViewButton.Name = "ReportViewButton";
+            ReportViewButton.Size = new Size(348, 40);
+            ReportViewButton.TabIndex = 6;
+            ReportViewButton.Text = "View Reports";
+            ReportViewButton.TextAlign = ContentAlignment.MiddleCenter;
             // 
             // StatisticLabel
             // 
@@ -165,7 +299,7 @@
             // panel3
             // 
             panel3.BackColor = Color.White;
-            panel3.Controls.Add(label3);
+            panel3.Controls.Add(TotalRevenueNumberLabel);
             panel3.Controls.Add(RevenueLabel);
             panel3.Controls.Add(pictureBox3);
             panel3.Location = new Point(395, 45);
@@ -173,15 +307,15 @@
             panel3.Size = new Size(156, 126);
             panel3.TabIndex = 4;
             // 
-            // label3
+            // TotalRevenueNumberLabel
             // 
-            label3.AutoSize = true;
-            label3.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label3.Location = new Point(67, 79);
-            label3.Name = "label3";
-            label3.Size = new Size(19, 21);
-            label3.TabIndex = 2;
-            label3.Text = "3";
+            TotalRevenueNumberLabel.AutoSize = true;
+            TotalRevenueNumberLabel.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            TotalRevenueNumberLabel.Location = new Point(42, 80);
+            TotalRevenueNumberLabel.Name = "TotalRevenueNumberLabel";
+            TotalRevenueNumberLabel.Size = new Size(64, 21);
+            TotalRevenueNumberLabel.TabIndex = 2;
+            TotalRevenueNumberLabel.Text = "67313$";
             // 
             // RevenueLabel
             // 
@@ -196,16 +330,18 @@
             // 
             // pictureBox3
             // 
+            pictureBox3.Image = Properties.Resources.profit;
             pictureBox3.Location = new Point(46, 9);
             pictureBox3.Name = "pictureBox3";
             pictureBox3.Size = new Size(61, 50);
+            pictureBox3.SizeMode = PictureBoxSizeMode.StretchImage;
             pictureBox3.TabIndex = 0;
             pictureBox3.TabStop = false;
             // 
             // panel2
             // 
             panel2.BackColor = Color.White;
-            panel2.Controls.Add(label1);
+            panel2.Controls.Add(ActiveUsersNumberLabel);
             panel2.Controls.Add(ActiveUsersLabel);
             panel2.Controls.Add(pictureBox2);
             panel2.Location = new Point(204, 45);
@@ -213,15 +349,15 @@
             panel2.Size = new Size(156, 126);
             panel2.TabIndex = 3;
             // 
-            // label1
+            // ActiveUsersNumberLabel
             // 
-            label1.AutoSize = true;
-            label1.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label1.Location = new Point(69, 79);
-            label1.Name = "label1";
-            label1.Size = new Size(19, 21);
-            label1.TabIndex = 2;
-            label1.Text = "5";
+            ActiveUsersNumberLabel.AutoSize = true;
+            ActiveUsersNumberLabel.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            ActiveUsersNumberLabel.Location = new Point(69, 79);
+            ActiveUsersNumberLabel.Name = "ActiveUsersNumberLabel";
+            ActiveUsersNumberLabel.Size = new Size(19, 21);
+            ActiveUsersNumberLabel.TabIndex = 2;
+            ActiveUsersNumberLabel.Text = "5";
             // 
             // ActiveUsersLabel
             // 
@@ -236,16 +372,18 @@
             // 
             // pictureBox2
             // 
+            pictureBox2.Image = Properties.Resources.active;
             pictureBox2.Location = new Point(46, 9);
             pictureBox2.Name = "pictureBox2";
             pictureBox2.Size = new Size(61, 50);
+            pictureBox2.SizeMode = PictureBoxSizeMode.StretchImage;
             pictureBox2.TabIndex = 0;
             pictureBox2.TabStop = false;
             // 
             // successfulJourneysPanel
             // 
             successfulJourneysPanel.BackColor = Color.White;
-            successfulJourneysPanel.Controls.Add(SuccessfulJourneysNumber);
+            successfulJourneysPanel.Controls.Add(TotalUsersNumberLabel);
             successfulJourneysPanel.Controls.Add(TotalUsersLabel);
             successfulJourneysPanel.Controls.Add(pictureBox1);
             successfulJourneysPanel.Location = new Point(12, 45);
@@ -253,15 +391,15 @@
             successfulJourneysPanel.Size = new Size(156, 126);
             successfulJourneysPanel.TabIndex = 0;
             // 
-            // SuccessfulJourneysNumber
+            // TotalUsersNumberLabel
             // 
-            SuccessfulJourneysNumber.AutoSize = true;
-            SuccessfulJourneysNumber.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            SuccessfulJourneysNumber.Location = new Point(67, 79);
-            SuccessfulJourneysNumber.Name = "SuccessfulJourneysNumber";
-            SuccessfulJourneysNumber.Size = new Size(19, 21);
-            SuccessfulJourneysNumber.TabIndex = 2;
-            SuccessfulJourneysNumber.Text = "3";
+            TotalUsersNumberLabel.AutoSize = true;
+            TotalUsersNumberLabel.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            TotalUsersNumberLabel.Location = new Point(61, 79);
+            TotalUsersNumberLabel.Name = "TotalUsersNumberLabel";
+            TotalUsersNumberLabel.Size = new Size(19, 21);
+            TotalUsersNumberLabel.TabIndex = 2;
+            TotalUsersNumberLabel.Text = "3";
             // 
             // TotalUsersLabel
             // 
@@ -276,9 +414,11 @@
             // 
             // pictureBox1
             // 
-            pictureBox1.Location = new Point(46, 9);
+            pictureBox1.Image = Properties.Resources.dashboard;
+            pictureBox1.Location = new Point(50, 9);
             pictureBox1.Name = "pictureBox1";
-            pictureBox1.Size = new Size(61, 50);
+            pictureBox1.Size = new Size(50, 50);
+            pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
             pictureBox1.TabIndex = 0;
             pictureBox1.TabStop = false;
             // 
@@ -325,6 +465,7 @@
             // 
             // TripReviewDisplayPanel
             // 
+            TripReviewDisplayPanel.AutoScroll = true;
             TripReviewDisplayPanel.BackColor = Color.White;
             TripReviewDisplayPanel.Location = new Point(3, 123);
             TripReviewDisplayPanel.Name = "TripReviewDisplayPanel";
@@ -334,17 +475,63 @@
             // tripReviewTopPanel
             // 
             tripReviewTopPanel.BackColor = Color.White;
+            tripReviewTopPanel.Controls.Add(tripFilterButton);
+            tripReviewTopPanel.Controls.Add(groupBox2);
             tripReviewTopPanel.Controls.Add(TripReviwesHeadLabel);
             tripReviewTopPanel.Location = new Point(3, 17);
             tripReviewTopPanel.Name = "tripReviewTopPanel";
             tripReviewTopPanel.Size = new Size(1163, 100);
             tripReviewTopPanel.TabIndex = 0;
             // 
+            // tripFilterButton
+            // 
+            tripFilterButton.BackColor = Color.Black;
+            tripFilterButton.BorderStyle = BorderStyle.FixedSingle;
+            tripFilterButton.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
+            tripFilterButton.ForeColor = Color.White;
+            tripFilterButton.Location = new Point(990, 26);
+            tripFilterButton.Name = "tripFilterButton";
+            tripFilterButton.Size = new Size(93, 46);
+            tripFilterButton.TabIndex = 11;
+            tripFilterButton.Text = "Apply";
+            tripFilterButton.TextAlign = ContentAlignment.MiddleCenter;
+            tripFilterButton.Click += tripFilterButton_Click;
+            // 
+            // groupBox2
+            // 
+            groupBox2.Controls.Add(tripFlagOption);
+            groupBox2.Font = new Font("Segoe UI", 10F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            groupBox2.Location = new Point(591, 14);
+            groupBox2.Margin = new Padding(2);
+            groupBox2.Name = "groupBox2";
+            groupBox2.Padding = new Padding(2);
+            groupBox2.Size = new Size(321, 71);
+            groupBox2.TabIndex = 10;
+            groupBox2.TabStop = false;
+            groupBox2.Text = "What do you want to see?";
+            // 
+            // tripFlagOption
+            // 
+            tripFlagOption.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            tripFlagOption.BackColor = Color.White;
+            tripFlagOption.FlatStyle = FlatStyle.Flat;
+            tripFlagOption.Font = new Font("Segoe UI", 16F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            tripFlagOption.ForeColor = SystemColors.InactiveCaptionText;
+            tripFlagOption.FormattingEnabled = true;
+            tripFlagOption.ItemHeight = 30;
+            tripFlagOption.Items.AddRange(new object[] { "clear", "flagged" });
+            tripFlagOption.Location = new Point(8, 17);
+            tripFlagOption.Margin = new Padding(2);
+            tripFlagOption.Name = "tripFlagOption";
+            tripFlagOption.Size = new Size(309, 38);
+            tripFlagOption.TabIndex = 4;
+            tripFlagOption.Text = "flagged";
+            // 
             // TripReviwesHeadLabel
             // 
             TripReviwesHeadLabel.AutoSize = true;
             TripReviwesHeadLabel.Font = new Font("Segoe UI", 18F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            TripReviwesHeadLabel.Location = new Point(477, 31);
+            TripReviwesHeadLabel.Location = new Point(132, 44);
             TripReviwesHeadLabel.Name = "TripReviwesHeadLabel";
             TripReviwesHeadLabel.Size = new Size(156, 32);
             TripReviwesHeadLabel.TabIndex = 0;
@@ -353,6 +540,7 @@
             // SideBarPanel
             // 
             SideBarPanel.BackColor = Color.White;
+            SideBarPanel.Controls.Add(UserApprovalButtonPanel);
             SideBarPanel.Controls.Add(serviceRevButtonPanel);
             SideBarPanel.Controls.Add(UserRevButtonPanel);
             SideBarPanel.Controls.Add(CategoryButtonPanel);
@@ -362,6 +550,37 @@
             SideBarPanel.Name = "SideBarPanel";
             SideBarPanel.Size = new Size(105, 684);
             SideBarPanel.TabIndex = 2;
+            // 
+            // UserApprovalButtonPanel
+            // 
+            UserApprovalButtonPanel.Controls.Add(UserApprovalButton);
+            UserApprovalButtonPanel.Controls.Add(UserApprovalLabel);
+            UserApprovalButtonPanel.Location = new Point(4, 373);
+            UserApprovalButtonPanel.Margin = new Padding(2);
+            UserApprovalButtonPanel.Name = "UserApprovalButtonPanel";
+            UserApprovalButtonPanel.Size = new Size(96, 62);
+            UserApprovalButtonPanel.TabIndex = 9;
+            // 
+            // UserApprovalButton
+            // 
+            UserApprovalButton.Image = Properties.Resources.reviews;
+            UserApprovalButton.Location = new Point(25, 3);
+            UserApprovalButton.Name = "UserApprovalButton";
+            UserApprovalButton.Size = new Size(40, 40);
+            UserApprovalButton.SizeMode = PictureBoxSizeMode.StretchImage;
+            UserApprovalButton.TabIndex = 4;
+            UserApprovalButton.TabStop = false;
+            UserApprovalButton.Click += UserApprovalButton_Click;
+            // 
+            // UserApprovalLabel
+            // 
+            UserApprovalLabel.AutoSize = true;
+            UserApprovalLabel.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            UserApprovalLabel.Location = new Point(6, 46);
+            UserApprovalLabel.Name = "UserApprovalLabel";
+            UserApprovalLabel.Size = new Size(86, 15);
+            UserApprovalLabel.TabIndex = 6;
+            UserApprovalLabel.Text = "User Approval";
             // 
             // serviceRevButtonPanel
             // 
@@ -505,6 +724,7 @@
             mainPanel.Controls.Add(CategoryPanel);
             mainPanel.Controls.Add(TripReviewPanel);
             mainPanel.Controls.Add(serviceReviewPanel);
+            mainPanel.Controls.Add(UserApprPanel);
             mainPanel.Dock = DockStyle.Fill;
             mainPanel.Location = new Point(0, 0);
             mainPanel.Name = "mainPanel";
@@ -523,10 +743,11 @@
             // 
             // CategoryDisplayPanel
             // 
+            CategoryDisplayPanel.AutoScroll = true;
             CategoryDisplayPanel.BackColor = Color.White;
             CategoryDisplayPanel.Location = new Point(3, 134);
             CategoryDisplayPanel.Name = "CategoryDisplayPanel";
-            CategoryDisplayPanel.Size = new Size(1166, 543);
+            CategoryDisplayPanel.Size = new Size(1157, 543);
             CategoryDisplayPanel.TabIndex = 1;
             // 
             // CategoryTopPanel
@@ -560,6 +781,7 @@
             AddCategoryButton.TabIndex = 3;
             AddCategoryButton.Text = "Add Category";
             AddCategoryButton.TextAlign = ContentAlignment.MiddleCenter;
+            AddCategoryButton.Click += AddCategoryButton_Click;
             // 
             // CategoryHeadlabel
             // 
@@ -583,6 +805,7 @@
             // 
             // ServiceRevDisplayPanel
             // 
+            ServiceRevDisplayPanel.AutoScroll = true;
             ServiceRevDisplayPanel.BackColor = Color.White;
             ServiceRevDisplayPanel.Location = new Point(3, 134);
             ServiceRevDisplayPanel.Name = "ServiceRevDisplayPanel";
@@ -592,34 +815,152 @@
             // ServiceRevTopPnael
             // 
             ServiceRevTopPnael.BackColor = Color.White;
+            ServiceRevTopPnael.Controls.Add(serviceFilerButton);
+            ServiceRevTopPnael.Controls.Add(groupBox1);
             ServiceRevTopPnael.Controls.Add(ServiceRevHeadLabel);
             ServiceRevTopPnael.Location = new Point(3, 18);
             ServiceRevTopPnael.Name = "ServiceRevTopPnael";
             ServiceRevTopPnael.Size = new Size(1163, 100);
             ServiceRevTopPnael.TabIndex = 0;
             // 
+            // serviceFilerButton
+            // 
+            serviceFilerButton.BackColor = Color.Black;
+            serviceFilerButton.BorderStyle = BorderStyle.FixedSingle;
+            serviceFilerButton.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
+            serviceFilerButton.ForeColor = Color.White;
+            serviceFilerButton.Location = new Point(923, 28);
+            serviceFilerButton.Name = "serviceFilerButton";
+            serviceFilerButton.Size = new Size(93, 46);
+            serviceFilerButton.TabIndex = 9;
+            serviceFilerButton.Text = "Apply";
+            serviceFilerButton.TextAlign = ContentAlignment.MiddleCenter;
+            serviceFilerButton.Click += serviceFilerButton_Click;
+            // 
+            // groupBox1
+            // 
+            groupBox1.Controls.Add(serviceFlagOption);
+            groupBox1.Font = new Font("Segoe UI", 10F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            groupBox1.Location = new Point(524, 16);
+            groupBox1.Margin = new Padding(2);
+            groupBox1.Name = "groupBox1";
+            groupBox1.Padding = new Padding(2);
+            groupBox1.Size = new Size(321, 71);
+            groupBox1.TabIndex = 8;
+            groupBox1.TabStop = false;
+            groupBox1.Text = "What do you want to see?";
+            // 
+            // serviceFlagOption
+            // 
+            serviceFlagOption.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            serviceFlagOption.BackColor = Color.White;
+            serviceFlagOption.FlatStyle = FlatStyle.Flat;
+            serviceFlagOption.Font = new Font("Segoe UI", 16F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            serviceFlagOption.ForeColor = SystemColors.InactiveCaptionText;
+            serviceFlagOption.FormattingEnabled = true;
+            serviceFlagOption.ItemHeight = 30;
+            serviceFlagOption.Items.AddRange(new object[] { "clear", "flagged" });
+            serviceFlagOption.Location = new Point(9, 18);
+            serviceFlagOption.Margin = new Padding(2);
+            serviceFlagOption.Name = "serviceFlagOption";
+            serviceFlagOption.Size = new Size(298, 38);
+            serviceFlagOption.TabIndex = 4;
+            serviceFlagOption.Text = "flagged";
+            // 
             // ServiceRevHeadLabel
             // 
             ServiceRevHeadLabel.AutoSize = true;
             ServiceRevHeadLabel.Font = new Font("Segoe UI", 15.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            ServiceRevHeadLabel.Location = new Point(492, 40);
+            ServiceRevHeadLabel.Location = new Point(172, 37);
             ServiceRevHeadLabel.Name = "ServiceRevHeadLabel";
             ServiceRevHeadLabel.Size = new Size(167, 30);
             ServiceRevHeadLabel.TabIndex = 0;
             ServiceRevHeadLabel.Text = "Service Reviews";
             // 
-            // ReportViewButton
+            // UserApprPanel
             // 
-            ReportViewButton.BackColor = Color.Black;
-            ReportViewButton.BorderStyle = BorderStyle.FixedSingle;
-            ReportViewButton.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
-            ReportViewButton.ForeColor = Color.White;
-            ReportViewButton.Location = new Point(115, 417);
-            ReportViewButton.Name = "ReportViewButton";
-            ReportViewButton.Size = new Size(348, 40);
-            ReportViewButton.TabIndex = 6;
-            ReportViewButton.Text = "View Reports";
-            ReportViewButton.TextAlign = ContentAlignment.MiddleCenter;
+            UserApprPanel.Controls.Add(UsersDiplayPanel);
+            UserApprPanel.Controls.Add(UserApprovalTopPanel);
+            UserApprPanel.Location = new Point(108, 3);
+            UserApprPanel.Name = "UserApprPanel";
+            UserApprPanel.Size = new Size(1169, 678);
+            UserApprPanel.TabIndex = 3;
+            UserApprPanel.Visible = false;
+            // 
+            // UsersDiplayPanel
+            // 
+            UsersDiplayPanel.AutoScroll = true;
+            UsersDiplayPanel.BackColor = Color.White;
+            UsersDiplayPanel.Location = new Point(3, 146);
+            UsersDiplayPanel.Name = "UsersDiplayPanel";
+            UsersDiplayPanel.Size = new Size(1166, 519);
+            UsersDiplayPanel.TabIndex = 1;
+            // 
+            // UserApprovalTopPanel
+            // 
+            UserApprovalTopPanel.BackColor = Color.White;
+            UserApprovalTopPanel.Controls.Add(ApplyButton);
+            UserApprovalTopPanel.Controls.Add(UserSelection);
+            UserApprovalTopPanel.Controls.Add(UserApprovalHeadingLabel);
+            UserApprovalTopPanel.Location = new Point(0, 37);
+            UserApprovalTopPanel.Name = "UserApprovalTopPanel";
+            UserApprovalTopPanel.Size = new Size(1169, 100);
+            UserApprovalTopPanel.TabIndex = 0;
+            // 
+            // ApplyButton
+            // 
+            ApplyButton.BackColor = Color.Black;
+            ApplyButton.BorderStyle = BorderStyle.FixedSingle;
+            ApplyButton.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
+            ApplyButton.ForeColor = Color.White;
+            ApplyButton.Location = new Point(1014, 30);
+            ApplyButton.Name = "ApplyButton";
+            ApplyButton.Size = new Size(93, 46);
+            ApplyButton.TabIndex = 7;
+            ApplyButton.Text = "Apply";
+            ApplyButton.TextAlign = ContentAlignment.MiddleCenter;
+            ApplyButton.Click += ApplyButton_Click;
+            // 
+            // UserSelection
+            // 
+            UserSelection.Controls.Add(statusSelectOption);
+            UserSelection.Font = new Font("Segoe UI", 10F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            UserSelection.Location = new Point(615, 18);
+            UserSelection.Margin = new Padding(2);
+            UserSelection.Name = "UserSelection";
+            UserSelection.Padding = new Padding(2);
+            UserSelection.Size = new Size(321, 71);
+            UserSelection.TabIndex = 6;
+            UserSelection.TabStop = false;
+            UserSelection.Text = "What do you want to see?";
+            // 
+            // statusSelectOption
+            // 
+            statusSelectOption.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            statusSelectOption.BackColor = Color.White;
+            statusSelectOption.FlatStyle = FlatStyle.Flat;
+            statusSelectOption.Font = new Font("Segoe UI", 16F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            statusSelectOption.ForeColor = SystemColors.InactiveCaptionText;
+            statusSelectOption.FormattingEnabled = true;
+            statusSelectOption.ItemHeight = 30;
+            statusSelectOption.Items.AddRange(new object[] { "pending", "accepted", "rejected" });
+            statusSelectOption.Location = new Point(10, 19);
+            statusSelectOption.Margin = new Padding(2);
+            statusSelectOption.Name = "statusSelectOption";
+            statusSelectOption.Size = new Size(307, 38);
+            statusSelectOption.TabIndex = 4;
+            statusSelectOption.Text = "pending";
+            // 
+            // UserApprovalHeadingLabel
+            // 
+            UserApprovalHeadingLabel.AutoSize = true;
+            UserApprovalHeadingLabel.Font = new Font("Segoe UI", 15.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            UserApprovalHeadingLabel.Location = new Point(270, 40);
+            UserApprovalHeadingLabel.Name = "UserApprovalHeadingLabel";
+            UserApprovalHeadingLabel.Size = new Size(152, 30);
+            UserApprovalHeadingLabel.TabIndex = 1;
+            UserApprovalHeadingLabel.Text = "User Approval";
+            UserApprovalHeadingLabel.TextAlign = ContentAlignment.MiddleCenter;
             // 
             // Admin
             // 
@@ -636,6 +977,12 @@
             UpcomingTripsPanel.PerformLayout();
             StatisticsPanel.ResumeLayout(false);
             StatisticsPanel.PerformLayout();
+            panel4.ResumeLayout(false);
+            panel4.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)pictureBox5).EndInit();
+            panel1.ResumeLayout(false);
+            panel1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)pictureBox4).EndInit();
             panel3.ResumeLayout(false);
             panel3.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox3).EndInit();
@@ -649,7 +996,11 @@
             TripReviewPanel.ResumeLayout(false);
             tripReviewTopPanel.ResumeLayout(false);
             tripReviewTopPanel.PerformLayout();
+            groupBox2.ResumeLayout(false);
             SideBarPanel.ResumeLayout(false);
+            UserApprovalButtonPanel.ResumeLayout(false);
+            UserApprovalButtonPanel.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)UserApprovalButton).EndInit();
             serviceRevButtonPanel.ResumeLayout(false);
             serviceRevButtonPanel.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)ServiceRevButton).EndInit();
@@ -670,6 +1021,11 @@
             serviceReviewPanel.ResumeLayout(false);
             ServiceRevTopPnael.ResumeLayout(false);
             ServiceRevTopPnael.PerformLayout();
+            groupBox1.ResumeLayout(false);
+            UserApprPanel.ResumeLayout(false);
+            UserApprovalTopPanel.ResumeLayout(false);
+            UserApprovalTopPanel.PerformLayout();
+            UserSelection.ResumeLayout(false);
             ResumeLayout(false);
         }
 
@@ -684,15 +1040,15 @@
         private Panel StatisticsPanel;
         private Label StatisticLabel;
         private Panel panel3;
-        private Label label3;
+        private Label TotalRevenueNumberLabel;
         private Label RevenueLabel;
         private PictureBox pictureBox3;
         private Panel panel2;
-        private Label label1;
+        private Label ActiveUsersNumberLabel;
         private Label ActiveUsersLabel;
         private PictureBox pictureBox2;
         private Panel successfulJourneysPanel;
-        private Label SuccessfulJourneysNumber;
+        private Label TotalUsersNumberLabel;
         private Label TotalUsersLabel;
         private PictureBox pictureBox1;
         private Panel tripReviewTopPanel;
@@ -735,5 +1091,29 @@
         private Label AddCategoryButton;
         private TextBox addCategoryBox;
         private Label ReportViewButton;
+        private Panel UserApprPanel;
+        private Panel UsersDiplayPanel;
+        private Panel UserApprovalTopPanel;
+        private Label UserApprovalHeadingLabel;
+        private GroupBox UserSelection;
+        private ComboBox statusSelectOption;
+        private Label ApplyButton;
+        private Panel UserApprovalButtonPanel;
+        private PictureBox UserApprovalButton;
+        private Label UserApprovalLabel;
+        private Label serviceFilerButton;
+        private GroupBox groupBox1;
+        private ComboBox serviceFlagOption;
+        private Label tripFilterButton;
+        private GroupBox groupBox2;
+        private ComboBox tripFlagOption;
+        private Panel panel4;
+        private Label AverageTripLengthNumber;
+        private Label AverageTripLength;
+        private PictureBox pictureBox5;
+        private Panel panel1;
+        private Label AverageTripCostNumberLabel;
+        private Label AverageTripCost;
+        private PictureBox pictureBox4;
     }
 }

@@ -35,6 +35,28 @@ INSERT INTO reg_counter (user_type, last_number) VALUES ('TR', 50);
 INSERT INTO reg_counter (user_type, last_number) VALUES ('OP', 50);
 INSERT INTO reg_counter (user_type, last_number) VALUES ('SP', 50);
 INSERT INTO reg_counter (user_type, last_number) VALUES ('AD', 50);
+INSERT INTO reg_counter (user_type, last_number) VALUES
+('ASI', 50),
+('AUR', 50),
+('AFR', 50),
+('EUR', 50),
+('NAM', 50),
+('SAM', 50),
+('OCE', 50),
+('ANT', 50),
+('TRIP', 50),
+('BOOK', 50),
+('TXN', 50),
+('TRVW', 50),
+('UAL', 50),
+('TRL', 50),
+('SRV', 50),
+('ETK', 50),
+('HTL', 50),
+('ACT', 50),
+('SRVW', 50),
+('CAT', 50);
+
 
 
 select * from users
@@ -96,6 +118,15 @@ CREATE TABLE location (
         ),
     country VARCHAR(100) NOT NULL
 )
+
+UPDATE trips
+SET profileTrip_image_url = CASE 
+    WHEN ABS(CAST(CAST(NEWID() AS VARBINARY) AS INT)) % 2 = 0 
+        THEN 'https://i.postimg.cc/L5ZYdk4R/john-rodenn-castillo-eluz-JSfk-NCk-unsplash.jpg'
+    ELSE 'https://i.postimg.cc/bvWSmF8L/pexels-8moments-1323550.jpg'
+END
+WHERE ABS(CAST(CAST(NEWID() AS VARBINARY) AS INT)) % 10 < 7; -- skip ~30%
+
 
 CREATE TABLE trips (
     trip_id VARCHAR(20) PRIMARY KEY CHECK (
@@ -194,6 +225,8 @@ CREATE TABLE trip_reviews (
     flag_status VARCHAR(50) NOT NULL CHECK (flag_status IN ('clear', 'flagged')) DEFAULT 'clear'
 )
 
+select * from trip_reviews
+
 CREATE TABLE user_approval_logs(
     log_id VARCHAR(20) PRIMARY KEY CHECK (log_id LIKE 'UAL-[0-9][0-9][0-9][0-9][0-9][0-9]'),
 
@@ -289,6 +322,13 @@ CREATE TABLE trip_services (
     
     PRIMARY KEY (trip_id, service_id)
 )
+ALTER TABLE trip_services
+ADD status VARCHAR(10) 
+CHECK (status IN ('pending', 'accepted', 'rejected'));
+
+UPDATE trip_services
+SET status = 'accepted';
+
 
 CREATE TABLE digital_passes (
     pass_id VARCHAR(20) PRIMARY KEY CHECK (
@@ -319,7 +359,7 @@ CREATE TABLE service_reviews(
     service_id VARCHAR(20) NOT NULL,
     FOREIGN KEY (service_id) REFERENCES services(service_id),
     
-    traveler_id VARCHAR(20) NOT NULL,
+    user_id VARCHAR(20) NOT NULL,
     FOREIGN KEY (traveler_id) REFERENCES travelers(reg_no),
     
     rating INT NOT NULL CHECK (rating BETWEEN 1 AND 5),
@@ -327,7 +367,7 @@ CREATE TABLE service_reviews(
     review_date DATETIME DEFAULT GETDATE(),
     flag_status VARCHAR(50) NOT NULL CHECK (flag_status IN ('clear', 'flagged')) DEFAULT 'clear',
 )
-
+select * from service_reviews
 
 CREATE TABLE service_review_logs(
     log_id VARCHAR(20) PRIMARY KEY CHECK (log_id LIKE 'TRL-[0-9][0-9][0-9][0-9][0-9][0-9]'),
@@ -392,3 +432,15 @@ inner join trips t on t.category = c.id
 group by c.category_name
 
 select * from RevenueByCategory
+
+
+SELECT sr.review_id, sr.service_id, sr.traveler_id, 
+       sr.rating, sr.description, sr.review_date, sr.flag_status,
+       t.first_name + ' ' + t.last_name AS traveler_name
+FROM service_reviews sr
+JOIN travelers t ON sr.traveler_id = t.reg_no
+WHERE sr.flag_status = @status
+ORDER BY sr.review_date DESC
+
+
+select * from user_approval_logs
