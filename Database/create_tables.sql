@@ -51,6 +51,8 @@ CREATE TABLE travelers (
     date_of_birth DATE NOT NULL
 )
 
+select * from travelers
+
 CREATE TABLE admins (
     reg_no VARCHAR(20) PRIMARY KEY,
     FOREIGN KEY (reg_no) REFERENCES users(reg_no) ,
@@ -388,3 +390,5 @@ select c.category_name, Sum(t.price_per_person) as Revenue
 from Category c 
 inner join trips t on t.category = c.id
 group by c.category_name
+
+select * from RevenueByCategory
