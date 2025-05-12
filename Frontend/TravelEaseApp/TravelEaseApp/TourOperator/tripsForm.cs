@@ -32,6 +32,7 @@ namespace TravelEaseApp.TourOperator
         List<Trip> trips = new List<Trip>();
         List<Location> locations = new List<Location>();
         List<TripReview> reviews = new List<TripReview>();
+        List<Category> categories = new List<Category>();
         public tripsForm(string regNo)
         {
             InitializeComponent();
@@ -227,7 +228,7 @@ namespace TravelEaseApp.TourOperator
                                 StartDate = reader.GetDateTime(8),
                                 EndDate = reader.GetDateTime(9),
                                 OperatorId = reader.GetString(10), // Fixed: Changed GetInt32 to GetString
-                                Category = reader.GetString(11),
+                                Category = reader.GetString(12),
                             };
                             trips.Add(trip);
                         }
@@ -237,6 +238,39 @@ namespace TravelEaseApp.TourOperator
                     {
                         Console.WriteLine($"Error: {ex.Message}");
                         throw; // Re-throw to handle in calling code
+                    }
+                }
+                foreach (var trip in trips)
+                {
+                    // find the services for each trip
+                    string query2 = "SELECT * FROM trip_services WHERE trip_id = '" + trip.TripId + "'";
+                    using (SqlConnection connection = new SqlConnection(connectionString))
+                    {
+                        SqlCommand command = new SqlCommand(query2, connection);
+                        try
+                        {
+                            connection.Open();
+                            SqlDataReader reader = command.ExecuteReader();
+                            while (reader.Read())
+                            {
+                                var service = services.FirstOrDefault(s => s.ServiceId == reader.GetString(1));
+                                var status = reader.GetString(2);
+                                if (status == "accepted")
+                                {
+                                    trip.IncludedServices.Add(service);
+                                }
+                                else if (status != "rejected")
+                                {
+                                    trip.RequestedServices.Add(service);
+                                }
+                            }
+                            reader.Close();
+                        }
+                        catch (Exception ex)
+                        {
+                            Console.WriteLine($"Error: {ex.Message}");
+                            throw; // Re-throw to handle in calling code
+                        }
                     }
                 }
             }
@@ -302,8 +336,62 @@ namespace TravelEaseApp.TourOperator
                     }
                 }
             }
-        }
 
+            {   // setup visitedLocations attribute for trips
+                // find all locations related to trip and push to list order in ascending order by destination_order
+                foreach (var trip in trips)
+                {
+                    string query = $"SELECT * FROM trip_location WHERE trip_id = '{trip.TripId}' ORDER BY destination_order ASC";
+                    using (SqlConnection connection = new SqlConnection(connectionString))
+                    {
+                        SqlCommand command = new SqlCommand(query, connection);
+                        try
+                        {
+                            connection.Open();
+                            SqlDataReader reader = command.ExecuteReader();
+                            while (reader.Read())
+                            {
+                                var location = locations.FirstOrDefault(l => l.DestId == reader.GetString(1));
+                                if (location != null)
+                                {
+                                    trip.VisitedLocations.Add(location);
+                                }
+                            }
+                            reader.Close();
+                        }
+                        catch (Exception ex)
+                        {
+                            Console.WriteLine($"Error: {ex.Message}");
+                            throw; // Re-throw to handle in calling code
+                        }
+                    }
+                }
+            }
+
+            {   // fetch all categories
+                string query = "SELECT * FROM category";
+                using (SqlConnection connection = new SqlConnection(connectionString))
+                {
+                    SqlCommand command = new SqlCommand(query, connection);
+                    try
+                    {
+                        connection.Open();
+                        SqlDataReader reader = command.ExecuteReader();
+                        while (reader.Read())
+                        {
+                            var category = new Category(reader.GetString(0), reader.GetString(1));
+                            categories.Add(category);
+                        }
+                        reader.Close();
+                    }
+                    catch (Exception ex)
+                    {
+                        Console.WriteLine($"Error: {ex.Message}");
+                        throw; // Re-throw to handle in calling code
+                    }
+                }
+            }
+        }
         private void SetSampleData()
         {
             // Clear existing data
@@ -577,14 +665,15 @@ namespace TravelEaseApp.TourOperator
                 Location = new Point(boxInternalPadding + 10, boxInternalPadding)
             };
 
-            // Trip Category
-            Label lblCategory = new Label
+            // Status
+            string CategoryInText = categories.Find(c => c.Id == trip.Category)?.CategoryName ?? trip.Category;
+            var statusLabel = new Label
             {
-                Text = trip.Category.ToUpper(),
-                Font = idFont,
-                ForeColor = accentColor,
+                Text = $"{CategoryInText.ToUpper()} | {trip.Status.ToUpper()}",
+                Font = new Font("Segoe UI", 10),
+                ForeColor = trip.Status == "completed" ? Color.Gray : GetTripCategoryColor(trip.Category),
                 AutoSize = true,
-                Location = new Point(lblId.Right + 15, boxInternalPadding)
+                Location = new Point(lblId.Right, boxInternalPadding)
             };
 
             // Title
@@ -638,7 +727,7 @@ namespace TravelEaseApp.TourOperator
             // Duration
             Label lblDuration = new Label
             {
-                Text = trip.DurationDisplay,
+                Text = $"{trip.DurationDays} days",
                 Font = textFont,
                 ForeColor = textColor,
                 AutoSize = true,
@@ -646,9 +735,18 @@ namespace TravelEaseApp.TourOperator
             };
 
             // Start Location
+            //find startLocationId in locations and save string
+            foreach (var location in locations)
+            {
+                if (location.DestId == trip.StartLocationId)
+                {
+                    trip.StartLocation = location;
+                    break;
+                }
+            }
             Label lblLocation = new Label
             {
-                Text = $"Start: {trip.StartLocation?.ToString() ?? "N/A"}",
+                Text = $"Start: {trip.StartLocationId?.ToString() ?? "N/A"}",
                 Font = textFont,
                 ForeColor = textColor,
                 AutoSize = true,
@@ -671,9 +769,15 @@ namespace TravelEaseApp.TourOperator
             btnRequestService.FlatAppearance.BorderSize = 0;
             btnRequestService.Click += BtnRequestService_Click;
 
+            if (trip.Status == "completed")
+            {
+                btnRequestService.Enabled = false;
+                btnRequestService.BackColor = Color.Gray;
+            }
+
             // Add controls to panel
             tripBox.Controls.Add(lblId);
-            tripBox.Controls.Add(lblCategory);
+            tripBox.Controls.Add(statusLabel);
             tripBox.Controls.Add(lblTitle);
             tripBox.Controls.Add(lblDesc);
             tripBox.Controls.Add(lblPrice);
@@ -713,14 +817,16 @@ namespace TravelEaseApp.TourOperator
 
         private Color GetTripCategoryColor(string category)
         {
-            switch (category?.ToLower())
-            {
-                case "luxury": return Color.FromArgb(184, 134, 11);   // Dark goldenrod
-                case "cultural": return Color.FromArgb(34, 139, 34);  // Forest green
-                case "urban": return Color.FromArgb(70, 130, 180);    // Steel blue
-                case "adventure": return Color.FromArgb(138, 43, 226); // Blue violet
-                default: return Color.FromArgb(0, 122, 204);          // Default blue
-            }
+            // use some hash to generate color
+            int hash = category.GetHashCode();
+            int r = (hash & 0xFF0000) >> 16;
+            int g = (hash & 0x00FF00) >> 8;
+            int b = hash & 0x0000FF;
+            // Ensure RGB values are not too light
+            r = Math.Max(r, 50);
+            g = Math.Max(g, 50);
+            b = Math.Max(b, 50);
+            return Color.FromArgb(255, r, g, b);
         }
 
         private void ShowTripDetails(Trip trip)
@@ -801,8 +907,9 @@ namespace TravelEaseApp.TourOperator
             currentY += titleLabel.Height + 10;
 
             // Category and Status
+            string CategoryInText = categories.Find(c => c.Id == trip.Category)?.CategoryName ?? trip.Category;
             var statusLabel = AddLabel(
-                $"{trip.Category} | {trip.Status}",
+                $"{CategoryInText} | {trip.Status}",
                 new Font("Segoe UI", 10),
                 GetTripCategoryColor(trip.Category),
                 currentY,
@@ -848,7 +955,7 @@ namespace TravelEaseApp.TourOperator
 
             // Duration
             var durationLabel = AddLabel(
-                $"Duration: {trip.DurationDisplay}",
+                $"Duration: {trip.DurationDays} days",
                 new Font("Segoe UI", 10),
                 Color.Black,
                 currentY,
@@ -864,9 +971,18 @@ namespace TravelEaseApp.TourOperator
                 panel.Width - 60);
             currentY += locationLabel.Height + 15;
 
+            // Visited Locations
+            var visitedLocationsLabel = AddLabel(
+                $"Locations List: {string.Join(", ", trip.VisitedLocations.Select(l => l.ToString()))}",
+                new Font("Segoe UI", 10),
+                Color.Black,
+                currentY,
+                panel.Width - 60);
+            currentY += visitedLocationsLabel.Height + 10;
+
             // Operator
             var operatorLabel = AddLabel(
-                $"Operator: {trip.OperatorName}",
+                $"Operator: {trip.OperatorId}",
                 new Font("Segoe UI", 10),
                 Color.Black,
                 currentY,
@@ -929,7 +1045,7 @@ namespace TravelEaseApp.TourOperator
                 foreach (var service in trip.IncludedServices)
                 {
                     var serviceLabel = AddLabel(
-                        $"• {service.ServiceType.ToUpper()}: {service.ServiceDescription} (Provider: {service.ProviderName}, Price: {service.Price:C})",
+                        $"• {service.ServiceType.ToUpper()}: {service.ServiceDescription} (Provider: {service.ProviderId}, Price: {service.Price:C})",
                         new Font("Segoe UI", 10),
                         Color.Black,
                         currentY,
@@ -962,7 +1078,7 @@ namespace TravelEaseApp.TourOperator
                 foreach (var service in trip.RequestedServices)
                 {
                     var serviceLabel = AddLabel(
-                        $"• {service.ServiceType.ToUpper()}: {service.ServiceDescription} (Provider: {service.ProviderName}, Price: {service.Price:C}) - PENDING",
+                        $"• {service.ServiceType.ToUpper()}: {service.ServiceDescription} (Provider: {service.ProviderId}, Price: {service.Price:C}) - PENDING",
                         new Font("Segoe UI", 10),
                         Color.DarkOrange,
                         currentY,
@@ -971,6 +1087,16 @@ namespace TravelEaseApp.TourOperator
                 }
                 currentY += 10; // Add space after last requested service
             }
+
+            // Divider
+            panel.Controls.Add(new Panel
+            {
+                BackColor = Color.LightGray,
+                Height = 1,
+                Width = panel.Width - 60,
+                Location = new Point(20, currentY)
+            });
+            currentY += 20;
 
             // ========== TRIP REVIEWS SECTION (NEW) ==========
             // Call the new function to display reviews in their own scrollable panel
@@ -984,7 +1110,117 @@ namespace TravelEaseApp.TourOperator
 
             // Adjust the panel's AutoScrollMinSize to ensure all content is scrollable
             // Make sure to account for the height of the new reviewsContainerPanel
-            panel.AutoScrollMinSize = new Size(0, currentY + 20); // Add some buffer at the end
+            // ========== ADD COMPLETION BUTTON (if trip is active) ==========
+            if (trip.Status == "active" && trip.EndDate <= DateTime.Now)
+            {
+                Button btnCompleteTrip = new Button
+                {
+                    Text = "Mark Trip as Completed",
+                    Font = new Font("Segoe UI Semibold", 10F),
+                    BackColor = Color.FromArgb(46, 139, 87), // Sea green
+                    ForeColor = Color.White,
+                    FlatStyle = FlatStyle.Flat,
+                    Size = new Size(200, 35),
+                    Location = new Point(20, currentY + 20),
+                    Tag = trip, // Store the trip object
+                    Cursor = Cursors.Hand
+                };
+                btnCompleteTrip.FlatAppearance.BorderSize = 0;
+                btnCompleteTrip.Click += BtnCompleteTrip_Click;
+                panel.Controls.Add(btnCompleteTrip);
+                currentY += btnCompleteTrip.Height + 20;
+            }
+
+            // Adjust the panel's AutoScrollMinSize
+            panel.AutoScrollMinSize = new Size(0, currentY + 20);
+        }
+
+        private void RefreshTripBox(Trip updatedTrip)
+        {
+            foreach (Control control in availableTripsPanel.Controls)
+            {
+                if (control is Panel tripBox && tripBox.Tag is Trip trip && trip.TripId == updatedTrip.TripId)
+                {
+                    // Update the trip object reference
+                    tripBox.Tag = updatedTrip;
+
+                    // Find and update the status/category label if it exists
+                    foreach (Control boxControl in tripBox.Controls)
+                    {
+                        if (boxControl is Label lbl && lbl.Text.Contains("|"))
+                        {
+                            lbl.Text = $"{updatedTrip.Category} | {updatedTrip.Status}";
+                            lbl.ForeColor = GetTripCategoryColor(updatedTrip.Category);
+                            break;
+                        }
+                    }
+
+                    // Optionally change the appearance of the completed trip
+                    tripBox.BackColor = Color.FromArgb(240, 240, 240); // Light gray
+                    break;
+                }
+            }
+        }
+
+        private void BtnCompleteTrip_Click(object sender, EventArgs e)
+        {
+            Button btn = sender as Button;
+            if (btn == null) return;
+
+            Trip trip = btn.Tag as Trip;
+            if (trip == null) return;
+
+            // Confirm with the user
+            DialogResult result = MessageBox.Show(
+                $"Are you sure you want to mark '{trip.Title}' as completed?",
+                "Confirm Completion",
+                MessageBoxButtons.YesNo,
+                MessageBoxIcon.Question);
+
+            if (result == DialogResult.Yes)
+            {
+                try
+                {
+                    // Update the database
+                    string query = "UPDATE trips SET status = 'completed' WHERE trip_id = @tripId";
+
+                    using (SqlConnection connection = new SqlConnection(connectionString))
+                    using (SqlCommand command = new SqlCommand(query, connection))
+                    {
+                        command.Parameters.AddWithValue("@tripId", trip.TripId);
+                        connection.Open();
+                        int rowsAffected = command.ExecuteNonQuery();
+
+                        if (rowsAffected > 0)
+                        {
+                            // Update the local trip object
+                            trip.Status = "completed";
+
+                            // Refresh the UI
+                            if (CompleteTripInfoPanel.Visible)
+                            {
+                                DisplayTripInPanel(CompleteTripInfoPanel, trip);
+                            }
+
+                            // Refresh the trip box in the main panel
+                            RefreshTripBox(trip);
+
+                            MessageBox.Show("Trip marked as completed successfully!", "Success",
+                                MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        }
+                        else
+                        {
+                            MessageBox.Show("No trip was updated. The trip may not exist.", "Warning",
+                                MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show($"Error updating trip status: {ex.Message}", "Error",
+                        MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
         }
 
         private void AddCloseButtonToPanel(Panel panel)
@@ -1085,6 +1321,23 @@ namespace TravelEaseApp.TourOperator
                         if (!_currentTripForServiceRequest.RequestedServices.Any(rs => rs.ServiceId == selectedService.ServiceId))
                         {
                             _currentTripForServiceRequest.RequestedServices.Add(selectedService);
+                            {   // Write sql query to insert status = 'pending' in trip_services
+                                string query = $"INSERT INTO trip_services (trip_id, service_id, status) VALUES ('{_currentTripForServiceRequest.TripId}', '{selectedService.ServiceId}', 'pending')";
+                                using (SqlConnection connection = new SqlConnection(connectionString))
+                                {
+                                    SqlCommand command = new SqlCommand(query, connection);
+                                    try
+                                    {
+                                        connection.Open();
+                                        command.ExecuteNonQuery();
+                                    }
+                                    catch (Exception ex)
+                                    {
+                                        Console.WriteLine($"Error: {ex.Message}");
+                                        throw; // Re-throw to handle in calling code
+                                    }
+                                }
+                            }
                             MessageBox.Show($"Service '{selectedService.ServiceDescription}' requested for trip '{_currentTripForServiceRequest.Title}'.", "Service Requested", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         }
                         else

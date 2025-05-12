@@ -28,8 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            serviceTypeBoxEmail = new GroupBox();
-            innerServiceTypeBox = new TextBox();
             serviceDescriptionBox = new GroupBox();
             innerServiceDescriptionBox = new TextBox();
             pricePerPersonBox = new GroupBox();
@@ -39,44 +37,20 @@
             submitLabel = new Label();
             flowLayoutPanel1 = new FlowLayoutPanel();
             label1 = new Label();
-            RoleSelectionGroup = new GroupBox();
-            RoleSelectOptions = new ComboBox();
-            serviceTypeBoxEmail.SuspendLayout();
+            typeSelectionGroup = new GroupBox();
+            typeSelectOptions = new ComboBox();
             serviceDescriptionBox.SuspendLayout();
             pricePerPersonBox.SuspendLayout();
             capacityBox.SuspendLayout();
             flowLayoutPanel1.SuspendLayout();
-            RoleSelectionGroup.SuspendLayout();
+            typeSelectionGroup.SuspendLayout();
             SuspendLayout();
-            // 
-            // serviceTypeBoxEmail
-            // 
-            serviceTypeBoxEmail.Controls.Add(innerServiceTypeBox);
-            serviceTypeBoxEmail.Font = new Font("Times New Roman", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            serviceTypeBoxEmail.Location = new Point(403, 185);
-            serviceTypeBoxEmail.Margin = new Padding(3, 10, 3, 10);
-            serviceTypeBoxEmail.Name = "serviceTypeBoxEmail";
-            serviceTypeBoxEmail.Size = new Size(292, 59);
-            serviceTypeBoxEmail.TabIndex = 1;
-            serviceTypeBoxEmail.TabStop = false;
-            serviceTypeBoxEmail.Text = "Service Type";
-            // 
-            // innerServiceTypeBox
-            // 
-            innerServiceTypeBox.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-            innerServiceTypeBox.BackColor = SystemColors.Control;
-            innerServiceTypeBox.BorderStyle = BorderStyle.None;
-            innerServiceTypeBox.Font = new Font("Segoe UI", 9F);
-            innerServiceTypeBox.Location = new Point(13, 25);
-            innerServiceTypeBox.Name = "innerServiceTypeBox";
-            innerServiceTypeBox.Size = new Size(269, 16);
-            innerServiceTypeBox.TabIndex = 3;
             // 
             // serviceDescriptionBox
             // 
             serviceDescriptionBox.Controls.Add(innerServiceDescriptionBox);
             serviceDescriptionBox.Font = new Font("Times New Roman", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            serviceDescriptionBox.Location = new Point(403, 264);
+            serviceDescriptionBox.Location = new Point(403, 260);
             serviceDescriptionBox.Margin = new Padding(3, 10, 3, 10);
             serviceDescriptionBox.Name = "serviceDescriptionBox";
             serviceDescriptionBox.Size = new Size(292, 59);
@@ -99,7 +73,7 @@
             // 
             pricePerPersonBox.Controls.Add(innerPricePerPersonBox);
             pricePerPersonBox.Font = new Font("Times New Roman", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            pricePerPersonBox.Location = new Point(403, 343);
+            pricePerPersonBox.Location = new Point(403, 339);
             pricePerPersonBox.Margin = new Padding(3, 10, 3, 10);
             pricePerPersonBox.Name = "pricePerPersonBox";
             pricePerPersonBox.Size = new Size(292, 59);
@@ -122,7 +96,7 @@
             // 
             capacityBox.Controls.Add(innerCapacityBox);
             capacityBox.Font = new Font("Times New Roman", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            capacityBox.Location = new Point(403, 422);
+            capacityBox.Location = new Point(403, 418);
             capacityBox.Margin = new Padding(3, 10, 3, 10);
             capacityBox.Name = "capacityBox";
             capacityBox.Size = new Size(292, 59);
@@ -148,7 +122,7 @@
             submitLabel.Cursor = Cursors.Hand;
             submitLabel.Font = new Font("Segoe UI", 15F, FontStyle.Bold);
             submitLabel.ForeColor = Color.White;
-            submitLabel.Location = new Point(403, 501);
+            submitLabel.Location = new Point(403, 497);
             submitLabel.Margin = new Padding(3, 10, 3, 10);
             submitLabel.Name = "submitLabel";
             submitLabel.Size = new Size(292, 40);
@@ -160,12 +134,11 @@
             // flowLayoutPanel1
             // 
             flowLayoutPanel1.Controls.Add(label1);
-            flowLayoutPanel1.Controls.Add(serviceTypeBoxEmail);
+            flowLayoutPanel1.Controls.Add(typeSelectionGroup);
             flowLayoutPanel1.Controls.Add(serviceDescriptionBox);
             flowLayoutPanel1.Controls.Add(pricePerPersonBox);
             flowLayoutPanel1.Controls.Add(capacityBox);
             flowLayoutPanel1.Controls.Add(submitLabel);
-            flowLayoutPanel1.Controls.Add(RoleSelectionGroup);
             flowLayoutPanel1.Dock = DockStyle.Fill;
             flowLayoutPanel1.FlowDirection = FlowDirection.TopDown;
             flowLayoutPanel1.Location = new Point(0, 0);
@@ -173,7 +146,6 @@
             flowLayoutPanel1.Padding = new Padding(400, 120, 0, 0);
             flowLayoutPanel1.Size = new Size(1118, 610);
             flowLayoutPanel1.TabIndex = 8;
-            flowLayoutPanel1.Paint += flowLayoutPanel1_Paint;
             // 
             // label1
             // 
@@ -185,35 +157,34 @@
             label1.Text = "Add Service";
             label1.TextAlign = ContentAlignment.MiddleCenter;
             // 
-            // RoleSelectionGroup
+            // typeSelectionGroup
             // 
-            RoleSelectionGroup.Controls.Add(RoleSelectOptions);
-            RoleSelectionGroup.Font = new Font("Segoe UI", 10F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            RoleSelectionGroup.Location = new Point(700, 122);
-            RoleSelectionGroup.Margin = new Padding(2);
-            RoleSelectionGroup.Name = "RoleSelectionGroup";
-            RoleSelectionGroup.Padding = new Padding(2);
-            RoleSelectionGroup.Size = new Size(321, 71);
-            RoleSelectionGroup.TabIndex = 9;
-            RoleSelectionGroup.TabStop = false;
-            RoleSelectionGroup.Text = "Service Type";
+            typeSelectionGroup.Controls.Add(typeSelectOptions);
+            typeSelectionGroup.Font = new Font("Times New Roman", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            typeSelectionGroup.Location = new Point(402, 177);
+            typeSelectionGroup.Margin = new Padding(2);
+            typeSelectionGroup.Name = "typeSelectionGroup";
+            typeSelectionGroup.Padding = new Padding(2);
+            typeSelectionGroup.Size = new Size(293, 71);
+            typeSelectionGroup.TabIndex = 9;
+            typeSelectionGroup.TabStop = false;
+            typeSelectionGroup.Text = "Service Type";
             // 
-            // RoleSelectOptions
+            // typeSelectOptions
             // 
-            RoleSelectOptions.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-            RoleSelectOptions.BackColor = Color.White;
-            RoleSelectOptions.FlatStyle = FlatStyle.Flat;
-            RoleSelectOptions.Font = new Font("Segoe UI", 16F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            RoleSelectOptions.ForeColor = SystemColors.InactiveCaptionText;
-            RoleSelectOptions.FormattingEnabled = true;
-            RoleSelectOptions.ItemHeight = 30;
-            RoleSelectOptions.Items.AddRange(new object[] { "Traveller", "Tour Operator", "Service Provider", "Admin" });
-            RoleSelectOptions.Location = new Point(10, 19);
-            RoleSelectOptions.Margin = new Padding(2);
-            RoleSelectOptions.Name = "RoleSelectOptions";
-            RoleSelectOptions.Size = new Size(429, 38);
-            RoleSelectOptions.TabIndex = 4;
-            RoleSelectOptions.Text = "Traveller";
+            typeSelectOptions.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            typeSelectOptions.BackColor = Color.White;
+            typeSelectOptions.FlatStyle = FlatStyle.Flat;
+            typeSelectOptions.Font = new Font("Segoe UI", 16F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            typeSelectOptions.ForeColor = SystemColors.InactiveCaptionText;
+            typeSelectOptions.FormattingEnabled = true;
+            typeSelectOptions.ItemHeight = 30;
+            typeSelectOptions.Items.AddRange(new object[] { "Guide", "Hotel", "Transport", "Other" });
+            typeSelectOptions.Location = new Point(4, 22);
+            typeSelectOptions.Margin = new Padding(2);
+            typeSelectOptions.Name = "typeSelectOptions";
+            typeSelectOptions.Size = new Size(285, 38);
+            typeSelectOptions.TabIndex = 4;
             // 
             // addServiceForm
             // 
@@ -225,8 +196,6 @@
             Name = "addServiceForm";
             Text = "Form1";
             Load += Form1_Load;
-            serviceTypeBoxEmail.ResumeLayout(false);
-            serviceTypeBoxEmail.PerformLayout();
             serviceDescriptionBox.ResumeLayout(false);
             serviceDescriptionBox.PerformLayout();
             pricePerPersonBox.ResumeLayout(false);
@@ -234,14 +203,11 @@
             capacityBox.ResumeLayout(false);
             capacityBox.PerformLayout();
             flowLayoutPanel1.ResumeLayout(false);
-            RoleSelectionGroup.ResumeLayout(false);
+            typeSelectionGroup.ResumeLayout(false);
             ResumeLayout(false);
         }
 
         #endregion
-
-        private GroupBox serviceTypeBoxEmail;
-        private TextBox innerServiceTypeBox;
         private GroupBox serviceDescriptionBox;
         private TextBox innerServiceDescriptionBox;
         private GroupBox pricePerPersonBox;
@@ -251,7 +217,7 @@
         private Label submitLabel;
         private FlowLayoutPanel flowLayoutPanel1;
         private Label label1;
-        private GroupBox RoleSelectionGroup;
-        private ComboBox RoleSelectOptions;
+        private GroupBox typeSelectionGroup;
+        private ComboBox typeSelectOptions;
     }
 }

@@ -25,17 +25,84 @@ namespace TravelEaseApp.TourOperator
         List<Trip> trips = new List<Trip>();
         List<Location> locations = new List<Location>();
         List<TripReview> reviews = new List<TripReview>();
+        List<Category> categories = new List<Category>();
 
-        int TourOperatorId;
-
-        public dashboardForm(string regNo)
+        public dashboardForm(string REGNO)
         {
             InitializeComponent();
-            this.regNo = regNo;
+            this.regNo = REGNO;
         }
 
         private void InitializeComponents()
         {
+            {   //Run sql query to get tourOperatorDetails from tour_operator table
+                string query = "SELECT * FROM tour_operator WHERE reg_no = '" + @regNo + "'";
+                using (SqlConnection connection = new SqlConnection(connectionString))
+                {
+                    SqlCommand command = new SqlCommand(query, connection);
+                    try
+                    {
+                        connection.Open();
+                        SqlDataReader reader = command.ExecuteReader();
+                        if (reader.Read())
+                        {
+                            var nameLabel = reader.GetString(1);
+                            var businessAddress = reader.GetString(2);
+                            var websiteUrl = reader.GetString(3);
+
+                            username.Text = nameLabel;
+                            tagline.Text = businessAddress;
+
+                            // new label inside infopanel1
+                            var infoLabel1 = new Label
+                            {
+                                Text = "Tour Operator ID: " + regNo,
+                                Font = new Font("Segoe UI", 9F),
+                                ForeColor = Color.FromArgb(80, 80, 80),
+                                AutoSize = true,
+                                Location = new Point(10, 10),
+                            };
+                            infoPanel1.Controls.Add(infoLabel1);
+                            // new label inside infopanel1 below infoLabel1 username
+                            var infoLabel2 = new Label
+                            {
+                                Text = "Operator Name: " + username.Text,
+                                Font = new Font("Segoe UI", 9F),
+                                ForeColor = Color.FromArgb(80, 80, 80),
+                                AutoSize = true,
+                                Location = new Point(10, infoLabel1.Bottom + 5)
+                            };
+                            infoPanel1.Controls.Add(infoLabel2);
+                            // new label inside infopanel1 below infoLabel2 business address
+                            var infoLabel3 = new Label
+                            {
+                                Text = "Business Address: " + businessAddress,
+                                Font = new Font("Segoe UI", 9F),
+                                ForeColor = Color.FromArgb(80, 80, 80),
+                                AutoSize = true,
+                                Location = new Point(10, infoLabel2.Bottom + 5)
+                            };
+                            infoPanel1.Controls.Add(infoLabel3);
+                            // new label inside infopanel1 below infoLabel3 website url
+                            var infoLabel4 = new Label
+                            {
+                                Text = "Website URL: " + websiteUrl,
+                                Font = new Font("Segoe UI", 9F),
+                                ForeColor = Color.FromArgb(80, 80, 80),
+                                AutoSize = true,
+                                Location = new Point(10, infoLabel3.Bottom + 5)
+                            };
+                        }
+                        reader.Close();
+                    }
+                    catch (Exception ex)
+                    {
+                        Console.WriteLine($"Error: {ex.Message}");
+                        throw; // Re-throw to handle in calling code
+                    }
+                }
+            }
+
             hiddenLabel = new Label();
             hiddenLabel.Size = new Size(0, 0);
             hiddenLabel.Location = new Point(0, 0);
@@ -66,23 +133,6 @@ namespace TravelEaseApp.TourOperator
             AddHoverTransition(addTripLabel, addTripLabel.BackColor, addTripLabel.ForeColor, addTripLabel.ForeColor, addTripLabel.BackColor);
 
             Color borderColor = Color.FromArgb(220, 224, 230);
-            infoPanel1.Paint += (s, e) =>
-            {
-                ControlPaint.DrawBorder(e.Graphics, infoPanel1.ClientRectangle,
-                    borderColor, 1, ButtonBorderStyle.Solid,
-                    borderColor, 1, ButtonBorderStyle.Solid,
-                    borderColor, 1, ButtonBorderStyle.Solid,
-                    borderColor, 1, ButtonBorderStyle.Solid);
-            };
-            infoPanel2.Paint += (s, e) =>
-            {
-                ControlPaint.DrawBorder(e.Graphics, infoPanel2.ClientRectangle,
-                    borderColor, 1, ButtonBorderStyle.Solid,
-                    borderColor, 1, ButtonBorderStyle.Solid,
-                    borderColor, 1, ButtonBorderStyle.Solid,
-                    borderColor, 1, ButtonBorderStyle.Solid);
-            };
-
             topStatPanel1.Paint += (s, e) =>
             {
                 ControlPaint.DrawBorder(e.Graphics, topStatPanel1.ClientRectangle,
@@ -122,15 +172,18 @@ namespace TravelEaseApp.TourOperator
             // topStatLabelNumber2 = total number of trips with tourOperatorId = tourOperatorId and status = "active"
             // topStatLabelNumber3 = avg rating of all trips with tourOperatorId = tourOperatorId
 
+            int totalRatingScore = 0;
             foreach (var review in reviews)
             {
                 DisplayTripReviewInPanel(customerReviewsPanel, review, true);
+                totalRatingScore += review.Rating;
             }
-            topStatLabelNumber1.Text = trips.Count.ToString();
+            customerReviewsPanel.AutoScrollPosition = new Point(0, 0);
+
+            topStatLabelNumber1.Text = trips.Count(t => t.Status == "completed").ToString();
             topStatLabelNumber2.Text = trips.Count(t => t.Status == "active").ToString();
-
+            topStatLabelNumber3.Text = (totalRatingScore / (double)reviews.Count).ToString("0.0");
         }
-
         private void setData()
         {
             {   // get all services
@@ -169,7 +222,7 @@ namespace TravelEaseApp.TourOperator
             }
 
             {   // get all trips with operator_id == reg_no
-                string query = "SELECT * FROM trips WHERE operator_id = '@regNo'";
+                string query = "SELECT * FROM trips WHERE operator_id = '" + @regNo + "'";
                 using (SqlConnection connection = new SqlConnection(connectionString))
                 {
                     SqlCommand command = new SqlCommand(query, connection);
@@ -202,6 +255,39 @@ namespace TravelEaseApp.TourOperator
                     {
                         Console.WriteLine($"Error: {ex.Message}");
                         throw; // Re-throw to handle in calling code
+                    }
+                }
+                foreach (var trip in trips)
+                {
+                    // find the services for each trip
+                    string query2 = "SELECT * FROM trip_services WHERE trip_id = '" + trip.TripId + "'";
+                    using (SqlConnection connection = new SqlConnection(connectionString))
+                    {
+                        SqlCommand command = new SqlCommand(query2, connection);
+                        try
+                        {
+                            connection.Open();
+                            SqlDataReader reader = command.ExecuteReader();
+                            while (reader.Read())
+                            {
+                                var service = services.FirstOrDefault(s => s.ServiceId == reader.GetString(1));
+                                var status = reader.GetString(2);
+                                if (status == "accepted")
+                                {
+                                    trip.IncludedServices.Add(service);
+                                }
+                                else if (status != "rejected")
+                                {
+                                    trip.RequestedServices.Add(service);
+                                }
+                            }
+                            reader.Close();
+                        }
+                        catch (Exception ex)
+                        {
+                            Console.WriteLine($"Error: {ex.Message}");
+                            throw; // Re-throw to handle in calling code
+                        }
                     }
                 }
             }
@@ -267,8 +353,62 @@ namespace TravelEaseApp.TourOperator
                     }
                 }
             }
-        }
 
+            {   // setup visitedLocations attribute for trips
+                // find all locations related to trip and push to list order in ascending order by destination_order
+                foreach (var trip in trips)
+                {
+                    string query = $"SELECT * FROM trip_location WHERE trip_id = '{trip.TripId}' ORDER BY destination_order ASC";
+                    using (SqlConnection connection = new SqlConnection(connectionString))
+                    {
+                        SqlCommand command = new SqlCommand(query, connection);
+                        try
+                        {
+                            connection.Open();
+                            SqlDataReader reader = command.ExecuteReader();
+                            while (reader.Read())
+                            {
+                                var location = locations.FirstOrDefault(l => l.DestId == reader.GetString(1));
+                                if (location != null)
+                                {
+                                    trip.VisitedLocations.Add(location);
+                                }
+                            }
+                            reader.Close();
+                        }
+                        catch (Exception ex)
+                        {
+                            Console.WriteLine($"Error: {ex.Message}");
+                            throw; // Re-throw to handle in calling code
+                        }
+                    }
+                }
+            }
+
+            {   // fetch all categories
+                string query = "SELECT * FROM category";
+                using (SqlConnection connection = new SqlConnection(connectionString))
+                {
+                    SqlCommand command = new SqlCommand(query, connection);
+                    try
+                    {
+                        connection.Open();
+                        SqlDataReader reader = command.ExecuteReader();
+                        while (reader.Read())
+                        {
+                            var category = new Category(reader.GetString(0), reader.GetString(1));
+                            categories.Add(category);
+                        }
+                        reader.Close();
+                    }
+                    catch (Exception ex)
+                    {
+                        Console.WriteLine($"Error: {ex.Message}");
+                        throw; // Re-throw to handle in calling code
+                    }
+                }
+            }
+        }
         private void SetSampleData()
         {
             // Clear existing data
@@ -576,7 +716,7 @@ namespace TravelEaseApp.TourOperator
             // Provider
             Label lblProvider = new Label
             {
-                Text = $"Provider: {service.ProviderName}",
+                Text = $"Provider ID: {service.ProviderId}",
                 Font = textFont,
                 ForeColor = textColor,
                 AutoSize = true,
@@ -837,11 +977,6 @@ namespace TravelEaseApp.TourOperator
         }
 
         public event Action RequestAddTripForm;
-
-        private void addTripLabel_Click(object sender, EventArgs e)
-        {
-            RequestAddTripForm?.Invoke();
-        }
 
         public void DisplayTripReviewInPanel(
             Panel containerPanel,
@@ -1167,6 +1302,11 @@ namespace TravelEaseApp.TourOperator
         private void availableServicesPanel_Paint(object sender, PaintEventArgs e)
         {
 
+        }
+
+        private void addTripLabel_Click_1(object sender, EventArgs e)
+        {
+            RequestAddTripForm?.Invoke();
         }
     }
 }

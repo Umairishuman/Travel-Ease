@@ -15,11 +15,14 @@ using System.Drawing.Drawing2D;
 using System.Windows.Forms;
 using static TravelEaseApp.Helpers;
 using System.Numerics;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel;
+using Microsoft.Data.SqlClient;
 
 namespace TravelEaseApp.ServiceProvider
 {
     public partial class dashboardForm : Form
     {
+        string regNo;
         private Label hiddenLabel;
         private Panel CompleteServiceInfoPanel;
 
@@ -27,9 +30,10 @@ namespace TravelEaseApp.ServiceProvider
 
         List<Trip> trips = new List<Trip>();
 
-        public dashboardForm()
+        public dashboardForm(string REGNO)
         {
             InitializeComponent();
+            regNo = REGNO;
             InitializeComponents();
 
             // ProfilePicture
@@ -96,6 +100,114 @@ namespace TravelEaseApp.ServiceProvider
             };
         }
 
+        private void setData()
+        {
+            {   // get all services
+                string query = "SELECT * FROM services WHERE provider_id = '" + regNo + "'";
+
+                using (SqlConnection connection = new SqlConnection(connectionString))
+                {
+                    SqlCommand command = new SqlCommand(query, connection);
+
+                    try
+                    {
+                        connection.Open();
+                        SqlDataReader reader = command.ExecuteReader();
+
+                        while (reader.Read())
+                        {
+                            var service = new Service
+                            {
+                                ServiceId = reader.GetString(0),
+                                ServiceType = reader.GetString(1),
+                                ServiceDescription = reader.GetString(2),
+                                Price = reader.GetDecimal(3),
+                                ProviderId = reader.GetString(4), // Fixed: Changed GetInt32 to GetString
+                                Capacity = reader.GetInt32(5)
+                            };
+                            services.Add(service);
+                        }
+                        reader.Close();
+                    }
+                    catch (Exception ex)
+                    {
+                        Console.WriteLine($"Error: {ex.Message}");
+                        throw; // Re-throw to handle in calling code
+                    }
+                }
+            }
+
+            {   // get all trips with operator_id == reg_no
+                string query = "SELECT * FROM trips";
+                using (SqlConnection connection = new SqlConnection(connectionString))
+                {
+                    SqlCommand command = new SqlCommand(query, connection);
+                    try
+                    {
+                        connection.Open();
+                        SqlDataReader reader = command.ExecuteReader();
+                        while (reader.Read())
+                        {
+                            var trip = new Trip
+                            {
+                                TripId = reader.GetString(0),
+                                Title = reader.GetString(1),
+                                Description = reader.GetString(2),
+                                Capacity = reader.GetInt32(3),
+                                DurationDays = reader.GetInt32(4),
+                                Status = reader.GetString(5),
+                                PricePerPerson = reader.GetDecimal(6),
+                                StartLocationId = reader.GetString(7), // Fixed: Changed GetInt32 to GetString
+                                StartDate = reader.GetDateTime(8),
+                                EndDate = reader.GetDateTime(9),
+                                OperatorId = reader.GetString(10), // Fixed: Changed GetInt32 to GetString
+                                Category = reader.GetString(11),
+                            };
+                            trips.Add(trip);
+                        }
+                        reader.Close();
+                    }
+                    catch (Exception ex)
+                    {
+                        Console.WriteLine($"Error: {ex.Message}");
+                        throw; // Re-throw to handle in calling code
+                    }
+                }
+                foreach (var trip in trips)
+                {
+                    // find the services for each trip
+                    string query2 = "SELECT * FROM trip_services WHERE trip_id = '" + trip.TripId + "'";
+                    using (SqlConnection connection = new SqlConnection(connectionString))
+                    {
+                        SqlCommand command = new SqlCommand(query2, connection);
+                        try
+                        {
+                            connection.Open();
+                            SqlDataReader reader = command.ExecuteReader();
+                            while (reader.Read())
+                            {
+                                var service = services.FirstOrDefault(s => s.ServiceId == reader.GetString(1));
+                                var status = reader.GetString(2);
+                                if (status == "accepted")
+                                {
+                                    trip.IncludedServices.Add(service);
+                                }
+                                else if (status != "rejected")
+                                {
+                                    trip.RequestedServices.Add(service);
+                                }
+                            }
+                            reader.Close();
+                        }
+                        catch (Exception ex)
+                        {
+                            Console.WriteLine($"Error: {ex.Message}");
+                            throw; // Re-throw to handle in calling code
+                        }
+                    }
+                }
+            }
+        }
         private void SetSampleData()
         {
             // Clear existing data
@@ -224,7 +336,8 @@ namespace TravelEaseApp.ServiceProvider
 
         private void dashboardForm_Load(object sender, EventArgs e)
         {
-            SetSampleData();
+            //SetSampleData();
+            setData();
             // Add service boxes to the panel
             foreach (var service in services)
             {
@@ -480,7 +593,55 @@ namespace TravelEaseApp.ServiceProvider
                 Button btn = (Button)s;
                 Service serviceToApprove = (Service)btn.Tag;
                 MessageBox.Show($"Approving service: {serviceToApprove.ServiceId} - Linked with Trip: {trip.TripId}");
-                // Add your approval logic here
+                // Update status in trip_services and local lists inside a transaction
+                string query = "UPDATE trip_services SET status = 'accepted' WHERE trip_id = '" + trip.TripId + "' AND service_id = '" + serviceToApprove.ServiceId + "'";
+
+                using (SqlConnection connection = new SqlConnection(connectionString))
+                {
+                    connection.Open();
+                    SqlTransaction transaction = connection.BeginTransaction();
+
+                    try
+                    {
+                        // 1. Update database
+                        using (SqlCommand command = new SqlCommand(query, connection, transaction))
+                        {
+                            int rowsAffected = command.ExecuteNonQuery();
+                            if (rowsAffected == 0) throw new Exception("Service not found in database");
+                        }
+
+                        // 2. Update local lists
+                        if (trip.RequestedServices.Contains(serviceToApprove))
+                        {
+                            trip.RequestedServices.Remove(serviceToApprove);
+                            trip.IncludedServices.Add(serviceToApprove);
+                        }
+                        else throw new Exception("Service not found in local requested services");
+
+                        // 3. Commit transaction
+                        transaction.Commit();
+
+                        // 4. Refresh UI (outside transaction)
+                        pendingRequestsPanel.Controls.Clear();
+                        foreach (var service in services)
+                        {
+                            foreach (var t in trips)
+                            {
+                                if (t.RequestedServices != null && t.RequestedServices.Contains(service))
+                                {
+                                    AddServiceBox(pendingRequestsPanel, service, t);
+                                }
+                            }
+                        }
+
+                        MessageBox.Show("Service approved successfully.");
+                    }
+                    catch (Exception ex)
+                    {
+                        try { transaction.Rollback(); } catch { /* Handle rollback failure */ }
+                        MessageBox.Show($"Error: {ex.Message}");
+                    }
+                }
             };
 
             // - Button
@@ -500,11 +661,58 @@ namespace TravelEaseApp.ServiceProvider
             minusButton.FlatAppearance.BorderSize = 1;
             minusButton.FlatAppearance.BorderColor = Color.LightGray;
             minusButton.Click += (s, e) => {
-                // Handle - button click (reject service)
                 Button btn = (Button)s;
                 Service serviceToReject = (Service)btn.Tag;
-                MessageBox.Show($"Rejecting service: {serviceToReject.ServiceId} - Linked with Trip: {trip.TripId}");
-                // Add your rejection logic here
+
+                string query = "UPDATE trip_services SET status = 'rejected' WHERE trip_id = '" +
+                               trip.TripId + "' AND service_id = '" + serviceToReject.ServiceId + "'";
+
+                using (SqlConnection connection = new SqlConnection(connectionString))
+                {
+                    connection.Open();
+                    SqlTransaction transaction = connection.BeginTransaction();
+
+                    try
+                    {
+                        // 1. Update database
+                        using (SqlCommand command = new SqlCommand(query, connection, transaction))
+                        {
+                            int rowsAffected = command.ExecuteNonQuery();
+                            if (rowsAffected == 0) throw new Exception("Service not found in database");
+                        }
+
+                        // 2. Update local lists
+                        if (trip.RequestedServices.Contains(serviceToReject))
+                        {
+                            trip.RequestedServices.Remove(serviceToReject);
+                            // Note: Unlike approval, we don't add to IncludedServices for rejections
+                        }
+                        else throw new Exception("Service not found in local requested services");
+
+                        // 3. Commit transaction
+                        transaction.Commit();
+
+                        // 4. Refresh UI
+                        pendingRequestsPanel.Controls.Clear();
+                        foreach (var service in services)
+                        {
+                            foreach (var t in trips)
+                            {
+                                if (t.RequestedServices != null && t.RequestedServices.Contains(service))
+                                {
+                                    AddServiceBox(pendingRequestsPanel, service, t);
+                                }
+                            }
+                        }
+
+                        MessageBox.Show($"Service {serviceToReject.ServiceId} rejected successfully.");
+                    }
+                    catch (Exception ex)
+                    {
+                        try { transaction.Rollback(); } catch { /* Handle rollback failure */ }
+                        MessageBox.Show($"Error rejecting service: {ex.Message}");
+                    }
+                }
             };
 
             // Add buttons to action panel
