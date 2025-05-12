@@ -85,11 +85,6 @@ namespace TravelEaseApp
 
         private void PopulateSelectReportComboBox()
         {
-            //categoryComboBox.DataSource = null; // Clear previous bindings
-            //categoryComboBox.DisplayMember = "CategoryName"; // Display user-friendly string
-            //categoryComboBox.ValueMember = "Id"; // Set the value to location_id
-            //categoryComboBox.DataSource = categories; // Bind the data
-
             // show strings from reportList, but output the index of the selection
             selectReportComboBox.DataSource = reportList;
             selectReportComboBox.SelectedIndex = -1; // No selection by default
