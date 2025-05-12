@@ -46,7 +46,7 @@ SELECT
     floor(DATEDIFF(YEAR, travelers.date_of_birth,GETDATE()) / 365) AS age,
     COUNT(*) AS traveler_count
 FROM travelers
-GROUP BY travelers.nationality, FLOOR(DATEDIFF(YEAR,travelers.date_of_birth,GETDATE()) / 365)
+GROUP BY travelers.nationality, FLOOR(DATEDIFF(DAY,travelers.date_of_birth,GETDATE()) / 365)
 
 
 drop view traveler_age_nationality_distribution

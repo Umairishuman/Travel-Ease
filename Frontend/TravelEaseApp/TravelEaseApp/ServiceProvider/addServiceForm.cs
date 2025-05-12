@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Data.SqlClient;
 
 namespace TravelEaseApp.ServiceProvider
 {
@@ -24,7 +25,39 @@ namespace TravelEaseApp.ServiceProvider
 
         private void submitLabel_Click(object sender, EventArgs e)
         {
+            string connString = "Data Source=DESKTOP-ON2MGLP\\SQLEXPRESS;Initial Catalog=Database phase 1 backup;Integrated Security=True";
+            string serviceType=innerServiceTypeBox.Text;
+            string serviceDesc = innerServiceDescriptionBox.Text;
+            decimal price = decimal.Parse(innerPricePerPersonBox.Text);
+            int capacity = int.Parse(innerCapacityBox.Text);
 
+            int newServiceId = 1;
+
+                
+
+
+            string query = "INSERT INTO services (service_type, service_description, price, capacity) " +
+                   "VALUES (@service_type, @description, @price_per_person, @capacity)";
+
+            using (SqlConnection conn = new SqlConnection(connString))
+            using (SqlCommand cmd = new SqlCommand(query, conn))
+            {
+                cmd.Parameters.AddWithValue("@service_type", serviceType);
+                cmd.Parameters.AddWithValue("@description", serviceDesc);
+                cmd.Parameters.AddWithValue("@price_per_person", price);
+                cmd.Parameters.AddWithValue("@capacity", capacity);
+
+                try
+                {
+                    conn.Open();
+                    int rowsInserted = cmd.ExecuteNonQuery();
+                    MessageBox.Show("Service added successfully.");
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Error while inserting: " + ex.Message);
+                }
+            }
         }
 
         private int SmoothTransition(int current, int target)
