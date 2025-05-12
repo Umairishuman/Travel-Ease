@@ -550,7 +550,7 @@ namespace TravelEaseApp.ServiceProvider
             // Provider
             Label lblProvider = new Label
             {
-                Text = $"Provider: {service.ProviderName}",
+                Text = $"Provider: {service.ProviderId}",
                 Font = textFont,
                 ForeColor = textColor,
                 AutoSize = true,
@@ -568,6 +568,14 @@ namespace TravelEaseApp.ServiceProvider
             };
 
             // Rating (stars)
+            foreach (var review in reviews)
+            {
+                if (review.ServiceId == service.ServiceId)
+                {
+                    service.AverageReview += review.Rating;
+                }
+            }
+            service.AverageReview /= reviews.Count(r => r.ServiceId == service.ServiceId);
             Label lblRating = new Label
             {
                 Text = $"{new string('★', (int)service.AverageReview)}{new string('☆', 5 - (int)service.AverageReview)}",
@@ -717,7 +725,7 @@ namespace TravelEaseApp.ServiceProvider
 
             // Provider
             var providerLabel = AddLabel(
-                $"Provider: {service.ProviderName}",
+                $"Provider: {service.ProviderId}",
                 new Font("Segoe UI", 10),
                 Color.Black,
                 currentY,
@@ -792,59 +800,59 @@ namespace TravelEaseApp.ServiceProvider
             });
             currentY += 20;
 
-            // ========== SERVICE-SPECIFIC ATTRIBUTES SECTION ==========
-            var attributesTitle = AddLabel(
-                "SERVICE ATTRIBUTES",
-                new Font("Segoe UI", 11, FontStyle.Bold),
-                GetServiceTypeColor(service.ServiceType),
-                currentY,
-                panel.Width - 60);
-            currentY += attributesTitle.Height + 15;
+            //// ========== SERVICE-SPECIFIC ATTRIBUTES SECTION ==========
+            //var attributesTitle = AddLabel(
+            //    "SERVICE ATTRIBUTES",
+            //    new Font("Segoe UI", 11, FontStyle.Bold),
+            //    GetServiceTypeColor(service.ServiceType),
+            //    currentY,
+            //    panel.Width - 60);
+            //currentY += attributesTitle.Height + 15;
 
-            // Example of service-specific attributes
-            switch (service.ServiceType.ToLower())
-            {
-                case "hotel":
-                    AddLabel("Room Type: Deluxe Suite", new Font("Segoe UI", 10), Color.Black, currentY, panel.Width - 60);
-                    currentY += 25;
-                    AddLabel("Amenities: Pool, Spa, WiFi", new Font("Segoe UI", 10), Color.Black, currentY, panel.Width - 60);
-                    currentY += 25;
-                    AddLabel("Check-in: 3:00 PM", new Font("Segoe UI", 10), Color.Black, currentY, panel.Width - 60);
-                    currentY += 25;
-                    AddLabel("Check-out: 11:00 AM", new Font("Segoe UI", 10), Color.Black, currentY, panel.Width - 60);
-                    break;
-                case "transport":
-                    AddLabel("Vehicle Type: Premium SUV", new Font("Segoe UI", 10), Color.Black, currentY, panel.Width - 60);
-                    currentY += 25;
-                    AddLabel("AC: Yes", new Font("Segoe UI", 10), Color.Black, currentY, panel.Width - 60);
-                    currentY += 25;
-                    AddLabel("Max Passengers: 4", new Font("Segoe UI", 10), Color.Black, currentY, panel.Width - 60);
-                    currentY += 25;
-                    AddLabel("Driver Included: Yes", new Font("Segoe UI", 10), Color.Black, currentY, panel.Width - 60);
-                    break;
-                case "guide":
-                    AddLabel("Guide Name: John Smith", new Font("Segoe UI", 10), Color.Black, currentY, panel.Width - 60);
-                    currentY += 25;
-                    AddLabel("Experience: 8 years", new Font("Segoe UI", 10), Color.Black, currentY, panel.Width - 60);
-                    currentY += 25;
-                    AddLabel("Certification: Licensed", new Font("Segoe UI", 10), Color.Black, currentY, panel.Width - 60);
-                    currentY += 25;
-                    AddLabel("Languages: English, Spanish", new Font("Segoe UI", 10), Color.Black, currentY, panel.Width - 60);
-                    break;
-                default:
-                    AddLabel("No additional attributes available", new Font("Segoe UI", 10), Color.Gray, currentY, panel.Width - 60);
-                    break;
-            }
-            currentY += 25;
+            //// Example of service-specific attributes
+            //switch (service.ServiceType.ToLower())
+            //{
+            //    case "hotel":
+            //        AddLabel("Room Type: Deluxe Suite", new Font("Segoe UI", 10), Color.Black, currentY, panel.Width - 60);
+            //        currentY += 25;
+            //        AddLabel("Amenities: Pool, Spa, WiFi", new Font("Segoe UI", 10), Color.Black, currentY, panel.Width - 60);
+            //        currentY += 25;
+            //        AddLabel("Check-in: 3:00 PM", new Font("Segoe UI", 10), Color.Black, currentY, panel.Width - 60);
+            //        currentY += 25;
+            //        AddLabel("Check-out: 11:00 AM", new Font("Segoe UI", 10), Color.Black, currentY, panel.Width - 60);
+            //        break;
+            //    case "transport":
+            //        AddLabel("Vehicle Type: Premium SUV", new Font("Segoe UI", 10), Color.Black, currentY, panel.Width - 60);
+            //        currentY += 25;
+            //        AddLabel("AC: Yes", new Font("Segoe UI", 10), Color.Black, currentY, panel.Width - 60);
+            //        currentY += 25;
+            //        AddLabel("Max Passengers: 4", new Font("Segoe UI", 10), Color.Black, currentY, panel.Width - 60);
+            //        currentY += 25;
+            //        AddLabel("Driver Included: Yes", new Font("Segoe UI", 10), Color.Black, currentY, panel.Width - 60);
+            //        break;
+            //    case "guide":
+            //        AddLabel("Guide Name: John Smith", new Font("Segoe UI", 10), Color.Black, currentY, panel.Width - 60);
+            //        currentY += 25;
+            //        AddLabel("Experience: 8 years", new Font("Segoe UI", 10), Color.Black, currentY, panel.Width - 60);
+            //        currentY += 25;
+            //        AddLabel("Certification: Licensed", new Font("Segoe UI", 10), Color.Black, currentY, panel.Width - 60);
+            //        currentY += 25;
+            //        AddLabel("Languages: English, Spanish", new Font("Segoe UI", 10), Color.Black, currentY, panel.Width - 60);
+            //        break;
+            //    default:
+            //        AddLabel("No additional attributes available", new Font("Segoe UI", 10), Color.Gray, currentY, panel.Width - 60);
+            //        break;
+            //}
+            //currentY += 25;
 
-            // Divider
-            panel.Controls.Add(new Panel
-            {
-                BackColor = Color.LightGray,
-                Height = 1,
-                Width = panel.Width - 60,
-                Location = new Point(20, currentY)
-            });
+            //// Divider
+            //panel.Controls.Add(new Panel
+            //{
+            //    BackColor = Color.LightGray,
+            //    Height = 1,
+            //    Width = panel.Width - 60,
+            //    Location = new Point(20, currentY)
+            //});
 
             // New panel for service reviews
             currentY += 20;

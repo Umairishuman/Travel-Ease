@@ -30,6 +30,8 @@ namespace TravelEaseApp.ServiceProvider
 
         List<Trip> trips = new List<Trip>();
 
+        List<ServiceReview> reviews = new List<ServiceReview>();
+
         public dashboardForm(string REGNO)
         {
             InitializeComponent();
@@ -45,15 +47,6 @@ namespace TravelEaseApp.ServiceProvider
             AddHoverTransition(addServiceLabel, addServiceLabel.BackColor, addServiceLabel.ForeColor, addServiceLabel.ForeColor, addServiceLabel.BackColor);
 
             Color borderColor = Color.FromArgb(220, 224, 230);
-            informationPanel.Paint += (s, e) =>
-            {
-                ControlPaint.DrawBorder(e.Graphics, informationPanel.ClientRectangle,
-                    borderColor, 1, ButtonBorderStyle.Solid,
-                    borderColor, 1, ButtonBorderStyle.Solid,
-                    borderColor, 1, ButtonBorderStyle.Solid,
-                    borderColor, 1, ButtonBorderStyle.Solid);
-            };
-
             topStatPanel1.Paint += (s, e) =>
             {
                 ControlPaint.DrawBorder(e.Graphics, topStatPanel1.ClientRectangle,
@@ -75,24 +68,6 @@ namespace TravelEaseApp.ServiceProvider
             topStatPanel3.Paint += (s, e) =>
             {
                 ControlPaint.DrawBorder(e.Graphics, topStatPanel3.ClientRectangle,
-                    borderColor, 1, ButtonBorderStyle.Solid,
-                    borderColor, 1, ButtonBorderStyle.Solid,
-                    borderColor, 1, ButtonBorderStyle.Solid,
-                    borderColor, 1, ButtonBorderStyle.Solid);
-            };
-
-            statPanel1.Paint += (s, e) =>
-            {
-                ControlPaint.DrawBorder(e.Graphics, statPanel1.ClientRectangle,
-                    borderColor, 1, ButtonBorderStyle.Solid,
-                    borderColor, 1, ButtonBorderStyle.Solid,
-                    borderColor, 1, ButtonBorderStyle.Solid,
-                    borderColor, 1, ButtonBorderStyle.Solid);
-            };
-
-            statPanel2.Paint += (s, e) =>
-            {
-                ControlPaint.DrawBorder(e.Graphics, statPanel2.ClientRectangle,
                     borderColor, 1, ButtonBorderStyle.Solid,
                     borderColor, 1, ButtonBorderStyle.Solid,
                     borderColor, 1, ButtonBorderStyle.Solid,
@@ -176,10 +151,11 @@ namespace TravelEaseApp.ServiceProvider
                 foreach (var trip in trips)
                 {
                     // find the services for each trip
-                    string query2 = "SELECT * FROM trip_services WHERE trip_id = '" + trip.TripId + "'";
+                    string query2 = "SELECT * FROM trip_services WHERE trip_id = '@tripId'";
                     using (SqlConnection connection = new SqlConnection(connectionString))
                     {
                         SqlCommand command = new SqlCommand(query2, connection);
+                        command.Parameters.AddWithValue("@tripId", trip.TripId);
                         try
                         {
                             connection.Open();
@@ -192,7 +168,7 @@ namespace TravelEaseApp.ServiceProvider
                                 {
                                     trip.IncludedServices.Add(service);
                                 }
-                                else if (status != "rejected")
+                                else
                                 {
                                     trip.RequestedServices.Add(service);
                                 }
@@ -204,6 +180,40 @@ namespace TravelEaseApp.ServiceProvider
                             Console.WriteLine($"Error: {ex.Message}");
                             throw; // Re-throw to handle in calling code
                         }
+                    }
+                }
+            }
+
+            {   // get serviceReviews
+
+                string query = "SELECT * FROM service_reviews";
+                using (SqlConnection connection = new SqlConnection(connectionString))
+                {
+                    SqlCommand command = new SqlCommand(query, connection);
+                    try
+                    {
+                        connection.Open();
+                        SqlDataReader reader = command.ExecuteReader();
+                        while (reader.Read())
+                        {
+                            var review = new ServiceReview
+                            {
+                                ReviewId = reader.GetString(0),
+                                TravelerId = reader.GetString(1),
+                                ServiceId = reader.GetString(2),
+                                Rating = reader.GetInt32(3),
+                                Description = reader.GetString(4),
+                                ReviewDate = reader.GetDateTime(5),
+                                FlagStatus = reader.GetString(6),
+                            };
+                            reviews.Add(review);
+                        }
+                        reader.Close();
+                    }
+                    catch (Exception ex)
+                    {
+                        Console.WriteLine($"Error: {ex.Message}");
+                        throw; // Re-throw to handle in calling code
                     }
                 }
             }
@@ -355,6 +365,68 @@ namespace TravelEaseApp.ServiceProvider
                 catch (Exception ex)
                 {
                     MessageBox.Show($"An error occurred while processing service {service.ServiceId}: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+
+            {   // run sql queries to get user info from service_provider
+                string query = "SELECT * FROM service_provider WHERE reg_no = '" + regNo + "'";
+                using (SqlConnection connection = new SqlConnection(connectionString))
+                {
+                    SqlCommand command = new SqlCommand(query, connection);
+                    try
+                    {
+                        connection.Open();
+                        SqlDataReader reader = command.ExecuteReader();
+                        if (reader.Read())
+                        {
+                            var name = reader.GetString(1);
+                            var location = reader.GetString(2);
+
+                            username.Text = name;
+                            tagline.Text = location;
+                        }
+                        reader.Close();
+                    }
+                    catch (Exception ex)
+                    {
+                        Console.WriteLine($"Error: {ex.Message}");
+                        throw; // Re-throw to handle in calling code
+                    }
+                }
+
+            }
+
+            {   //Initialize topStatLabelNumberX's
+                topStatLabelNumber1.Text = services.Count.ToString();
+
+                //topstatlabelnumber2 = number of services that are included in atleast 1 trip
+                int includedCount = 0;
+                foreach (var trip in trips)
+                {
+                    includedCount += trip.IncludedServices.Count;
+                }
+                topStatLabelNumber2.Text = includedCount.ToString();
+
+                //avgrating
+                double totalRating = 0;
+                foreach (var service in services)
+                {
+                    foreach (var review in reviews)
+                    {
+                        if (service.ServiceId == review.ServiceId)
+                        {
+                            totalRating += review.Rating;
+                        }
+                    }
+                }
+                if (services.Count > 0)
+                {
+                    double avgRating = totalRating / services.Count;
+                    topStatLabelNumber3.Text = $"{avgRating:0.0}";
+                }
+                else
+                {
+                    topStatLabelNumber3.Text = "N/A";
                 }
             }
         }
