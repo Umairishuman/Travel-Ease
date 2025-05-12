@@ -44,11 +44,10 @@
             username = new Label();
             customerReviewsPanel = new FlowLayoutPanel();
             addTripLabel = new Label();
-            infoPanel1 = new FlowLayoutPanel();
-            infoPanel2 = new FlowLayoutPanel();
             tagline = new Label();
             profilePictureBox = new PictureBox();
             infoPanel = new FlowLayoutPanel();
+            infoPanel1 = new Panel();
             infoLabel = new Label();
             mainInfoPanel.SuspendLayout();
             topStatPanel1.SuspendLayout();
@@ -56,6 +55,7 @@
             topStatPanel3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)profilePictureBox).BeginInit();
             infoPanel.SuspendLayout();
+            infoPanel1.SuspendLayout();
             SuspendLayout();
             // 
             // availableServicesPanel
@@ -144,7 +144,7 @@
             topStatLabel1.Name = "topStatLabel1";
             topStatLabel1.Size = new Size(93, 15);
             topStatLabel1.TabIndex = 2;
-            topStatLabel1.Text = "Total Trips";
+            topStatLabel1.Text = "Completed Trips";
             topStatLabel1.TextAlign = ContentAlignment.MiddleCenter;
             // 
             // mainInfoPanel
@@ -192,7 +192,7 @@
             // 
             customerReviewsLabel.AutoSize = true;
             customerReviewsLabel.Font = new Font("Segoe UI", 13F, FontStyle.Bold);
-            customerReviewsLabel.Location = new Point(472, 171);
+            customerReviewsLabel.Location = new Point(472, 137);
             customerReviewsLabel.Name = "customerReviewsLabel";
             customerReviewsLabel.Size = new Size(167, 25);
             customerReviewsLabel.TabIndex = 30;
@@ -213,9 +213,9 @@
             // 
             customerReviewsPanel.AutoScroll = true;
             customerReviewsPanel.BackColor = SystemColors.Control;
-            customerReviewsPanel.Location = new Point(472, 199);
+            customerReviewsPanel.Location = new Point(472, 166);
             customerReviewsPanel.Name = "customerReviewsPanel";
-            customerReviewsPanel.Size = new Size(644, 374);
+            customerReviewsPanel.Size = new Size(644, 482);
             customerReviewsPanel.TabIndex = 37;
             // 
             // addTripLabel
@@ -225,28 +225,13 @@
             addTripLabel.Cursor = Cursors.Hand;
             addTripLabel.Font = new Font("Segoe UI", 15F, FontStyle.Bold);
             addTripLabel.ForeColor = Color.White;
-            addTripLabel.Location = new Point(637, 589);
+            addTripLabel.Location = new Point(459, 15);
             addTripLabel.Name = "addTripLabel";
-            addTripLabel.Size = new Size(291, 40);
+            addTripLabel.Size = new Size(178, 50);
             addTripLabel.TabIndex = 38;
             addTripLabel.Text = "Add New Trip";
             addTripLabel.TextAlign = ContentAlignment.MiddleCenter;
-            // 
-            // infoPanel1
-            // 
-            infoPanel1.BackColor = Color.White;
-            infoPanel1.Location = new Point(3, 3);
-            infoPanel1.Name = "infoPanel1";
-            infoPanel1.Size = new Size(315, 120);
-            infoPanel1.TabIndex = 2;
-            // 
-            // infoPanel2
-            // 
-            infoPanel2.BackColor = Color.White;
-            infoPanel2.Location = new Point(324, 3);
-            infoPanel2.Name = "infoPanel2";
-            infoPanel2.Size = new Size(315, 120);
-            infoPanel2.TabIndex = 3;
+            addTripLabel.Click += addTripLabel_Click_1;
             // 
             // tagline
             // 
@@ -274,11 +259,18 @@
             // 
             infoPanel.BackColor = SystemColors.Control;
             infoPanel.Controls.Add(infoPanel1);
-            infoPanel.Controls.Add(infoPanel2);
             infoPanel.Location = new Point(472, 39);
             infoPanel.Name = "infoPanel";
-            infoPanel.Size = new Size(644, 127);
+            infoPanel.Size = new Size(644, 95);
             infoPanel.TabIndex = 32;
+            // 
+            // infoPanel1
+            // 
+            infoPanel1.Controls.Add(addTripLabel);
+            infoPanel1.Location = new Point(3, 3);
+            infoPanel1.Name = "infoPanel1";
+            infoPanel1.Size = new Size(638, 89);
+            infoPanel1.TabIndex = 0;
             // 
             // infoLabel
             // 
@@ -301,7 +293,6 @@
             Controls.Add(customerReviewsLabel);
             Controls.Add(username);
             Controls.Add(customerReviewsPanel);
-            Controls.Add(addTripLabel);
             Controls.Add(tagline);
             Controls.Add(profilePictureBox);
             Controls.Add(infoPanel);
@@ -316,6 +307,7 @@
             topStatPanel3.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)profilePictureBox).EndInit();
             infoPanel.ResumeLayout(false);
+            infoPanel1.ResumeLayout(false);
             ResumeLayout(false);
             PerformLayout();
         }
@@ -338,11 +330,10 @@
         private Label username;
         private FlowLayoutPanel customerReviewsPanel;
         private Label addTripLabel;
-        private FlowLayoutPanel infoPanel1;
-        private FlowLayoutPanel infoPanel2;
         private Label tagline;
         private PictureBox profilePictureBox;
         private FlowLayoutPanel infoPanel;
         private Label infoLabel;
+        private Panel infoPanel1;
     }
 }

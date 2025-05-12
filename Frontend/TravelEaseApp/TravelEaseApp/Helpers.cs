@@ -4,6 +4,9 @@ using System.Windows.Forms;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
 using static System.Runtime.InteropServices.JavaScript.JSType;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel;
+using static TravelEaseApp.Helpers;
+using System.Configuration.Provider;
 
 namespace TravelEaseApp
 {
@@ -44,42 +47,6 @@ namespace TravelEaseApp
                 return target;
             return current + diff / 5;
         }
-
-        //public static void AddHoverTransition(Control control, Color normalBackColor, Color hoverBackColor, Color normalTextColor, Color hoverTextColor)
-        //{
-        //    Color currentBackColor = normalBackColor;
-        //    Color currentTextColor = normalTextColor;
-        //    bool isHovering = false;
-
-        //    control.BackColor = normalBackColor;
-        //    control.ForeColor = normalTextColor;
-
-        //    System.Windows.Forms.Timer hoverTimer = new System.Windows.Forms.Timer();
-        //    hoverTimer.Interval = 15;
-        //    hoverTimer.Tick += (s, e) =>
-        //    {
-        //        // Transition background
-        //        Color targetBackColor = isHovering ? hoverBackColor : normalBackColor;
-        //        int rBack = SmoothTransition(currentBackColor.R, targetBackColor.R);
-        //        int gBack = SmoothTransition(currentBackColor.G, targetBackColor.G);
-        //        int bBack = SmoothTransition(currentBackColor.B, targetBackColor.B);
-        //        currentBackColor = Color.FromArgb(rBack, gBack, bBack);
-
-        //        // Transition text color
-        //        Color targetTextColor = isHovering ? hoverTextColor : normalTextColor;
-        //        int rText = SmoothTransition(currentTextColor.R, targetTextColor.R);
-        //        int gText = SmoothTransition(currentTextColor.G, targetTextColor.G);
-        //        int bText = SmoothTransition(currentTextColor.B, targetTextColor.B);
-        //        currentTextColor = Color.FromArgb(rText, gText, bText);
-
-        //        control.BackColor = currentBackColor;
-        //        control.ForeColor = currentTextColor;
-        //    };
-        //    hoverTimer.Start();
-
-        //    control.MouseEnter += (s, e) => isHovering = true;
-        //    control.MouseLeave += (s, e) => isHovering = false;
-        //}
 
         public static void AddHoverTransition(
             Control control,
@@ -278,6 +245,10 @@ namespace TravelEaseApp
             public DateTime ReviewDate { get; set; } = DateTime.Now;
             public string FlagStatus { get; set; } = "clear";
 
+            public ServiceReview()
+            {
+                // Default constructor
+            }
             public ServiceReview(string reviewId, string serviceId, string travelerId, int rating,
                                  string description, DateTime? reviewDate = null, string flagStatus = "clear")
             {
@@ -693,6 +664,7 @@ namespace TravelEaseApp
             }
 
             public string CategoryName { get; set; }
+
 
             public Category(string id, string categoryName)
             {

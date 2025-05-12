@@ -37,7 +37,7 @@ namespace TravelEaseApp.TourOperator
 
         private void ShowDashboardForm()
         {
-            var dashboardForm = new dashboardForm("OP-000001");
+            var dashboardForm = new dashboardForm(regNo);
             dashboardForm.TopLevel = false;
             dashboardForm.FormBorderStyle = FormBorderStyle.None;
             dashboardForm.Dock = DockStyle.Fill;
@@ -62,7 +62,7 @@ namespace TravelEaseApp.TourOperator
 
         private void ShowAddTripForm()
         {
-            var addServiceForm = new addTripForm();
+            var addServiceForm = new addTripForm(regNo);
             addServiceForm.TopLevel = false;
             addServiceForm.FormBorderStyle = FormBorderStyle.None;
             addServiceForm.Dock = DockStyle.Fill;
